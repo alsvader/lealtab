@@ -1,0 +1,41 @@
+{
+ "lealtab-master.svg": {
+  "sha256_anterior": "c0d59f96b4a5aa9d3d0f11bf4f9b4189a1615961751d1717f2c36d0e4f7acd65",
+  "d_anteriores": {
+   "isotipo-pieza-l": "2facb2f3b38d2a41ddfee47b966c4fc1bb040304e1a4743b54efcd997284ecba",
+   "isotipo-pieza-gancho": "81ef2992439f7b58784db0841014da40b1d3e879ef047457ceda766da5af9e2d",
+   "wm-L": "3ec5ef758c3f239cb0bdab5da3dfd226ea7dae108adc1d6a69851a0295a69a27",
+   "wm-e": "1ea1fe1b4489fcb47dfb17cc0e100497d25e728cb2b14d9383787211ab9f861f",
+   "wm-a1": "62bd31940ea9a085a34541f5f0a20335fbf62715eb76d86e9dc96823149c4879",
+   "wm-l": "c29c6707cd5acc44592c56aab752271091ccd364f1f979de402cd596c5c7bdb1",
+   "wm-T": "0ff8fdc3db823e884af2819551d924f6ceae5e0d95e88223a339e312c0194b3b",
+   "wm-a2": "3f84d693ddf002737105cf446872695a14442af7cf8e2a8ab23ee55974a13710",
+   "wm-b": "6db24b615a56fb6c31969e993149e4c322f334980173db375c9d75f58e1e1bbd"
+  },
+  "sha256_nuevo": "18e949212be392167cf0719f5142c9081ba547f50c2ba6b6bf37fc4defc36c77",
+  "frozen": "lealtab-master-frozen.svg",
+  "sha256_frozen": "18e949212be392167cf0719f5142c9081ba547f50c2ba6b6bf37fc4defc36c77",
+  "d_sin_cambios": true,
+  "grupos_y_transforms_sin_cambios": true
+ },
+ "lealtab-vertical.svg": {
+  "sha256_anterior": "57d5bee375327bf0563da4d8e52766d9229c7ece776e32161736883347526cc5",
+  "d_anteriores": {
+   "isotipo-pieza-l": "2facb2f3b38d2a41ddfee47b966c4fc1bb040304e1a4743b54efcd997284ecba",
+   "isotipo-pieza-gancho": "81ef2992439f7b58784db0841014da40b1d3e879ef047457ceda766da5af9e2d",
+   "wm-L": "3ec5ef758c3f239cb0bdab5da3dfd226ea7dae108adc1d6a69851a0295a69a27",
+   "wm-e": "1ea1fe1b4489fcb47dfb17cc0e100497d25e728cb2b14d9383787211ab9f861f",
+   "wm-a1": "62bd31940ea9a085a34541f5f0a20335fbf62715eb76d86e9dc96823149c4879",
+   "wm-l": "c29c6707cd5acc44592c56aab752271091ccd364f1f979de402cd596c5c7bdb1",
+   "wm-T": "0ff8fdc3db823e884af2819551d924f6ceae5e0d95e88223a339e312c0194b3b",
+   "wm-a2": "3f84d693ddf002737105cf446872695a14442af7cf8e2a8ab23ee55974a13710",
+   "wm-b": "6db24b615a56fb6c31969e993149e4c322f334980173db375c9d75f58e1e1bbd"
+  },
+  "sha256_nuevo": "8ca6ee15aff62416cc395cd4cccfc5a5b4c8d29764ea1725dfea3f49a3ac5377",
+  "frozen": "lealtab-vertical-frozen.svg",
+  "sha256_frozen": "8ca6ee15aff62416cc395cd4cccfc5a5b4c8d29764ea1725dfea3f49a3ac5377",
+  "d_sin_cambios": true,
+  "grupos_y_transforms_sin_cambios": true
+ },
+ "ok": true
+}

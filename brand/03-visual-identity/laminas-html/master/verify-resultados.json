@@ -1,0 +1,17 @@
+{
+ "iso": {
+  "max_diff": 0.19607841968536377,
+  "px_diff_gt_50": 0,
+  "px_diff_gt_10": 38,
+  "ink_px": 375600,
+  "mean_diff_on_ink": 8.643123146612197e-05
+ },
+ "wordmark": {
+  "max_diff": 0.6392157077789307,
+  "px_diff_gt_50": 17,
+  "px_diff_gt_10": 7899,
+  "ink_px": 595977,
+  "mean_diff_on_ink": 0.0034433009568601847
+ },
+ "scale": 4
+}

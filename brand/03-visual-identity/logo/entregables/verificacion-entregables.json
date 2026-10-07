@@ -1,0 +1,1327 @@
+{
+ "estado": "Exportaciones finales · aprobado 2026-10-06",
+ "svg": {
+  "entregables.svg": {
+   "d_identicos": "2/2",
+   "ok": true,
+   "errores": []
+  },
+  "impresion/lealtab-horizontal-negro.svg": {
+   "d_identicos": "9/9",
+   "ok": true,
+   "errores": []
+  },
+  "impresion/lealtab-horizontal-noche.svg": {
+   "d_identicos": "9/9",
+   "ok": true,
+   "errores": []
+  },
+  "impresion/lealtab-isotipo-negro.svg": {
+   "d_identicos": "2/2",
+   "ok": true,
+   "errores": []
+  },
+  "impresion/lealtab-isotipo-noche.svg": {
+   "d_identicos": "2/2",
+   "ok": true,
+   "errores": []
+  },
+  "impresion/lealtab-vertical-negro.svg": {
+   "d_identicos": "9/9",
+   "ok": true,
+   "errores": []
+  },
+  "impresion/lealtab-vertical-noche.svg": {
+   "d_identicos": "9/9",
+   "ok": true,
+   "errores": []
+  },
+  "impresion/lealtab-wordmark-negro.svg": {
+   "d_identicos": "7/7",
+   "ok": true,
+   "errores": []
+  },
+  "impresion/lealtab-wordmark-noche.svg": {
+   "d_identicos": "7/7",
+   "ok": true,
+   "errores": []
+  },
+  "redes/lealtab-avatar-lino-cuadrado.svg": {
+   "d_identicos": "2/2",
+   "ok": true,
+   "errores": []
+  },
+  "redes/lealtab-avatar-noche-cuadrado.svg": {
+   "d_identicos": "2/2",
+   "ok": true,
+   "errores": []
+  },
+  "redes/lealtab-portada-facebook.svg": {
+   "d_identicos": "9/9",
+   "ok": true,
+   "errores": []
+  },
+  "svg/lealtab-horizontal-blanco-con-area.svg": {
+   "d_identicos": "9/9",
+   "ok": true,
+   "errores": []
+  },
+  "svg/lealtab-horizontal-blanco.svg": {
+   "d_identicos": "9/9",
+   "ok": true,
+   "errores": []
+  },
+  "svg/lealtab-horizontal-lino-con-area.svg": {
+   "d_identicos": "9/9",
+   "ok": true,
+   "errores": []
+  },
+  "svg/lealtab-horizontal-lino-fondo-noche-con-area.svg": {
+   "d_identicos": "9/9",
+   "ok": true,
+   "errores": []
+  },
+  "svg/lealtab-horizontal-lino-fondo-noche.svg": {
+   "d_identicos": "9/9",
+   "ok": true,
+   "errores": []
+  },
+  "svg/lealtab-horizontal-lino.svg": {
+   "d_identicos": "9/9",
+   "ok": true,
+   "errores": []
+  },
+  "svg/lealtab-horizontal-negro-con-area.svg": {
+   "d_identicos": "9/9",
+   "ok": true,
+   "errores": []
+  },
+  "svg/lealtab-horizontal-negro.svg": {
+   "d_identicos": "9/9",
+   "ok": true,
+   "errores": []
+  },
+  "svg/lealtab-horizontal-noche-con-area.svg": {
+   "d_identicos": "9/9",
+   "ok": true,
+   "errores": []
+  },
+  "svg/lealtab-horizontal-noche.svg": {
+   "d_identicos": "9/9",
+   "ok": true,
+   "errores": []
+  },
+  "svg/lealtab-isotipo-blanco-con-area.svg": {
+   "d_identicos": "2/2",
+   "ok": true,
+   "errores": []
+  },
+  "svg/lealtab-isotipo-blanco.svg": {
+   "d_identicos": "2/2",
+   "ok": true,
+   "errores": []
+  },
+  "svg/lealtab-isotipo-lino-con-area.svg": {
+   "d_identicos": "2/2",
+   "ok": true,
+   "errores": []
+  },
+  "svg/lealtab-isotipo-lino-fondo-noche-con-area.svg": {
+   "d_identicos": "2/2",
+   "ok": true,
+   "errores": []
+  },
+  "svg/lealtab-isotipo-lino-fondo-noche.svg": {
+   "d_identicos": "2/2",
+   "ok": true,
+   "errores": []
+  },
+  "svg/lealtab-isotipo-lino.svg": {
+   "d_identicos": "2/2",
+   "ok": true,
+   "errores": []
+  },
+  "svg/lealtab-isotipo-negro-con-area.svg": {
+   "d_identicos": "2/2",
+   "ok": true,
+   "errores": []
+  },
+  "svg/lealtab-isotipo-negro.svg": {
+   "d_identicos": "2/2",
+   "ok": true,
+   "errores": []
+  },
+  "svg/lealtab-isotipo-noche-con-area.svg": {
+   "d_identicos": "2/2",
+   "ok": true,
+   "errores": []
+  },
+  "svg/lealtab-isotipo-noche.svg": {
+   "d_identicos": "2/2",
+   "ok": true,
+   "errores": []
+  },
+  "svg/lealtab-vertical-blanco-con-area.svg": {
+   "d_identicos": "9/9",
+   "ok": true,
+   "errores": []
+  },
+  "svg/lealtab-vertical-blanco.svg": {
+   "d_identicos": "9/9",
+   "ok": true,
+   "errores": []
+  },
+  "svg/lealtab-vertical-lino-con-area.svg": {
+   "d_identicos": "9/9",
+   "ok": true,
+   "errores": []
+  },
+  "svg/lealtab-vertical-lino-fondo-noche-con-area.svg": {
+   "d_identicos": "9/9",
+   "ok": true,
+   "errores": []
+  },
+  "svg/lealtab-vertical-lino-fondo-noche.svg": {
+   "d_identicos": "9/9",
+   "ok": true,
+   "errores": []
+  },
+  "svg/lealtab-vertical-lino.svg": {
+   "d_identicos": "9/9",
+   "ok": true,
+   "errores": []
+  },
+  "svg/lealtab-vertical-negro-con-area.svg": {
+   "d_identicos": "9/9",
+   "ok": true,
+   "errores": []
+  },
+  "svg/lealtab-vertical-negro.svg": {
+   "d_identicos": "9/9",
+   "ok": true,
+   "errores": []
+  },
+  "svg/lealtab-vertical-noche-con-area.svg": {
+   "d_identicos": "9/9",
+   "ok": true,
+   "errores": []
+  },
+  "svg/lealtab-vertical-noche.svg": {
+   "d_identicos": "9/9",
+   "ok": true,
+   "errores": []
+  },
+  "svg/lealtab-wordmark-blanco-con-area.svg": {
+   "d_identicos": "7/7",
+   "ok": true,
+   "errores": []
+  },
+  "svg/lealtab-wordmark-blanco.svg": {
+   "d_identicos": "7/7",
+   "ok": true,
+   "errores": []
+  },
+  "svg/lealtab-wordmark-lino-con-area.svg": {
+   "d_identicos": "7/7",
+   "ok": true,
+   "errores": []
+  },
+  "svg/lealtab-wordmark-lino-fondo-noche-con-area.svg": {
+   "d_identicos": "7/7",
+   "ok": true,
+   "errores": []
+  },
+  "svg/lealtab-wordmark-lino-fondo-noche.svg": {
+   "d_identicos": "7/7",
+   "ok": true,
+   "errores": []
+  },
+  "svg/lealtab-wordmark-lino.svg": {
+   "d_identicos": "7/7",
+   "ok": true,
+   "errores": []
+  },
+  "svg/lealtab-wordmark-negro-con-area.svg": {
+   "d_identicos": "7/7",
+   "ok": true,
+   "errores": []
+  },
+  "svg/lealtab-wordmark-negro.svg": {
+   "d_identicos": "7/7",
+   "ok": true,
+   "errores": []
+  },
+  "svg/lealtab-wordmark-noche-con-area.svg": {
+   "d_identicos": "7/7",
+   "ok": true,
+   "errores": []
+  },
+  "svg/lealtab-wordmark-noche.svg": {
+   "d_identicos": "7/7",
+   "ok": true,
+   "errores": []
+  },
+  "web/favicon.svg": {
+   "tipo": "favicon B (pixel-fit aprobado, derivado)",
+   "identico_a_iconos": true,
+   "ok": true
+  }
+ },
+ "png": {
+  "png/horizontal/lealtab-horizontal-noche-con-area-512.png": {
+   "fuente": "entregables/svg/lealtab-horizontal-noche-con-area.svg",
+   "tamaño": [
+    512,
+    182
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 430,
+   "minimo_px": 80,
+   "sobre_minimo": true,
+   "sha256": "d5af39cf814bf8e3eeef8c38e1d72dcacb97bfdd301bbe98083470e342ed74d0",
+   "ok": true
+  },
+  "png/horizontal/lealtab-horizontal-noche-con-area-1024.png": {
+   "fuente": "entregables/svg/lealtab-horizontal-noche-con-area.svg",
+   "tamaño": [
+    1024,
+    365
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 860,
+   "minimo_px": 80,
+   "sobre_minimo": true,
+   "sha256": "9b4ac06c0ed44bbfffef042a491f14608ccbd47e3858247fc5a4d56e8430a85f",
+   "ok": true
+  },
+  "png/horizontal/lealtab-horizontal-noche-con-area-2048.png": {
+   "fuente": "entregables/svg/lealtab-horizontal-noche-con-area.svg",
+   "tamaño": [
+    2048,
+    729
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 1718,
+   "minimo_px": 80,
+   "sobre_minimo": true,
+   "sha256": "ab40433baa29874b66ff5357676688e0d7a5ab29f73c4d90d6d72b7503db41c7",
+   "ok": true
+  },
+  "png/horizontal/lealtab-horizontal-lino-con-area-512.png": {
+   "fuente": "entregables/svg/lealtab-horizontal-lino-con-area.svg",
+   "tamaño": [
+    512,
+    182
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 430,
+   "minimo_px": 80,
+   "sobre_minimo": true,
+   "sha256": "f7cdf34a3121660188fa619b3a0dd0eede29b4fd2f9ddfc46d2667281c46e54c",
+   "ok": true
+  },
+  "png/horizontal/lealtab-horizontal-lino-con-area-1024.png": {
+   "fuente": "entregables/svg/lealtab-horizontal-lino-con-area.svg",
+   "tamaño": [
+    1024,
+    365
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 860,
+   "minimo_px": 80,
+   "sobre_minimo": true,
+   "sha256": "82fce96e830fef44d08e72c6fff4ba04af42fe456dddeb50112967d98ef38402",
+   "ok": true
+  },
+  "png/horizontal/lealtab-horizontal-lino-con-area-2048.png": {
+   "fuente": "entregables/svg/lealtab-horizontal-lino-con-area.svg",
+   "tamaño": [
+    2048,
+    729
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 1718,
+   "minimo_px": 80,
+   "sobre_minimo": true,
+   "sha256": "91cf74a8f0b5c33fa1d9745aaa561064f9388b4d39e2a3702f6b82e4cc2a3548",
+   "ok": true
+  },
+  "png/horizontal/lealtab-horizontal-lino-fondo-noche-con-area-512.png": {
+   "fuente": "entregables/svg/lealtab-horizontal-lino-fondo-noche-con-area.svg",
+   "tamaño": [
+    512,
+    182
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 512,
+   "minimo_px": 80,
+   "sobre_minimo": true,
+   "sha256": "3bbb623c2c98c0208df395d3cc1e81a52dee6042ae06b7e779d8839d91b5ec54",
+   "ok": true
+  },
+  "png/horizontal/lealtab-horizontal-lino-fondo-noche-con-area-1024.png": {
+   "fuente": "entregables/svg/lealtab-horizontal-lino-fondo-noche-con-area.svg",
+   "tamaño": [
+    1024,
+    365
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 1024,
+   "minimo_px": 80,
+   "sobre_minimo": true,
+   "sha256": "02558a6c3f7f0a5495bf7ea66eeadc6c5edbb674f2f15fe2b6721a89dc9c4827",
+   "ok": true
+  },
+  "png/horizontal/lealtab-horizontal-lino-fondo-noche-con-area-2048.png": {
+   "fuente": "entregables/svg/lealtab-horizontal-lino-fondo-noche-con-area.svg",
+   "tamaño": [
+    2048,
+    729
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 2048,
+   "minimo_px": 80,
+   "sobre_minimo": true,
+   "sha256": "229d7fd588e9e86c11c6ed68e473d554dd1300d7547636ded26872c0d1601aae",
+   "ok": true
+  },
+  "png/horizontal/lealtab-horizontal-negro-con-area-512.png": {
+   "fuente": "entregables/svg/lealtab-horizontal-negro-con-area.svg",
+   "tamaño": [
+    512,
+    182
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 430,
+   "minimo_px": 80,
+   "sobre_minimo": true,
+   "sha256": "a66080dac4f54db94f35cc255628cad709653fbbf4fcab9d86231bdc76ed250c",
+   "ok": true
+  },
+  "png/horizontal/lealtab-horizontal-negro-con-area-1024.png": {
+   "fuente": "entregables/svg/lealtab-horizontal-negro-con-area.svg",
+   "tamaño": [
+    1024,
+    365
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 860,
+   "minimo_px": 80,
+   "sobre_minimo": true,
+   "sha256": "9b0a6b894bca3e6088295275d0e66b1ae171740a73ad194c67e956d7d4ca05ca",
+   "ok": true
+  },
+  "png/horizontal/lealtab-horizontal-negro-con-area-2048.png": {
+   "fuente": "entregables/svg/lealtab-horizontal-negro-con-area.svg",
+   "tamaño": [
+    2048,
+    729
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 1718,
+   "minimo_px": 80,
+   "sobre_minimo": true,
+   "sha256": "4870b150650d090537eda05790f6039a32cdead27bacd83e9a299bf834605f98",
+   "ok": true
+  },
+  "png/horizontal/lealtab-horizontal-blanco-con-area-512.png": {
+   "fuente": "entregables/svg/lealtab-horizontal-blanco-con-area.svg",
+   "tamaño": [
+    512,
+    182
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 430,
+   "minimo_px": 80,
+   "sobre_minimo": true,
+   "sha256": "2d43d781fb9802d0551d216ad64803602c14de808d7e14db2bb15284421eff63",
+   "ok": true
+  },
+  "png/horizontal/lealtab-horizontal-blanco-con-area-1024.png": {
+   "fuente": "entregables/svg/lealtab-horizontal-blanco-con-area.svg",
+   "tamaño": [
+    1024,
+    365
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 860,
+   "minimo_px": 80,
+   "sobre_minimo": true,
+   "sha256": "0eaa64ede4bc522e92bf3cb373522a2c94ffc45cd88e9c8af974205e8f00ec31",
+   "ok": true
+  },
+  "png/horizontal/lealtab-horizontal-blanco-con-area-2048.png": {
+   "fuente": "entregables/svg/lealtab-horizontal-blanco-con-area.svg",
+   "tamaño": [
+    2048,
+    729
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 1718,
+   "minimo_px": 80,
+   "sobre_minimo": true,
+   "sha256": "52b0b73a6abc6c66e2659e5c034214722979a59d70be2216e09ebb2ecc53fb2d",
+   "ok": true
+  },
+  "png/vertical/lealtab-vertical-noche-con-area-512.png": {
+   "fuente": "entregables/svg/lealtab-vertical-noche-con-area.svg",
+   "tamaño": [
+    512,
+    447
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 368,
+   "minimo_px": 56,
+   "sobre_minimo": true,
+   "sha256": "92c0e4a8ca7da859de13442227a24b00e16c6a5f0feba25ea460ba9752099d55",
+   "ok": true
+  },
+  "png/vertical/lealtab-vertical-noche-con-area-1024.png": {
+   "fuente": "entregables/svg/lealtab-vertical-noche-con-area.svg",
+   "tamaño": [
+    1024,
+    894
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 736,
+   "minimo_px": 56,
+   "sobre_minimo": true,
+   "sha256": "6b98eb82299e7e0030d6cc2723737323c5103886656772edc5c8744e7d4542f6",
+   "ok": true
+  },
+  "png/vertical/lealtab-vertical-noche-con-area-2048.png": {
+   "fuente": "entregables/svg/lealtab-vertical-noche-con-area.svg",
+   "tamaño": [
+    2048,
+    1788
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 1470,
+   "minimo_px": 56,
+   "sobre_minimo": true,
+   "sha256": "4aa04b759f202ac151f1cdfe7cafa08584203d5609efab0a56d8eba1af00b767",
+   "ok": true
+  },
+  "png/vertical/lealtab-vertical-lino-con-area-512.png": {
+   "fuente": "entregables/svg/lealtab-vertical-lino-con-area.svg",
+   "tamaño": [
+    512,
+    447
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 368,
+   "minimo_px": 56,
+   "sobre_minimo": true,
+   "sha256": "9bff057b330493a4f9c5a9bb5711dfd2f6e7c7f4fdc20ac79a8518b6822560f0",
+   "ok": true
+  },
+  "png/vertical/lealtab-vertical-lino-con-area-1024.png": {
+   "fuente": "entregables/svg/lealtab-vertical-lino-con-area.svg",
+   "tamaño": [
+    1024,
+    894
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 736,
+   "minimo_px": 56,
+   "sobre_minimo": true,
+   "sha256": "a631143fadc1abc3913b48922cd0ab4f3c89f19eaf8fc34fecfd82481f4ed411",
+   "ok": true
+  },
+  "png/vertical/lealtab-vertical-lino-con-area-2048.png": {
+   "fuente": "entregables/svg/lealtab-vertical-lino-con-area.svg",
+   "tamaño": [
+    2048,
+    1788
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 1470,
+   "minimo_px": 56,
+   "sobre_minimo": true,
+   "sha256": "969d09da44f0221c5a53c47a5198d70a122991295447b053d3244e567b640a6a",
+   "ok": true
+  },
+  "png/vertical/lealtab-vertical-lino-fondo-noche-con-area-512.png": {
+   "fuente": "entregables/svg/lealtab-vertical-lino-fondo-noche-con-area.svg",
+   "tamaño": [
+    512,
+    447
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 512,
+   "minimo_px": 56,
+   "sobre_minimo": true,
+   "sha256": "c34037783194513793830603fad1b130c1312dabcdb3c48843b72569e9dd79f3",
+   "ok": true
+  },
+  "png/vertical/lealtab-vertical-lino-fondo-noche-con-area-1024.png": {
+   "fuente": "entregables/svg/lealtab-vertical-lino-fondo-noche-con-area.svg",
+   "tamaño": [
+    1024,
+    894
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 1024,
+   "minimo_px": 56,
+   "sobre_minimo": true,
+   "sha256": "9a20514fc2543397fa1048d30500c76f5410ab895dc83c4f9cda7f4a5c4382be",
+   "ok": true
+  },
+  "png/vertical/lealtab-vertical-lino-fondo-noche-con-area-2048.png": {
+   "fuente": "entregables/svg/lealtab-vertical-lino-fondo-noche-con-area.svg",
+   "tamaño": [
+    2048,
+    1788
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 2048,
+   "minimo_px": 56,
+   "sobre_minimo": true,
+   "sha256": "51718edfb565b0bd8b18dcf27f7944b965ac6dc24553eac688e4ae6d88aab7f8",
+   "ok": true
+  },
+  "png/vertical/lealtab-vertical-negro-con-area-512.png": {
+   "fuente": "entregables/svg/lealtab-vertical-negro-con-area.svg",
+   "tamaño": [
+    512,
+    447
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 368,
+   "minimo_px": 56,
+   "sobre_minimo": true,
+   "sha256": "071ffcbe2c2b405b3deea04c635fcb35014735ef85a113e10f83344aecffb77a",
+   "ok": true
+  },
+  "png/vertical/lealtab-vertical-negro-con-area-1024.png": {
+   "fuente": "entregables/svg/lealtab-vertical-negro-con-area.svg",
+   "tamaño": [
+    1024,
+    894
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 736,
+   "minimo_px": 56,
+   "sobre_minimo": true,
+   "sha256": "9189e7b76bacb0e0e66ed2eddd9d61e6081ac2f3824eba2fe190a80df89084d1",
+   "ok": true
+  },
+  "png/vertical/lealtab-vertical-negro-con-area-2048.png": {
+   "fuente": "entregables/svg/lealtab-vertical-negro-con-area.svg",
+   "tamaño": [
+    2048,
+    1788
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 1470,
+   "minimo_px": 56,
+   "sobre_minimo": true,
+   "sha256": "526ad72909f11c272d9df1860e86474c05ef4babe7084dfd18941aba744feebc",
+   "ok": true
+  },
+  "png/vertical/lealtab-vertical-blanco-con-area-512.png": {
+   "fuente": "entregables/svg/lealtab-vertical-blanco-con-area.svg",
+   "tamaño": [
+    512,
+    447
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 368,
+   "minimo_px": 56,
+   "sobre_minimo": true,
+   "sha256": "bca0be30f8d90c7ae05d7c8b1d5dc89c4fa68bdbc94bb3286ec16728d90db172",
+   "ok": true
+  },
+  "png/vertical/lealtab-vertical-blanco-con-area-1024.png": {
+   "fuente": "entregables/svg/lealtab-vertical-blanco-con-area.svg",
+   "tamaño": [
+    1024,
+    894
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 736,
+   "minimo_px": 56,
+   "sobre_minimo": true,
+   "sha256": "71c2b6396dbc2533ccf315a86fc221d96c4dae52867e69a9b3a640202bbb62e9",
+   "ok": true
+  },
+  "png/vertical/lealtab-vertical-blanco-con-area-2048.png": {
+   "fuente": "entregables/svg/lealtab-vertical-blanco-con-area.svg",
+   "tamaño": [
+    2048,
+    1788
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 1470,
+   "minimo_px": 56,
+   "sobre_minimo": true,
+   "sha256": "458c1551a6ec48bb04bc1a2f0923feff27707a535c2bf7692ca11c0dcdf1bce0",
+   "ok": true
+  },
+  "png/isotipo/lealtab-isotipo-noche-con-area-512.png": {
+   "fuente": "entregables/svg/lealtab-isotipo-noche-con-area.svg",
+   "tamaño": [
+    512,
+    466
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 302,
+   "minimo_px": 16,
+   "sobre_minimo": true,
+   "sha256": "26b00da96f56e2d11107518318d8609dafd21eaf247bdeea914820cf877d1521",
+   "ok": true
+  },
+  "png/isotipo/lealtab-isotipo-noche-con-area-1024.png": {
+   "fuente": "entregables/svg/lealtab-isotipo-noche-con-area.svg",
+   "tamaño": [
+    1024,
+    932
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 602,
+   "minimo_px": 16,
+   "sobre_minimo": true,
+   "sha256": "2b3c1b19db36824ee7486bf35017f93074719d32e863a90129cff663581e57e0",
+   "ok": true
+  },
+  "png/isotipo/lealtab-isotipo-lino-con-area-512.png": {
+   "fuente": "entregables/svg/lealtab-isotipo-lino-con-area.svg",
+   "tamaño": [
+    512,
+    466
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 302,
+   "minimo_px": 16,
+   "sobre_minimo": true,
+   "sha256": "496aac0e0e6ef073afff1114cbb393bbed16de5a5cb9d0e785275a3f0db2052e",
+   "ok": true
+  },
+  "png/isotipo/lealtab-isotipo-lino-con-area-1024.png": {
+   "fuente": "entregables/svg/lealtab-isotipo-lino-con-area.svg",
+   "tamaño": [
+    1024,
+    932
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 602,
+   "minimo_px": 16,
+   "sobre_minimo": true,
+   "sha256": "2dce284a6c870fe5c09810e1a3db69687a0224799f8cd62c546a5bfdbb61e49a",
+   "ok": true
+  },
+  "png/isotipo/lealtab-isotipo-lino-fondo-noche-con-area-512.png": {
+   "fuente": "entregables/svg/lealtab-isotipo-lino-fondo-noche-con-area.svg",
+   "tamaño": [
+    512,
+    466
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 512,
+   "minimo_px": 16,
+   "sobre_minimo": true,
+   "sha256": "befe635038965717c13ba070cec8c269a54e1c4c57a3f35c72be64745d6692e0",
+   "ok": true
+  },
+  "png/isotipo/lealtab-isotipo-lino-fondo-noche-con-area-1024.png": {
+   "fuente": "entregables/svg/lealtab-isotipo-lino-fondo-noche-con-area.svg",
+   "tamaño": [
+    1024,
+    932
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 1024,
+   "minimo_px": 16,
+   "sobre_minimo": true,
+   "sha256": "8c570ee844c9cf4a24fae96c340e407913cda66baa9990b5c1c586832eb64b79",
+   "ok": true
+  },
+  "png/isotipo/lealtab-isotipo-negro-con-area-512.png": {
+   "fuente": "entregables/svg/lealtab-isotipo-negro-con-area.svg",
+   "tamaño": [
+    512,
+    466
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 302,
+   "minimo_px": 16,
+   "sobre_minimo": true,
+   "sha256": "ff2ae29b4d1cfb905e7f335647265304f34d3698076f2acf7f75c4184bceb35a",
+   "ok": true
+  },
+  "png/isotipo/lealtab-isotipo-negro-con-area-1024.png": {
+   "fuente": "entregables/svg/lealtab-isotipo-negro-con-area.svg",
+   "tamaño": [
+    1024,
+    932
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 602,
+   "minimo_px": 16,
+   "sobre_minimo": true,
+   "sha256": "8c136abc4dee37a7942d08f6ff971a7a4325371230b2e9061c885926f45a59e0",
+   "ok": true
+  },
+  "png/isotipo/lealtab-isotipo-blanco-con-area-512.png": {
+   "fuente": "entregables/svg/lealtab-isotipo-blanco-con-area.svg",
+   "tamaño": [
+    512,
+    466
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 302,
+   "minimo_px": 16,
+   "sobre_minimo": true,
+   "sha256": "0a79520399ae4e38d3819ed93818fc3a45aceff558b03d73f193e82f5e7e630a",
+   "ok": true
+  },
+  "png/isotipo/lealtab-isotipo-blanco-con-area-1024.png": {
+   "fuente": "entregables/svg/lealtab-isotipo-blanco-con-area.svg",
+   "tamaño": [
+    1024,
+    932
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 602,
+   "minimo_px": 16,
+   "sobre_minimo": true,
+   "sha256": "95e4314337761c764cd50020b109668e8b7b2cf5955d186d95d0b613ba599cc2",
+   "ok": true
+  },
+  "png/wordmark/lealtab-wordmark-noche-con-area-512.png": {
+   "fuente": "entregables/svg/lealtab-wordmark-noche-con-area.svg",
+   "tamaño": [
+    512,
+    217
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 396,
+   "minimo_px": 56,
+   "sobre_minimo": true,
+   "sha256": "d8ac59a405d4ef22f4693b493c5ed60bb039d71168e9c361353b29e6f646ec7f",
+   "ok": true
+  },
+  "png/wordmark/lealtab-wordmark-noche-con-area-1024.png": {
+   "fuente": "entregables/svg/lealtab-wordmark-noche-con-area.svg",
+   "tamaño": [
+    1024,
+    434
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 790,
+   "minimo_px": 56,
+   "sobre_minimo": true,
+   "sha256": "c1699e223827ca8d158bf18383f349b6153f578561a7de75ac0a5c3d52aad523",
+   "ok": true
+  },
+  "png/wordmark/lealtab-wordmark-lino-con-area-512.png": {
+   "fuente": "entregables/svg/lealtab-wordmark-lino-con-area.svg",
+   "tamaño": [
+    512,
+    217
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 396,
+   "minimo_px": 56,
+   "sobre_minimo": true,
+   "sha256": "9addf9b14c011415dc4baa71bbde1adcb65f52551217584e4e4ab77d682284ec",
+   "ok": true
+  },
+  "png/wordmark/lealtab-wordmark-lino-con-area-1024.png": {
+   "fuente": "entregables/svg/lealtab-wordmark-lino-con-area.svg",
+   "tamaño": [
+    1024,
+    434
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 790,
+   "minimo_px": 56,
+   "sobre_minimo": true,
+   "sha256": "df097bfb7ccb6ffd02b817ba34ad722c3765751a4afe8e4e1dbf0e8bdd4f43d2",
+   "ok": true
+  },
+  "png/wordmark/lealtab-wordmark-lino-fondo-noche-con-area-512.png": {
+   "fuente": "entregables/svg/lealtab-wordmark-lino-fondo-noche-con-area.svg",
+   "tamaño": [
+    512,
+    217
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 512,
+   "minimo_px": 56,
+   "sobre_minimo": true,
+   "sha256": "7b99f51dc943fa260d13eff55d9ca896dd3b268ae883af1da07353702a32b375",
+   "ok": true
+  },
+  "png/wordmark/lealtab-wordmark-lino-fondo-noche-con-area-1024.png": {
+   "fuente": "entregables/svg/lealtab-wordmark-lino-fondo-noche-con-area.svg",
+   "tamaño": [
+    1024,
+    434
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 1024,
+   "minimo_px": 56,
+   "sobre_minimo": true,
+   "sha256": "80a01e1afca761e890fd7dcd0eb24019c40027eb3ae1dc4e4fa7c1942b14ceb2",
+   "ok": true
+  },
+  "png/wordmark/lealtab-wordmark-negro-con-area-512.png": {
+   "fuente": "entregables/svg/lealtab-wordmark-negro-con-area.svg",
+   "tamaño": [
+    512,
+    217
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 396,
+   "minimo_px": 56,
+   "sobre_minimo": true,
+   "sha256": "17e60aff65136205db5e5ca191148ec556afaec6e62ce1b6c257689544e5898e",
+   "ok": true
+  },
+  "png/wordmark/lealtab-wordmark-negro-con-area-1024.png": {
+   "fuente": "entregables/svg/lealtab-wordmark-negro-con-area.svg",
+   "tamaño": [
+    1024,
+    434
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 790,
+   "minimo_px": 56,
+   "sobre_minimo": true,
+   "sha256": "62750166f56d5eeff02283ca658860cb86d3973938ac34b093a8dc6d41aa32f1",
+   "ok": true
+  },
+  "png/wordmark/lealtab-wordmark-blanco-con-area-512.png": {
+   "fuente": "entregables/svg/lealtab-wordmark-blanco-con-area.svg",
+   "tamaño": [
+    512,
+    217
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 396,
+   "minimo_px": 56,
+   "sobre_minimo": true,
+   "sha256": "5380448e13fb129142aba63e010bc6a89eed9cea8f718b35d658cccd7a078855",
+   "ok": true
+  },
+  "png/wordmark/lealtab-wordmark-blanco-con-area-1024.png": {
+   "fuente": "entregables/svg/lealtab-wordmark-blanco-con-area.svg",
+   "tamaño": [
+    1024,
+    434
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 790,
+   "minimo_px": 56,
+   "sobre_minimo": true,
+   "sha256": "0be6995cb97473f2d900d0b7e29f4f44088790de72cd27acd92fac46eed0ba39",
+   "ok": true
+  },
+  "web/apple-touch-icon.png": {
+   "fuente": "iconos/app/lealtab-apple-touch-icon-180-sangre.svg",
+   "tamaño": [
+    180,
+    180
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 106,
+   "minimo_px": 16,
+   "sobre_minimo": true,
+   "sha256": "330e87089efb40d120627aa0b0c0072c44df9789065b86f14eaa06ba53387b80",
+   "ok": true
+  },
+  "web/icon-192.png": {
+   "fuente": "iconos/pwa/lealtab-pwa-192.svg",
+   "tamaño": [
+    192,
+    192
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 192,
+   "minimo_px": 16,
+   "sobre_minimo": true,
+   "sha256": "bfcdbcfcb4166b97b879b6fdf684be86e8aa48b56ba2161c49673171ce1c4fcf",
+   "ok": true
+  },
+  "web/icon-512.png": {
+   "fuente": "iconos/pwa/lealtab-pwa-512.svg",
+   "tamaño": [
+    512,
+    512
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 512,
+   "minimo_px": 16,
+   "sobre_minimo": true,
+   "sha256": "feca59d7f2a1a39cbf630934b94d961988a6a7b5665b47df120ea13cf1efc925",
+   "ok": true
+  },
+  "web/icon-maskable-512.png": {
+   "fuente": "iconos/pwa/lealtab-pwa-maskable-512.svg",
+   "tamaño": [
+    512,
+    512
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 257,
+   "minimo_px": 16,
+   "sobre_minimo": true,
+   "sha256": "80233bf6d99ca0cee7d275d89fc218771c3ba8aaad5528154c454fbe9c108fc8",
+   "ok": true
+  },
+  "redes/lealtab-avatar-lino-circulo-400.png": {
+   "fuente": "iconos/avatar/lealtab-avatar-lino-400.svg",
+   "tamaño": [
+    400,
+    400
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 400,
+   "minimo_px": 16,
+   "sobre_minimo": true,
+   "sha256": "d359fe046e7475b2e67b4c3b00301187c39e097315564637aa491da18ac9d63f",
+   "ok": true
+  },
+  "redes/lealtab-avatar-lino-circulo-1080.png": {
+   "fuente": "iconos/avatar/lealtab-avatar-lino-400.svg",
+   "tamaño": [
+    1080,
+    1080
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 1080,
+   "minimo_px": 16,
+   "sobre_minimo": true,
+   "sha256": "9ef7211a98edcb84b57eb672c4e211d1ac5fe4000d6b5289e5327dd4d93b4e3b",
+   "ok": true
+  },
+  "redes/lealtab-avatar-lino-cuadrado-400.png": {
+   "fuente": "entregables/redes/lealtab-avatar-lino-cuadrado.svg",
+   "tamaño": [
+    400,
+    400
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 233,
+   "minimo_px": 16,
+   "sobre_minimo": true,
+   "sha256": "b11f3b752ee6923a28dc97298849b2a34ca6bf031c5e25be1fd881a6ea9d328f",
+   "ok": true
+  },
+  "redes/lealtab-avatar-lino-cuadrado-1080.png": {
+   "fuente": "entregables/redes/lealtab-avatar-lino-cuadrado.svg",
+   "tamaño": [
+    1080,
+    1080
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 628,
+   "minimo_px": 16,
+   "sobre_minimo": true,
+   "sha256": "d13860edd29e6591d534328187804789147cf3d64c4003711c7c4ff3635fcb43",
+   "ok": true
+  },
+  "redes/lealtab-avatar-noche-circulo-400.png": {
+   "fuente": "iconos/avatar/lealtab-avatar-noche-400.svg",
+   "tamaño": [
+    400,
+    400
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 400,
+   "minimo_px": 16,
+   "sobre_minimo": true,
+   "sha256": "3731975a0d9f32bee131261fa7e58ea922a229f21ce7fb804c93cc619942a383",
+   "ok": true
+  },
+  "redes/lealtab-avatar-noche-circulo-1080.png": {
+   "fuente": "iconos/avatar/lealtab-avatar-noche-400.svg",
+   "tamaño": [
+    1080,
+    1080
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 1080,
+   "minimo_px": 16,
+   "sobre_minimo": true,
+   "sha256": "41386ecefa57e9ab0f5e6abef16db55ffff5e4b7cdb72c047e3e61c07ae18cfe",
+   "ok": true
+  },
+  "redes/lealtab-avatar-noche-cuadrado-400.png": {
+   "fuente": "entregables/redes/lealtab-avatar-noche-cuadrado.svg",
+   "tamaño": [
+    400,
+    400
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 233,
+   "minimo_px": 16,
+   "sobre_minimo": true,
+   "sha256": "6e773e111bd3da3f7d489efa8049acf36ea2e1b6aa08ce28e1b2e45c336ef653",
+   "ok": true
+  },
+  "redes/lealtab-avatar-noche-cuadrado-1080.png": {
+   "fuente": "entregables/redes/lealtab-avatar-noche-cuadrado.svg",
+   "tamaño": [
+    1080,
+    1080
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 628,
+   "minimo_px": 16,
+   "sobre_minimo": true,
+   "sha256": "b2c2d8c75b234ec643fecedb84553b9cd47e8421dbb101823d4a08e148959126",
+   "ok": true
+  },
+  "redes/lealtab-portada-facebook-1640x624.png": {
+   "fuente": "entregables/redes/lealtab-portada-facebook.svg",
+   "tamaño": [
+    1640,
+    624
+   ],
+   "igual_al_rerender": true,
+   "dif_max": 0,
+   "ancho_tinta_px": 520,
+   "minimo_px": 80,
+   "sobre_minimo": true,
+   "sha256": "8e149a8c860f17df126abd6d7e089ed4119ed5ef87d9d48da32e94fd1501b34d",
+   "ok": true
+  }
+ },
+ "pdf": {
+  "impresion/lealtab-horizontal-negro.pdf": {
+   "paginas": 1,
+   "mm": [
+    99.8,
+    23.3
+   ],
+   "imagenes_raster": 0,
+   "fuentes": 0,
+   "vectorial": true,
+   "cmyk": "no (RGB; pendiente de imprenta)",
+   "ok": true
+  },
+  "impresion/lealtab-horizontal-noche.pdf": {
+   "paginas": 1,
+   "mm": [
+    99.8,
+    23.3
+   ],
+   "imagenes_raster": 0,
+   "fuentes": 0,
+   "vectorial": true,
+   "cmyk": "no (RGB; pendiente de imprenta)",
+   "ok": true
+  },
+  "impresion/lealtab-isotipo-negro.pdf": {
+   "paginas": 1,
+   "mm": [
+    39.9,
+    33.9
+   ],
+   "imagenes_raster": 0,
+   "fuentes": 0,
+   "vectorial": true,
+   "cmyk": "no (RGB; pendiente de imprenta)",
+   "ok": true
+  },
+  "impresion/lealtab-isotipo-noche.pdf": {
+   "paginas": 1,
+   "mm": [
+    39.9,
+    33.9
+   ],
+   "imagenes_raster": 0,
+   "fuentes": 0,
+   "vectorial": true,
+   "cmyk": "no (RGB; pendiente de imprenta)",
+   "ok": true
+  },
+  "impresion/lealtab-vertical-negro.pdf": {
+   "paginas": 1,
+   "mm": [
+    59.9,
+    49.4
+   ],
+   "imagenes_raster": 0,
+   "fuentes": 0,
+   "vectorial": true,
+   "cmyk": "no (RGB; pendiente de imprenta)",
+   "ok": true
+  },
+  "impresion/lealtab-vertical-noche.pdf": {
+   "paginas": 1,
+   "mm": [
+    59.9,
+    49.4
+   ],
+   "imagenes_raster": 0,
+   "fuentes": 0,
+   "vectorial": true,
+   "cmyk": "no (RGB; pendiente de imprenta)",
+   "ok": true
+  },
+  "impresion/lealtab-wordmark-negro.pdf": {
+   "paginas": 1,
+   "mm": [
+    80.1,
+    20.5
+   ],
+   "imagenes_raster": 0,
+   "fuentes": 0,
+   "vectorial": true,
+   "cmyk": "no (RGB; pendiente de imprenta)",
+   "ok": true
+  },
+  "impresion/lealtab-wordmark-noche.pdf": {
+   "paginas": 1,
+   "mm": [
+    80.1,
+    20.5
+   ],
+   "imagenes_raster": 0,
+   "fuentes": 0,
+   "vectorial": true,
+   "cmyk": "no (RGB; pendiente de imprenta)",
+   "ok": true
+  }
+ },
+ "ico": {
+  "tamaños": [
+   [
+    16,
+    16
+   ],
+   [
+    32,
+    32
+   ],
+   [
+    48,
+    48
+   ]
+  ],
+  "identico_a_iconos": true
+ },
+ "fuentes_protegidas": {
+  "master_congelados": true,
+  "sistema": true,
+  "iconos": true,
+  "uso": true
+ },
+ "comparacion_con_png_de_iconos": {
+  "web/apple-touch-icon.png": {
+   "png_aprobado": "iconos/app/lealtab-apple-touch-icon-180-sangre.png",
+   "pixeles_distintos(>8)": 0,
+   "de": 32400,
+   "dif_max": 4,
+   "nota": "solo en bordes antialias; mismo SVG fuente"
+  },
+  "web/icon-192.png": {
+   "png_aprobado": "iconos/pwa/lealtab-pwa-192.png",
+   "pixeles_distintos(>8)": 26,
+   "de": 36864,
+   "dif_max": 78,
+   "nota": "solo en bordes antialias; mismo SVG fuente"
+  },
+  "web/icon-512.png": {
+   "png_aprobado": "iconos/pwa/lealtab-pwa-512.png",
+   "pixeles_distintos(>8)": 11,
+   "de": 262144,
+   "dif_max": 16,
+   "nota": "solo en bordes antialias; mismo SVG fuente"
+  },
+  "web/icon-maskable-512.png": {
+   "png_aprobado": "iconos/pwa/lealtab-pwa-maskable-512.png",
+   "pixeles_distintos(>8)": 42,
+   "de": 262144,
+   "dif_max": 52,
+   "nota": "solo en bordes antialias; mismo SVG fuente"
+  },
+  "redes/lealtab-avatar-lino-circulo-400.png": {
+   "png_aprobado": "iconos/avatar/lealtab-avatar-lino-400.png",
+   "pixeles_distintos(>8)": 123,
+   "de": 160000,
+   "dif_max": 93,
+   "nota": "solo en bordes antialias; mismo SVG fuente"
+  },
+  "redes/lealtab-avatar-noche-circulo-400.png": {
+   "png_aprobado": "iconos/avatar/lealtab-avatar-noche-400.png",
+   "pixeles_distintos(>8)": 146,
+   "de": 160000,
+   "dif_max": 75,
+   "nota": "solo en bordes antialias; mismo SVG fuente"
+  }
+ },
+ "resumen": {
+  "todo_ok": true,
+  "svg": 53,
+  "png": 63,
+  "pdf": 8,
+  "png_iguales_al_rerender": 63,
+  "png_bajo_minimo": []
+ }
+}

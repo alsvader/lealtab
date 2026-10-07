@@ -1,0 +1,1561 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LealTab · Haz que tus clientes siempre regresen</title>
+  <meta name="description" content="Tu tarjeta de lealtad, ahora en el celular de tus clientes. Créala en minutos; tus clientes la instalan con un toque, sin descargar nada. Prueba gratis 30 días." />
+  <link rel="icon" href="../03-visual-identity/logo/entregables/web/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../04-design-system/tokens.css" />
+  <style>
+    /* ——— Reset & base ——— */
+    *, *::before, *::after { box-sizing: border-box; }
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px; /* sticky nav clearance */
+    }
+    /* Sections clear sticky nav on in-page jump / scrollIntoView */
+    main > section,
+    .section,
+    .hero,
+    .roadmap,
+    .cta-final {
+      scroll-margin-top: 80px;
+    }
+    body {
+      margin: 0;
+      background: var(--color-bg);
+      color: var(--color-text);
+      font-family: var(--font-body);
+      font-size: var(--font-size-body);
+      font-weight: var(--font-weight-regular);
+      line-height: var(--font-line-body);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: clip;
+    }
+    img, svg { display: block; max-width: 100%; height: auto; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; cursor: pointer; border: none; background: none; }
+    ul { list-style: none; margin: 0; padding: 0; }
+    :focus { outline: none; }
+    :focus-visible {
+      outline: none;
+      box-shadow: var(--focus-ring);
+    }
+    a:focus-visible,
+    button:focus-visible,
+    summary:focus-visible {
+      border-radius: var(--radius-control);
+    }
+
+    /* ——— Typography helpers ——— */
+    .display, h1, h2, h3, .h3 {
+      font-family: var(--font-display);
+      font-weight: var(--font-weight-black);
+      font-stretch: condensed;
+      font-variation-settings: "wdth" 75, "wght" 800;
+      letter-spacing: -0.01em;
+      color: var(--color-text);
+      margin: 0;
+    }
+    h1 {
+      font-size: clamp(32px, 7vw, var(--font-size-h1));
+      line-height: var(--font-line-h1);
+    }
+    h2 {
+      font-size: clamp(26px, 4.5vw, var(--font-size-h2));
+      line-height: var(--font-line-h2);
+    }
+    h3, .h3 {
+      font-size: clamp(20px, 3vw, var(--font-size-h3));
+      line-height: var(--font-line-h3);
+    }
+    .lead {
+      font-size: clamp(16px, 2.2vw, var(--font-size-lead));
+      font-weight: var(--font-weight-medium);
+      line-height: var(--font-line-lead);
+      color: var(--color-text-muted);
+      margin: 0;
+    }
+    .caption {
+      font-size: var(--font-size-caption);
+      font-weight: var(--font-weight-semibold);
+      line-height: var(--font-line-caption);
+      color: var(--color-text-muted);
+    }
+    .label {
+      font-size: var(--font-size-label);
+      font-weight: var(--font-weight-bold);
+      letter-spacing: var(--font-tracking-label);
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+    }
+
+    /* ——— Layout ——— */
+    .wrap {
+      width: min(100% - 32px, 1120px);
+      margin-inline: auto;
+    }
+    @media (min-width: 768px) {
+      .wrap { width: min(100% - 48px, 1120px); }
+    }
+    .section {
+      padding: var(--space-7) 0;
+    }
+    @media (min-width: 768px) {
+      .section { padding: var(--space-8) 0; }
+    }
+    .section-tight { padding: var(--space-7) 0; }
+    .stack-sm { display: flex; flex-direction: column; gap: var(--space-3); }
+    .stack { display: flex; flex-direction: column; gap: var(--space-4); }
+    .stack-lg { display: flex; flex-direction: column; gap: var(--space-5); }
+    .center { text-align: center; }
+    .center-block { margin-inline: auto; }
+
+    /* ——— Buttons ——— */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+      font-family: var(--font-body);
+      font-weight: var(--font-weight-semibold);
+      border: var(--border-product) solid var(--color-border);
+      border-radius: var(--radius-control);
+      box-shadow: var(--shadow-button);
+      transition:
+        transform var(--duration-fast) var(--easing-standard),
+        box-shadow var(--duration-fast) var(--easing-standard),
+        border-width var(--duration-fast) var(--easing-standard);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .btn:focus-visible {
+      outline: none;
+      box-shadow: var(--shadow-button), var(--focus-ring);
+    }
+    .btn:active {
+      transform: translate(4px, 4px);
+      box-shadow: none;
+    }
+    .btn-primary {
+      background: var(--color-bosque);
+      color: var(--color-text-on-bosque);
+    }
+    /* Soft hover lift — hard shadow stays Ciclo v2 */
+    .btn-primary:hover {
+      border-width: var(--border-product-strong);
+      transform: translate(-1px, -1px);
+      box-shadow: 5px 5px 0 var(--color-shadow);
+    }
+    .btn-primary:active {
+      transform: translate(4px, 4px);
+      box-shadow: none;
+    }
+    .btn-secondary {
+      background: var(--color-surface);
+      color: var(--color-text);
+    }
+    .btn-secondary:hover {
+      border-width: var(--border-product-strong);
+      transform: translate(-1px, -1px);
+      box-shadow: 5px 5px 0 var(--color-shadow);
+    }
+    .btn-secondary:active {
+      transform: translate(4px, 4px);
+      box-shadow: none;
+    }
+    .btn-sm { padding: var(--space-2) var(--space-3); font-size: var(--font-size-ui); }
+    .btn-md { padding: var(--space-3) var(--space-4); font-size: var(--font-size-ui); }
+    .btn-lg { padding: var(--space-4) var(--space-5); font-size: var(--font-size-body); }
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+      align-items: center;
+    }
+
+    /* ——— Cards ——— */
+    .card {
+      background: var(--color-surface);
+      border: var(--border-marketing) solid var(--color-border);
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-card);
+    }
+    .card-pad { padding: var(--space-5); }
+
+    /* ——— Nav ——— */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: color-mix(in srgb, var(--color-lino) 92%, transparent);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: var(--border-hair) solid var(--color-border);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-3);
+      height: 64px;
+    }
+    .nav-logo { height: 28px; width: auto; }
+    .nav-links {
+      display: none;
+      align-items: center;
+      gap: var(--space-5);
+      font-size: var(--font-size-ui);
+      font-weight: var(--font-weight-semibold);
+    }
+    .nav-links a {
+      padding: var(--space-1) var(--space-2);
+      border-radius: var(--radius-control);
+      transition: color var(--duration-fast) var(--easing-standard);
+    }
+    .nav-links a:hover { color: var(--color-bosque); }
+    .nav-links a:focus-visible { box-shadow: var(--focus-ring); }
+    .nav-actions { display: flex; align-items: center; gap: var(--space-2); flex-shrink: 0; }
+    .nav-toggle {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 40px;
+      height: 40px;
+      padding: 8px;
+      border: var(--border-product) solid var(--color-border);
+      border-radius: var(--radius-control);
+      background: var(--color-surface);
+      box-shadow: var(--shadow-sticker);
+      transition:
+        transform var(--duration-fast) var(--easing-standard),
+        box-shadow var(--duration-fast) var(--easing-standard);
+    }
+    .nav-toggle:focus-visible { box-shadow: var(--shadow-sticker), var(--focus-ring); }
+    .nav-toggle:active {
+      transform: translate(3px, 3px);
+      box-shadow: none;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 18px;
+      height: 2px;
+      background: var(--color-noche);
+      border-radius: 1px;
+      margin-inline: auto;
+      transition: transform var(--duration-ui) var(--easing-standard), opacity var(--duration-ui);
+    }
+    .nav-toggle[aria-expanded="true"] span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .nav-toggle[aria-expanded="true"] span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+    .nav-drawer {
+      display: grid;
+      grid-template-rows: 0fr;
+      border-top: 0 solid transparent;
+      background: var(--color-surface);
+      transition: grid-template-rows var(--duration-ui) var(--easing-standard);
+    }
+    .nav-drawer > .nav-drawer-inner {
+      overflow: hidden;
+      min-height: 0;
+    }
+    .nav-drawer.open {
+      grid-template-rows: 1fr;
+      border-top: var(--border-hair) solid var(--color-border);
+    }
+    .nav-drawer-inner {
+      padding: 0 var(--space-4);
+    }
+    .nav-drawer.open .nav-drawer-inner {
+      padding: var(--space-4);
+    }
+    .nav-drawer a {
+      display: block;
+      padding: var(--space-3) 0;
+      font-weight: var(--font-weight-semibold);
+      border-bottom: var(--border-hair) solid color-mix(in srgb, var(--color-border) 25%, transparent);
+      border-radius: var(--radius-control);
+    }
+    .nav-drawer a:last-child { border-bottom: none; }
+    .nav-drawer a:focus-visible { box-shadow: var(--focus-ring); padding-inline: var(--space-2); }
+    @media (min-width: 880px) {
+      .nav-links { display: flex; }
+      .nav-toggle { display: none; }
+      .nav-cta-mobile { display: none !important; }
+      .nav-drawer { display: none !important; }
+      .nav-actions { gap: var(--space-3); }
+    }
+    @media (max-width: 879px) {
+      .nav-cta-desktop { display: none !important; }
+    }
+
+    /* ——— Hero ——— */
+    .hero {
+      padding: var(--space-6) 0 var(--space-7);
+    }
+    @media (min-width: 768px) {
+      .hero { padding: var(--space-7) 0 var(--space-8); }
+    }
+    .hero-grid {
+      display: grid;
+      gap: var(--space-6);
+      align-items: center;
+    }
+    @media (min-width: 720px) and (max-width: 899px) {
+      .hero-grid {
+        grid-template-columns: 1fr 0.85fr;
+        gap: var(--space-5);
+        align-items: start;
+      }
+    }
+    @media (min-width: 900px) {
+      .hero-grid {
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: var(--space-8);
+      }
+    }
+    .hero-copy .lead { margin-top: var(--space-4); max-width: 36ch; }
+    .hero-ctas { margin-top: var(--space-5); }
+    .hero-note {
+      margin-top: var(--space-3);
+      font-size: var(--font-size-ui);
+      color: var(--color-text-muted);
+      font-weight: var(--font-weight-medium);
+    }
+
+    /* Phone mock */
+    .phone {
+      width: min(100%, 280px);
+      margin-inline: auto;
+      background: var(--color-noche);
+      border: var(--border-marketing) solid var(--color-noche);
+      border-radius: 36px;
+      box-shadow: var(--shadow-storefront);
+      padding: 12px;
+      position: relative;
+    }
+    @media (min-width: 720px) and (max-width: 899px) {
+      .phone {
+        width: min(100%, 260px);
+        margin-inline: 0 auto;
+      }
+      .phone-screen { min-height: 420px; padding: var(--space-4) var(--space-3) var(--space-3); }
+    }
+    @media (min-width: 900px) {
+      .phone { width: min(100%, 300px); }
+    }
+    .phone-notch {
+      width: 96px;
+      height: 22px;
+      background: var(--color-noche);
+      border-radius: 0 0 14px 14px;
+      margin: 0 auto 8px;
+      position: relative;
+      z-index: 2;
+    }
+    .phone-screen {
+      background: var(--color-lino);
+      border-radius: 26px;
+      overflow: hidden;
+      min-height: 460px;
+      padding: var(--space-5) var(--space-4) var(--space-4);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+    }
+    .loyalty-card {
+      background: var(--color-bosque);
+      color: var(--color-lino);
+      border: var(--border-marketing) solid var(--color-noche);
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-card);
+      padding: var(--space-4);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+    .loyalty-card .biz {
+      font-family: var(--font-display);
+      font-variation-settings: "wdth" 75, "wght" 800;
+      font-size: 22px;
+      line-height: 1;
+    }
+    .loyalty-card .reward-line {
+      font-size: var(--font-size-ui);
+      opacity: 0.92;
+      line-height: 1.4;
+      margin: 0;
+    }
+    .loyalty-progress {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      margin-top: var(--space-2);
+    }
+    .loyalty-progress .stat {
+      font-variant-numeric: tabular-nums;
+      font-weight: var(--font-weight-bold);
+      font-size: var(--font-size-stat);
+      letter-spacing: var(--font-tracking-stat);
+      line-height: var(--font-line-stat);
+    }
+    .loyalty-progress .stat-label {
+      font-size: var(--font-size-caption);
+      opacity: 0.85;
+    }
+    .home-preview {
+      background: var(--color-surface);
+      border: var(--border-product) solid var(--color-border);
+      border-radius: var(--radius-card);
+      padding: var(--space-3);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-2);
+    }
+    .home-icon {
+      aspect-ratio: 1;
+      border-radius: 12px;
+      border: 1.5px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 700;
+      background: var(--color-menta);
+    }
+    .home-icon.brand {
+      background: var(--color-bosque);
+      color: var(--color-lino);
+    }
+    .home-icon.ghost {
+      background: var(--color-blanco-lino);
+      color: var(--color-gris-noche);
+      opacity: 0.7;
+    }
+
+    /* Hero aro animation */
+    .aro-hero { flex-shrink: 0; }
+    .aro-fill {
+      stroke-dasharray: 130.69 32.67;
+      stroke-dashoffset: 130.69;
+      animation: aroFill var(--duration-arc) var(--easing-standard) 0.35s forwards;
+    }
+    .aro-tip {
+      stroke-dasharray: 6 157.36;
+      opacity: 0;
+      transform-origin: 36px 36px;
+      animation:
+        aroTipIn 0.35s var(--easing-standard) 0.95s forwards,
+        aroTipPulse 0.55s var(--easing-standard) 1.3s 1;
+    }
+    @keyframes aroFill {
+      to { stroke-dashoffset: 0; }
+    }
+    @keyframes aroTipIn {
+      to { opacity: 1; }
+    }
+    @keyframes aroTipPulse {
+      0% { stroke-width: 8; }
+      45% { stroke-width: 11; }
+      100% { stroke-width: 8; }
+    }
+
+    /* Steps */
+    .steps {
+      display: grid;
+      gap: var(--space-4);
+      margin-top: var(--space-6);
+    }
+    @media (min-width: 700px) {
+      .steps { grid-template-columns: repeat(3, 1fr); gap: var(--space-5); }
+    }
+    .step {
+      background: var(--color-surface);
+      border: var(--border-marketing) solid var(--color-border);
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-card);
+      padding: var(--space-5);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+    .step-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .step-num {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-full);
+      background: var(--color-bosque);
+      color: var(--color-lino);
+      border: var(--border-product) solid var(--color-border);
+      display: grid;
+      place-items: center;
+      font-weight: var(--font-weight-bold);
+      font-variant-numeric: tabular-nums;
+    }
+    .step-icon { width: 40px; height: 40px; }
+    .step h3 {
+      font-size: var(--font-size-h4);
+      line-height: var(--font-line-h4);
+    }
+    .step p {
+      margin: 0;
+      color: var(--color-text-muted);
+      font-size: var(--font-size-ui);
+      line-height: var(--font-line-ui);
+    }
+
+    /* Tarjeta examples */
+    .cards-row {
+      display: flex;
+      gap: var(--space-4);
+      margin-top: var(--space-5);
+      overflow-x: auto;
+      padding-bottom: var(--space-2);
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+    }
+    .cards-row > * {
+      flex: 0 0 min(280px, 85vw);
+      scroll-snap-align: start;
+    }
+    @media (min-width: 900px) {
+      .cards-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        overflow: visible;
+      }
+      .cards-row > * { flex: unset; }
+    }
+    .example-card {
+      border: var(--border-marketing) solid var(--color-border);
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-card);
+      padding: var(--space-4);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+      min-height: 220px;
+    }
+    .example-card.barberia { background: var(--color-bosque); color: var(--color-lino); }
+    .example-card.estetica { background: var(--color-surface); color: var(--color-text); }
+    .example-card.tapioca { background: var(--color-menta); color: var(--color-text); }
+    .example-card .name {
+      font-family: var(--font-display);
+      font-variation-settings: "wdth" 75, "wght" 800;
+      font-size: 20px;
+      line-height: 1.05;
+    }
+    .example-card .msg {
+      font-size: var(--font-size-ui);
+      line-height: 1.45;
+      opacity: 0.95;
+      flex: 1;
+      margin: 0;
+    }
+    .mini-aro {
+      width: 56px;
+      height: 56px;
+      align-self: flex-end;
+    }
+
+    .install-grid {
+      display: grid;
+      gap: var(--space-5);
+      margin-top: var(--space-6);
+      align-items: start;
+    }
+    @media (min-width: 800px) {
+      .install-grid { grid-template-columns: 1fr 1.2fr; gap: var(--space-7); }
+    }
+    .home-screen-demo {
+      background: var(--color-surface);
+      border: var(--border-marketing) solid var(--color-border);
+      border-radius: var(--radius-container);
+      box-shadow: var(--shadow-card);
+      padding: var(--space-5);
+    }
+    .home-screen-demo .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-3);
+      margin-top: var(--space-4);
+    }
+    .app-tile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    .app-tile .icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      border: var(--border-product) solid var(--color-border);
+      display: grid;
+      place-items: center;
+      background: var(--color-menta);
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .app-tile .icon.lt {
+      background: var(--color-bosque);
+      padding: 8px;
+    }
+    .app-tile .icon.lt img { width: 100%; height: auto; }
+    .app-tile .icon.ghost {
+      background: var(--color-blanco-lino);
+      color: var(--color-gris-noche);
+    }
+    .app-tile span {
+      font-size: 11px;
+      font-weight: 600;
+      text-align: center;
+    }
+    .guide {
+      background: var(--color-surface);
+      border: var(--border-marketing) solid var(--color-border);
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-card);
+      padding: var(--space-5);
+    }
+    .guide-item + .guide-item {
+      margin-top: var(--space-4);
+      padding-top: var(--space-4);
+      border-top: var(--border-hair) solid color-mix(in srgb, var(--color-border) 30%, transparent);
+    }
+    .guide-item strong {
+      display: block;
+      margin-bottom: var(--space-2);
+      font-size: var(--font-size-ui);
+    }
+    .guide-item p {
+      margin: 0;
+      color: var(--color-text-muted);
+      font-size: var(--font-size-ui);
+    }
+
+    /* Para quién */
+    .audience {
+      display: grid;
+      gap: var(--space-4);
+      margin-top: var(--space-6);
+    }
+    @media (min-width: 700px) {
+      .audience { grid-template-columns: repeat(3, 1fr); }
+    }
+    .audience-card {
+      background: var(--color-surface);
+      border: var(--border-marketing) solid var(--color-border);
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .audience-card .illu {
+      background: var(--color-menta);
+      border-bottom: var(--border-marketing) solid var(--color-border);
+      aspect-ratio: 5/4;
+      display: grid;
+      place-items: center;
+      padding: var(--space-3);
+    }
+    .audience-card .illu img { width: 100%; max-width: 280px; }
+    .audience-card .body {
+      padding: var(--space-5);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+      flex: 1;
+    }
+    .audience-card p {
+      margin: 0;
+      color: var(--color-text-muted);
+      font-size: var(--font-size-ui);
+      line-height: var(--font-line-ui);
+    }
+
+    /* Precios */
+    .trial-banner {
+      background: var(--color-bosque);
+      color: var(--color-lino);
+      border: var(--border-marketing) solid var(--color-border);
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-card);
+      padding: var(--space-5);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-4);
+      margin: var(--space-6) 0 var(--space-5);
+    }
+    .trial-banner p {
+      margin: 0;
+      font-size: clamp(16px, 2.2vw, var(--font-size-lead));
+      font-weight: var(--font-weight-semibold);
+      line-height: var(--font-line-lead);
+      flex: 1 1 220px;
+    }
+    .trial-banner .btn-primary {
+      background: var(--color-surface);
+      color: var(--color-text);
+    }
+
+    .pricing {
+      display: grid;
+      gap: var(--space-5);
+      padding-top: var(--space-3); /* room for badge */
+    }
+    @media (min-width: 900px) {
+      .pricing {
+        grid-template-columns: repeat(3, 1fr);
+        align-items: stretch;
+        gap: var(--space-4);
+      }
+    }
+    .plan {
+      background: var(--color-surface);
+      border: var(--border-marketing) solid var(--color-border);
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-card);
+      padding: var(--space-5);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+      position: relative;
+    }
+    /* Mobile: Negocio (featured) first so badge is visible up top */
+    .plan.order-inicio { order: 2; }
+    .plan.order-negocio { order: 1; }
+    .plan.order-pro { order: 3; }
+    @media (min-width: 900px) {
+      .plan.order-inicio,
+      .plan.order-negocio,
+      .plan.order-pro { order: unset; }
+    }
+    .plan.featured {
+      border-width: 3px;
+      background: var(--color-blanco-lino);
+      margin-top: var(--space-2);
+    }
+    @media (min-width: 900px) {
+      .plan.featured { margin-top: 0; }
+    }
+    .plan.muted {
+      opacity: 0.85;
+      background: color-mix(in srgb, var(--color-menta) 40%, var(--color-surface));
+    }
+    .badge {
+      position: absolute;
+      top: -12px;
+      right: var(--space-4);
+      background: var(--color-durazno);
+      color: var(--color-noche);
+      border: var(--border-product) solid var(--color-border);
+      border-radius: var(--radius-sticker);
+      box-shadow: var(--shadow-sticker);
+      padding: 4px 10px;
+      font-family: var(--font-display);
+      font-variation-settings: "wdth" 75, "wght" 800;
+      font-size: var(--font-size-sticker);
+      letter-spacing: var(--font-tracking-sticker);
+      text-transform: uppercase;
+      transform: rotate(-3deg);
+      z-index: 1;
+    }
+    .plan-price {
+      font-variant-numeric: tabular-nums;
+      font-weight: var(--font-weight-bold);
+      font-size: clamp(28px, 5vw, 36px);
+      letter-spacing: var(--font-tracking-stat);
+      line-height: 1.1;
+    }
+    .plan-price span {
+      display: inline-block;
+      font-size: var(--font-size-ui);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-text-muted);
+    }
+    .plan.muted .plan-price { font-size: var(--font-size-h4); }
+    .plan ul {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+      flex: 1;
+    }
+    .plan li {
+      display: flex;
+      gap: var(--space-2);
+      align-items: flex-start;
+      font-size: var(--font-size-ui);
+      line-height: var(--font-line-ui);
+    }
+    .plan li::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      margin-top: 6px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      background: var(--color-bosque);
+      border: 1.5px solid var(--color-border);
+    }
+    .plan.muted li::before { background: var(--color-gris-noche); }
+    .pricing-note {
+      margin-top: var(--space-5);
+      text-align: center;
+      color: var(--color-text-muted);
+      font-size: var(--font-size-ui);
+    }
+
+    /* Confianza */
+    .trust {
+      display: grid;
+      gap: var(--space-4);
+      margin-top: var(--space-6);
+    }
+    @media (min-width: 700px) {
+      .trust { grid-template-columns: repeat(2, 1fr); }
+    }
+    .trust-item {
+      background: var(--color-surface);
+      border: var(--border-marketing) solid var(--color-border);
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-card);
+      padding: var(--space-5);
+      display: flex;
+      gap: var(--space-4);
+      align-items: flex-start;
+    }
+    .trust-item img { width: 40px; height: 40px; flex-shrink: 0; }
+    .trust-item h3 {
+      font-size: clamp(18px, 2.5vw, var(--font-size-h4));
+      line-height: var(--font-line-h4);
+      margin-bottom: var(--space-2);
+    }
+    .trust-item p {
+      margin: 0;
+      color: var(--color-text-muted);
+      font-size: var(--font-size-ui);
+    }
+    .trust-item a {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      border-radius: 4px;
+    }
+    .trust-item a:focus-visible { box-shadow: var(--focus-ring); }
+
+    /* Lo que viene */
+    .roadmap {
+      background: var(--color-noche);
+      color: var(--color-lino);
+      padding: var(--space-7) 0;
+    }
+    @media (min-width: 768px) {
+      .roadmap { padding: var(--space-8) 0; }
+    }
+    .roadmap h2, .roadmap .lead { color: var(--color-lino); }
+    .roadmap .lead { opacity: 0.85; }
+    .roadmap-grid {
+      display: grid;
+      gap: var(--space-6);
+      margin-top: var(--space-5);
+    }
+    @media (min-width: 800px) {
+      .roadmap-grid {
+        grid-template-columns: 0.9fr 1.1fr;
+        align-items: start;
+      }
+    }
+    .roadmap-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+    .roadmap-item {
+      background: color-mix(in srgb, var(--color-bosque) 55%, var(--color-noche));
+      border: var(--border-product) solid var(--color-lino);
+      border-radius: var(--radius-card);
+      padding: var(--space-4);
+      display: grid;
+      gap: var(--space-2);
+    }
+    .roadmap-item .tag {
+      display: inline-flex;
+      width: fit-content;
+      background: var(--color-menta);
+      color: var(--color-noche);
+      border: 1.5px solid var(--color-lino);
+      border-radius: var(--radius-sticker);
+      padding: 2px 8px;
+      font-size: var(--font-size-label);
+      font-weight: var(--font-weight-bold);
+      letter-spacing: var(--font-tracking-label);
+      text-transform: uppercase;
+    }
+    .roadmap-item strong {
+      font-family: var(--font-display);
+      font-variation-settings: "wdth" 75, "wght" 800;
+      font-size: 20px;
+    }
+    .roadmap-item p {
+      margin: 0;
+      font-size: var(--font-size-ui);
+      opacity: 0.9;
+    }
+
+    /* CTA final */
+    .cta-final {
+      padding: var(--space-8) 0 var(--space-7);
+      text-align: center;
+    }
+    .cta-final .aro-wrap {
+      width: min(180px, 50vw);
+      margin: 0 auto var(--space-5);
+    }
+    .cta-final .lead { max-width: 36ch; margin: var(--space-3) auto var(--space-5); }
+    .cta-final .wa-hint {
+      margin-top: var(--space-3);
+      font-size: var(--font-size-ui);
+      color: var(--color-text-muted);
+    }
+    .cta-final .wa-hint a {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      border-radius: 4px;
+    }
+    .cta-final .wa-hint a:focus-visible { box-shadow: var(--focus-ring); }
+
+    /* FAQ — smooth accordion */
+    .faq {
+      max-width: 720px;
+      margin: var(--space-7) auto 0;
+      text-align: left;
+    }
+    .faq h2 { text-align: center; margin-bottom: var(--space-5); }
+    .faq details {
+      background: var(--color-surface);
+      border: var(--border-marketing) solid var(--color-border);
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-sticker);
+      margin-bottom: var(--space-3);
+      padding: 0;
+      overflow: clip;
+    }
+    .faq summary {
+      list-style: none;
+      cursor: pointer;
+      padding: var(--space-4) var(--space-5);
+      font-weight: var(--font-weight-semibold);
+      font-size: clamp(15px, 2.5vw, var(--font-size-body));
+      line-height: 1.35;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-3);
+      transition: background var(--duration-fast) var(--easing-standard);
+    }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::after {
+      content: "+";
+      font-weight: 800;
+      font-size: 22px;
+      line-height: 1;
+      flex-shrink: 0;
+      transition: transform var(--duration-ui) var(--easing-standard);
+    }
+    .faq details[open] summary::after {
+      content: "–";
+    }
+    .faq summary:hover { background: color-mix(in srgb, var(--color-menta) 35%, var(--color-surface)); }
+    .faq summary:focus-visible {
+      box-shadow: inset var(--focus-ring);
+    }
+    .faq details[open] summary {
+      border-bottom: var(--border-hair) solid color-mix(in srgb, var(--color-border) 30%, transparent);
+    }
+    .faq .answer-wrap {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows var(--duration-ui) var(--easing-standard);
+    }
+    .faq details[open] .answer-wrap {
+      grid-template-rows: 1fr;
+    }
+    .faq .answer-inner {
+      overflow: hidden;
+      min-height: 0;
+    }
+    .faq .answer {
+      padding: var(--space-4) var(--space-5) var(--space-5);
+      color: var(--color-text-muted);
+      font-size: var(--font-size-ui);
+      line-height: var(--font-line-ui);
+      margin: 0;
+    }
+
+    /* Footer */
+    .footer {
+      border-top: var(--border-marketing) solid var(--color-border);
+      background: var(--color-surface);
+      padding: var(--space-7) 0 var(--space-5);
+    }
+    .footer-grid {
+      display: grid;
+      gap: var(--space-5);
+    }
+    @media (min-width: 700px) {
+      .footer-grid {
+        grid-template-columns: 1.2fr 1fr;
+        align-items: start;
+      }
+    }
+    .footer-logo { height: 28px; width: auto; }
+    .footer-tagline {
+      margin: var(--space-3) 0 0;
+      font-size: var(--font-size-ui);
+      color: var(--color-text-muted);
+      max-width: 28ch;
+    }
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3) var(--space-5);
+      font-size: var(--font-size-ui);
+      font-weight: var(--font-weight-semibold);
+    }
+    .footer-links a {
+      border-radius: var(--radius-control);
+      padding: 2px 0;
+    }
+    .footer-links a:hover { color: var(--color-bosque); }
+    .footer-links a:focus-visible { box-shadow: var(--focus-ring); padding-inline: var(--space-2); }
+    .footer-legal {
+      margin-top: var(--space-6);
+      padding-top: var(--space-4);
+      border-top: var(--border-hair) solid color-mix(in srgb, var(--color-border) 25%, transparent);
+      font-size: var(--font-size-caption);
+      color: var(--color-text-muted);
+    }
+
+    /* Section headers */
+    .sec-head {
+      max-width: 40ch;
+    }
+    .sec-head.center-block { text-align: center; }
+    .sec-head .lead { margin-top: var(--space-3); }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(12px);
+      transition:
+        opacity var(--duration-arc) var(--easing-standard),
+        transform var(--duration-arc) var(--easing-standard);
+    }
+    .reveal.is-visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* Utility */
+    .mt-5 { margin-top: var(--space-5); }
+    .mt-6 { margin-top: var(--space-6); }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .aro-fill { stroke-dashoffset: 0; }
+      .aro-tip { opacity: 1; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a href="#" aria-label="LealTab inicio">
+        <img class="nav-logo" src="../03-visual-identity/logo/entregables/svg/lealtab-horizontal-noche.svg" alt="LealTab" width="140" height="28" />
+      </a>
+      <nav class="nav-links" aria-label="Principal">
+        <a href="#como-funciona">Cómo funciona</a>
+        <a href="#precios">Precios</a>
+        <a href="https://app.lealtab.com">Entrar</a>
+      </nav>
+      <div class="nav-actions">
+        <a class="btn btn-primary btn-sm nav-cta-desktop" href="https://app.lealtab.com">Crea tu tarjeta gratis</a>
+        <a class="btn btn-primary btn-sm nav-cta-mobile" href="https://app.lealtab.com">Empieza gratis</a>
+        <button class="nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" id="navToggle">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <div class="nav-drawer" id="navDrawer">
+      <div class="nav-drawer-inner wrap">
+        <a href="#como-funciona">Cómo funciona</a>
+        <a href="#precios">Precios</a>
+        <a href="https://app.lealtab.com">Entrar</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- 1. HERO -->
+    <section class="hero" id="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-copy stack">
+          <h1>Tu tarjeta de lealtad, ahora en el celular de tus clientes.</h1>
+          <p class="lead">Créala en minutos. Tus clientes la instalan con un toque, sin descargar nada.</p>
+          <div class="btn-row hero-ctas">
+            <a class="btn btn-primary btn-lg" href="https://app.lealtab.com">Crea tu tarjeta gratis</a>
+            <a class="btn btn-secondary btn-lg" href="#como-funciona">Ver cómo funciona ↓</a>
+          </div>
+          <p class="hero-note">Prueba gratis 30 días. Sin tarjeta de crédito.</p>
+        </div>
+
+        <div class="phone" aria-label="Vista previa de la tarjeta en el celular">
+          <div class="phone-notch" aria-hidden="true"></div>
+          <div class="phone-screen">
+            <div class="loyalty-card">
+              <div class="biz">Barbería Norte</div>
+              <p class="reward-line">Llevas 4 de 5. El siguiente corte va por nuestra cuenta.</p>
+              <div class="loyalty-progress">
+                <!-- Aro 4/5: avance bosque, slot 5 con tip durazno -->
+                <svg class="aro-hero" width="72" height="72" viewBox="0 0 72 72" aria-hidden="true">
+                  <circle cx="36" cy="36" r="26" fill="none" stroke="#0F2A22" stroke-width="10" transform="translate(2 2)"/>
+                  <circle cx="36" cy="36" r="26" fill="none" stroke="#0F2A22" stroke-width="10"/>
+                  <circle cx="36" cy="36" r="26" fill="none" stroke="#CFE3D6" stroke-width="8"/>
+                  <circle class="aro-fill" cx="36" cy="36" r="26" fill="none" stroke="#0F4D3A" stroke-width="8"
+                    stroke-linecap="round"
+                    transform="rotate(-90 36 36)"/>
+                  <circle class="aro-tip" cx="36" cy="36" r="26" fill="none" stroke="#FF9F6E" stroke-width="8"
+                    stroke-linecap="round"
+                    transform="rotate(206 36 36)"/>
+                </svg>
+                <div>
+                  <div class="stat">4/5</div>
+                  <div class="stat-label">visitas</div>
+                </div>
+              </div>
+            </div>
+            <p class="caption" style="margin:0;color:var(--color-text)">En su pantalla de inicio</p>
+            <div class="home-preview" aria-hidden="true">
+              <div class="home-icon ghost">📷</div>
+              <div class="home-icon brand">BN</div>
+              <div class="home-icon ghost">💬</div>
+              <div class="home-icon ghost">♪</div>
+              <div class="home-icon ghost">📅</div>
+              <div class="home-icon ghost">🗺️</div>
+              <div class="home-icon ghost">✉️</div>
+              <div class="home-icon ghost">⚙️</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. CÓMO FUNCIONA -->
+    <section class="section" id="como-funciona" style="background: color-mix(in srgb, var(--color-menta) 35%, var(--color-lino));">
+      <div class="wrap">
+        <div class="sec-head center-block reveal">
+          <h2>Tres pasos y tu tarjeta de cartón se queda en el cajón.</h2>
+        </div>
+        <div class="steps">
+          <article class="step">
+            <div class="step-top">
+              <span class="step-num">1</span>
+              <img class="step-icon" src="../03-visual-identity/recursos/iconos/activo/lt-icono-negocio-activo.svg" alt="" width="40" height="40" />
+            </div>
+            <h3>Crea tu tarjeta.</h3>
+            <p>Sube tu logo, elige tus colores y define tu recompensa. Lista en minutos.</p>
+          </article>
+          <article class="step">
+            <div class="step-top">
+              <span class="step-num">2</span>
+              <img class="step-icon" src="../03-visual-identity/recursos/iconos/activo/lt-icono-escanear-activo.svg" alt="" width="40" height="40" />
+            </div>
+            <h3>Tu cliente escanea el QR.</h3>
+            <p>Toca "Agregar a inicio" y su tarjeta queda en su pantalla, como una app. Sin tienda de apps.</p>
+          </article>
+          <article class="step">
+            <div class="step-top">
+              <span class="step-num">3</span>
+              <img class="step-icon" src="../03-visual-identity/recursos/iconos/activo/lt-icono-visita-activo.svg" alt="" width="40" height="40" />
+            </div>
+            <h3>Suma visitas y ve quién regresa.</h3>
+            <p>Cada visita completa el aro. Tú ves quién vuelve y quién no.</p>
+          </article>
+        </div>
+        <div class="center mt-6">
+          <a class="btn btn-primary btn-lg" href="https://app.lealtab.com">Crea tu tarjeta gratis</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. LA TARJETA -->
+    <section class="section" id="la-tarjeta">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <h2>Tu tarjeta digital siempre a un toque.</h2>
+          <p class="lead">Con tu logo, tus colores y tu recompensa. Se ve tan bien como tu negocio.</p>
+        </div>
+
+        <div class="cards-row" role="list">
+          <article class="example-card barberia" role="listitem">
+            <div class="name">Barbería Norte</div>
+            <p class="msg">Llevas 4 de 5. El siguiente corte va por nuestra cuenta.</p>
+            <img class="mini-aro" src="../03-visual-identity/recursos/aro/lt-aro-ui-56-parcial-3de8.svg" alt="" width="56" height="56" />
+          </article>
+          <article class="example-card estetica" role="listitem">
+            <div class="name">Estética Luna</div>
+            <p class="msg">2 de 6 visitas. Tu tratamiento de regalo te espera.</p>
+            <img class="mini-aro" src="../03-visual-identity/recursos/aro/lt-aro-ui-56-parcial-3de8.svg" alt="" width="56" height="56" />
+          </article>
+          <article class="example-card tapioca" role="listitem">
+            <div class="name">Tapioca Sol</div>
+            <p class="msg">7 de 10. Te faltan 3 para tu tapioca gratis.</p>
+            <img class="mini-aro" src="../03-visual-identity/recursos/aro/lt-aro-ui-56-parcial-3de8.svg" alt="" width="56" height="56" />
+          </article>
+        </div>
+
+        <div class="install-grid">
+          <div class="home-screen-demo">
+            <p class="label">En su pantalla de inicio</p>
+            <p style="margin: var(--space-2) 0 0; font-size: var(--font-size-ui); color: var(--color-text-muted);">
+              Tu negocio, con su propio ícono, junto a las apps de tu cliente. Nada que buscar entre pestañas.
+            </p>
+            <div class="grid" aria-hidden="true">
+              <div class="app-tile"><div class="icon ghost">📷</div><span>Fotos</span></div>
+              <div class="app-tile">
+                <div class="icon lt">
+                  <img src="../03-visual-identity/logo/entregables/svg/lealtab-isotipo-lino.svg" alt="" width="28" height="28" />
+                </div>
+                <span>Norte</span>
+              </div>
+              <div class="app-tile"><div class="icon">💬</div><span>Mensajes</span></div>
+              <div class="app-tile"><div class="icon">♪</div><span>Música</span></div>
+            </div>
+          </div>
+
+          <div class="guide">
+            <p class="label" style="margin-bottom: var(--space-4);">Cómo se instala</p>
+            <div class="guide-item">
+              <strong>iPhone</strong>
+              <p>Abre el enlace, toca Compartir y luego "Agregar a inicio".</p>
+            </div>
+            <div class="guide-item">
+              <strong>Android</strong>
+              <p>Abre el enlace, toca el menú ⋮ y luego "Instalar app" o "Agregar a la pantalla principal".</p>
+            </div>
+            <p class="caption mt-5" style="margin-bottom:0;">Funciona en cualquier celular. Sin tienda de apps, sin cuentas que crear.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. PARA QUIÉN -->
+    <section class="section" id="para-quien" style="background: color-mix(in srgb, var(--color-menta) 28%, var(--color-lino));">
+      <div class="wrap">
+        <div class="sec-head center-block reveal">
+          <h2>Hecha para negocios donde el cliente vuelve.</h2>
+        </div>
+        <div class="audience">
+          <article class="audience-card">
+            <div class="illu">
+              <img src="../03-visual-identity/recursos/ilustraciones/lt-ilustracion-barberia.svg" alt="Ilustración barbería: tijeras, navaja y máquina" width="400" height="320" />
+            </div>
+            <div class="body">
+              <h3>Barberías</h3>
+              <p>Al quinto corte, el sexto es gratis. Y la tarjeta ya no se pierde en la cartera.</p>
+            </div>
+          </article>
+          <article class="audience-card">
+            <div class="illu">
+              <img src="../03-visual-identity/recursos/ilustraciones/lt-ilustracion-estetica.svg" alt="Ilustración estética: secadora, cepillo y esmalte" width="400" height="320" />
+            </div>
+            <div class="body">
+              <h3>Estéticas</h3>
+              <p>Tus clientas ven cuántas visitas les faltan. Tú ves quién dejó de venir.</p>
+            </div>
+          </article>
+          <article class="audience-card">
+            <div class="illu">
+              <img src="../03-visual-identity/recursos/ilustraciones/lt-ilustracion-tapioca.svg" alt="Ilustración tapioca: vaso con popote y perlas" width="400" height="320" />
+            </div>
+            <div class="body">
+              <h3>Tapiocas</h3>
+              <p>Cada tapioca suma. Tus clientes ven cuántas les faltan.</p>
+            </div>
+          </article>
+        </div>
+        <p class="center mt-6" style="font-size: var(--font-size-lead); font-weight: 600; margin-bottom: 0;">
+          ¿Tu negocio vive de que el cliente regrese? También es para ti.
+        </p>
+      </div>
+    </section>
+
+    <!-- 5. PRECIOS -->
+    <section class="section" id="precios">
+      <div class="wrap">
+        <div class="sec-head center-block reveal">
+          <h2>Precios claros. Sin contratos ni pago inicial.</h2>
+        </div>
+
+        <div class="trial-banner">
+          <p>Pruébala gratis 30 días. Sin tarjeta de crédito.</p>
+          <a class="btn btn-primary btn-md" href="https://app.lealtab.com">Crea tu tarjeta gratis</a>
+        </div>
+
+        <div class="pricing">
+          <article class="plan order-inicio">
+            <div>
+              <p class="label" style="margin:0 0 var(--space-2);">Inicio</p>
+              <div class="plan-price">$299 <span>MXN/mes + IVA</span></div>
+            </div>
+            <ul>
+              <li>Hasta 200 clientes activos</li>
+              <li>1 tarjeta de lealtad</li>
+              <li>1 sucursal</li>
+              <li>Soporte por WhatsApp</li>
+            </ul>
+            <a class="btn btn-primary btn-md" href="https://app.lealtab.com">Crea tu tarjeta gratis</a>
+          </article>
+
+          <article class="plan featured order-negocio">
+            <span class="badge">Recomendado</span>
+            <div>
+              <p class="label" style="margin:0 0 var(--space-2);">Negocio</p>
+              <div class="plan-price">$449 <span>MXN/mes + IVA</span></div>
+            </div>
+            <ul>
+              <li>Clientes activos ilimitados</li>
+              <li>Varias tarjetas / recompensas</li>
+              <li>Hasta 3 sucursales</li>
+              <li>Soporte por WhatsApp</li>
+            </ul>
+            <a class="btn btn-primary btn-md" href="https://app.lealtab.com">Crea tu tarjeta gratis</a>
+          </article>
+
+          <article class="plan muted order-pro">
+            <div>
+              <p class="label" style="margin:0 0 var(--space-2);">Pro</p>
+              <div class="plan-price">Próximamente</div>
+            </div>
+            <ul>
+              <li>Para cuando tu operación pida más</li>
+            </ul>
+          </article>
+        </div>
+
+        <p class="pricing-note">Sin contratos, cancelas cuando quieras. Todos los precios + IVA.</p>
+      </div>
+    </section>
+
+    <!-- 6. CONFIANZA -->
+    <section class="section" id="confianza" style="background: color-mix(in srgb, var(--color-menta) 28%, var(--color-lino));">
+      <div class="wrap">
+        <div class="sec-head center-block reveal">
+          <h2>Detrás de LealTab hay personas.</h2>
+        </div>
+        <div class="trust">
+          <article class="trust-item">
+            <img src="../03-visual-identity/recursos/iconos/activo/lt-icono-mensaje-activo.svg" alt="" width="40" height="40" />
+            <div>
+              <h3>Te atiende una persona, por WhatsApp.</h3>
+              <p>Escríbenos y te responde una persona real. Sin bots ni tickets.</p>
+            </div>
+          </article>
+          <article class="trust-item">
+            <img src="../03-visual-identity/recursos/iconos/activo/lt-icono-cliente-activo.svg" alt="" width="40" height="40" />
+            <div>
+              <h3>Tus datos son tuyos.</h3>
+              <p>Tus clientes y su historial te pertenecen. Descárgalos cuando quieras.</p>
+            </div>
+          </article>
+          <article class="trust-item">
+            <img src="../03-visual-identity/recursos/iconos/activo/lt-icono-estadisticas-activo.svg" alt="" width="40" height="40" />
+            <div>
+              <h3>Ves quién regresa.</h3>
+              <p>Un tablero sencillo con tus clientes frecuentes y los que no han vuelto.</p>
+            </div>
+          </article>
+          <article class="trust-item">
+            <img src="../03-visual-identity/recursos/iconos/activo/lt-icono-check-activo.svg" alt="" width="40" height="40" />
+            <div>
+              <h3>Privacidad clara.</h3>
+              <p>Te explicamos qué datos guardamos y para qué. <a href="#">Lee el aviso de privacidad →</a></p>
+            </div>
+          </article>
+        </div>
+        <div class="center mt-6">
+          <a class="btn btn-secondary btn-md" href="https://wa.me/">Escríbenos por WhatsApp</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. LO QUE VIENE -->
+    <section class="roadmap" id="lo-que-viene">
+      <div class="wrap roadmap-grid">
+        <div class="stack reveal">
+          <h2>Lo que viene.</h2>
+          <p class="lead">Lo construimos contigo. Si estás en el piloto, tu opinión decide qué sigue.</p>
+        </div>
+        <ul class="roadmap-list">
+          <li class="roadmap-item">
+            <span class="tag">Próximamente</span>
+            <strong>Avisos</strong>
+            <p>Para que tus clientes vuelvan en el momento justo.</p>
+          </li>
+          <li class="roadmap-item">
+            <span class="tag">Próximamente</span>
+            <strong>Campañas</strong>
+            <p>Llena los días flojos con una promoción para tus clientes de siempre.</p>
+          </li>
+          <li class="roadmap-item">
+            <span class="tag">Próximamente</span>
+            <strong>Varias sucursales</strong>
+            <p>Todas tus sucursales en una sola cuenta.</p>
+          </li>
+          <li class="roadmap-item">
+            <span class="tag">Próximamente</span>
+            <strong>Apple y Google Wallet</strong>
+            <p>Tu tarjeta también en la cartera del celular.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 8. CTA + FAQ -->
+    <section class="cta-final" id="cta-final">
+      <div class="wrap">
+        <div class="aro-wrap">
+          <img src="../03-visual-identity/recursos/aro/lt-aro-marketing-completo.svg" alt="" width="180" height="180" />
+        </div>
+        <h2 class="reveal">Haz que tus clientes siempre regresen.</h2>
+        <p class="lead">Crea tu tarjeta hoy. Es gratis empezar.</p>
+        <a class="btn btn-primary btn-lg" href="https://app.lealtab.com">Crea tu tarjeta gratis</a>
+        <p class="wa-hint">¿Dudas? <a href="https://wa.me/">Escríbenos por WhatsApp</a>.</p>
+
+        <div class="faq" id="faq">
+          <h2 style="font-size: clamp(24px, 3vw, 32px);">Preguntas frecuentes</h2>
+
+          <details open>
+            <summary>¿Mis clientes tienen que descargar algo?</summary>
+            <div class="answer-wrap"><div class="answer-inner"><p class="answer">No. Escanean tu QR, tocan "Agregar a inicio" y la tarjeta queda en su pantalla. Sin tienda de apps.</p></div></div>
+          </details>
+          <details>
+            <summary>¿Funciona en iPhone y Android?</summary>
+            <div class="answer-wrap"><div class="answer-inner"><p class="answer">Sí. Funciona en cualquier celular con navegador, iPhone o Android.</p></div></div>
+          </details>
+          <details>
+            <summary>¿Qué pasa cuando termina la prueba?</summary>
+            <div class="answer-wrap"><div class="answer-inner"><p class="answer">Te avisamos antes de que termine. Si eliges un plan, todo sigue igual. Si no, tu tarjeta se pausa y puedes descargar tus datos.</p></div></div>
+          </details>
+          <details>
+            <summary>¿Puedo cancelar cuando quiera?</summary>
+            <div class="answer-wrap"><div class="answer-inner"><p class="answer">Sí. No hay contratos ni plazos forzosos. Cancelas cuando quieras.</p></div></div>
+          </details>
+          <details>
+            <summary>¿Mis datos son míos?</summary>
+            <div class="answer-wrap"><div class="answer-inner"><p class="answer">Sí. Tus clientes y su historial son tuyos y los descargas cuando quieras.</p></div></div>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div>
+          <img class="footer-logo" src="../03-visual-identity/logo/entregables/svg/lealtab-horizontal-noche.svg" alt="LealTab" width="140" height="28" />
+          <p class="footer-tagline">Haz que tus clientes siempre regresen.</p>
+        </div>
+        <nav class="footer-links" aria-label="Pie">
+          <a href="#">Aviso de privacidad</a>
+          <a href="https://wa.me/">WhatsApp</a>
+          <a href="https://instagram.com/getlealtab">Instagram @getlealtab</a>
+          <a href="https://app.lealtab.com">Entrar</a>
+        </nav>
+      </div>
+      <p class="footer-legal">© 2026 LealTab</p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      // Mobile nav
+      var toggle = document.getElementById("navToggle");
+      var drawer = document.getElementById("navDrawer");
+      function setNav(open) {
+        if (!toggle || !drawer) return;
+        drawer.classList.toggle("open", open);
+        toggle.setAttribute("aria-expanded", open ? "true" : "false");
+        toggle.setAttribute("aria-label", open ? "Cerrar menú" : "Abrir menú");
+      }
+      if (toggle && drawer) {
+        toggle.addEventListener("click", function () {
+          setNav(!drawer.classList.contains("open"));
+        });
+        drawer.querySelectorAll("a").forEach(function (a) {
+          a.addEventListener("click", function () { setNav(false); });
+        });
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape") setNav(false);
+        });
+      }
+
+      // FAQ: one open at a time + keep smooth class in sync
+      document.querySelectorAll(".faq details").forEach(function (d) {
+        d.addEventListener("toggle", function () {
+          if (d.open) {
+            document.querySelectorAll(".faq details").forEach(function (other) {
+              if (other !== d) other.open = false;
+            });
+          }
+        });
+      });
+
+      // Scroll reveal for section titles
+      if (!reduce && "IntersectionObserver" in window) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              io.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.2, rootMargin: "0px 0px -40px 0px" });
+        document.querySelectorAll(".reveal").forEach(function (el) { io.observe(el); });
+      } else {
+        document.querySelectorAll(".reveal").forEach(function (el) {
+          el.classList.add("is-visible");
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

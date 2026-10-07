@@ -1,0 +1,171 @@
+{
+ "congelados": {
+  "lealtab-master-frozen.svg": "18e949212be392167cf0719f5142c9081ba547f50c2ba6b6bf37fc4defc36c77",
+  "lealtab-vertical-frozen.svg": "8ca6ee15aff62416cc395cd4cccfc5a5b4c8d29764ea1725dfea3f49a3ac5377"
+ },
+ "d_congelados_sha256": {
+  "isotipo-pieza-l": "2facb2f3b38d2a41ddfee47b966c4fc1bb040304e1a4743b54efcd997284ecba",
+  "isotipo-pieza-gancho": "81ef2992439f7b58784db0841014da40b1d3e879ef047457ceda766da5af9e2d",
+  "wm-L": "3ec5ef758c3f239cb0bdab5da3dfd226ea7dae108adc1d6a69851a0295a69a27",
+  "wm-e": "1ea1fe1b4489fcb47dfb17cc0e100497d25e728cb2b14d9383787211ab9f861f",
+  "wm-a1": "62bd31940ea9a085a34541f5f0a20335fbf62715eb76d86e9dc96823149c4879",
+  "wm-l": "c29c6707cd5acc44592c56aab752271091ccd364f1f979de402cd596c5c7bdb1",
+  "wm-T": "0ff8fdc3db823e884af2819551d924f6ceae5e0d95e88223a339e312c0194b3b",
+  "wm-a2": "3f84d693ddf002737105cf446872695a14442af7cf8e2a8ab23ee55974a13710",
+  "wm-b": "6db24b615a56fb6c31969e993149e4c322f334980173db375c9d75f58e1e1bbd"
+ },
+ "archivos": {
+  "lealtab-horizontal-blanco.svg": {
+   "paths_verificados": 9,
+   "paths_identicos": 9,
+   "ok": true,
+   "errores": [],
+   "sha256_archivo": "57175d5e563072447486994f134d5e9d830c81ae5dd14fc0ac33c17882daa38a"
+  },
+  "lealtab-horizontal-lino-fondo-noche.svg": {
+   "paths_verificados": 9,
+   "paths_identicos": 9,
+   "ok": true,
+   "errores": [],
+   "sha256_archivo": "3a5e39082225928291fe110e3b988ea9c5b810d947c3735115b02853bd63e03a"
+  },
+  "lealtab-horizontal-lino.svg": {
+   "paths_verificados": 9,
+   "paths_identicos": 9,
+   "ok": true,
+   "errores": [],
+   "sha256_archivo": "ca1e267628884fb884d91872d72940226671e2be7603c6fd39d53c7529efb22c"
+  },
+  "lealtab-horizontal-negro.svg": {
+   "paths_verificados": 9,
+   "paths_identicos": 9,
+   "ok": true,
+   "errores": [],
+   "sha256_archivo": "a53a51ea00b3413a93c5cc84f700af14b9925296ef11aa5047935e43fc5c2f5d"
+  },
+  "lealtab-horizontal-noche.svg": {
+   "paths_verificados": 9,
+   "paths_identicos": 9,
+   "ok": true,
+   "errores": [],
+   "sha256_archivo": "f8220bd83c5932c05b518acf07cf820027029fd060979b9e65cae80e51028010"
+  },
+  "lealtab-isotipo-blanco.svg": {
+   "paths_verificados": 2,
+   "paths_identicos": 2,
+   "ok": true,
+   "errores": [],
+   "sha256_archivo": "5099774992ef8ed359232a7ef728713656a1fbbf09cc917b29e36a3af959d767"
+  },
+  "lealtab-isotipo-lino-fondo-noche.svg": {
+   "paths_verificados": 2,
+   "paths_identicos": 2,
+   "ok": true,
+   "errores": [],
+   "sha256_archivo": "da126a488372caa0504011db3a4845dc993c2427a2c599825b5934ff8f3b86af"
+  },
+  "lealtab-isotipo-lino.svg": {
+   "paths_verificados": 2,
+   "paths_identicos": 2,
+   "ok": true,
+   "errores": [],
+   "sha256_archivo": "ac2f74ff72740adae28a9633b4420d54f392c02d9dd32f37731674680939c38a"
+  },
+  "lealtab-isotipo-negro.svg": {
+   "paths_verificados": 2,
+   "paths_identicos": 2,
+   "ok": true,
+   "errores": [],
+   "sha256_archivo": "c0be3e54a1196bf0ccdd6362dec43728a3e6f2e91a5f30e17cb76b2b833671ae"
+  },
+  "lealtab-isotipo-noche.svg": {
+   "paths_verificados": 2,
+   "paths_identicos": 2,
+   "ok": true,
+   "errores": [],
+   "sha256_archivo": "3b181ff8ee94dc4335ed7a6c3de2bf30e6db65821c15b241a61bb75909db61f0"
+  },
+  "lealtab-vertical-blanco.svg": {
+   "paths_verificados": 9,
+   "paths_identicos": 9,
+   "ok": true,
+   "errores": [],
+   "sha256_archivo": "ebb660762a1a4e3fdcdd3c705f8f26dd4418b5f4ea04de9ff9e0650419950e78"
+  },
+  "lealtab-vertical-lino-fondo-noche.svg": {
+   "paths_verificados": 9,
+   "paths_identicos": 9,
+   "ok": true,
+   "errores": [],
+   "sha256_archivo": "0df1c498950b02adf2de322a465d9492659b5cfd6b66b3d41e58404876e1e7c9"
+  },
+  "lealtab-vertical-lino.svg": {
+   "paths_verificados": 9,
+   "paths_identicos": 9,
+   "ok": true,
+   "errores": [],
+   "sha256_archivo": "a83d9d851e5b165bab4eecc398cb35a962f1f4df447d3ec2aa3511b55da39d47"
+  },
+  "lealtab-vertical-negro.svg": {
+   "paths_verificados": 9,
+   "paths_identicos": 9,
+   "ok": true,
+   "errores": [],
+   "sha256_archivo": "d8e1ff18cb9c4506c730c79bc23856b4abc37144fbf67387f6f20755069ddf6a"
+  },
+  "lealtab-vertical-noche.svg": {
+   "paths_verificados": 9,
+   "paths_identicos": 9,
+   "ok": true,
+   "errores": [],
+   "sha256_archivo": "f9abf3cfc437d7a0dba7681bcc1adab57ef3c6d59633e77c33eb5f77b2da1fd1"
+  },
+  "lealtab-wordmark-blanco.svg": {
+   "paths_verificados": 7,
+   "paths_identicos": 7,
+   "ok": true,
+   "errores": [],
+   "sha256_archivo": "4088df503d93f2758e14faa76ff86158e5b40a50140db2e8c0a9005746b26951"
+  },
+  "lealtab-wordmark-lino-fondo-noche.svg": {
+   "paths_verificados": 7,
+   "paths_identicos": 7,
+   "ok": true,
+   "errores": [],
+   "sha256_archivo": "3f82128751f054a166e9416022d3598b866c5709b66d1fa597ae46d411e8ded8"
+  },
+  "lealtab-wordmark-lino.svg": {
+   "paths_verificados": 7,
+   "paths_identicos": 7,
+   "ok": true,
+   "errores": [],
+   "sha256_archivo": "da573cf91cac93121f492938fad52ff39268f613a3ca406aab90272002740921"
+  },
+  "lealtab-wordmark-negro.svg": {
+   "paths_verificados": 7,
+   "paths_identicos": 7,
+   "ok": true,
+   "errores": [],
+   "sha256_archivo": "4be81c5335edbc1277a49737d47d5c0b563e27e7415d9f755a04df7f3c433eeb"
+  },
+  "lealtab-wordmark-noche.svg": {
+   "paths_verificados": 7,
+   "paths_identicos": 7,
+   "ok": true,
+   "errores": [],
+   "sha256_archivo": "1a51aec598cf5e0abfe62de6847e8bf534cc84c95123f14b2b9bab0904650b9e"
+  },
+  "sistema-variantes.svg": {
+   "paths_verificados": 9,
+   "paths_identicos": 9,
+   "ok": true,
+   "errores": [],
+   "sha256_archivo": "c8899eed628f30f9d68a73437bc1c7232658374547727eaac99dfab025140d86"
+  }
+ },
+ "resumen": {
+  "archivos": 21,
+  "todos_ok": true,
+  "paths_comparados": 144
+ }
+}

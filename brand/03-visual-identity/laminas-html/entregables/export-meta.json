@@ -1,0 +1,521 @@
+{
+ "manifest_src": {
+  "svg/lealtab-horizontal-noche.svg": "sistema/lealtab-horizontal-noche.svg",
+  "svg/lealtab-horizontal-noche-con-area.svg": "sistema/lealtab-horizontal-noche.svg",
+  "png/horizontal/lealtab-horizontal-noche-con-area-512.png": "svg/lealtab-horizontal-noche-con-area.svg",
+  "png/horizontal/lealtab-horizontal-noche-con-area-1024.png": "svg/lealtab-horizontal-noche-con-area.svg",
+  "png/horizontal/lealtab-horizontal-noche-con-area-2048.png": "svg/lealtab-horizontal-noche-con-area.svg",
+  "svg/lealtab-horizontal-lino.svg": "sistema/lealtab-horizontal-lino.svg",
+  "svg/lealtab-horizontal-lino-con-area.svg": "sistema/lealtab-horizontal-lino.svg",
+  "png/horizontal/lealtab-horizontal-lino-con-area-512.png": "svg/lealtab-horizontal-lino-con-area.svg",
+  "png/horizontal/lealtab-horizontal-lino-con-area-1024.png": "svg/lealtab-horizontal-lino-con-area.svg",
+  "png/horizontal/lealtab-horizontal-lino-con-area-2048.png": "svg/lealtab-horizontal-lino-con-area.svg",
+  "svg/lealtab-horizontal-lino-fondo-noche.svg": "sistema/lealtab-horizontal-lino-fondo-noche.svg",
+  "svg/lealtab-horizontal-lino-fondo-noche-con-area.svg": "sistema/lealtab-horizontal-lino-fondo-noche.svg",
+  "png/horizontal/lealtab-horizontal-lino-fondo-noche-con-area-512.png": "svg/lealtab-horizontal-lino-fondo-noche-con-area.svg",
+  "png/horizontal/lealtab-horizontal-lino-fondo-noche-con-area-1024.png": "svg/lealtab-horizontal-lino-fondo-noche-con-area.svg",
+  "png/horizontal/lealtab-horizontal-lino-fondo-noche-con-area-2048.png": "svg/lealtab-horizontal-lino-fondo-noche-con-area.svg",
+  "svg/lealtab-horizontal-negro.svg": "sistema/lealtab-horizontal-negro.svg",
+  "svg/lealtab-horizontal-negro-con-area.svg": "sistema/lealtab-horizontal-negro.svg",
+  "png/horizontal/lealtab-horizontal-negro-con-area-512.png": "svg/lealtab-horizontal-negro-con-area.svg",
+  "png/horizontal/lealtab-horizontal-negro-con-area-1024.png": "svg/lealtab-horizontal-negro-con-area.svg",
+  "png/horizontal/lealtab-horizontal-negro-con-area-2048.png": "svg/lealtab-horizontal-negro-con-area.svg",
+  "svg/lealtab-horizontal-blanco.svg": "sistema/lealtab-horizontal-blanco.svg",
+  "svg/lealtab-horizontal-blanco-con-area.svg": "sistema/lealtab-horizontal-blanco.svg",
+  "png/horizontal/lealtab-horizontal-blanco-con-area-512.png": "svg/lealtab-horizontal-blanco-con-area.svg",
+  "png/horizontal/lealtab-horizontal-blanco-con-area-1024.png": "svg/lealtab-horizontal-blanco-con-area.svg",
+  "png/horizontal/lealtab-horizontal-blanco-con-area-2048.png": "svg/lealtab-horizontal-blanco-con-area.svg",
+  "svg/lealtab-vertical-noche.svg": "sistema/lealtab-vertical-noche.svg",
+  "svg/lealtab-vertical-noche-con-area.svg": "sistema/lealtab-vertical-noche.svg",
+  "png/vertical/lealtab-vertical-noche-con-area-512.png": "svg/lealtab-vertical-noche-con-area.svg",
+  "png/vertical/lealtab-vertical-noche-con-area-1024.png": "svg/lealtab-vertical-noche-con-area.svg",
+  "png/vertical/lealtab-vertical-noche-con-area-2048.png": "svg/lealtab-vertical-noche-con-area.svg",
+  "svg/lealtab-vertical-lino.svg": "sistema/lealtab-vertical-lino.svg",
+  "svg/lealtab-vertical-lino-con-area.svg": "sistema/lealtab-vertical-lino.svg",
+  "png/vertical/lealtab-vertical-lino-con-area-512.png": "svg/lealtab-vertical-lino-con-area.svg",
+  "png/vertical/lealtab-vertical-lino-con-area-1024.png": "svg/lealtab-vertical-lino-con-area.svg",
+  "png/vertical/lealtab-vertical-lino-con-area-2048.png": "svg/lealtab-vertical-lino-con-area.svg",
+  "svg/lealtab-vertical-lino-fondo-noche.svg": "sistema/lealtab-vertical-lino-fondo-noche.svg",
+  "svg/lealtab-vertical-lino-fondo-noche-con-area.svg": "sistema/lealtab-vertical-lino-fondo-noche.svg",
+  "png/vertical/lealtab-vertical-lino-fondo-noche-con-area-512.png": "svg/lealtab-vertical-lino-fondo-noche-con-area.svg",
+  "png/vertical/lealtab-vertical-lino-fondo-noche-con-area-1024.png": "svg/lealtab-vertical-lino-fondo-noche-con-area.svg",
+  "png/vertical/lealtab-vertical-lino-fondo-noche-con-area-2048.png": "svg/lealtab-vertical-lino-fondo-noche-con-area.svg",
+  "svg/lealtab-vertical-negro.svg": "sistema/lealtab-vertical-negro.svg",
+  "svg/lealtab-vertical-negro-con-area.svg": "sistema/lealtab-vertical-negro.svg",
+  "png/vertical/lealtab-vertical-negro-con-area-512.png": "svg/lealtab-vertical-negro-con-area.svg",
+  "png/vertical/lealtab-vertical-negro-con-area-1024.png": "svg/lealtab-vertical-negro-con-area.svg",
+  "png/vertical/lealtab-vertical-negro-con-area-2048.png": "svg/lealtab-vertical-negro-con-area.svg",
+  "svg/lealtab-vertical-blanco.svg": "sistema/lealtab-vertical-blanco.svg",
+  "svg/lealtab-vertical-blanco-con-area.svg": "sistema/lealtab-vertical-blanco.svg",
+  "png/vertical/lealtab-vertical-blanco-con-area-512.png": "svg/lealtab-vertical-blanco-con-area.svg",
+  "png/vertical/lealtab-vertical-blanco-con-area-1024.png": "svg/lealtab-vertical-blanco-con-area.svg",
+  "png/vertical/lealtab-vertical-blanco-con-area-2048.png": "svg/lealtab-vertical-blanco-con-area.svg",
+  "svg/lealtab-isotipo-noche.svg": "sistema/lealtab-isotipo-noche.svg",
+  "svg/lealtab-isotipo-noche-con-area.svg": "sistema/lealtab-isotipo-noche.svg",
+  "png/isotipo/lealtab-isotipo-noche-con-area-512.png": "svg/lealtab-isotipo-noche-con-area.svg",
+  "png/isotipo/lealtab-isotipo-noche-con-area-1024.png": "svg/lealtab-isotipo-noche-con-area.svg",
+  "svg/lealtab-isotipo-lino.svg": "sistema/lealtab-isotipo-lino.svg",
+  "svg/lealtab-isotipo-lino-con-area.svg": "sistema/lealtab-isotipo-lino.svg",
+  "png/isotipo/lealtab-isotipo-lino-con-area-512.png": "svg/lealtab-isotipo-lino-con-area.svg",
+  "png/isotipo/lealtab-isotipo-lino-con-area-1024.png": "svg/lealtab-isotipo-lino-con-area.svg",
+  "svg/lealtab-isotipo-lino-fondo-noche.svg": "sistema/lealtab-isotipo-lino-fondo-noche.svg",
+  "svg/lealtab-isotipo-lino-fondo-noche-con-area.svg": "sistema/lealtab-isotipo-lino-fondo-noche.svg",
+  "png/isotipo/lealtab-isotipo-lino-fondo-noche-con-area-512.png": "svg/lealtab-isotipo-lino-fondo-noche-con-area.svg",
+  "png/isotipo/lealtab-isotipo-lino-fondo-noche-con-area-1024.png": "svg/lealtab-isotipo-lino-fondo-noche-con-area.svg",
+  "svg/lealtab-isotipo-negro.svg": "sistema/lealtab-isotipo-negro.svg",
+  "svg/lealtab-isotipo-negro-con-area.svg": "sistema/lealtab-isotipo-negro.svg",
+  "png/isotipo/lealtab-isotipo-negro-con-area-512.png": "svg/lealtab-isotipo-negro-con-area.svg",
+  "png/isotipo/lealtab-isotipo-negro-con-area-1024.png": "svg/lealtab-isotipo-negro-con-area.svg",
+  "svg/lealtab-isotipo-blanco.svg": "sistema/lealtab-isotipo-blanco.svg",
+  "svg/lealtab-isotipo-blanco-con-area.svg": "sistema/lealtab-isotipo-blanco.svg",
+  "png/isotipo/lealtab-isotipo-blanco-con-area-512.png": "svg/lealtab-isotipo-blanco-con-area.svg",
+  "png/isotipo/lealtab-isotipo-blanco-con-area-1024.png": "svg/lealtab-isotipo-blanco-con-area.svg",
+  "svg/lealtab-wordmark-noche.svg": "sistema/lealtab-wordmark-noche.svg",
+  "svg/lealtab-wordmark-noche-con-area.svg": "sistema/lealtab-wordmark-noche.svg",
+  "png/wordmark/lealtab-wordmark-noche-con-area-512.png": "svg/lealtab-wordmark-noche-con-area.svg",
+  "png/wordmark/lealtab-wordmark-noche-con-area-1024.png": "svg/lealtab-wordmark-noche-con-area.svg",
+  "svg/lealtab-wordmark-lino.svg": "sistema/lealtab-wordmark-lino.svg",
+  "svg/lealtab-wordmark-lino-con-area.svg": "sistema/lealtab-wordmark-lino.svg",
+  "png/wordmark/lealtab-wordmark-lino-con-area-512.png": "svg/lealtab-wordmark-lino-con-area.svg",
+  "png/wordmark/lealtab-wordmark-lino-con-area-1024.png": "svg/lealtab-wordmark-lino-con-area.svg",
+  "svg/lealtab-wordmark-lino-fondo-noche.svg": "sistema/lealtab-wordmark-lino-fondo-noche.svg",
+  "svg/lealtab-wordmark-lino-fondo-noche-con-area.svg": "sistema/lealtab-wordmark-lino-fondo-noche.svg",
+  "png/wordmark/lealtab-wordmark-lino-fondo-noche-con-area-512.png": "svg/lealtab-wordmark-lino-fondo-noche-con-area.svg",
+  "png/wordmark/lealtab-wordmark-lino-fondo-noche-con-area-1024.png": "svg/lealtab-wordmark-lino-fondo-noche-con-area.svg",
+  "svg/lealtab-wordmark-negro.svg": "sistema/lealtab-wordmark-negro.svg",
+  "svg/lealtab-wordmark-negro-con-area.svg": "sistema/lealtab-wordmark-negro.svg",
+  "png/wordmark/lealtab-wordmark-negro-con-area-512.png": "svg/lealtab-wordmark-negro-con-area.svg",
+  "png/wordmark/lealtab-wordmark-negro-con-area-1024.png": "svg/lealtab-wordmark-negro-con-area.svg",
+  "svg/lealtab-wordmark-blanco.svg": "sistema/lealtab-wordmark-blanco.svg",
+  "svg/lealtab-wordmark-blanco-con-area.svg": "sistema/lealtab-wordmark-blanco.svg",
+  "png/wordmark/lealtab-wordmark-blanco-con-area-512.png": "svg/lealtab-wordmark-blanco-con-area.svg",
+  "png/wordmark/lealtab-wordmark-blanco-con-area-1024.png": "svg/lealtab-wordmark-blanco-con-area.svg",
+  "web/favicon.svg": "iconos/favicon/favicon.svg",
+  "web/favicon.ico": "iconos/favicon/favicon.ico",
+  "web/apple-touch-icon.png": "iconos/app/lealtab-apple-touch-icon-180-sangre.svg",
+  "web/icon-192.png": "iconos/pwa/lealtab-pwa-192.svg",
+  "web/icon-512.png": "iconos/pwa/lealtab-pwa-512.svg",
+  "web/icon-maskable-512.png": "iconos/pwa/lealtab-pwa-maskable-512.svg",
+  "redes/lealtab-avatar-lino-circulo-400.png": "iconos/avatar/lealtab-avatar-lino-400.svg",
+  "redes/lealtab-avatar-lino-circulo-1080.png": "iconos/avatar/lealtab-avatar-lino-400.svg",
+  "redes/lealtab-avatar-lino-cuadrado.svg": "iconos/avatar/lealtab-avatar-lino-400.svg (círculo → cuadrado)",
+  "redes/lealtab-avatar-lino-cuadrado-400.png": "redes/lealtab-avatar-lino-cuadrado.svg",
+  "redes/lealtab-avatar-lino-cuadrado-1080.png": "redes/lealtab-avatar-lino-cuadrado.svg",
+  "redes/lealtab-avatar-noche-circulo-400.png": "iconos/avatar/lealtab-avatar-noche-400.svg",
+  "redes/lealtab-avatar-noche-circulo-1080.png": "iconos/avatar/lealtab-avatar-noche-400.svg",
+  "redes/lealtab-avatar-noche-cuadrado.svg": "iconos/avatar/lealtab-avatar-noche-400.svg (círculo → cuadrado)",
+  "redes/lealtab-avatar-noche-cuadrado-400.png": "redes/lealtab-avatar-noche-cuadrado.svg",
+  "redes/lealtab-avatar-noche-cuadrado-1080.png": "redes/lealtab-avatar-noche-cuadrado.svg",
+  "redes/lealtab-portada-facebook.svg": "sistema/lealtab-horizontal-lino.svg",
+  "redes/lealtab-portada-facebook-1640x624.png": "redes/lealtab-portada-facebook.svg",
+  "impresion/lealtab-horizontal-noche.svg": "svg/lealtab-horizontal-noche.svg",
+  "impresion/lealtab-horizontal-noche.pdf": "impresion/lealtab-horizontal-noche.svg",
+  "impresion/lealtab-horizontal-negro.svg": "svg/lealtab-horizontal-negro.svg",
+  "impresion/lealtab-horizontal-negro.pdf": "impresion/lealtab-horizontal-negro.svg",
+  "impresion/lealtab-vertical-noche.svg": "svg/lealtab-vertical-noche.svg",
+  "impresion/lealtab-vertical-noche.pdf": "impresion/lealtab-vertical-noche.svg",
+  "impresion/lealtab-vertical-negro.svg": "svg/lealtab-vertical-negro.svg",
+  "impresion/lealtab-vertical-negro.pdf": "impresion/lealtab-vertical-negro.svg",
+  "impresion/lealtab-isotipo-noche.svg": "svg/lealtab-isotipo-noche.svg",
+  "impresion/lealtab-isotipo-noche.pdf": "impresion/lealtab-isotipo-noche.svg",
+  "impresion/lealtab-isotipo-negro.svg": "svg/lealtab-isotipo-negro.svg",
+  "impresion/lealtab-isotipo-negro.pdf": "impresion/lealtab-isotipo-negro.svg",
+  "impresion/lealtab-wordmark-noche.svg": "svg/lealtab-wordmark-noche.svg",
+  "impresion/lealtab-wordmark-noche.pdf": "impresion/lealtab-wordmark-noche.svg",
+  "impresion/lealtab-wordmark-negro.svg": "svg/lealtab-wordmark-negro.svg",
+  "impresion/lealtab-wordmark-negro.pdf": "impresion/lealtab-wordmark-negro.svg"
+ },
+ "svg_jobs": [
+  [
+   "entregables/svg/lealtab-horizontal-noche-con-area.svg",
+   512,
+   182,
+   "entregables/png/horizontal/lealtab-horizontal-noche-con-area-512.png"
+  ],
+  [
+   "entregables/svg/lealtab-horizontal-noche-con-area.svg",
+   1024,
+   365,
+   "entregables/png/horizontal/lealtab-horizontal-noche-con-area-1024.png"
+  ],
+  [
+   "entregables/svg/lealtab-horizontal-noche-con-area.svg",
+   2048,
+   729,
+   "entregables/png/horizontal/lealtab-horizontal-noche-con-area-2048.png"
+  ],
+  [
+   "entregables/svg/lealtab-horizontal-lino-con-area.svg",
+   512,
+   182,
+   "entregables/png/horizontal/lealtab-horizontal-lino-con-area-512.png"
+  ],
+  [
+   "entregables/svg/lealtab-horizontal-lino-con-area.svg",
+   1024,
+   365,
+   "entregables/png/horizontal/lealtab-horizontal-lino-con-area-1024.png"
+  ],
+  [
+   "entregables/svg/lealtab-horizontal-lino-con-area.svg",
+   2048,
+   729,
+   "entregables/png/horizontal/lealtab-horizontal-lino-con-area-2048.png"
+  ],
+  [
+   "entregables/svg/lealtab-horizontal-lino-fondo-noche-con-area.svg",
+   512,
+   182,
+   "entregables/png/horizontal/lealtab-horizontal-lino-fondo-noche-con-area-512.png"
+  ],
+  [
+   "entregables/svg/lealtab-horizontal-lino-fondo-noche-con-area.svg",
+   1024,
+   365,
+   "entregables/png/horizontal/lealtab-horizontal-lino-fondo-noche-con-area-1024.png"
+  ],
+  [
+   "entregables/svg/lealtab-horizontal-lino-fondo-noche-con-area.svg",
+   2048,
+   729,
+   "entregables/png/horizontal/lealtab-horizontal-lino-fondo-noche-con-area-2048.png"
+  ],
+  [
+   "entregables/svg/lealtab-horizontal-negro-con-area.svg",
+   512,
+   182,
+   "entregables/png/horizontal/lealtab-horizontal-negro-con-area-512.png"
+  ],
+  [
+   "entregables/svg/lealtab-horizontal-negro-con-area.svg",
+   1024,
+   365,
+   "entregables/png/horizontal/lealtab-horizontal-negro-con-area-1024.png"
+  ],
+  [
+   "entregables/svg/lealtab-horizontal-negro-con-area.svg",
+   2048,
+   729,
+   "entregables/png/horizontal/lealtab-horizontal-negro-con-area-2048.png"
+  ],
+  [
+   "entregables/svg/lealtab-horizontal-blanco-con-area.svg",
+   512,
+   182,
+   "entregables/png/horizontal/lealtab-horizontal-blanco-con-area-512.png"
+  ],
+  [
+   "entregables/svg/lealtab-horizontal-blanco-con-area.svg",
+   1024,
+   365,
+   "entregables/png/horizontal/lealtab-horizontal-blanco-con-area-1024.png"
+  ],
+  [
+   "entregables/svg/lealtab-horizontal-blanco-con-area.svg",
+   2048,
+   729,
+   "entregables/png/horizontal/lealtab-horizontal-blanco-con-area-2048.png"
+  ],
+  [
+   "entregables/svg/lealtab-vertical-noche-con-area.svg",
+   512,
+   447,
+   "entregables/png/vertical/lealtab-vertical-noche-con-area-512.png"
+  ],
+  [
+   "entregables/svg/lealtab-vertical-noche-con-area.svg",
+   1024,
+   894,
+   "entregables/png/vertical/lealtab-vertical-noche-con-area-1024.png"
+  ],
+  [
+   "entregables/svg/lealtab-vertical-noche-con-area.svg",
+   2048,
+   1788,
+   "entregables/png/vertical/lealtab-vertical-noche-con-area-2048.png"
+  ],
+  [
+   "entregables/svg/lealtab-vertical-lino-con-area.svg",
+   512,
+   447,
+   "entregables/png/vertical/lealtab-vertical-lino-con-area-512.png"
+  ],
+  [
+   "entregables/svg/lealtab-vertical-lino-con-area.svg",
+   1024,
+   894,
+   "entregables/png/vertical/lealtab-vertical-lino-con-area-1024.png"
+  ],
+  [
+   "entregables/svg/lealtab-vertical-lino-con-area.svg",
+   2048,
+   1788,
+   "entregables/png/vertical/lealtab-vertical-lino-con-area-2048.png"
+  ],
+  [
+   "entregables/svg/lealtab-vertical-lino-fondo-noche-con-area.svg",
+   512,
+   447,
+   "entregables/png/vertical/lealtab-vertical-lino-fondo-noche-con-area-512.png"
+  ],
+  [
+   "entregables/svg/lealtab-vertical-lino-fondo-noche-con-area.svg",
+   1024,
+   894,
+   "entregables/png/vertical/lealtab-vertical-lino-fondo-noche-con-area-1024.png"
+  ],
+  [
+   "entregables/svg/lealtab-vertical-lino-fondo-noche-con-area.svg",
+   2048,
+   1788,
+   "entregables/png/vertical/lealtab-vertical-lino-fondo-noche-con-area-2048.png"
+  ],
+  [
+   "entregables/svg/lealtab-vertical-negro-con-area.svg",
+   512,
+   447,
+   "entregables/png/vertical/lealtab-vertical-negro-con-area-512.png"
+  ],
+  [
+   "entregables/svg/lealtab-vertical-negro-con-area.svg",
+   1024,
+   894,
+   "entregables/png/vertical/lealtab-vertical-negro-con-area-1024.png"
+  ],
+  [
+   "entregables/svg/lealtab-vertical-negro-con-area.svg",
+   2048,
+   1788,
+   "entregables/png/vertical/lealtab-vertical-negro-con-area-2048.png"
+  ],
+  [
+   "entregables/svg/lealtab-vertical-blanco-con-area.svg",
+   512,
+   447,
+   "entregables/png/vertical/lealtab-vertical-blanco-con-area-512.png"
+  ],
+  [
+   "entregables/svg/lealtab-vertical-blanco-con-area.svg",
+   1024,
+   894,
+   "entregables/png/vertical/lealtab-vertical-blanco-con-area-1024.png"
+  ],
+  [
+   "entregables/svg/lealtab-vertical-blanco-con-area.svg",
+   2048,
+   1788,
+   "entregables/png/vertical/lealtab-vertical-blanco-con-area-2048.png"
+  ],
+  [
+   "entregables/svg/lealtab-isotipo-noche-con-area.svg",
+   512,
+   466,
+   "entregables/png/isotipo/lealtab-isotipo-noche-con-area-512.png"
+  ],
+  [
+   "entregables/svg/lealtab-isotipo-noche-con-area.svg",
+   1024,
+   932,
+   "entregables/png/isotipo/lealtab-isotipo-noche-con-area-1024.png"
+  ],
+  [
+   "entregables/svg/lealtab-isotipo-lino-con-area.svg",
+   512,
+   466,
+   "entregables/png/isotipo/lealtab-isotipo-lino-con-area-512.png"
+  ],
+  [
+   "entregables/svg/lealtab-isotipo-lino-con-area.svg",
+   1024,
+   932,
+   "entregables/png/isotipo/lealtab-isotipo-lino-con-area-1024.png"
+  ],
+  [
+   "entregables/svg/lealtab-isotipo-lino-fondo-noche-con-area.svg",
+   512,
+   466,
+   "entregables/png/isotipo/lealtab-isotipo-lino-fondo-noche-con-area-512.png"
+  ],
+  [
+   "entregables/svg/lealtab-isotipo-lino-fondo-noche-con-area.svg",
+   1024,
+   932,
+   "entregables/png/isotipo/lealtab-isotipo-lino-fondo-noche-con-area-1024.png"
+  ],
+  [
+   "entregables/svg/lealtab-isotipo-negro-con-area.svg",
+   512,
+   466,
+   "entregables/png/isotipo/lealtab-isotipo-negro-con-area-512.png"
+  ],
+  [
+   "entregables/svg/lealtab-isotipo-negro-con-area.svg",
+   1024,
+   932,
+   "entregables/png/isotipo/lealtab-isotipo-negro-con-area-1024.png"
+  ],
+  [
+   "entregables/svg/lealtab-isotipo-blanco-con-area.svg",
+   512,
+   466,
+   "entregables/png/isotipo/lealtab-isotipo-blanco-con-area-512.png"
+  ],
+  [
+   "entregables/svg/lealtab-isotipo-blanco-con-area.svg",
+   1024,
+   932,
+   "entregables/png/isotipo/lealtab-isotipo-blanco-con-area-1024.png"
+  ],
+  [
+   "entregables/svg/lealtab-wordmark-noche-con-area.svg",
+   512,
+   217,
+   "entregables/png/wordmark/lealtab-wordmark-noche-con-area-512.png"
+  ],
+  [
+   "entregables/svg/lealtab-wordmark-noche-con-area.svg",
+   1024,
+   434,
+   "entregables/png/wordmark/lealtab-wordmark-noche-con-area-1024.png"
+  ],
+  [
+   "entregables/svg/lealtab-wordmark-lino-con-area.svg",
+   512,
+   217,
+   "entregables/png/wordmark/lealtab-wordmark-lino-con-area-512.png"
+  ],
+  [
+   "entregables/svg/lealtab-wordmark-lino-con-area.svg",
+   1024,
+   434,
+   "entregables/png/wordmark/lealtab-wordmark-lino-con-area-1024.png"
+  ],
+  [
+   "entregables/svg/lealtab-wordmark-lino-fondo-noche-con-area.svg",
+   512,
+   217,
+   "entregables/png/wordmark/lealtab-wordmark-lino-fondo-noche-con-area-512.png"
+  ],
+  [
+   "entregables/svg/lealtab-wordmark-lino-fondo-noche-con-area.svg",
+   1024,
+   434,
+   "entregables/png/wordmark/lealtab-wordmark-lino-fondo-noche-con-area-1024.png"
+  ],
+  [
+   "entregables/svg/lealtab-wordmark-negro-con-area.svg",
+   512,
+   217,
+   "entregables/png/wordmark/lealtab-wordmark-negro-con-area-512.png"
+  ],
+  [
+   "entregables/svg/lealtab-wordmark-negro-con-area.svg",
+   1024,
+   434,
+   "entregables/png/wordmark/lealtab-wordmark-negro-con-area-1024.png"
+  ],
+  [
+   "entregables/svg/lealtab-wordmark-blanco-con-area.svg",
+   512,
+   217,
+   "entregables/png/wordmark/lealtab-wordmark-blanco-con-area-512.png"
+  ],
+  [
+   "entregables/svg/lealtab-wordmark-blanco-con-area.svg",
+   1024,
+   434,
+   "entregables/png/wordmark/lealtab-wordmark-blanco-con-area-1024.png"
+  ],
+  [
+   "iconos/app/lealtab-apple-touch-icon-180-sangre.svg",
+   180,
+   180,
+   "entregables/web/apple-touch-icon.png"
+  ],
+  [
+   "iconos/pwa/lealtab-pwa-192.svg",
+   192,
+   192,
+   "entregables/web/icon-192.png"
+  ],
+  [
+   "iconos/pwa/lealtab-pwa-512.svg",
+   512,
+   512,
+   "entregables/web/icon-512.png"
+  ],
+  [
+   "iconos/pwa/lealtab-pwa-maskable-512.svg",
+   512,
+   512,
+   "entregables/web/icon-maskable-512.png"
+  ],
+  [
+   "iconos/avatar/lealtab-avatar-lino-400.svg",
+   400,
+   400,
+   "entregables/redes/lealtab-avatar-lino-circulo-400.png"
+  ],
+  [
+   "iconos/avatar/lealtab-avatar-lino-400.svg",
+   1080,
+   1080,
+   "entregables/redes/lealtab-avatar-lino-circulo-1080.png"
+  ],
+  [
+   "entregables/redes/lealtab-avatar-lino-cuadrado.svg",
+   400,
+   400,
+   "entregables/redes/lealtab-avatar-lino-cuadrado-400.png"
+  ],
+  [
+   "entregables/redes/lealtab-avatar-lino-cuadrado.svg",
+   1080,
+   1080,
+   "entregables/redes/lealtab-avatar-lino-cuadrado-1080.png"
+  ],
+  [
+   "iconos/avatar/lealtab-avatar-noche-400.svg",
+   400,
+   400,
+   "entregables/redes/lealtab-avatar-noche-circulo-400.png"
+  ],
+  [
+   "iconos/avatar/lealtab-avatar-noche-400.svg",
+   1080,
+   1080,
+   "entregables/redes/lealtab-avatar-noche-circulo-1080.png"
+  ],
+  [
+   "entregables/redes/lealtab-avatar-noche-cuadrado.svg",
+   400,
+   400,
+   "entregables/redes/lealtab-avatar-noche-cuadrado-400.png"
+  ],
+  [
+   "entregables/redes/lealtab-avatar-noche-cuadrado.svg",
+   1080,
+   1080,
+   "entregables/redes/lealtab-avatar-noche-cuadrado-1080.png"
+  ],
+  [
+   "entregables/redes/lealtab-portada-facebook.svg",
+   1640,
+   624,
+   "entregables/redes/lealtab-portada-facebook-1640x624.png"
+  ]
+ ],
+ "PRINT_MM": {
+  "horizontal": 100,
+  "vertical": 60,
+  "isotipo": 40,
+  "wordmark": 80
+ },
+ "MIN_PX": {
+  "horizontal": 80,
+  "vertical": 56,
+  "isotipo": 16,
+  "wordmark": 56
+ },
+ "AREA": 78.0
+}

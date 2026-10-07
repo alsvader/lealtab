@@ -1,0 +1,2645 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<!-- LealTab · Mockup landing v1.4 (7 oct 2026): v1.3 + microinteracciones (editor vivo, "Suma una visita", Para quién → La tarjeta). Base v1.3: v1.2 + capa de movimiento. Base v1.2 (7 oct 2026): hero rediseñado con el lema y el aro protagonista. Cómo funciona rediseñado (titular fijo + aro de avance). La tarjeta rediseñada (selector de negocio). Para quién rediseñada (filas alternadas). Precios rediseñados (sin durazno). Confianza rediseñada (cuadrícula sin cajas). Lo que viene en bosque. Cierre con aro completo en durazno y FAQ sin cajas. Nav v1.2 (lino sólido, sección activa, menú móvil a pantalla completa). Footer v1.2 en bosque. Resto de secciones = v1.1. -->
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LealTab · Haz que tus clientes siempre regresen</title>
+  <meta name="description" content="Tu tarjeta de lealtad, ahora en el celular de tus clientes. Créala en minutos; tus clientes la instalan con un toque, sin descargar nada. Prueba gratis 30 días." />
+  <link rel="icon" href="../03-visual-identity/logo/entregables/web/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../04-design-system/tokens.css" />
+  <script>document.documentElement.classList.add("js");</script>
+  <style>
+    /* ——— Reset & base ——— */
+    *, *::before, *::after { box-sizing: border-box; }
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 64px; /* altura del menú fijo en móvil */
+    }
+    @media (min-width: 1024px) { html { scroll-padding-top: 76px; } }
+    body {
+      margin: 0;
+      background: var(--color-bg);
+      color: var(--color-text);
+      font-family: var(--font-body);
+      font-size: var(--font-size-body);
+      font-weight: var(--font-weight-regular);
+      line-height: var(--font-line-body);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: clip;
+    }
+    img, svg { display: block; max-width: 100%; height: auto; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; cursor: pointer; border: none; background: none; }
+    ul { list-style: none; margin: 0; padding: 0; }
+    :focus { outline: none; }
+    :focus-visible {
+      outline: none;
+      box-shadow: var(--focus-ring);
+    }
+    a:focus-visible,
+    button:focus-visible,
+    summary:focus-visible {
+      border-radius: var(--radius-control);
+    }
+
+    /* ——— Typography helpers ——— */
+    .display, h1, h2, h3, .h3 {
+      font-family: var(--font-display);
+      font-weight: var(--font-weight-black);
+      font-stretch: condensed;
+      font-variation-settings: "wdth" 75, "wght" 800;
+      letter-spacing: -0.01em;
+      color: var(--color-text);
+      margin: 0;
+    }
+    h1 {
+      font-size: clamp(32px, 7vw, var(--font-size-h1));
+      line-height: var(--font-line-h1);
+    }
+    h2 {
+      font-size: clamp(26px, 4.5vw, var(--font-size-h2));
+      line-height: var(--font-line-h2);
+    }
+    h3, .h3 {
+      font-size: clamp(20px, 3vw, var(--font-size-h3));
+      line-height: var(--font-line-h3);
+    }
+    .lead {
+      font-size: clamp(16px, 2.2vw, var(--font-size-lead));
+      font-weight: var(--font-weight-medium);
+      line-height: var(--font-line-lead);
+      color: var(--color-text-muted);
+      margin: 0;
+    }
+    .caption {
+      font-size: var(--font-size-caption);
+      font-weight: var(--font-weight-semibold);
+      line-height: var(--font-line-caption);
+      color: var(--color-text-muted);
+    }
+    .label {
+      font-size: var(--font-size-label);
+      font-weight: var(--font-weight-bold);
+      letter-spacing: var(--font-tracking-label);
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+    }
+
+    /* ——— Layout ——— */
+    .wrap {
+      width: min(100% - 32px, 1120px);
+      margin-inline: auto;
+    }
+    @media (min-width: 768px) {
+      .wrap { width: min(100% - 48px, 1120px); }
+    }
+    .section {
+      padding: var(--space-7) 0;
+    }
+    @media (min-width: 768px) {
+      .section { padding: var(--space-8) 0; }
+    }
+    .section-tight { padding: var(--space-7) 0; }
+    .stack-sm { display: flex; flex-direction: column; gap: var(--space-3); }
+    .stack { display: flex; flex-direction: column; gap: var(--space-4); }
+    .stack-lg { display: flex; flex-direction: column; gap: var(--space-5); }
+    .center { text-align: center; }
+    .center-block { margin-inline: auto; }
+
+    /* ——— Buttons ——— */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+      font-family: var(--font-body);
+      font-weight: var(--font-weight-semibold);
+      border: var(--border-product) solid var(--color-border);
+      border-radius: var(--radius-control);
+      box-shadow: var(--shadow-button);
+      transition:
+        transform var(--duration-fast) var(--easing-standard),
+        box-shadow var(--duration-fast) var(--easing-standard),
+        border-width var(--duration-fast) var(--easing-standard);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .btn:focus-visible {
+      outline: none;
+      box-shadow: var(--shadow-button), var(--focus-ring);
+    }
+    .btn:active {
+      transform: translate(4px, 4px);
+      box-shadow: none;
+    }
+    .btn-primary {
+      background: var(--color-bosque);
+      color: var(--color-text-on-bosque);
+    }
+    /* Soft hover lift — hard shadow stays Ciclo v2 */
+    .btn-primary:hover {
+      border-width: var(--border-product-strong);
+      transform: translate(-1px, -1px);
+      box-shadow: 5px 5px 0 var(--color-shadow);
+    }
+    .btn-primary:active {
+      transform: translate(4px, 4px);
+      box-shadow: none;
+    }
+    .btn-secondary {
+      background: var(--color-surface);
+      color: var(--color-text);
+    }
+    .btn-secondary:hover {
+      border-width: var(--border-product-strong);
+      transform: translate(-1px, -1px);
+      box-shadow: 5px 5px 0 var(--color-shadow);
+    }
+    .btn-secondary:active {
+      transform: translate(4px, 4px);
+      box-shadow: none;
+    }
+    .btn-sm { padding: var(--space-2) var(--space-3); font-size: var(--font-size-ui); }
+    .btn-md { padding: var(--space-3) var(--space-4); font-size: var(--font-size-ui); }
+    .btn-lg { padding: var(--space-4) var(--space-5); font-size: var(--font-size-body); }
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+      align-items: center;
+    }
+
+    /* ——— Cards ——— */
+    .card {
+      background: var(--color-surface);
+      border: var(--border-marketing) solid var(--color-border);
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-card);
+    }
+    .card-pad { padding: var(--space-5); }
+
+    /* ——— Nav v1.2: lino sólido (sin vidrio esmerilado), sección activa, CTA firma ——— */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: var(--color-lino);
+      border-bottom: var(--border-hair) solid var(--color-border);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-4);
+      height: 64px;
+    }
+    @media (min-width: 1024px) {
+      .nav-inner { height: 76px; display: grid; grid-template-columns: 1fr auto 1fr; }
+      .nav-inner > .nav-home { justify-self: start; }
+      .nav-inner > .nav-actions { justify-self: end; }
+    }
+    .nav-logo { height: 28px; width: auto; }
+    .nav-home { display: inline-flex; border-radius: var(--radius-control); }
+    .nav-home:focus-visible { box-shadow: var(--focus-ring); }
+    .nav-links {
+      display: none;
+      align-items: center;
+      gap: var(--space-5);
+      font-size: var(--font-size-body);
+      font-weight: var(--font-weight-semibold);
+    }
+    @media (min-width: 1200px) { .nav-links { gap: var(--space-6); } }
+    .nav-links a {
+      position: relative;
+      padding: var(--space-2) 0;
+      border-radius: 4px;
+      transition: color var(--duration-fast) var(--easing-standard);
+    }
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 2px;
+      background: var(--color-bosque);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform var(--duration-ui) var(--easing-standard);
+    }
+    .nav-links a:hover { color: var(--color-bosque); }
+    .nav-links a:hover::after,
+    .nav-links a[aria-current="true"]::after { transform: scaleX(1); }
+    .nav-links a[aria-current="true"] { color: var(--color-bosque); }
+    .nav-links a:focus-visible { box-shadow: var(--focus-ring); }
+    .nav-actions { display: flex; align-items: center; gap: var(--space-4); flex-shrink: 0; }
+    .nav-login {
+      display: none;
+      font-size: var(--font-size-body);
+      font-weight: var(--font-weight-semibold);
+      padding: var(--space-2) 0;
+      border-radius: 4px;
+    }
+    .nav-login:hover { color: var(--color-bosque); text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 2px; }
+    .nav-login:focus-visible { box-shadow: var(--focus-ring); }
+    /* CTA firma en tamaño chico */
+    .btn-cta.btn-cta-sm { min-height: 40px; font-size: var(--font-size-ui); box-shadow: var(--shadow-sticker); }
+    .btn-cta.btn-cta-sm .btn-cta-label { padding: 0 var(--space-3); }
+    .btn-cta.btn-cta-sm .btn-cta-arrow { width: 40px; }
+    @media (min-width: 1024px) {
+      .btn-cta.btn-cta-sm { min-height: 46px; font-size: var(--font-size-body); }
+      .btn-cta.btn-cta-sm .btn-cta-label { padding: 0 var(--space-4); }
+      .btn-cta.btn-cta-sm .btn-cta-arrow { width: 46px; }
+    }
+    .btn-cta.btn-cta-sm:hover { box-shadow: 4px 4px 0 var(--color-shadow); }
+    .btn-cta.btn-cta-sm:active { transform: translate(3px, 3px); box-shadow: none; }
+    .nav-actions .nav-cta-desktop { display: none; }
+    /* Hamburguesa plana: un solo elemento con sombra en la barra (el CTA) */
+    .nav-toggle {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 40px;
+      height: 40px;
+      padding: 8px;
+      border: var(--border-product) solid var(--color-border);
+      border-radius: var(--radius-control);
+      background: var(--color-surface);
+    }
+    .nav-toggle:focus-visible { box-shadow: var(--focus-ring); }
+    .nav-toggle span {
+      display: block;
+      width: 18px;
+      height: 2px;
+      background: var(--color-noche);
+      border-radius: 1px;
+      margin-inline: auto;
+      transition: transform var(--duration-ui) var(--easing-standard), opacity var(--duration-ui);
+    }
+    .nav-toggle[aria-expanded="true"] { background: var(--color-bosque); }
+    .nav-toggle[aria-expanded="true"] span { background: var(--color-lino); }
+    .nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    /* Menú móvil a pantalla completa */
+    .nav-drawer {
+      position: fixed;
+      inset: 64px 0 0 0;
+      z-index: 49;
+      background: var(--color-lino);
+      border-top: var(--border-hair) solid var(--color-border);
+      display: flex;
+      flex-direction: column;
+      padding: var(--space-5) 0 var(--space-6);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-8px);
+      transition: opacity var(--duration-ui) var(--easing-standard), transform var(--duration-ui) var(--easing-standard), visibility 0s linear var(--duration-ui);
+    }
+    .nav-drawer.open {
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+      transition: opacity var(--duration-ui) var(--easing-standard), transform var(--duration-ui) var(--easing-standard), visibility 0s;
+    }
+    .nav-drawer-inner { display: flex; flex-direction: column; height: 100%; }
+    .nav-drawer-links a {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--space-4) 0;
+      border-bottom: var(--border-hair) solid var(--color-border);
+      font-family: var(--font-display);
+      font-variation-settings: "wdth" 75, "wght" 800;
+      font-size: clamp(32px, 9vw, 44px);
+      line-height: 1;
+      border-radius: 4px;
+    }
+    .nav-drawer-links a::after { content: "→"; font-family: var(--font-body); font-size: 22px; font-weight: 600; }
+    .nav-drawer-links a[aria-current="true"] { color: var(--color-bosque); }
+    .nav-drawer-links a:focus-visible { box-shadow: var(--focus-ring); }
+    .nav-drawer-foot { margin-top: auto; display: flex; flex-direction: column; gap: var(--space-4); }
+    .nav-drawer-foot .btn-cta { width: 100%; }
+    .nav-drawer-foot .nav-login { display: block; text-align: center; font-size: var(--font-size-body); }
+    .nav-drawer-foot .note { margin: 0; text-align: center; font-size: var(--font-size-ui); color: var(--color-text-muted); }
+    body.nav-open { overflow: hidden; }
+    body.nav-open .nav-cta-mobile { visibility: hidden; }
+    .nav-drawer:focus, .nav-drawer:focus-visible { outline: none; box-shadow: none; }
+    @media (min-width: 1024px) {
+      .nav-links, .nav-login { display: flex; }
+      .nav-actions .nav-cta-desktop { display: inline-flex; }
+      .nav-toggle, .nav-cta-mobile, .nav-drawer { display: none !important; }
+    }
+    @media (max-width: 1023px) {
+      .nav-cta-desktop { display: none !important; }
+    }
+    @media (max-width: 359px) {
+      .nav-cta-mobile .btn-cta-arrow { display: none; }
+    }
+
+    /* ——— Hero v1.2: lema + aro protagonista (Ciclo v2, nivel landing) ——— */
+    .hero {
+      position: relative;
+      overflow: clip; /* el aro sale del encuadre; solo él rompe el borde */
+      overflow-clip-margin: 0;
+      padding: var(--space-6) 0 var(--space-7);
+    }
+    @media (min-width: 900px) {
+      .hero { padding: var(--space-7) 0 var(--space-8); }
+    }
+    .hero-grid {
+      display: grid;
+      gap: var(--space-6);
+      align-items: center;
+    }
+    @media (min-width: 900px) {
+      .hero-grid {
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: var(--space-7);
+      }
+    }
+    .hero-title {
+      font-size: clamp(48px, 12.5vw, 64px);
+      line-height: var(--font-line-display);
+      letter-spacing: -0.015em;
+    }
+    @media (min-width: 900px) {
+      .hero-title {
+        font-size: clamp(72px, 6.6vw, 92px);
+      }
+    }
+    .hero-copy .lead {
+      margin-top: var(--space-5);
+      max-width: 34ch;
+      color: var(--color-text);
+    }
+    .hero-ctas {
+      margin-top: var(--space-6);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-4) var(--space-5);
+    }
+    .hero-note {
+      margin: var(--space-4) 0 0;
+      font-size: var(--font-size-ui);
+      color: var(--color-text-muted);
+      font-weight: var(--font-weight-medium);
+    }
+
+    /* Botón firma: flecha en bloque (Ciclo v2) */
+    .btn-cta {
+      display: inline-flex;
+      align-items: stretch;
+      min-height: 56px;
+      border: var(--border-product-strong) solid var(--color-border);
+      border-radius: var(--radius-control);
+      box-shadow: var(--shadow-button);
+      overflow: hidden;
+      font-weight: var(--font-weight-bold);
+      font-size: var(--font-size-body);
+      white-space: nowrap;
+      transition:
+        transform 120ms var(--easing-standard),
+        box-shadow 120ms var(--easing-standard);
+    }
+    .btn-cta-label {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      padding: 0 var(--space-5);
+      background: var(--color-bosque);
+      color: var(--color-text-on-bosque);
+    }
+    .btn-cta-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      background: var(--color-noche);
+      color: var(--color-lino);
+    }
+    .btn-cta-arrow svg { transition: transform var(--duration-ui) var(--easing-standard); }
+    /* Hover de v1.1: lift suave (−1 px) manteniendo la sombra dura */
+    .btn-cta:hover {
+      transform: translate(-1px, -1px);
+      box-shadow: 5px 5px 0 var(--color-shadow);
+    }
+    .btn-cta:hover .btn-cta-arrow svg { transform: translateX(3px); }
+    .btn-cta:active {
+      transform: translate(4px, 4px);
+      box-shadow: none;
+      transition-duration: 90ms;
+    }
+    .btn-cta:focus-visible { box-shadow: var(--shadow-button), var(--focus-ring); }
+    .link-arrow {
+      font-weight: var(--font-weight-semibold);
+      text-decoration: underline;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 5px;
+      padding: var(--space-1) 0;
+    }
+    .link-arrow:hover { color: var(--color-bosque); }
+    @media (max-width: 559px) {
+      .hero-ctas .btn-cta { width: 100%; }
+    }
+
+    /* Escena: aro grande + celular + sticker */
+    .hero-visual {
+      position: relative;
+      padding-top: var(--space-6);
+      width: 100%;
+      max-width: 400px; /* tableta: celular y aro siguen juntos */
+      margin-inline: auto;
+    }
+    @media (min-width: 900px) {
+      .hero-visual { height: 640px; padding-top: 0; max-width: none; }
+    }
+    /* Centro del aro arriba a la derecha del celular: el final del 4/5 y la
+       visita 5 en durazno (cuadrante superior izquierdo) quedan siempre a la vista. */
+    .hero-aro {
+      position: absolute;
+      z-index: 0;
+      width: 420px;
+      left: calc(100% - 161px);
+      top: -16px;
+    }
+    @media (min-width: 900px) {
+      .hero-aro { width: 560px; left: calc(50% + 150px - 280px); top: -96px; }
+    }
+    .hero-aro .aro-fill,
+    .hero-aro .aro-fill-edge {
+      stroke-dasharray: 80 100;
+      animation: aroDraw 650ms var(--easing-standard) 250ms both;
+    }
+    .hero-aro .aro-tip,
+    .hero-aro .aro-tip-edge { opacity: 0; }
+    .hero-aro .aro-tip { animation: aroTipIn 200ms var(--easing-standard) 900ms forwards, aroTipPulse 360ms var(--easing-standard) 1100ms 1; }
+    .hero-aro .aro-tip-edge { animation: aroTipIn 200ms var(--easing-standard) 900ms forwards, aroTipEdgePulse 360ms var(--easing-standard) 1100ms 1; }
+    @keyframes aroTipIn { to { opacity: 1; } }
+    /* Pulso ~4 % sobre el grosor del aro */
+    @keyframes aroTipPulse {
+      0%, 100% { stroke-width: 44; }
+      45%      { stroke-width: 50; }
+    }
+    @keyframes aroTipEdgePulse {
+      0%, 100% { stroke-width: 49; }
+      45%      { stroke-width: 55; }
+    }
+    @keyframes aroDraw {
+      0%   { stroke-dasharray: 0 100; opacity: 0; }
+      4%   { opacity: 1; }
+      80%  { stroke-dasharray: 83 100; } /* se pasa 3 % y regresa una vez */
+      100% { stroke-dasharray: 80 100; opacity: 1; }
+    }
+
+    /* Phone mock */
+    .phone {
+      position: relative;
+      z-index: 1;
+      width: 236px;
+      background: var(--color-noche);
+      border: var(--border-marketing) solid var(--color-noche);
+      border-radius: 36px;
+      box-shadow: var(--shadow-storefront);
+      padding: 10px;
+    }
+    @media (min-width: 900px) {
+      .phone { position: absolute; bottom: 0; left: 50%; width: 272px; transform: translateX(-70%); }
+    }
+    .phone-notch {
+      width: 88px;
+      height: 20px;
+      background: var(--color-noche);
+      border-radius: 0 0 14px 14px;
+      margin: 0 auto 6px;
+    }
+    .phone-screen {
+      background: var(--color-lino);
+      border-radius: 26px;
+      padding: var(--space-4) var(--space-4) var(--space-3);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+    }
+    .pwa-head {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+    .pwa-badge {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: var(--color-bosque);
+      color: var(--color-lino);
+      border: var(--border-product) solid var(--color-noche);
+      display: grid;
+      place-items: center;
+      font-size: var(--font-size-caption);
+      font-weight: var(--font-weight-bold);
+    }
+    .pwa-biz { font-weight: var(--font-weight-bold); font-size: var(--font-size-ui); line-height: 1.2; }
+    .pwa-hello { font-size: var(--font-size-caption); color: var(--color-text-muted); }
+    /* Aro de interfaz (brand book p. 18): plano, sin contorno ni sombra;
+       carril menta, avance bosque, cifra en Manrope tabular dentro */
+    .aro-ui { position: relative; flex-shrink: 0; }
+    .aro-ui svg { display: block; width: 100%; height: 100%; }
+    .aro-ui .track { stroke: var(--color-menta); }
+    .aro-ui .fill { stroke: var(--color-bosque); }
+    .aro-ui .tip { stroke: var(--color-durazno); } /* visita por completarse (solo hero) */
+    .aro-ui-num {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-content: center;
+      text-align: center;
+      color: var(--color-noche);
+      font-weight: var(--font-weight-bold);
+      font-variant-numeric: tabular-nums;
+      letter-spacing: var(--font-tracking-stat);
+      line-height: 1;
+    }
+    .aro-ui-num small { display: block; margin-top: 4px; font-size: var(--font-size-caption); font-weight: var(--font-weight-semibold); letter-spacing: 0; }
+
+    /* Panel de avance de la tarjeta (brand book p. 22): blanco lino, sin sombra */
+    .loyalty-card {
+      position: relative;
+      background: var(--color-surface);
+      color: var(--color-text);
+      border: var(--border-product) solid var(--color-noche);
+      border-radius: var(--radius-card);
+      padding: var(--space-3);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-3);
+    }
+    .loyalty-card .aro-ui { width: 68px; height: 68px; }
+    .loyalty-card .aro-ui-num { font-size: 18px; }
+    .loyalty-card .reward-line {
+      font-size: var(--font-size-ui);
+      line-height: 1.4;
+      margin: 0;
+    }
+    .visits .label { display: block; margin-bottom: var(--space-1); }
+    .visits li {
+      display: flex;
+      justify-content: space-between;
+      padding: var(--space-2) 0;
+      border-top: var(--border-hair) solid color-mix(in srgb, var(--color-border) 22%, transparent);
+      font-size: var(--font-size-ui);
+      font-variant-numeric: tabular-nums;
+    }
+    .visits li span:first-child { font-weight: var(--font-weight-semibold); }
+    .visits li span:last-child { color: var(--color-text-muted); }
+    .pwa-code {
+      display: block;
+      text-align: center;
+      padding: var(--space-3);
+      background: var(--color-bosque);
+      color: var(--color-lino);
+      border: var(--border-product) solid var(--color-noche);
+      border-radius: var(--radius-control);
+      box-shadow: var(--shadow-sticker);
+      font-size: var(--font-size-ui);
+      font-weight: var(--font-weight-bold);
+    }
+    .pwa-sign {
+      margin: 0;
+      text-align: center;
+      font-size: 10px;
+      color: var(--color-text-muted);
+    }
+
+    /* Sticker "Casi premio" (marketing: rotado, contorno 2.5, sombra 3) */
+    .sticker {
+      position: absolute;
+      z-index: 2;
+      top: -16px;
+      right: -30px;
+      padding: 6px 10px;
+      background: var(--color-menta);
+      color: var(--color-noche);
+      border: var(--border-product-strong) solid var(--color-noche);
+      border-radius: var(--radius-sticker);
+      box-shadow: var(--shadow-sticker);
+      font-family: var(--font-display);
+      font-variation-settings: "wdth" 75, "wght" 800;
+      font-size: var(--font-size-sticker-lg);
+      letter-spacing: var(--font-tracking-sticker);
+      text-transform: uppercase;
+      line-height: 1;
+      white-space: nowrap;
+      transform: rotate(4deg);
+      animation: stickerIn 240ms var(--easing-standard) 1300ms both;
+    }
+    @keyframes stickerIn {
+      0%   { opacity: 0; transform: scale(0.6) rotate(-12deg); }
+      60%  { opacity: 1; transform: scale(1.06) rotate(0deg); }
+      100% { opacity: 1; transform: scale(1) rotate(4deg); }
+    }
+
+    /* ——— Cómo funciona v1.2: titular fijo + aro de avance + pasos con UI real ——— */
+    .how { padding: var(--space-7) 0 var(--space-8); }
+    .how-grid { display: grid; gap: var(--space-6); }
+    @media (min-width: 900px) {
+      .how { padding: var(--space-8) 0 calc(var(--space-8) * 1.5); }
+      .how-grid { grid-template-columns: 0.85fr 1.15fr; gap: var(--space-8); align-items: start; }
+    }
+    .how-aside .label { display: block; margin-bottom: var(--space-3); }
+    .how-aside h2 { font-size: clamp(36px, 9.5vw, 52px); max-width: 14ch; }
+    .how-meter { display: none; }
+    .how-cta-desktop { display: none; }
+    @media (min-width: 900px) {
+      .how-aside { position: sticky; top: 112px; }
+      .how-meter {
+        display: flex;
+        align-items: center;
+        gap: var(--space-4);
+        margin-top: var(--space-7);
+      }
+      .how-cta-desktop { display: inline-flex; margin-top: var(--space-7); }
+      .how-cta-mobile { display: none; }
+    }
+    .how-meter svg { flex-shrink: 0; }
+    .how-meter .aro-step {
+      transition: stroke-dasharray var(--duration-arc) var(--easing-standard);
+    }
+    .how-meter .stat {
+      font-variant-numeric: tabular-nums;
+      font-weight: var(--font-weight-bold);
+      font-size: var(--font-size-stat);
+      letter-spacing: var(--font-tracking-stat);
+      line-height: var(--font-line-stat);
+    }
+    .how-meter .caption { display: block; margin-top: var(--space-1); }
+
+    .how-steps { display: flex; flex-direction: column; list-style: none; margin: 0; padding: 0; }
+    .how-step {
+      padding: var(--space-6) 0;
+    }
+    .how-step:first-child { padding-top: 0; }
+    @media (min-width: 900px) {
+      .how-step { padding: var(--space-8) 0; }
+      .how-step:first-child { padding-top: var(--space-2); }
+    }
+    .step-tag {
+      display: inline-block;
+      padding: 4px 8px;
+      border: var(--border-product) solid var(--color-border);
+      border-radius: var(--radius-sticker);
+      background: var(--color-surface);
+      font-size: var(--font-size-label);
+      font-weight: var(--font-weight-bold);
+      letter-spacing: var(--font-tracking-label);
+      text-transform: uppercase;
+      font-variant-numeric: tabular-nums;
+      transition: background var(--duration-ui) var(--easing-standard), color var(--duration-ui) var(--easing-standard);
+    }
+    .how-step.is-active .step-tag { background: var(--color-bosque); color: var(--color-lino); }
+    .how-step h3 {
+      margin-top: var(--space-4);
+      font-size: clamp(var(--font-size-h4), 3vw, var(--font-size-h3));
+      line-height: var(--font-line-h3);
+    }
+    .how-step > p {
+      margin: var(--space-3) 0 0;
+      max-width: 42ch;
+      font-size: var(--font-size-body);
+      text-wrap: pretty;
+    }
+
+    /* Muestras de UI (nivel producto: contorno 2 px, sombra solo en el contenedor) */
+    .ui {
+      margin-top: var(--space-5);
+      background: var(--color-surface);
+      border: var(--border-product) solid var(--color-border);
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-card);
+      padding: var(--space-4);
+      font-size: var(--font-size-ui);
+      max-width: 540px;
+    }
+    .ui-split { display: grid; gap: var(--space-4); }
+    @media (min-width: 560px) {
+      .ui-split { grid-template-columns: 1.25fr 1fr; align-items: start; }
+    }
+    .ui-field { display: flex; flex-direction: column; gap: 6px; }
+    .ui-field + .ui-field { margin-top: var(--space-3); }
+    .ui-field label, .ui-k { font-size: var(--font-size-caption); font-weight: var(--font-weight-semibold); color: var(--color-text-muted); }
+    .ui-input {
+      padding: 10px var(--space-3);
+      border: var(--border-product) solid var(--color-border);
+      border-radius: var(--radius-control);
+      background: var(--color-surface);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.35;
+    }
+    .ui-swatches { display: flex; gap: var(--space-2); }
+    .ui-preview {
+      background: var(--color-bosque);
+      color: var(--color-lino);
+      border: var(--border-product) solid var(--color-noche);
+      border-radius: var(--radius-card);
+      padding: var(--space-4);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+    .ui-preview .k { font-size: var(--font-size-caption); opacity: 0.85; }
+    .ui-preview .biz { font-weight: var(--font-weight-bold); }
+    .ui-preview .stat { font-size: 24px; font-weight: var(--font-weight-bold); font-variant-numeric: tabular-nums; }
+
+    .ui-qr { display: flex; flex-direction: column; align-items: center; gap: var(--space-3); text-align: center; }
+    .ui-qr svg { width: 132px; height: 132px; }
+    .ui-qr .biz { font-weight: var(--font-weight-bold); }
+    .ui-sheet { display: flex; flex-direction: column; gap: var(--space-2); }
+    .ui-sheet .row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px var(--space-3);
+      border: var(--border-hair) solid color-mix(in srgb, var(--color-border) 30%, transparent);
+      border-radius: var(--radius-control);
+      font-weight: var(--font-weight-semibold);
+    }
+    .ui-sheet .row img { width: 20px; height: 20px; }
+    .ui-sheet .row.is-on { background: var(--color-menta); border: var(--border-product) solid var(--color-border); }
+    .ui-sheet .app {
+      margin-top: var(--space-2);
+      display: flex; align-items: center; gap: var(--space-3);
+    }
+    .ui-sheet .app .pwa-badge { width: 44px; height: 44px; border-radius: 12px; }
+
+    .ui-table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+    .ui-table caption { text-align: left; font-weight: var(--font-weight-bold); padding-bottom: var(--space-3); }
+    .ui-table th {
+      text-align: left;
+      font-size: var(--font-size-label);
+      letter-spacing: var(--font-tracking-label);
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      padding: 0 var(--space-2) var(--space-2) 0;
+      border-bottom: var(--border-hair) solid var(--color-border);
+    }
+    .ui-table td {
+      padding: 10px var(--space-2) 10px 0;
+      border-bottom: var(--border-hair) solid color-mix(in srgb, var(--color-border) 18%, transparent);
+      white-space: nowrap;
+    }
+    .ui-table td:first-child { font-weight: var(--font-weight-semibold); }
+    .ui-table tr:last-child td { border-bottom: 0; }
+    .chip {
+      display: inline-block;
+      padding: 3px 8px;
+      border: var(--border-hair) solid var(--color-border);
+      border-radius: var(--radius-sticker);
+      font-family: var(--font-display);
+      font-variation-settings: "wdth" 75, "wght" 800;
+      font-size: var(--font-size-sticker-sm);
+      letter-spacing: var(--font-tracking-sticker);
+      text-transform: uppercase;
+    }
+    .chip-frecuente { background: var(--color-bosque); color: var(--color-lino); }
+    .chip-casi { background: var(--color-menta); color: var(--color-noche); }
+    .chip-riesgo { background: var(--color-risk-bg); color: var(--color-risk); border-color: var(--color-risk); }
+    @media (max-width: 559px) {
+      .ui-table .hide-sm { display: none; }
+    }
+
+    /* ——— La tarjeta v1.2: una tarjeta grande que toma la marca de cada negocio ——— */
+    .showcase {
+      background: var(--color-menta);
+      padding: var(--space-7) 0;
+    }
+    @media (min-width: 900px) {
+      .showcase { padding: calc(var(--space-8) * 1.5) 0; }
+    }
+    .showcase-grid { display: grid; gap: var(--space-6); align-items: center; }
+    @media (min-width: 900px) {
+      .showcase-grid { grid-template-columns: 1fr 1fr; gap: var(--space-8); }
+    }
+    .showcase h2 {
+      font-size: clamp(40px, 10.5vw, var(--font-size-h1));
+      line-height: var(--font-line-h1);
+      max-width: 16ch;
+    }
+    .showcase .lead { margin-top: var(--space-4); max-width: 30ch; color: var(--color-text); }
+
+    /* Selector de negocio */
+    .biz-switch {
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      margin-top: var(--space-6);
+    }
+    .biz-switch button {
+      padding: 10px var(--space-4);
+      border: var(--border-product) solid var(--color-border);
+      border-radius: var(--radius-control);
+      background: var(--color-surface);
+      color: var(--color-text);
+      font-weight: var(--font-weight-semibold);
+      font-size: var(--font-size-ui);
+      transition: background var(--duration-ui) var(--easing-standard), color var(--duration-ui) var(--easing-standard);
+    }
+    .biz-switch button[aria-selected="true"] {
+      background: var(--color-bosque);
+      color: var(--color-lino);
+      box-shadow: var(--shadow-sticker);
+    }
+    .biz-switch button:focus-visible { box-shadow: var(--focus-ring); }
+    .showcase-note { margin: var(--space-4) 0 0; font-size: var(--font-size-ui); color: var(--color-text-muted); }
+
+    /* Tarjeta grande (temas dentro de la paleta) */
+    .bizcard {
+      --card-bg: var(--color-bosque);
+      --card-fg: var(--color-lino);
+      --card-btn: var(--color-menta);
+      width: min(100%, 420px);
+      justify-self: center;
+      background: var(--card-bg);
+      color: var(--card-fg);
+      border: var(--border-marketing) solid var(--color-noche);
+      border-radius: var(--radius-container);
+      box-shadow: var(--shadow-storefront);
+      padding: var(--space-5);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-5);
+      transition: background var(--duration-ui) var(--easing-standard), color var(--duration-ui) var(--easing-standard), box-shadow var(--duration-ui) var(--easing-standard);
+    }
+    .bizcard[data-theme="estetica"] { --card-bg: var(--color-lino); --card-fg: var(--color-noche); }
+    .bizcard[data-theme="tapioca"]  { --card-bg: var(--color-noche); --card-fg: var(--color-lino); }
+    /* Sobre noche, la sombra noche no se distingue (paleta-y-tipografia.md): se quita */
+    .bizcard[data-theme="tapioca"] { box-shadow: none; }
+    .bizcard-head { display: flex; align-items: center; gap: var(--space-3); }
+    .bizcard-badge {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      border: var(--border-product) solid var(--color-noche);
+      background: var(--card-fg);
+      color: var(--card-bg);
+      display: grid; place-items: center;
+      font-weight: var(--font-weight-bold);
+      font-size: var(--font-size-ui);
+    }
+    .bizcard-name {
+      font-family: var(--font-display);
+      font-variation-settings: "wdth" 75, "wght" 800;
+      font-size: 28px;
+      line-height: 1;
+    }
+    .bizcard-panel {
+      background: var(--color-surface);
+      color: var(--color-text);
+      border: var(--border-product) solid var(--color-noche);
+      border-radius: var(--radius-card);
+      padding: var(--space-4);
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+    }
+    .bizcard-panel .aro-ui { width: 128px; height: 128px; }
+    @media (min-width: 900px) { .bizcard-panel .aro-ui { width: 148px; height: 148px; } }
+    .bizcard-panel .aro-ui-num { font-size: clamp(30px, 8vw, 38px); }
+    .bizcard-panel .fill { transition: stroke-dasharray var(--duration-arc) var(--easing-standard); }
+    .bizcard-msg { margin: 0; font-size: var(--font-size-body); line-height: 1.45; }
+    .bizcard-btn {
+      display: block;
+      text-align: center;
+      padding: var(--space-3);
+      border: var(--border-product) solid var(--color-noche);
+      border-radius: var(--radius-control);
+      background: var(--card-btn);
+      color: var(--color-noche);
+      font-weight: var(--font-weight-bold);
+      font-size: var(--font-size-ui);
+    }
+    .bizcard-sign { margin: calc(var(--space-3) * -1) 0 0; text-align: center; font-size: 11px; opacity: 0.8; }
+
+    /* Instalación: pantalla de inicio + guía, sin cajas extra */
+    .install {
+      display: grid;
+      gap: var(--space-6);
+      margin-top: var(--space-8);
+    }
+    @media (min-width: 900px) {
+      .install { grid-template-columns: 1fr 1fr; gap: var(--space-8); }
+    }
+    .install h3 { font-size: var(--font-size-h4); line-height: var(--font-line-h4); }
+    .install-copy { margin: var(--space-2) 0 0; max-width: 38ch; }
+    .homegrid {
+      margin-top: var(--space-5);
+      display: grid;
+      grid-template-columns: repeat(4, 56px);
+      gap: var(--space-4) var(--space-5);
+    }
+    .homegrid .tile { display: flex; flex-direction: column; align-items: center; gap: 6px; font-size: 11px; font-weight: var(--font-weight-semibold); }
+    .homegrid .ico {
+      width: 56px; height: 56px;
+      border-radius: 14px;
+      border: var(--border-product) solid var(--color-noche);
+      background: var(--color-blanco-lino);
+    }
+    .homegrid .ico.is-biz {
+      display: grid; place-items: center;
+      background: var(--color-bosque);
+      color: var(--color-lino);
+      font-weight: var(--font-weight-bold);
+      font-size: var(--font-size-ui);
+      box-shadow: var(--shadow-sticker);
+      transition: background var(--duration-ui) var(--easing-standard), color var(--duration-ui) var(--easing-standard);
+    }
+    .homegrid .ico.ghost { opacity: 0.55; }
+    .steps-os { list-style: none; margin: var(--space-5) 0 0; padding: 0; display: grid; gap: var(--space-5); }
+    .steps-os li { display: grid; grid-template-columns: 120px 1fr; gap: var(--space-3); }
+    .steps-os strong { font-weight: var(--font-weight-bold); }
+    .steps-os p { margin: 0; }
+    .install-foot { margin: var(--space-5) 0 0; font-weight: var(--font-weight-semibold); }
+
+    /* ——— Para quién v1.2: filas alternadas, ilustraciones sueltas sobre lino ——— */
+    .who { padding: var(--space-7) 0 var(--space-8); }
+    @media (min-width: 900px) { .who { padding: calc(var(--space-8) * 1.5) 0; } }
+    .who h2 {
+      font-size: clamp(36px, 9.5vw, 52px);
+      max-width: 15ch;
+    }
+    .who-list { list-style: none; margin: var(--space-6) 0 0; padding: 0; }
+    .who-row {
+      display: grid;
+      gap: var(--space-4);
+      align-items: center;
+      padding: var(--space-6) 0;
+    }
+    .who-row img { width: min(100%, 300px); height: auto; }
+    @media (min-width: 900px) {
+      .who-list { margin-top: var(--space-7); }
+      .who-row { grid-template-columns: 1fr 1fr; gap: var(--space-8); padding: var(--space-5) 0; }
+      .who-row img { width: 360px; justify-self: center; }
+      .who-row:nth-child(even) .who-art { order: 2; }
+    }
+    .who-row h3 {
+      font-size: clamp(var(--font-size-h3), 6vw, var(--font-size-h2));
+      line-height: var(--font-line-h2);
+    }
+    .who-row p {
+      margin: var(--space-3) 0 0;
+      max-width: 34ch;
+      font-size: var(--font-size-lead);
+      line-height: var(--font-line-lead);
+      text-wrap: pretty;
+    }
+    .who-more {
+      margin: var(--space-6) 0 0;
+      font-size: var(--font-size-lead);
+      font-weight: var(--font-weight-semibold);
+    }
+
+    /* ——— Precios v1.2: prueba arriba, Negocio destacado sin durazno ——— */
+    .pricing-sec { padding: var(--space-7) 0 var(--space-8); }
+    @media (min-width: 900px) { .pricing-sec { padding: calc(var(--space-8) * 1.5) 0; } }
+    .pricing-head { display: grid; gap: var(--space-5); align-items: end; }
+    @media (min-width: 900px) { .pricing-head { grid-template-columns: 1.2fr 0.8fr; gap: var(--space-8); } }
+    .pricing-head h2 { font-size: clamp(36px, 9.5vw, 52px); max-width: 14ch; }
+    .trial { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-4); }
+    .trial p { margin: 0; font-size: var(--font-size-lead); font-weight: var(--font-weight-semibold); line-height: var(--font-line-lead); max-width: 26ch; }
+
+    .pricing {
+      display: grid;
+      gap: var(--space-5);
+      margin-top: var(--space-7);
+    }
+    @media (min-width: 900px) {
+      .pricing { grid-template-columns: 1fr 1.15fr 0.8fr; align-items: stretch; gap: var(--space-5); margin-block: var(--space-8) var(--space-7); }
+    }
+    .plan {
+      background: var(--color-surface);
+      border: var(--border-product) solid var(--color-border);
+      border-radius: var(--radius-card);
+      padding: var(--space-5);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-5);
+    }
+    /* Negocio: el plan que queremos vender. Bloque bosque, más ancho y más alto */
+    .plan.featured {
+      background: var(--color-bosque);
+      color: var(--color-text-on-bosque);
+      border-width: var(--border-marketing);
+      box-shadow: var(--shadow-storefront);
+    }
+    @media (min-width: 900px) {
+      .plan.featured { margin-block: calc(var(--space-5) * -1); padding: var(--space-6) var(--space-5); }
+    }
+    .plan.featured .plan-name { font-size: var(--font-size-h3); color: var(--color-lino); }
+    .plan.featured .plan-price { font-size: clamp(52px, 14vw, 72px); }
+    .plan.featured .plan-price small { color: var(--color-text-on-bosque); }
+    .plan.featured .btn-cta-label { background: var(--color-blanco-lino); color: var(--color-noche); }
+    .plan.muted {
+      background: transparent;
+      border-style: solid;
+      border-color: color-mix(in srgb, var(--color-border) 35%, transparent);
+    }
+    /* Móvil: Negocio primero */
+    .plan.order-inicio { order: 2; }
+    .plan.order-negocio { order: 1; }
+    .plan.order-pro { order: 3; }
+    @media (min-width: 900px) {
+      .plan.order-inicio, .plan.order-negocio, .plan.order-pro { order: unset; }
+    }
+    .plan-top { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); min-height: 34px; }
+    .plan-name {
+      font-family: var(--font-display);
+      font-variation-settings: "wdth" 75, "wght" 800;
+      font-size: var(--font-size-h4);
+      line-height: 1;
+    }
+    .plan-chip {
+      padding: 6px 12px;
+      background: var(--color-menta);
+      color: var(--color-noche);
+      border: var(--border-product) solid var(--color-border);
+      border-radius: var(--radius-sticker);
+      box-shadow: var(--shadow-sticker);
+      font-family: var(--font-display);
+      font-variation-settings: "wdth" 75, "wght" 800;
+      font-size: var(--font-size-sticker-lg);
+      line-height: 1;
+      letter-spacing: var(--font-tracking-sticker);
+      text-transform: uppercase;
+    }
+    .plan-price {
+      font-variant-numeric: tabular-nums;
+      font-weight: var(--font-weight-bold);
+      font-size: clamp(44px, 12vw, 56px);
+      letter-spacing: var(--font-tracking-stat);
+      line-height: 1;
+    }
+    .plan-price small {
+      display: block;
+      margin-top: var(--space-2);
+      font-size: var(--font-size-ui);
+      font-weight: var(--font-weight-semibold);
+      letter-spacing: 0;
+      color: var(--color-text-muted);
+    }
+    .plan.muted .plan-price { font-size: var(--font-size-h4); font-weight: var(--font-weight-semibold); color: var(--color-text-muted); }
+    .plan ul { display: flex; flex-direction: column; gap: var(--space-3); flex: 1; }
+    .plan li {
+      display: flex;
+      gap: var(--space-2);
+      align-items: flex-start;
+      font-size: var(--font-size-body);
+      line-height: 1.4;
+    }
+    .plan li svg { width: 20px; height: 20px; flex-shrink: 0; margin-top: 1px; }
+    .plan.muted li { color: var(--color-text-muted); }
+    .plan .btn-cta { width: 100%; }
+    .plan .btn { width: 100%; }
+    .pricing-note {
+      margin: var(--space-6) 0 0;
+      color: var(--color-text-muted);
+      font-size: var(--font-size-ui);
+    }
+
+    /* ——— Confianza v1.2: compromisos en cuadrícula sin cajas ——— */
+    .trust-sec { background: var(--color-surface); padding: var(--space-8) 0; }
+    @media (min-width: 900px) { .trust-sec { padding: calc(var(--space-8) * 1.5) 0; } }
+    .trust-sec h2 { font-size: clamp(36px, 9.5vw, 52px); max-width: 14ch; }
+    .trust {
+      list-style: none;
+      margin: var(--space-6) 0 0;
+      padding: 0;
+      display: grid;
+      column-gap: var(--space-8);
+    }
+    @media (min-width: 760px) { .trust { grid-template-columns: 1fr 1fr; margin-top: var(--space-7); } }
+    .trust-item {
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      gap: var(--space-4);
+      padding: var(--space-5) 0;
+    }
+    .trust-item img { width: 28px; height: 28px; margin-top: 2px; }
+    .trust-item h3 {
+      font-size: clamp(var(--font-size-h4), 3vw, 30px);
+      line-height: var(--font-line-h4);
+    }
+    .trust-item p { margin: var(--space-2) 0 0; max-width: 38ch; }
+    .trust-item a {
+      font-weight: var(--font-weight-semibold);
+      text-decoration: underline;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 4px;
+      border-radius: 4px;
+    }
+    .trust-item a:hover { color: var(--color-bosque); }
+    .trust-item a:focus-visible { box-shadow: var(--focus-ring); }
+    .trust-cta { margin-top: var(--space-6); display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-4); }
+    .trust-cta p { margin: 0; color: var(--color-text-muted); }
+
+    /* ——— Lo que viene v1.2: capítulo en bosque, lista sin cajas ——— */
+    .roadmap {
+      background: var(--color-bosque);
+      color: var(--color-lino);
+      border-block: var(--border-marketing) solid var(--color-noche);
+      padding: var(--space-8) 0;
+    }
+    @media (min-width: 900px) { .roadmap { padding: calc(var(--space-8) * 1.75) 0; } }
+    .roadmap-grid { display: grid; gap: var(--space-6); }
+    @media (min-width: 900px) {
+      .roadmap-grid { grid-template-columns: 0.9fr 1.1fr; gap: var(--space-8); align-items: start; }
+    }
+    .roadmap h2 {
+      color: var(--color-lino);
+      font-size: clamp(56px, 16vw, var(--font-size-display));
+      line-height: var(--font-line-display);
+    }
+    .roadmap .lead { margin-top: var(--space-4); max-width: 30ch; color: var(--color-lino); }
+    /* Mosaicos en noche sobre bosque: más profundidad sin parecer funciones disponibles */
+    .roadmap-list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-4); }
+    @media (min-width: 640px) { .roadmap-list { grid-template-columns: 1fr 1fr; } }
+    .roadmap-item {
+      background: var(--color-noche);
+      border: var(--border-product) solid color-mix(in srgb, var(--color-lino) 28%, transparent);
+      border-radius: var(--radius-card);
+      padding: var(--space-5);
+      display: flex;
+      flex-direction: column;
+    }
+    .roadmap-top { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); }
+    .roadmap-ico {
+      width: 52px; height: 52px;
+      display: grid; place-items: center;
+      background: var(--color-menta);
+      border: var(--border-product) solid var(--color-noche);
+      border-radius: 12px;
+    }
+    .roadmap-ico img { width: 28px; height: 28px; }
+    .roadmap-item .tag {
+      color: var(--color-menta);
+      font-size: var(--font-size-label);
+      font-weight: var(--font-weight-bold);
+      letter-spacing: var(--font-tracking-label);
+      text-transform: uppercase;
+    }
+    .roadmap-item strong {
+      display: block;
+      margin-top: var(--space-5);
+      font-family: var(--font-display);
+      font-variation-settings: "wdth" 75, "wght" 800;
+      font-weight: 800;
+      font-size: clamp(var(--font-size-h4), 2.6vw, 30px);
+      line-height: 1;
+    }
+    .roadmap-item p { margin: var(--space-2) 0 0; color: color-mix(in srgb, var(--color-lino) 88%, transparent); }
+
+    /* ——— Cierre v1.2: el aro se completa en durazno + CTA ——— */
+    .cta-final { position: relative; overflow: clip; padding: var(--space-8) 0; }
+    @media (min-width: 900px) { .cta-final { padding: calc(var(--space-8) * 1.5) 0 var(--space-8); } }
+    .close-grid { display: grid; gap: var(--space-5); align-items: center; }
+    @media (min-width: 900px) { .close-grid { grid-template-columns: 1fr 1fr; gap: var(--space-8); } }
+    .close-visual { position: relative; height: 300px; order: -1; }
+    @media (min-width: 900px) { .close-visual { height: 520px; order: 0; } }
+    .close-aro { position: absolute; max-width: none; width: 340px; top: 50%; left: calc(100% - 250px); transform: translateY(-50%); }
+    @media (min-width: 900px) { .close-aro { width: 620px; left: calc(100% - 400px); } }
+    .close-aro .fill,
+    .close-aro .fill-edge { stroke-dasharray: 100 100; }
+    .close-aro .fill { stroke: var(--color-durazno); }
+    .js .close-aro:not(.is-done) .fill,
+    .js .close-aro:not(.is-done) .fill-edge { stroke-dasharray: 0 100; opacity: 0; }
+    .js .close-aro:not(.is-done) .fill { stroke: var(--color-bosque); }
+    .close-aro.is-done .fill,
+    .close-aro.is-done .fill-edge { animation: closeDraw 650ms var(--easing-standard) both; }
+    .close-aro.is-done .fill { animation: closeDraw 650ms var(--easing-standard) both, closeTurn 200ms var(--easing-standard) 650ms both, closePulse 360ms var(--easing-standard) 850ms 1; }
+    .close-aro.is-done .fill-edge { animation: closeDraw 650ms var(--easing-standard) both, closeEdgePulse 360ms var(--easing-standard) 850ms 1; }
+    @keyframes closeDraw {
+      0%   { stroke-dasharray: 0 100; opacity: 0; }
+      4%   { opacity: 1; }
+      100% { stroke-dasharray: 100 100; opacity: 1; }
+    }
+    @keyframes closeTurn { from { stroke: var(--color-bosque); } to { stroke: var(--color-durazno); } }
+    @keyframes closePulse { 0%, 100% { stroke-width: 44; } 45% { stroke-width: 50; } }
+    @keyframes closeEdgePulse { 0%, 100% { stroke-width: 49; } 45% { stroke-width: 55; } }
+    .sticker-reward {
+      position: absolute;
+      left: calc(100% - 290px);
+      bottom: 34px;
+      padding: 7px 12px;
+      background: var(--color-durazno);
+      color: var(--color-noche);
+      border: var(--border-product-strong) solid var(--color-noche);
+      border-radius: var(--radius-sticker);
+      box-shadow: var(--shadow-sticker);
+      font-family: var(--font-display);
+      font-variation-settings: "wdth" 75, "wght" 800;
+      font-size: var(--font-size-sticker-lg);
+      letter-spacing: var(--font-tracking-sticker);
+      text-transform: uppercase;
+      line-height: 1;
+      white-space: nowrap;
+      transform: rotate(-4deg);
+    }
+    @media (min-width: 900px) { .sticker-reward { left: calc(100% - 440px); bottom: 40px; font-size: 18px; } }
+    /* Cifra dentro del aro: cierra la historia del hero (4/5 → 5/5) */
+    .close-count {
+      position: absolute;
+      top: 50%;
+      left: calc(100% - 82px);
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: var(--color-noche);
+    }
+    @media (min-width: 900px) { .close-count { left: calc(100% - 94px); } }
+    .close-count .num {
+      display: block;
+      font-weight: var(--font-weight-bold);
+      font-variant-numeric: tabular-nums;
+      letter-spacing: var(--font-tracking-stat);
+      line-height: 1;
+      font-size: clamp(52px, 14vw, 96px);
+    }
+    .close-count .unit {
+      display: block;
+      margin-top: var(--space-2);
+      font-size: var(--font-size-ui);
+      font-weight: var(--font-weight-semibold);
+    }
+    @media (min-width: 900px) { .close-count .unit { font-size: var(--font-size-lead); } }
+    .js .close-visual:not(.is-done) .close-count { opacity: 0; }
+    .close-visual.is-done .close-count { animation: closeCountIn 240ms var(--easing-standard) 650ms both; }
+    @keyframes closeCountIn {
+      from { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+      to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    }
+    .js .close-visual:not(.is-done) .sticker-reward { opacity: 0; }
+    .close-visual.is-done .sticker-reward { animation: stickerInReward 240ms var(--easing-standard) 1000ms both; }
+    @keyframes stickerInReward {
+      0%   { opacity: 0; transform: scale(0.6) rotate(-16deg); }
+      60%  { opacity: 1; transform: scale(1.06) rotate(-2deg); }
+      100% { opacity: 1; transform: scale(1) rotate(-4deg); }
+    }
+    .cta-final h2 {
+      font-size: clamp(56px, 15vw, var(--font-size-display));
+      line-height: var(--font-line-display);
+    }
+    .cta-final .lead { margin: var(--space-4) 0 var(--space-6); color: var(--color-text); }
+    .cta-final .wa-hint { margin: var(--space-4) 0 0; font-size: var(--font-size-ui); color: var(--color-text-muted); }
+    .cta-final .wa-hint a { text-decoration: underline; text-underline-offset: 3px; border-radius: 4px; }
+    .cta-final .wa-hint a:focus-visible { box-shadow: var(--focus-ring); }
+    @media (max-width: 559px) { .cta-final .btn-cta { width: 100%; } }
+
+    /* FAQ: titular a la izquierda, acordeón sin cajas a la derecha */
+    .faq {
+      display: grid;
+      gap: var(--space-5);
+      margin-top: calc(var(--space-8) * 1.5);
+    }
+    @media (min-width: 900px) { .faq { grid-template-columns: 0.8fr 1.2fr; gap: var(--space-8); } }
+    .faq h2 { font-size: clamp(32px, 8vw, var(--font-size-h2)); line-height: var(--font-line-h2); max-width: 10ch; }
+    .faq details { border-bottom: var(--border-hair) solid var(--color-border); }
+    .faq details:first-of-type { border-top: var(--border-hair) solid var(--color-border); }
+    .faq summary {
+      list-style: none;
+      cursor: pointer;
+      padding: var(--space-5) 0;
+      font-weight: var(--font-weight-semibold);
+      font-size: clamp(16px, 2.4vw, 18px);
+      line-height: 1.35;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-4);
+      border-radius: 4px;
+    }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::after {
+      content: "+";
+      flex-shrink: 0;
+      width: 32px; height: 32px;
+      display: grid; place-items: center;
+      border: var(--border-product) solid var(--color-border);
+      border-radius: var(--radius-control);
+      font-weight: 800;
+      font-size: 18px;
+      line-height: 1;
+      transition: background var(--duration-fast) var(--easing-standard), color var(--duration-fast) var(--easing-standard);
+    }
+    .faq details.is-open summary::after { content: "–"; background: var(--color-bosque); color: var(--color-lino); }
+    .faq summary:hover { color: var(--color-bosque); }
+    .faq summary:focus-visible { box-shadow: var(--focus-ring); }
+    /* La altura se anima con JS: la que cierra y la que abre a la vez, para que la página no salte */
+    .faq .answer-wrap { overflow: hidden; }
+    .faq .answer { margin: 0; padding: 0 var(--space-8) var(--space-5) 0; max-width: 60ch; }
+
+    /* ——— Footer v1.2: capítulo final en bosque, logo lino, enlaces por columnas ——— */
+    .footer {
+      background: var(--color-bosque);
+      color: var(--color-lino);
+      border-top: var(--border-marketing) solid var(--color-noche);
+      padding: var(--space-8) 0 var(--space-5);
+    }
+    .footer-grid { display: grid; gap: var(--space-7); }
+    @media (min-width: 900px) {
+      .footer-grid { grid-template-columns: 1.3fr 2fr; gap: var(--space-8); align-items: start; }
+    }
+    .footer-logo { height: 36px; width: auto; }
+    .footer-tagline {
+      margin: var(--space-5) 0 0;
+      font-family: var(--font-display);
+      font-variation-settings: "wdth" 75, "wght" 800;
+      font-size: clamp(32px, 8vw, var(--font-size-h2));
+      line-height: var(--font-line-h2);
+      max-width: 15ch;
+    }
+    .footer-cols { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-6) var(--space-5); }
+    @media (min-width: 640px) { .footer-cols { grid-template-columns: repeat(3, 1fr); } }
+    .footer-col h3 {
+      font-family: var(--font-body);
+      font-size: var(--font-size-label);
+      font-weight: var(--font-weight-bold);
+      letter-spacing: var(--font-tracking-label);
+      text-transform: uppercase;
+      color: var(--color-menta);
+      margin: 0 0 var(--space-4);
+    }
+    .footer-col ul { display: flex; flex-direction: column; gap: var(--space-3); }
+    .footer-col a {
+      font-size: var(--font-size-body);
+      font-weight: var(--font-weight-semibold);
+      border-radius: 4px;
+      text-underline-offset: 4px;
+      text-decoration-thickness: 2px;
+    }
+    .footer-col a:hover { text-decoration: underline; color: var(--color-menta); }
+    .footer-col a:focus-visible,
+    .footer-legal a:focus-visible { box-shadow: var(--focus-ring); }
+    .footer-legal {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: var(--space-3) var(--space-5);
+      margin-top: var(--space-8);
+      padding-top: var(--space-4);
+      border-top: var(--border-hair) solid color-mix(in srgb, var(--color-lino) 40%, transparent);
+      font-size: var(--font-size-ui);
+    }
+    .footer-legal p { margin: 0; }
+    .footer-legal a { text-decoration: underline; text-underline-offset: 3px; border-radius: 4px; }
+    .footer-legal a:hover { color: var(--color-menta); }
+
+    /* Section headers */
+    .sec-head {
+      max-width: 40ch;
+    }
+    .sec-head.center-block { text-align: center; }
+    .sec-head .lead { margin-top: var(--space-3); }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(12px);
+      transition:
+        opacity var(--duration-arc) var(--easing-standard),
+        transform var(--duration-arc) var(--easing-standard);
+    }
+    .reveal.is-visible {
+      opacity: 1;
+      transform: none;
+    }
+
+
+    /* ——— v1.3 · Capa de movimiento (moodboard §7: corto, con significado, un solo rebote,
+       sin parallax ni bucles; todo se apaga con "reducir movimiento") ——— */
+
+    /* 1. Entrada del hero en secuencia: titular, bajada, CTA, nota; el celular sube con un rebote */
+    .js .hero-seq { animation: heroIn 900ms var(--easing-standard) var(--d, 0ms) both; }
+    .js .hero .phone { animation: phoneIn 950ms var(--easing-standard) 300ms both; }
+    @keyframes heroIn { from { opacity: 0; translate: 0 24px; } to { opacity: 1; translate: 0 0; } }
+    @keyframes phoneIn {
+      0%   { opacity: 0; translate: 0 64px; }
+      72%  { opacity: 1; translate: 0 -5px; }
+      100% { opacity: 1; translate: 0 0; }
+    }
+
+    /* 2. Aparición escalonada al hacer scroll (usa translate para no chocar con los hovers) */
+    .js [data-reveal] {
+      opacity: 0;
+      translate: 0 20px;
+      transition:
+        opacity 500ms var(--easing-standard) var(--d, 0ms),
+        translate 600ms var(--easing-standard) var(--d, 0ms);
+    }
+    .js [data-reveal].is-in { opacity: 1; translate: 0 0; }
+
+    /* 3. Cómo funciona: la interfaz de cada paso "se activa" la primera vez que se ve */
+    .js .how-step .ui-preview,
+    .js .how-step .ui-sheet .row.is-on,
+    .js .how-step .ui-sheet .app,
+    .js .how-step .chip {
+      opacity: 0;
+      scale: 0.92;
+      transition: opacity 240ms var(--easing-standard) var(--d, 0ms), scale 240ms var(--easing-standard) var(--d, 0ms), background 240ms var(--easing-standard);
+    }
+    .js .how-step.seen .ui-preview,
+    .js .how-step.seen .ui-sheet .row.is-on,
+    .js .how-step.seen .ui-sheet .app,
+    .js .how-step.seen .chip { opacity: 1; scale: 1; }
+    .how-step .ui-preview { --d: 260ms; }
+    .how-step .ui-sheet .row.is-on { --d: 200ms; }
+    .how-step .ui-sheet .app { --d: 420ms; }
+    .how-step tr:nth-child(1) .chip { --d: 200ms; }
+    .how-step tr:nth-child(2) .chip { --d: 320ms; }
+    .how-step tr:nth-child(3) .chip { --d: 440ms; }
+    .how-meter .stat.bump { animation: statBump 260ms var(--easing-standard); }
+    @keyframes statBump { 0% { scale: 0.86; opacity: 0.4; } 100% { scale: 1; opacity: 1; } }
+
+    /* 4. La tarjeta: el panel cambia con un fundido corto al elegir otro negocio */
+    .bizcard-panel.swap, .bizcard-head.swap { animation: bizSwap 220ms var(--easing-standard); }
+    @keyframes bizSwap { from { opacity: 0.35; translate: 0 6px; } to { opacity: 1; translate: 0 0; } }
+
+    /* 5. Precios: Negocio se levanta de su sombra (inverso del botón presionado) */
+    .js .plan.featured[data-reveal] { opacity: 1; translate: 0 0; box-shadow: 0 0 0 var(--color-shadow); transform: translate(8px, 8px); transition: none; }
+    .js .plan.featured[data-reveal].is-in { animation: planRise 560ms var(--easing-standard) 160ms both; }
+    @keyframes planRise {
+      0%   { transform: translate(8px, 8px); box-shadow: 0 0 0 var(--color-shadow); }
+      70%  { transform: translate(-1px, -1px); box-shadow: 9px 9px 0 var(--color-shadow); }
+      100% { transform: none; box-shadow: var(--shadow-storefront); }
+    }
+    .js .plan.featured.risen { animation: none; transform: none; box-shadow: var(--shadow-storefront); }
+    .js .plan.featured .plan-chip { opacity: 0; }
+    .js .plan.featured.is-in .plan-chip { animation: chipPop 240ms var(--easing-standard) 620ms both; }
+    @keyframes chipPop {
+      0%   { opacity: 0; scale: 0.6; rotate: -8deg; }
+      60%  { opacity: 1; scale: 1.06; rotate: 0deg; }
+      100% { opacity: 1; scale: 1; rotate: 0deg; }
+    }
+
+    /* 6. Hovers: las tarjetas se levantan sobre su sombra dura, como los botones */
+    @media (hover: hover) {
+      .plan:not(.muted) { transition: transform var(--duration-ui) var(--easing-standard), box-shadow var(--duration-ui) var(--easing-standard); }
+      .plan:not(.muted):not(.featured):hover { transform: translate(-3px, -3px); box-shadow: 4px 4px 0 var(--color-shadow); }
+      .plan.featured.risen:hover, html:not(.js) .plan.featured:hover { transform: translate(-2px, -2px); box-shadow: 10px 10px 0 var(--color-shadow); }
+      .roadmap-ico { transition: rotate var(--duration-ui) var(--easing-standard), scale var(--duration-ui) var(--easing-standard); }
+      .roadmap-item { transition: border-color var(--duration-ui) var(--easing-standard); }
+      .roadmap-item:hover { border-color: color-mix(in srgb, var(--color-lino) 60%, transparent); }
+      .roadmap-item:hover .roadmap-ico { rotate: -8deg; scale: 1.06; }
+      .who-art img { transition: rotate var(--duration-ui) var(--easing-standard), scale var(--duration-ui) var(--easing-standard); }
+      .who-row:hover .who-art img { rotate: -3deg; scale: 1.03; }
+      .ui { transition: transform var(--duration-ui) var(--easing-standard), box-shadow var(--duration-ui) var(--easing-standard); }
+      .ui:hover { transform: translate(-2px, -2px); box-shadow: 7px 7px 0 var(--color-shadow); }
+      .bizcard-btn, .pwa-code { transition: transform var(--duration-fast) var(--easing-standard); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .js .hero-seq, .js .hero .phone, .js .plan.featured[data-reveal].is-in, .js .plan.featured.is-in .plan-chip { animation: none !important; opacity: 1; translate: 0 0; }
+      .js [data-reveal] { opacity: 1; translate: 0 0; transition: none; }
+      .js .plan.featured[data-reveal], .js .plan.featured.risen { transform: none; box-shadow: var(--shadow-storefront); }
+      .js .plan.featured .plan-chip,
+      .js .how-step .ui-preview, .js .how-step .ui-sheet .row.is-on, .js .how-step .ui-sheet .app, .js .how-step .chip { opacity: 1; scale: 1; transition: none; }
+      .who-row:hover .who-art img, .roadmap-item:hover .roadmap-ico { rotate: 0deg; scale: 1; }
+    }
+
+
+    /* ——— v1.4 · Microinteracciones ——— */
+    /* Editor vivo */
+    .ui-hint { margin: var(--space-3) 0 0; font-size: var(--font-size-ui); font-weight: var(--font-weight-semibold); color: var(--color-bosque); }
+    .ui-field .lbl { font-size: var(--font-size-caption); font-weight: var(--font-weight-semibold); color: var(--color-text-muted); }
+    input.ui-input { width: 100%; font: inherit; font-weight: var(--font-weight-medium); color: var(--color-text); }
+    input.ui-input:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+    .ui-swatches button {
+      width: 30px; height: 30px; padding: 0;
+      border: var(--border-product) solid var(--color-border);
+      border-radius: var(--radius-sticker);
+      transition: scale var(--duration-fast) var(--easing-standard);
+    }
+    .ui-swatches button:hover { scale: 1.08; }
+    .ui-swatches button[aria-checked="true"] { box-shadow: var(--focus-ring); }
+    .ui-swatches button:focus-visible { outline: 2px solid var(--color-noche); outline-offset: 3px; }
+    .ui-live:hover { transform: none; box-shadow: var(--shadow-card); }
+    .ui-preview { transition: background var(--duration-ui) var(--easing-standard), color var(--duration-ui) var(--easing-standard); }
+    .ui-preview[data-c="noche"] { background: var(--color-noche); }
+    .ui-preview[data-c="menta"] { background: var(--color-menta); color: var(--color-noche); }
+    .ui-preview[data-c="gris"]  { background: var(--color-gris-noche); }
+    .ui-preview .biz, .ui-preview .pv-reward { overflow-wrap: anywhere; }
+    .ui-preview .pv-reward { font-size: var(--font-size-caption); line-height: 1.35; margin-top: var(--space-1); }
+    .ui-preview.pop { animation: pvPop 200ms var(--easing-standard); }
+    @keyframes pvPop { 0% { scale: 0.97; } 100% { scale: 1; } }
+
+    /* Suma una visita */
+    .bizcard-wrap { width: min(100%, 420px); justify-self: center; display: flex; flex-direction: column; gap: var(--space-5); }
+    .bizcard-wrap .bizcard { width: 100%; }
+    .bizcard-panel { position: relative; }
+    .visit-demo { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3) var(--space-4); }
+    .visit-demo p { margin: 0; font-size: var(--font-size-ui); color: var(--color-text-muted); }
+    .visit-demo .plus { font-weight: 800; font-size: 18px; line-height: 1; }
+    .bizcard-panel .aro-ui-num.bump { animation: statBump 260ms var(--easing-standard); }
+    .bizcard-panel .fill { transition: stroke-dasharray var(--duration-arc) var(--easing-standard), stroke var(--duration-ui) var(--easing-standard) 450ms; }
+    .bizcard.is-complete .bizcard-panel .fill { stroke: var(--color-durazno); }
+    .bizcard.is-complete .bizcard-panel .fill.pulse { animation: uiPulse 360ms var(--easing-standard) 600ms 1; }
+    @keyframes uiPulse { 0%, 100% { stroke-width: 11; } 45% { stroke-width: 13; } }
+    .sticker-done {
+      position: absolute; top: -14px; right: -12px; z-index: 2;
+      padding: 6px 10px;
+      background: var(--color-durazno); color: var(--color-noche);
+      border: var(--border-product-strong) solid var(--color-noche);
+      border-radius: var(--radius-sticker);
+      box-shadow: var(--shadow-sticker);
+      font-family: var(--font-display); font-variation-settings: "wdth" 75, "wght" 800;
+      font-size: var(--font-size-sticker); letter-spacing: var(--font-tracking-sticker); text-transform: uppercase; line-height: 1;
+      white-space: nowrap; rotate: 4deg;
+      opacity: 0; visibility: hidden;
+    }
+    .bizcard.is-complete .sticker-done { visibility: visible; animation: stickerDone 240ms var(--easing-standard) 700ms both; }
+    @keyframes stickerDone {
+      0%   { opacity: 0; scale: 0.6; rotate: -12deg; }
+      60%  { opacity: 1; scale: 1.06; rotate: 0deg; }
+      100% { opacity: 1; scale: 1; rotate: 4deg; }
+    }
+
+    /* Para quién → La tarjeta */
+    .who-link {
+      display: inline-flex; align-items: center; gap: var(--space-2);
+      margin-top: var(--space-4);
+      font-weight: var(--font-weight-semibold);
+      text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 5px;
+      border-radius: 4px;
+    }
+    .who-link span { transition: translate var(--duration-ui) var(--easing-standard); }
+    .who-link:hover { color: var(--color-bosque); }
+    .who-link:hover span { translate: 3px 0; }
+    .who-link:focus-visible { box-shadow: var(--focus-ring); }
+    .bizcard.spotlight { animation: spotlight 520ms var(--easing-standard) 1; }
+    @keyframes spotlight {
+      0%   { translate: 0 0; }
+      40%  { translate: 0 -6px; }
+      100% { translate: 0 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .bizcard-panel .fill { transition: none; }
+      .bizcard.is-complete .sticker-done { animation: none; opacity: 1; }
+      .bizcard.spotlight, .ui-preview.pop, .bizcard.is-complete .bizcard-panel .fill.pulse { animation: none; }
+    }
+
+
+    /* ——— v1.4 · Microinteracciones (segunda tanda) ——— */
+    /* 1. Guía según el celular */
+    .steps-os li { padding: var(--space-3) var(--space-4); margin: 0 0 0 calc(var(--space-4) * -1); border-radius: var(--radius-card); border: var(--border-product) solid transparent; transition: opacity var(--duration-ui) var(--easing-standard); }
+    .steps-os li.is-mine { background: var(--color-surface); border-color: var(--color-noche); order: -1; }
+    .steps-os li.is-dim { opacity: 0.55; }
+    .steps-os strong .mine-tag { display: block; margin-top: var(--space-1); color: var(--color-bosque); font-size: var(--font-size-label); font-weight: var(--font-weight-bold); letter-spacing: var(--font-tracking-label); text-transform: uppercase; }
+    .steps-os { display: flex; flex-direction: column; }
+
+    /* 2 y 4. Volteo 3D (panel de la tarjeta y mosaico de Avisos) */
+    .flip-inner { position: relative; transform-style: preserve-3d; transition: transform 420ms var(--easing-standard); }
+    .face { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+    .face-back { position: absolute; inset: 0; transform: rotateY(180deg); }
+    .is-flipped > .flip-inner, .is-flipped .flip-inner { transform: rotateY(180deg); }
+
+    .bizcard-panel { background: none; border: 0; padding: 0; display: block; perspective: 900px; }
+    .bizcard-panel .face {
+      background: var(--color-surface); color: var(--color-text);
+      border: var(--border-product) solid var(--color-noche); border-radius: var(--radius-card);
+      padding: var(--space-4); display: flex; align-items: center; gap: var(--space-4);
+    }
+    .bizcard-panel .face-back { justify-content: center; }
+    .bizcard-panel .qr { width: 96px; height: 96px; flex-shrink: 0; }
+    .bizcard-panel .face-back p { margin: 0; display: flex; flex-direction: column; gap: var(--space-1); }
+    .bizcard-panel .face-back span { font-size: var(--font-size-ui); color: var(--color-text-muted); }
+    button.bizcard-btn { width: 100%; cursor: pointer; transition: transform var(--duration-fast) var(--easing-standard); }
+    button.bizcard-btn:active { transform: translate(2px, 2px); }
+    button.bizcard-btn:focus-visible { box-shadow: var(--focus-ring); }
+
+    .roadmap-item.flip-tile { background: none; border: 0; padding: 0; perspective: 1000px; display: block; }
+    .flip-tile > .flip-inner { height: 100%; }
+    .flip-tile .face {
+      height: 100%;
+      background: var(--color-noche);
+      border: var(--border-product) solid color-mix(in srgb, var(--color-lino) 28%, transparent);
+      border-radius: var(--radius-card);
+      padding: var(--space-5);
+      display: flex; flex-direction: column;
+    }
+    .flip-tile .face-back { gap: var(--space-4); }
+    .flip-tile .face-front p { margin-bottom: var(--space-4); }
+    .tile-btn {
+      align-self: flex-start; margin-top: auto; padding: 2px 0;
+      color: var(--color-menta); font-weight: var(--font-weight-semibold);
+      text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 5px;
+      border-radius: 4px;
+    }
+    .tile-btn:hover { color: var(--color-lino); }
+    .tile-btn:focus-visible { box-shadow: var(--focus-ring); }
+    .notif {
+      display: flex; gap: var(--space-3); align-items: flex-start;
+      background: var(--color-surface); color: var(--color-noche);
+      border: var(--border-product) solid var(--color-noche); border-radius: var(--radius-card);
+      padding: var(--space-3);
+    }
+    .notif .pwa-badge { width: 36px; height: 36px; flex-shrink: 0; }
+    .notif b { display: block; font-size: var(--font-size-ui); }
+    .notif span:not(.pwa-badge) { display: block; font-size: var(--font-size-ui); line-height: 1.4; margin-top: 2px; }
+
+    /* 3. Íconos que se dibujan (como el aro) */
+    .draw path { stroke-dasharray: 1 1; }
+    .js .trust-item .draw path { stroke-dashoffset: 1; opacity: 0; transition: stroke-dashoffset 600ms var(--easing-standard) calc(var(--d, 0ms) + 150ms), opacity 1ms linear calc(var(--d, 0ms) + 150ms); }
+    .js .trust-item.is-in .draw path { stroke-dashoffset: 0; opacity: 1; }
+
+    /* 5. Checks de Negocio uno por uno, después de levantarse */
+    .js .plan.featured li { opacity: 0; translate: -8px 0; transition: opacity 240ms var(--easing-standard), translate 300ms var(--easing-standard); }
+    .js .plan.featured.is-in li { opacity: 1; translate: 0 0; }
+    .plan.featured li:nth-child(1) { transition-delay: 700ms; }
+    .plan.featured li:nth-child(2) { transition-delay: 780ms; }
+    .plan.featured li:nth-child(3) { transition-delay: 860ms; }
+    .plan.featured li:nth-child(4) { transition-delay: 940ms; }
+
+    /* 6. Filas de clientes con el motivo del estado */
+    .ui-table tbody tr { transition: background var(--duration-fast) var(--easing-standard); cursor: default; }
+    .ui-table tbody tr:hover, .ui-table tbody tr.is-open { background: color-mix(in srgb, var(--color-menta) 45%, transparent); }
+    .ui-table td:first-child, .ui-table th:first-child { padding-left: var(--space-2); }
+    .bizcard-panel.is-flipped .sticker-done { visibility: hidden; }
+    /* El motivo ya ocupa su espacio (invisible): al aparecer no cambia la altura de la fila ni mueve la página */
+    .ui-table .why {
+      display: block; margin-top: 4px; height: 1.4em; overflow: hidden;
+      font-size: var(--font-size-caption); line-height: 1.4; color: var(--color-text-muted); white-space: nowrap;
+      opacity: 0; translate: 0 -2px;
+      transition: opacity var(--duration-ui) var(--easing-standard), translate var(--duration-ui) var(--easing-standard);
+    }
+    .ui-table tr:hover .why, .ui-table tr.is-open .why { opacity: 1; translate: 0 0; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .flip-inner { transition: none; }
+      .js .trust-item .draw path { stroke-dashoffset: 0; opacity: 1; transition: none; }
+      .js .plan.featured li { opacity: 1; translate: 0 0; transition: none; }
+    }
+
+
+    /* ——— v1.4 · 8. El CTA del menú entra cuando el del hero sale de la vista ——— */
+    .nav-actions .btn-cta.btn-cta-sm {
+      max-width: 320px;
+      transition:
+        max-width 320ms var(--easing-standard),
+        margin-left 320ms var(--easing-standard),
+        opacity 200ms var(--easing-standard),
+        translate 320ms var(--easing-standard),
+        transform 120ms var(--easing-standard),
+        box-shadow 120ms var(--easing-standard);
+    }
+    .js .nav.hero-cta-visible .nav-actions .btn-cta.btn-cta-sm {
+      max-width: 0;
+      opacity: 0;
+      translate: 0 -6px;
+      margin-left: calc(var(--space-4) * -1);           /* cancela el espacio del grupo */
+      border-width: 0;
+      box-shadow: none;
+      pointer-events: none;
+    }
+
+    /* ——— v1.4 · 9. Los stickers responden al mouse: se enderezan y se levantan sobre su sombra ——— */
+    @media (hover: hover) {
+      .sticker, .sticker-reward {
+        transition: rotate var(--duration-ui) var(--easing-standard), translate var(--duration-ui) var(--easing-standard), box-shadow var(--duration-ui) var(--easing-standard);
+      }
+      .sticker:hover { rotate: -4deg; translate: -2px -2px; box-shadow: 5px 5px 0 var(--color-shadow); }
+      .sticker-reward:hover { rotate: 4deg; translate: -2px -2px; box-shadow: 5px 5px 0 var(--color-shadow); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .nav-actions .btn-cta.btn-cta-sm { transition: none; }
+      .sticker:hover, .sticker-reward:hover { rotate: 0deg; translate: 0 0; }
+    }
+
+    /* Utility */
+    .mt-5 { margin-top: var(--space-5); }
+    .mt-6 { margin-top: var(--space-6); }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .hero-aro .aro-fill,
+      .hero-aro .aro-fill-edge { animation: none; stroke-dasharray: 80 100; }
+      .hero-aro .aro-tip,
+      .hero-aro .aro-tip-edge { animation: none; opacity: 1; }
+      .sticker { animation: none; }
+      .how-meter .aro-step { transition: none; }
+      .bizcard-panel .fill { transition: none; }
+      .close-aro .fill, .close-aro .fill-edge, .sticker-reward, .close-count { animation: none !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV (v1.2) -->
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="nav-home" href="#hero" aria-label="LealTab, ir al inicio">
+        <img class="nav-logo" src="../03-visual-identity/logo/entregables/svg/lealtab-horizontal-noche.svg" alt="LealTab" width="140" height="28" />
+      </a>
+      <nav class="nav-links" aria-label="Principal">
+        <a href="#como-funciona">Cómo funciona</a>
+        <a href="#la-tarjeta">La tarjeta</a>
+        <a href="#precios">Precios</a>
+        <a href="#faq">Preguntas</a>
+      </nav>
+      <div class="nav-actions">
+        <a class="nav-login" href="https://app.lealtab.com">Entrar</a>
+        <a class="btn-cta btn-cta-sm nav-cta-desktop" href="https://app.lealtab.com"><span class="btn-cta-label">Crea tu tarjeta gratis</span><span class="btn-cta-arrow" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span></a>
+        <a class="btn-cta btn-cta-sm nav-cta-mobile" href="https://app.lealtab.com"><span class="btn-cta-label">Empieza gratis</span><span class="btn-cta-arrow" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span></a>
+        <button class="nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="navDrawer" id="navToggle">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <div class="nav-drawer" id="navDrawer" tabindex="-1">
+      <div class="nav-drawer-inner wrap">
+        <nav class="nav-drawer-links" aria-label="Principal (móvil)">
+          <a href="#como-funciona">Cómo funciona</a>
+          <a href="#la-tarjeta">La tarjeta</a>
+          <a href="#precios">Precios</a>
+          <a href="#faq">Preguntas</a>
+        </nav>
+        <div class="nav-drawer-foot">
+          <a class="btn-cta" href="https://app.lealtab.com"><span class="btn-cta-label">Crea tu tarjeta gratis</span><span class="btn-cta-arrow" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span></a>
+          <p class="note">Prueba gratis 30 días. Sin tarjeta de crédito.</p>
+          <a class="nav-login" href="https://app.lealtab.com">¿Ya tienes cuenta? Entrar</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- 1. HERO (v1.2: lema + aro protagonista) -->
+    <section class="hero" id="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <h1 class="hero-title hero-seq" style="--d: 0ms">Haz que tus clientes siempre regresen.</h1>
+          <p class="lead hero-seq" style="--d: 150ms">Tu tarjeta de lealtad, ahora en el celular de tus clientes. La instalan con un toque, sin descargar nada.</p>
+          <div class="hero-ctas hero-seq" style="--d: 300ms">
+            <a class="btn-cta" href="https://app.lealtab.com">
+              <span class="btn-cta-label">Crea tu tarjeta gratis</span>
+              <span class="btn-cta-arrow" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+              </span>
+            </a>
+            <a class="link-arrow" href="#como-funciona">Ver cómo funciona ↓</a>
+          </div>
+          <p class="hero-note hero-seq" style="--d: 450ms">Prueba gratis 30 días. Sin tarjeta de crédito.</p>
+        </div>
+
+        <div class="hero-visual">
+          <!-- Aro grande 4/5: la visita 5 por completarse en durazno (decisión de Aarón, 7 oct 2026) -->
+          <svg class="hero-aro" viewBox="0 0 420 420" aria-hidden="true">
+            <g fill="none">
+              <circle cx="207" cy="207" r="160" stroke="#0F2A22" stroke-width="49" transform="translate(5 5)"/>
+              <circle cx="207" cy="207" r="160" stroke="#0F2A22" stroke-width="49"/>
+              <circle cx="207" cy="207" r="160" stroke="#CFE3D6" stroke-width="44"/>
+              <circle class="aro-fill-edge" cx="207" cy="207" r="160" pathLength="100" stroke="#0F2A22" stroke-width="49" stroke-linecap="round" transform="rotate(-90 207 207)"/>
+              <circle class="aro-fill" cx="207" cy="207" r="160" pathLength="100" stroke="#0F4D3A" stroke-width="44" stroke-linecap="round" transform="rotate(-90 207 207)"/>
+              <g transform="rotate(-90 207 207)">
+                <circle class="aro-tip-edge" cx="207" cy="207" r="160" pathLength="100" stroke="#0F2A22" stroke-width="49" stroke-linecap="round" stroke-dasharray="3 97" stroke-dashoffset="-86"/>
+                <circle class="aro-tip" cx="207" cy="207" r="160" pathLength="100" stroke="#FF9F6E" stroke-width="44" stroke-linecap="round" stroke-dasharray="3 97" stroke-dashoffset="-86"/>
+              </g>
+            </g>
+          </svg>
+
+          <div class="phone" role="img" aria-label="Tarjeta digital de Barbería Norte en el celular: 4 de 5 visitas">
+            <div class="phone-notch" aria-hidden="true"></div>
+            <div class="phone-screen" aria-hidden="true">
+              <div class="pwa-head">
+                <span class="pwa-badge">BN</span>
+                <div>
+                  <div class="pwa-biz">Barbería Norte</div>
+                  <div class="pwa-hello">Hola, Andrés</div>
+                </div>
+              </div>
+              <div class="loyalty-card">
+                <span class="sticker">Casi premio</span>
+                <div class="aro-ui" aria-hidden="true">
+                  <svg viewBox="0 0 100 100"><g fill="none" stroke-width="12">
+                    <circle class="track" cx="50" cy="50" r="42"/>
+                    <circle class="fill" cx="50" cy="50" r="42" pathLength="100" stroke-linecap="round" stroke-dasharray="80 100" transform="rotate(-90 50 50)"/>
+                    <circle class="tip" cx="50" cy="50" r="42" pathLength="100" stroke-linecap="round" stroke-dasharray="3 97" stroke-dashoffset="-86" transform="rotate(-90 50 50)"/>
+                  </g></svg>
+                  <span class="aro-ui-num">4/5</span>
+                </div>
+                <p class="reward-line">Llevas 4 de 5. El siguiente corte va por nuestra cuenta.</p>
+              </div>
+              <div class="visits">
+                <span class="label">Tus visitas</span>
+                <ul>
+                  <li><span>Corte + barba</span><span>2 oct</span></li>
+                  <li><span>Corte</span><span>12 sep</span></li>
+                  <li><span>Corte</span><span>22 ago</span></li>
+                </ul>
+              </div>
+              <span class="pwa-code">Mostrar mi código</span>
+              <p class="pwa-sign">Hecho con LealTab</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. CÓMO FUNCIONA (v1.2: titular fijo + aro de avance + pasos con UI real) -->
+    <section class="how" id="como-funciona">
+      <div class="wrap">
+        <div class="how-grid">
+          <div class="how-aside">
+            <span class="label">Cómo funciona</span>
+            <h2>Tres pasos y tu tarjeta de cartón se queda en el cajón.</h2>
+            <div class="how-meter" aria-hidden="true">
+              <svg width="116" height="116" viewBox="0 0 124 124">
+                <g fill="none">
+                  <circle cx="58" cy="58" r="44" stroke="#0F2A22" stroke-width="22" transform="translate(6.5 6.5)"/>
+                  <circle cx="58" cy="58" r="44" stroke="#0F2A22" stroke-width="22"/>
+                  <circle cx="58" cy="58" r="44" stroke="#CFE3D6" stroke-width="16"/>
+                  <circle class="aro-step aro-step-edge" cx="58" cy="58" r="44" pathLength="100" stroke="#0F2A22" stroke-width="22" stroke-linecap="round" stroke-dasharray="33.3 100" transform="rotate(-90 58 58)"/>
+                  <circle class="aro-step" cx="58" cy="58" r="44" pathLength="100" stroke="#0F4D3A" stroke-width="16" stroke-linecap="round" stroke-dasharray="33.3 100" transform="rotate(-90 58 58)"/>
+                </g>
+              </svg>
+              <div>
+                <div class="stat"><span id="howStep">1</span> de 3</div>
+                <span class="caption">pasos</span>
+              </div>
+            </div>
+            <a class="btn-cta how-cta-desktop" href="https://app.lealtab.com">
+              <span class="btn-cta-label">Crea tu tarjeta gratis</span>
+              <span class="btn-cta-arrow" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span>
+            </a>
+          </div>
+
+          <ol class="how-steps" role="list">
+            <li class="how-step is-active seen" data-step="1">
+              <span class="step-tag">Paso 1</span>
+              <h3>Crea tu tarjeta.</h3>
+              <p>Sube tu logo, elige tus colores y define tu recompensa. Lista en minutos.</p>
+              <p class="ui-hint">Pruébalo: cambia el nombre, el color o la recompensa.</p>
+              <div class="ui ui-split ui-live" data-reveal style="--d: 0ms">
+                <div>
+                  <div class="ui-field"><label for="edName">Nombre del negocio</label><input id="edName" class="ui-input" type="text" value="Barbería Norte" maxlength="24" autocomplete="off" spellcheck="false" /></div>
+                  <div class="ui-field"><span class="lbl" id="edColorLbl">Color</span>
+                    <div class="ui-swatches" role="radiogroup" aria-labelledby="edColorLbl">
+                      <button type="button" role="radio" aria-checked="true" aria-label="Bosque" data-c="bosque" style="background:#0F4D3A"></button>
+                      <button type="button" role="radio" aria-checked="false" aria-label="Noche" data-c="noche" style="background:#0F2A22" tabindex="-1"></button>
+                      <button type="button" role="radio" aria-checked="false" aria-label="Menta" data-c="menta" style="background:#CFE3D6" tabindex="-1"></button>
+                      <button type="button" role="radio" aria-checked="false" aria-label="Gris noche" data-c="gris" style="background:#4D635A" tabindex="-1"></button>
+                    </div>
+                  </div>
+                  <div class="ui-field"><label for="edReward">Recompensa</label><input id="edReward" class="ui-input" type="text" value="Al quinto corte, el siguiente es gratis." maxlength="48" autocomplete="off" /></div>
+                </div>
+                <div class="ui-preview" id="edPreview" data-c="bosque">
+                  <span class="k">Vista previa</span>
+                  <span class="biz" id="pvName">Barbería Norte</span>
+                  <span class="stat">0/5</span>
+                  <span class="k">cortes</span>
+                  <span class="pv-reward" id="pvReward">Al quinto corte, el siguiente es gratis.</span>
+                </div>
+              </div>
+            </li>
+
+            <li class="how-step" data-step="2">
+              <span class="step-tag">Paso 2</span>
+              <h3>Tu cliente escanea el QR.</h3>
+              <p>Toca "Agregar a inicio" y su tarjeta queda en su pantalla, como una app. Sin tienda de apps.</p>
+              <div class="ui ui-split" aria-hidden="true" data-reveal style="--d: 0ms">
+                <div class="ui-qr">
+                  <span class="biz">Barbería Norte</span>
+                  <svg viewBox="-1 -1 23 23" aria-hidden="true"><rect x="-1" y="-1" width="23" height="23" fill="#FFFDF8"/><path d="M0 0h1v1h-1zM1 0h1v1h-1zM2 0h1v1h-1zM3 0h1v1h-1zM4 0h1v1h-1zM5 0h1v1h-1zM6 0h1v1h-1zM8 0h1v1h-1zM9 0h1v1h-1zM10 0h1v1h-1zM11 0h1v1h-1zM12 0h1v1h-1zM14 0h1v1h-1zM15 0h1v1h-1zM16 0h1v1h-1zM17 0h1v1h-1zM18 0h1v1h-1zM19 0h1v1h-1zM20 0h1v1h-1zM0 1h1v1h-1zM6 1h1v1h-1zM10 1h1v1h-1zM12 1h1v1h-1zM14 1h1v1h-1zM20 1h1v1h-1zM0 2h1v1h-1zM2 2h1v1h-1zM3 2h1v1h-1zM4 2h1v1h-1zM6 2h1v1h-1zM9 2h1v1h-1zM10 2h1v1h-1zM12 2h1v1h-1zM14 2h1v1h-1zM16 2h1v1h-1zM17 2h1v1h-1zM18 2h1v1h-1zM20 2h1v1h-1zM0 3h1v1h-1zM2 3h1v1h-1zM3 3h1v1h-1zM4 3h1v1h-1zM6 3h1v1h-1zM12 3h1v1h-1zM14 3h1v1h-1zM16 3h1v1h-1zM17 3h1v1h-1zM18 3h1v1h-1zM20 3h1v1h-1zM0 4h1v1h-1zM2 4h1v1h-1zM3 4h1v1h-1zM4 4h1v1h-1zM6 4h1v1h-1zM10 4h1v1h-1zM11 4h1v1h-1zM12 4h1v1h-1zM14 4h1v1h-1zM16 4h1v1h-1zM17 4h1v1h-1zM18 4h1v1h-1zM20 4h1v1h-1zM0 5h1v1h-1zM6 5h1v1h-1zM10 5h1v1h-1zM14 5h1v1h-1zM20 5h1v1h-1zM0 6h1v1h-1zM1 6h1v1h-1zM2 6h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1zM5 6h1v1h-1zM6 6h1v1h-1zM8 6h1v1h-1zM11 6h1v1h-1zM12 6h1v1h-1zM14 6h1v1h-1zM15 6h1v1h-1zM16 6h1v1h-1zM17 6h1v1h-1zM18 6h1v1h-1zM19 6h1v1h-1zM20 6h1v1h-1zM8 7h1v1h-1zM10 7h1v1h-1zM0 8h1v1h-1zM1 8h1v1h-1zM8 8h1v1h-1zM10 8h1v1h-1zM11 8h1v1h-1zM12 8h1v1h-1zM13 8h1v1h-1zM14 8h1v1h-1zM17 8h1v1h-1zM0 9h1v1h-1zM1 9h1v1h-1zM2 9h1v1h-1zM3 9h1v1h-1zM4 9h1v1h-1zM8 9h1v1h-1zM11 9h1v1h-1zM16 9h1v1h-1zM17 9h1v1h-1zM19 9h1v1h-1zM1 10h1v1h-1zM2 10h1v1h-1zM5 10h1v1h-1zM6 10h1v1h-1zM7 10h1v1h-1zM10 10h1v1h-1zM14 10h1v1h-1zM16 10h1v1h-1zM17 10h1v1h-1zM1 11h1v1h-1zM4 11h1v1h-1zM5 11h1v1h-1zM6 11h1v1h-1zM7 11h1v1h-1zM9 11h1v1h-1zM10 11h1v1h-1zM11 11h1v1h-1zM13 11h1v1h-1zM14 11h1v1h-1zM17 11h1v1h-1zM1 12h1v1h-1zM2 12h1v1h-1zM3 12h1v1h-1zM4 12h1v1h-1zM6 12h1v1h-1zM7 12h1v1h-1zM10 12h1v1h-1zM14 12h1v1h-1zM16 12h1v1h-1zM17 12h1v1h-1zM9 13h1v1h-1zM14 13h1v1h-1zM18 13h1v1h-1zM19 13h1v1h-1zM20 13h1v1h-1zM0 14h1v1h-1zM1 14h1v1h-1zM2 14h1v1h-1zM3 14h1v1h-1zM4 14h1v1h-1zM5 14h1v1h-1zM6 14h1v1h-1zM9 14h1v1h-1zM12 14h1v1h-1zM14 14h1v1h-1zM18 14h1v1h-1zM19 14h1v1h-1zM0 15h1v1h-1zM6 15h1v1h-1zM8 15h1v1h-1zM11 15h1v1h-1zM15 15h1v1h-1zM16 15h1v1h-1zM17 15h1v1h-1zM19 15h1v1h-1zM20 15h1v1h-1zM0 16h1v1h-1zM2 16h1v1h-1zM3 16h1v1h-1zM4 16h1v1h-1zM6 16h1v1h-1zM8 16h1v1h-1zM9 16h1v1h-1zM11 16h1v1h-1zM12 16h1v1h-1zM16 16h1v1h-1zM18 16h1v1h-1zM20 16h1v1h-1zM0 17h1v1h-1zM2 17h1v1h-1zM3 17h1v1h-1zM4 17h1v1h-1zM6 17h1v1h-1zM8 17h1v1h-1zM9 17h1v1h-1zM10 17h1v1h-1zM11 17h1v1h-1zM12 17h1v1h-1zM14 17h1v1h-1zM16 17h1v1h-1zM17 17h1v1h-1zM18 17h1v1h-1zM19 17h1v1h-1zM20 17h1v1h-1zM0 18h1v1h-1zM2 18h1v1h-1zM3 18h1v1h-1zM4 18h1v1h-1zM6 18h1v1h-1zM10 18h1v1h-1zM14 18h1v1h-1zM18 18h1v1h-1zM19 18h1v1h-1zM20 18h1v1h-1zM0 19h1v1h-1zM6 19h1v1h-1zM9 19h1v1h-1zM10 19h1v1h-1zM11 19h1v1h-1zM12 19h1v1h-1zM13 19h1v1h-1zM14 19h1v1h-1zM15 19h1v1h-1zM19 19h1v1h-1zM0 20h1v1h-1zM1 20h1v1h-1zM2 20h1v1h-1zM3 20h1v1h-1zM4 20h1v1h-1zM5 20h1v1h-1zM6 20h1v1h-1zM8 20h1v1h-1zM9 20h1v1h-1zM10 20h1v1h-1zM11 20h1v1h-1zM12 20h1v1h-1zM13 20h1v1h-1zM14 20h1v1h-1zM15 20h1v1h-1z" fill="#0F2A22"/></svg>
+                  <span class="ui-k">Escanea y guarda tu tarjeta</span>
+                </div>
+                <div class="ui-sheet">
+                  <div class="row"><span>Compartir</span><img src="../03-visual-identity/recursos/iconos/linea/lt-icono-compartir.svg" alt="" /></div>
+                  <div class="row is-on"><span>Agregar a inicio</span><img src="../03-visual-identity/recursos/iconos/linea/lt-icono-agregar.svg" alt="" /></div>
+                  <div class="app"><span class="pwa-badge">BN</span><span class="ui-k">Barbería Norte, ya en su pantalla de inicio</span></div>
+                </div>
+              </div>
+            </li>
+
+            <li class="how-step" data-step="3">
+              <span class="step-tag">Paso 3</span>
+              <h3>Suma visitas y ve quién regresa.</h3>
+              <p>Cada visita completa el aro. Tú ves quién vuelve y quién no.</p>
+              <div class="ui" aria-hidden="true" data-reveal style="--d: 0ms">
+                <table class="ui-table">
+                  <caption>Clientes · últimos 30 días</caption>
+                  <thead><tr><th>Cliente</th><th class="hide-sm">Visitas</th><th>Última</th><th>Estado</th></tr></thead>
+                  <tbody>
+                    <tr><td>Andrés S.</td><td class="hide-sm">4</td><td>hace 5 d</td><td><span class="chip chip-casi">Casi premio</span><span class="why">Le falta 1 corte</span></td></tr>
+                    <tr><td>Luis H.</td><td class="hide-sm">14</td><td>hace 6 d</td><td><span class="chip chip-frecuente">Frecuente</span><span class="why">Viene cada semana</span></td></tr>
+                    <tr><td>Carlos P.</td><td class="hide-sm">6</td><td>hace 41 d</td><td><span class="chip chip-riesgo">Te extrañamos</span><span class="why">Hace 41 días que no viene</span></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </li>
+          </ol>
+        </div>
+        <div class="how-cta-mobile">
+          <a class="btn-cta" href="https://app.lealtab.com" style="width:100%;margin-top:var(--space-6)">
+            <span class="btn-cta-label">Crea tu tarjeta gratis</span>
+            <span class="btn-cta-arrow" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. LA TARJETA (v1.2: una tarjeta grande con la marca de cada negocio) -->
+    <section class="showcase" id="la-tarjeta">
+      <div class="wrap">
+        <div class="showcase-grid">
+          <div>
+            <h2 class="reveal">Tu tarjeta digital siempre a un toque.</h2>
+            <p class="lead">Con tu logo, tus colores y tu recompensa. Se ve tan bien como tu negocio.</p>
+            <div class="biz-switch" role="tablist" aria-label="Ejemplos de tarjeta">
+              <button type="button" role="tab" aria-selected="true" aria-controls="bizcard" data-biz="barberia">Barbería</button>
+              <button type="button" role="tab" aria-selected="false" aria-controls="bizcard" data-biz="estetica">Estética</button>
+              <button type="button" role="tab" aria-selected="false" aria-controls="bizcard" data-biz="tapioca">Tapioca</button>
+            </div>
+            <p class="showcase-note">Toca un negocio para ver su tarjeta.</p>
+          </div>
+
+          <div class="bizcard-wrap" data-reveal style="--d: 100ms">
+          <article class="bizcard" id="bizcard" role="tabpanel" data-theme="barberia" aria-live="polite">
+            <div class="bizcard-head">
+              <span class="bizcard-badge" data-k="initials">BN</span>
+              <span class="bizcard-name" data-k="name">Barbería Norte</span>
+            </div>
+            <div class="bizcard-panel">
+              <div class="flip-inner">
+              <div class="face face-front">
+              <div class="aro-ui" aria-hidden="true">
+                <svg viewBox="0 0 100 100"><g fill="none" stroke-width="11">
+                  <circle class="track" cx="50" cy="50" r="43"/>
+                  <circle class="fill aro-biz-fill" cx="50" cy="50" r="43" pathLength="100" stroke-linecap="round" stroke-dasharray="80 100" transform="rotate(-90 50 50)"/>
+                </g></svg>
+                <span class="aro-ui-num"><span data-k="count">4/5</span><small data-k="unit">cortes</small></span>
+              </div>
+              <p class="bizcard-msg" data-k="msg">Llevas 4 de 5. El siguiente corte va por nuestra cuenta.</p>
+              </div>
+              <div class="face face-back" id="codeFace" aria-hidden="true">
+                <svg class="qr" viewBox="-1 -1 23 23" aria-hidden="true"><rect x="-1" y="-1" width="23" height="23" fill="#FFFDF8"/><path d="M0 0h1v1h-1zM1 0h1v1h-1zM2 0h1v1h-1zM3 0h1v1h-1zM4 0h1v1h-1zM5 0h1v1h-1zM6 0h1v1h-1zM8 0h1v1h-1zM9 0h1v1h-1zM10 0h1v1h-1zM11 0h1v1h-1zM12 0h1v1h-1zM14 0h1v1h-1zM15 0h1v1h-1zM16 0h1v1h-1zM17 0h1v1h-1zM18 0h1v1h-1zM19 0h1v1h-1zM20 0h1v1h-1zM0 1h1v1h-1zM6 1h1v1h-1zM10 1h1v1h-1zM12 1h1v1h-1zM14 1h1v1h-1zM20 1h1v1h-1zM0 2h1v1h-1zM2 2h1v1h-1zM3 2h1v1h-1zM4 2h1v1h-1zM6 2h1v1h-1zM9 2h1v1h-1zM10 2h1v1h-1zM12 2h1v1h-1zM14 2h1v1h-1zM16 2h1v1h-1zM17 2h1v1h-1zM18 2h1v1h-1zM20 2h1v1h-1zM0 3h1v1h-1zM2 3h1v1h-1zM3 3h1v1h-1zM4 3h1v1h-1zM6 3h1v1h-1zM12 3h1v1h-1zM14 3h1v1h-1zM16 3h1v1h-1zM17 3h1v1h-1zM18 3h1v1h-1zM20 3h1v1h-1zM0 4h1v1h-1zM2 4h1v1h-1zM3 4h1v1h-1zM4 4h1v1h-1zM6 4h1v1h-1zM10 4h1v1h-1zM11 4h1v1h-1zM12 4h1v1h-1zM14 4h1v1h-1zM16 4h1v1h-1zM17 4h1v1h-1zM18 4h1v1h-1zM20 4h1v1h-1zM0 5h1v1h-1zM6 5h1v1h-1zM10 5h1v1h-1zM14 5h1v1h-1zM20 5h1v1h-1zM0 6h1v1h-1zM1 6h1v1h-1zM2 6h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1zM5 6h1v1h-1zM6 6h1v1h-1zM8 6h1v1h-1zM11 6h1v1h-1zM12 6h1v1h-1zM14 6h1v1h-1zM15 6h1v1h-1zM16 6h1v1h-1zM17 6h1v1h-1zM18 6h1v1h-1zM19 6h1v1h-1zM20 6h1v1h-1zM8 7h1v1h-1zM10 7h1v1h-1zM0 8h1v1h-1zM1 8h1v1h-1zM8 8h1v1h-1zM10 8h1v1h-1zM11 8h1v1h-1zM12 8h1v1h-1zM13 8h1v1h-1zM14 8h1v1h-1zM17 8h1v1h-1zM0 9h1v1h-1zM1 9h1v1h-1zM2 9h1v1h-1zM3 9h1v1h-1zM4 9h1v1h-1zM8 9h1v1h-1zM11 9h1v1h-1zM16 9h1v1h-1zM17 9h1v1h-1zM19 9h1v1h-1zM1 10h1v1h-1zM2 10h1v1h-1zM5 10h1v1h-1zM6 10h1v1h-1zM7 10h1v1h-1zM10 10h1v1h-1zM14 10h1v1h-1zM16 10h1v1h-1zM17 10h1v1h-1zM1 11h1v1h-1zM4 11h1v1h-1zM5 11h1v1h-1zM6 11h1v1h-1zM7 11h1v1h-1zM9 11h1v1h-1zM10 11h1v1h-1zM11 11h1v1h-1zM13 11h1v1h-1zM14 11h1v1h-1zM17 11h1v1h-1zM1 12h1v1h-1zM2 12h1v1h-1zM3 12h1v1h-1zM4 12h1v1h-1zM6 12h1v1h-1zM7 12h1v1h-1zM10 12h1v1h-1zM14 12h1v1h-1zM16 12h1v1h-1zM17 12h1v1h-1zM9 13h1v1h-1zM14 13h1v1h-1zM18 13h1v1h-1zM19 13h1v1h-1zM20 13h1v1h-1zM0 14h1v1h-1zM1 14h1v1h-1zM2 14h1v1h-1zM3 14h1v1h-1zM4 14h1v1h-1zM5 14h1v1h-1zM6 14h1v1h-1zM9 14h1v1h-1zM12 14h1v1h-1zM14 14h1v1h-1zM18 14h1v1h-1zM19 14h1v1h-1zM0 15h1v1h-1zM6 15h1v1h-1zM8 15h1v1h-1zM11 15h1v1h-1zM15 15h1v1h-1zM16 15h1v1h-1zM17 15h1v1h-1zM19 15h1v1h-1zM20 15h1v1h-1zM0 16h1v1h-1zM2 16h1v1h-1zM3 16h1v1h-1zM4 16h1v1h-1zM6 16h1v1h-1zM8 16h1v1h-1zM9 16h1v1h-1zM11 16h1v1h-1zM12 16h1v1h-1zM16 16h1v1h-1zM18 16h1v1h-1zM20 16h1v1h-1zM0 17h1v1h-1zM2 17h1v1h-1zM3 17h1v1h-1zM4 17h1v1h-1zM6 17h1v1h-1zM8 17h1v1h-1zM9 17h1v1h-1zM10 17h1v1h-1zM11 17h1v1h-1zM12 17h1v1h-1zM14 17h1v1h-1zM16 17h1v1h-1zM17 17h1v1h-1zM18 17h1v1h-1zM19 17h1v1h-1zM20 17h1v1h-1zM0 18h1v1h-1zM2 18h1v1h-1zM3 18h1v1h-1zM4 18h1v1h-1zM6 18h1v1h-1zM10 18h1v1h-1zM14 18h1v1h-1zM18 18h1v1h-1zM19 18h1v1h-1zM20 18h1v1h-1zM0 19h1v1h-1zM6 19h1v1h-1zM9 19h1v1h-1zM10 19h1v1h-1zM11 19h1v1h-1zM12 19h1v1h-1zM13 19h1v1h-1zM14 19h1v1h-1zM15 19h1v1h-1zM19 19h1v1h-1zM0 20h1v1h-1zM1 20h1v1h-1zM2 20h1v1h-1zM3 20h1v1h-1zM4 20h1v1h-1zM5 20h1v1h-1zM6 20h1v1h-1zM8 20h1v1h-1zM9 20h1v1h-1zM10 20h1v1h-1zM11 20h1v1h-1zM12 20h1v1h-1zM13 20h1v1h-1zM14 20h1v1h-1zM15 20h1v1h-1z" fill="#0F2A22"/></svg>
+                <p><strong data-k="name">Barbería Norte</strong><span>Muéstralo en caja.</span></p>
+              </div>
+              </div>
+              <span class="sticker-done" aria-hidden="true">¡Recompensa lista!</span>
+            </div>
+            <button type="button" class="bizcard-btn" id="codeBtn" aria-controls="codeFace" aria-expanded="false">Mostrar mi código</button>
+            <p class="bizcard-sign">Hecho con LealTab</p>
+          </article>
+          <div class="visit-demo">
+            <button type="button" class="btn btn-secondary btn-md" id="visitBtn"><span class="plus" aria-hidden="true">+</span> <span id="visitLbl">Suma una visita</span></button>
+            <p>Así suma tu cajero cada visita.</p>
+          </div>
+          </div>
+        </div>
+
+        <div class="install">
+          <div data-reveal style="--d: 0ms">
+            <h3>En su pantalla de inicio.</h3>
+            <p class="install-copy">Tu negocio, con su propio ícono, junto a las apps de tu cliente. Nada que buscar entre pestañas.</p>
+            <div class="homegrid" aria-hidden="true">
+              <div class="tile"><span class="ico ghost"></span></div>
+              <div class="tile"><span class="ico is-biz" id="homeIcon">BN</span><span id="homeLabel">Norte</span></div>
+              <div class="tile"><span class="ico ghost"></span></div>
+              <div class="tile"><span class="ico ghost"></span></div>
+              <div class="tile"><span class="ico ghost"></span></div>
+              <div class="tile"><span class="ico ghost"></span></div>
+              <div class="tile"><span class="ico ghost"></span></div>
+              <div class="tile"><span class="ico ghost"></span></div>
+            </div>
+          </div>
+          <div data-reveal style="--d: 120ms">
+            <h3>Cómo se instala.</h3>
+            <ol class="steps-os">
+              <li data-os="ios"><strong>iPhone</strong><p>Abre el enlace, toca Compartir y luego "Agregar a inicio".</p></li>
+              <li data-os="android"><strong>Android</strong><p>Abre el enlace, toca el menú ⋮ y luego "Instalar app" o "Agregar a la pantalla principal".</p></li>
+            </ol>
+            <p class="install-foot">Funciona en cualquier celular. Sin tienda de apps, sin cuentas que crear.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. PARA QUIÉN (v1.2: filas alternadas, ilustraciones como objetos) -->
+    <section class="who" id="para-quien">
+      <div class="wrap">
+        <h2 class="reveal">Hecha para negocios donde el cliente vuelve.</h2>
+        <ul class="who-list" role="list">
+          <li class="who-row" data-reveal style="--d: 0ms">
+            <div class="who-art"><img src="../03-visual-identity/recursos/ilustraciones/lt-ilustracion-barberia-sin-sombra.svg" alt="" width="400" height="320" /></div>
+            <div>
+              <h3>Barberías</h3>
+              <p>Al quinto corte, el sexto es gratis. Y la tarjeta ya no se pierde en la cartera.</p>
+              <a class="who-link" href="#la-tarjeta" data-biz="barberia">Ver su tarjeta <span aria-hidden="true">→</span></a>
+            </div>
+          </li>
+          <li class="who-row" data-reveal style="--d: 0ms">
+            <div class="who-art"><img src="../03-visual-identity/recursos/ilustraciones/lt-ilustracion-estetica-sin-sombra.svg" alt="" width="400" height="320" /></div>
+            <div>
+              <h3>Estéticas</h3>
+              <p>Tus clientas ven cuántas visitas les faltan. Tú ves quién dejó de venir.</p>
+              <a class="who-link" href="#la-tarjeta" data-biz="estetica">Ver su tarjeta <span aria-hidden="true">→</span></a>
+            </div>
+          </li>
+          <li class="who-row" data-reveal style="--d: 0ms">
+            <div class="who-art"><img src="../03-visual-identity/recursos/ilustraciones/lt-ilustracion-tapioca-sin-sombra.svg" alt="" width="400" height="320" /></div>
+            <div>
+              <h3>Tapiocas</h3>
+              <p>Cada tapioca suma. Tus clientes ven cuántas les faltan.</p>
+              <a class="who-link" href="#la-tarjeta" data-biz="tapioca">Ver su tarjeta <span aria-hidden="true">→</span></a>
+            </div>
+          </li>
+        </ul>
+        <p class="who-more" data-reveal style="--d: 0ms">¿Tu negocio vive de que el cliente regrese? También es para ti.</p>
+      </div>
+    </section>
+
+    <!-- 5. PRECIOS (v1.2: prueba arriba, Negocio destacado sin durazno) -->
+    <section class="pricing-sec" id="precios">
+      <div class="wrap">
+        <div class="pricing-head">
+          <h2 class="reveal">Precios claros. Sin contratos ni pago inicial.</h2>
+          <div class="trial">
+            <p>Pruébala gratis 30 días. Sin tarjeta de crédito.</p>
+            <a class="btn-cta" href="https://app.lealtab.com"><span class="btn-cta-label">Crea tu tarjeta gratis</span><span class="btn-cta-arrow" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span></a>
+          </div>
+        </div>
+
+        <div class="pricing">
+          <article class="plan order-inicio" data-reveal style="--d: 0ms">
+            <div class="plan-top"><span class="plan-name">Inicio</span></div>
+            <div class="plan-price">$299<small>MXN/mes + IVA</small></div>
+            <ul>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Hasta 200 clientes activos</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>1 tarjeta de lealtad</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>1 sucursal</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Soporte por WhatsApp</li>
+            </ul>
+            <a class="btn btn-secondary btn-lg" href="https://app.lealtab.com">Crea tu tarjeta gratis</a>
+          </article>
+
+          <article class="plan featured order-negocio" data-reveal style="--d: 0ms">
+            <div class="plan-top"><span class="plan-name">Negocio</span><span class="plan-chip">Recomendado</span></div>
+            <div class="plan-price">$449<small>MXN/mes + IVA</small></div>
+            <ul>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Clientes activos ilimitados</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Varias tarjetas / recompensas</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Hasta 3 sucursales</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Soporte por WhatsApp</li>
+            </ul>
+            <a class="btn-cta" href="https://app.lealtab.com"><span class="btn-cta-label">Crea tu tarjeta gratis</span><span class="btn-cta-arrow" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span></a>
+          </article>
+
+          <article class="plan muted order-pro" data-reveal style="--d: 240ms">
+            <div class="plan-top"><span class="plan-name">Pro</span></div>
+            <div class="plan-price">Próximamente</div>
+            <ul>
+              <li>Para cuando tu operación pida más</li>
+            </ul>
+          </article>
+        </div>
+
+        <p class="pricing-note">Sin contratos, cancelas cuando quieras. Todos los precios + IVA.</p>
+      </div>
+    </section>
+
+    <!-- 6. CONFIANZA (v1.2: compromisos en cuadrícula, sin cajas) -->
+    <section class="trust-sec" id="confianza">
+      <div class="wrap">
+        <h2 class="reveal">Detrás de LealTab hay personas.</h2>
+        <ul class="trust" role="list">
+          <li class="trust-item" data-reveal style="--d: 0ms">
+            <svg class="draw" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><g fill="none" stroke="#0F2A22" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path pathLength="1" d="M4.25 4L19.75 4A1.25 1.25 0 0 1 21 5.25L21 15.75A1.25 1.25 0 0 1 19.75 17L10.975 17A1.25 1.25 0 0 0 10.145 17.316L7.495 19.671A0.898 0.898 0 0 1 6 19L6 18.25A1.25 1.25 0 0 0 4.75 17L4.25 17A1.25 1.25 0 0 1 3 15.75L3 5.25A1.25 1.25 0 0 1 4.25 4Z"/><path pathLength="1" d="M7.5 9H16.5"/><path pathLength="1" d="M7.5 12.5H13"/></g></svg>
+            <div>
+              <h3>Te atiende una persona, por WhatsApp.</h3>
+              <p>Escríbenos y te responde una persona real. Sin bots ni tickets.</p>
+            </div>
+          </li>
+          <li class="trust-item" data-reveal style="--d: 90ms">
+            <svg class="draw" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><g fill="none" stroke="#0F2A22" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path pathLength="1" d="M12 4A3.5 3.5 0 1 1 12 11A3.5 3.5 0 1 1 12 4"/><path pathLength="1" d="M5 20.5A7 7 0 0 1 19 20.5"/></g></svg>
+            <div>
+              <h3>Tus datos son tuyos.</h3>
+              <p>Tus clientes y su historial te pertenecen. Descárgalos cuando quieras.</p>
+            </div>
+          </li>
+          <li class="trust-item" data-reveal style="--d: 180ms">
+            <svg class="draw" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><g fill="none" stroke="#0F2A22" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path pathLength="1" d="M3.5 3.5L3.5 19.25A1.25 1.25 0 0 0 4.75 20.5L20.5 20.5"/><path pathLength="1" d="M8.5 16V13"/><path pathLength="1" d="M13 16V9"/><path pathLength="1" d="M17.5 16V5.5"/></g></svg>
+            <div>
+              <h3>Ves quién regresa.</h3>
+              <p>Un tablero sencillo con tus clientes frecuentes y los que no han vuelto.</p>
+            </div>
+          </li>
+          <li class="trust-item" data-reveal style="--d: 270ms">
+            <svg class="draw" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><g fill="none" stroke="#0F2A22" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path pathLength="1" d="M5 12.5L10 17.5L19.5 6.5"/></g></svg>
+            <div>
+              <h3>Privacidad clara.</h3>
+              <p>Te explicamos qué datos guardamos y para qué. <a href="#">Lee el aviso de privacidad →</a></p>
+            </div>
+          </li>
+        </ul>
+        <div class="trust-cta">
+          <a class="btn btn-secondary btn-lg" href="https://wa.me/">Escríbenos por WhatsApp</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. LO QUE VIENE (v1.2: capítulo en bosque, sin cajas ni stickers repetidos) -->
+    <section class="roadmap" id="lo-que-viene">
+      <div class="wrap roadmap-grid">
+        <div class="reveal">
+          <h2>Lo que viene.</h2>
+          <p class="lead">Lo construimos contigo. Si estás en el piloto, tu opinión decide qué sigue.</p>
+        </div>
+        <ul class="roadmap-list" role="list">
+          <li class="roadmap-item flip-tile" data-reveal style="--d: 0ms">
+            <div class="flip-inner">
+              <div class="face face-front" id="avisoFront">
+                <div class="roadmap-top">
+                  <span class="roadmap-ico"><img src="../03-visual-identity/recursos/iconos/linea/lt-icono-aviso.svg" alt="" width="28" height="28" /></span>
+                  <span class="tag">Próximamente</span>
+                </div>
+                <strong>Avisos</strong>
+                <p>Para que tus clientes vuelvan en el momento justo.</p>
+                <button type="button" class="tile-btn" data-flip="open" aria-controls="avisoBack" aria-expanded="false">Ver un ejemplo <span aria-hidden="true">→</span></button>
+              </div>
+              <div class="face face-back" id="avisoBack" aria-hidden="true" inert>
+                <span class="tag">Ejemplo de aviso</span>
+                <div class="notif">
+                  <span class="pwa-badge">BN</span>
+                  <div><b>Barbería Norte</b><span>Hace 3 semanas de tu último corte. ¿Te apartamos lugar?</span></div>
+                </div>
+                <button type="button" class="tile-btn" data-flip="close"><span aria-hidden="true">←</span> Volver</button>
+              </div>
+            </div>
+          </li>
+          <li class="roadmap-item" data-reveal style="--d: 90ms">
+            <div class="roadmap-top">
+              <span class="roadmap-ico"><img src="../03-visual-identity/recursos/iconos/linea/lt-icono-calendario.svg" alt="" width="28" height="28" /></span>
+              <span class="tag">Próximamente</span>
+            </div>
+            <strong>Campañas</strong>
+            <p>Llena los días flojos con una promoción para tus clientes de siempre.</p>
+          </li>
+          <li class="roadmap-item" data-reveal style="--d: 180ms">
+            <div class="roadmap-top">
+              <span class="roadmap-ico"><img src="../03-visual-identity/recursos/iconos/linea/lt-icono-negocio.svg" alt="" width="28" height="28" /></span>
+              <span class="tag">Próximamente</span>
+            </div>
+            <strong>Varias sucursales</strong>
+            <p>Todas tus sucursales en una sola cuenta.</p>
+          </li>
+          <li class="roadmap-item" data-reveal style="--d: 270ms">
+            <div class="roadmap-top">
+              <span class="roadmap-ico"><img src="../03-visual-identity/recursos/iconos/linea/lt-icono-cartera.svg" alt="" width="28" height="28" /></span>
+              <span class="tag">Próximamente</span>
+            </div>
+            <strong>Apple y Google Wallet</strong>
+            <p>Tu tarjeta también en la cartera del celular.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 8. CIERRE + FAQ (v1.2: el aro se completa en durazno) -->
+    <section class="cta-final" id="cta-final">
+      <div class="wrap">
+        <div class="close-grid">
+          <div>
+            <h2 class="reveal">Crea tu tarjeta hoy.</h2>
+            <p class="lead">Es gratis empezar.</p>
+            <a class="btn-cta" href="https://app.lealtab.com"><span class="btn-cta-label">Crea tu tarjeta gratis</span><span class="btn-cta-arrow" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span></a>
+            <p class="wa-hint">¿Dudas? <a href="https://wa.me/">Escríbenos por WhatsApp</a>.</p>
+          </div>
+          <div class="close-visual" id="closeVisual" aria-hidden="true">
+            <svg class="close-aro" viewBox="0 0 420 420">
+              <g fill="none">
+                <circle cx="207" cy="207" r="160" stroke="#0F2A22" stroke-width="49" transform="translate(5 5)"/>
+                <circle cx="207" cy="207" r="160" stroke="#0F2A22" stroke-width="49"/>
+                <circle cx="207" cy="207" r="160" stroke="#CFE3D6" stroke-width="44"/>
+                <circle class="fill-edge" cx="207" cy="207" r="160" pathLength="100" stroke="#0F2A22" stroke-width="49" stroke-linecap="round" transform="rotate(-90 207 207)"/>
+                <circle class="fill" cx="207" cy="207" r="160" pathLength="100" stroke-width="44" stroke-linecap="round" transform="rotate(-90 207 207)"/>
+              </g>
+            </svg>
+            <div class="close-count"><span class="num">5/5</span><span class="unit">cortes</span></div>
+            <span class="sticker-reward">¡Recompensa lista!</span>
+          </div>
+        </div>
+
+        <div class="faq" id="faq">
+          <h2>Preguntas frecuentes</h2>
+          <div>
+          <details open class="is-open">
+            <summary>¿Mis clientes tienen que descargar algo?</summary>
+            <div class="answer-wrap"><div class="answer-inner"><p class="answer">No. Escanean tu QR, tocan "Agregar a inicio" y la tarjeta queda en su pantalla. Sin tienda de apps.</p></div></div>
+          </details>
+          <details>
+            <summary>¿Funciona en iPhone y Android?</summary>
+            <div class="answer-wrap"><div class="answer-inner"><p class="answer">Sí. Funciona en cualquier celular con navegador, iPhone o Android.</p></div></div>
+          </details>
+          <details>
+            <summary>¿Qué pasa cuando termina la prueba?</summary>
+            <div class="answer-wrap"><div class="answer-inner"><p class="answer">Te avisamos antes de que termine. Si eliges un plan, todo sigue igual. Si no, tu tarjeta se pausa y puedes descargar tus datos.</p></div></div>
+          </details>
+          <details>
+            <summary>¿Puedo cancelar cuando quiera?</summary>
+            <div class="answer-wrap"><div class="answer-inner"><p class="answer">Sí. No hay contratos ni plazos forzosos. Cancelas cuando quieras.</p></div></div>
+          </details>
+          <details>
+            <summary>¿Mis datos son míos?</summary>
+            <div class="answer-wrap"><div class="answer-inner"><p class="answer">Sí. Tus clientes y su historial son tuyos y los descargas cuando quieras.</p></div></div>
+          </details>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER (v1.2: bosque, logo lino, enlaces por columnas) -->
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div>
+          <a href="#hero" aria-label="LealTab, ir al inicio" style="display:inline-flex;border-radius:var(--radius-control)">
+            <img class="footer-logo" src="../03-visual-identity/logo/entregables/svg/lealtab-horizontal-lino.svg" alt="LealTab" width="180" height="36" />
+          </a>
+          <p class="footer-tagline">Haz que tus clientes siempre regresen.</p>
+        </div>
+        <div class="footer-cols">
+          <nav class="footer-col" aria-label="Producto">
+            <h3>Producto</h3>
+            <ul>
+              <li><a href="#como-funciona">Cómo funciona</a></li>
+              <li><a href="#la-tarjeta">La tarjeta</a></li>
+              <li><a href="#precios">Precios</a></li>
+              <li><a href="#faq">Preguntas</a></li>
+            </ul>
+          </nav>
+          <nav class="footer-col" aria-label="Contacto">
+            <h3>Contacto</h3>
+            <ul>
+              <li><a href="https://wa.me/">WhatsApp</a></li>
+              <li><a href="https://instagram.com/getlealtab">Instagram @getlealtab</a></li>
+            </ul>
+          </nav>
+          <nav class="footer-col" aria-label="Cuenta">
+            <h3>Cuenta</h3>
+            <ul>
+              <li><a href="https://app.lealtab.com">Crea tu tarjeta gratis</a></li>
+              <li><a href="https://app.lealtab.com">Entrar</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <div class="footer-legal">
+        <p>© 2026 LealTab</p>
+        <a href="#">Aviso de privacidad</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      // Nav móvil: pantalla completa, bloquea el scroll, Escape y enlaces lo cierran
+      var toggle = document.getElementById("navToggle");
+      var drawer = document.getElementById("navDrawer");
+      function setNav(open) {
+        if (!toggle || !drawer) return;
+        drawer.classList.toggle("open", open);
+        document.body.classList.toggle("nav-open", open);
+        toggle.setAttribute("aria-expanded", open ? "true" : "false");
+        toggle.setAttribute("aria-label", open ? "Cerrar menú" : "Abrir menú");
+        if (open) drawer.focus();
+      }
+      if (toggle && drawer) {
+        toggle.addEventListener("click", function () { setNav(!drawer.classList.contains("open")); });
+        drawer.querySelectorAll("a").forEach(function (a) { a.addEventListener("click", function () { setNav(false); }); });
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape" && drawer.classList.contains("open")) { setNav(false); toggle.focus(); }
+        });
+        window.matchMedia("(min-width: 1024px)").addEventListener("change", function (m) { if (m.matches) setNav(false); });
+      }
+
+      // Nav: marca la sección activa (Cómo funciona o Precios)
+      var navMap = {};
+      document.querySelectorAll('.nav-links a[href^="#"], .nav-drawer-links a[href^="#"]').forEach(function (a) {
+        var id = a.getAttribute("href").slice(1);
+        (navMap[id] = navMap[id] || []).push(a);
+      });
+      if ("IntersectionObserver" in window) {
+        var navIo = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            var links = navMap[entry.target.id] || [];
+            links.forEach(function (a) {
+              if (entry.isIntersecting) a.setAttribute("aria-current", "true"); else a.removeAttribute("aria-current");
+            });
+          });
+        }, { rootMargin: "-40% 0px -55% 0px" });
+        Object.keys(navMap).forEach(function (id) { var el = document.getElementById(id); if (el) navIo.observe(el); });
+      }
+
+      // FAQ: una abierta a la vez. La que cierra y la que abre se animan juntas
+      // (200 ms), así la altura total cambia de forma continua y el pie no salta.
+      var faqItems = Array.prototype.slice.call(document.querySelectorAll(".faq details"));
+      var faqAnim = new WeakMap();
+      function faqHeight(d, from, to, done) {
+        var wrap = d.querySelector(".answer-wrap");
+        var prev = faqAnim.get(d); if (prev) prev.cancel();
+        if (reduce || !wrap.animate) { if (done) done(); return; }
+        var a = wrap.animate([{ height: from + "px" }, { height: to + "px" }],
+          { duration: 200, easing: "cubic-bezier(0.2, 0.8, 0.2, 1)", fill: "forwards" });
+        var finished = false;
+        var finish = function () {
+          if (finished || faqAnim.get(d) !== a) return;
+          finished = true;
+          if (done) done();
+          a.cancel();
+          faqAnim.delete(d);
+        };
+        faqAnim.set(d, a);
+        a.onfinish = finish;
+        setTimeout(finish, 260); // respaldo si el navegador no emite onfinish
+      }
+      function faqClose(d) {
+        var wrap = d.querySelector(".answer-wrap");
+        d.classList.remove("is-open");
+        d.querySelector("summary").setAttribute("aria-expanded", "false");
+        faqHeight(d, wrap.getBoundingClientRect().height, 0, function () { d.open = false; });
+      }
+      function faqOpen(d) {
+        var wrap = d.querySelector(".answer-wrap");
+        var from = d.open ? wrap.getBoundingClientRect().height : 0; // sigue desde donde iba
+        d.open = true;
+        d.classList.add("is-open");
+        d.querySelector("summary").setAttribute("aria-expanded", "true");
+        faqHeight(d, from, wrap.scrollHeight);
+      }
+      faqItems.forEach(function (d) {
+        d.querySelector("summary").addEventListener("click", function (e) {
+          e.preventDefault();
+          if (d.classList.contains("is-open")) { faqClose(d); return; }
+          faqItems.forEach(function (other) { if (other !== d && other.classList.contains("is-open")) faqClose(other); });
+          faqOpen(d);
+        });
+      });
+
+      // Cómo funciona: el paso a la vista se marca y el aro avanza (el aro solo se ve en escritorio)
+      var howSteps = document.querySelectorAll(".how-step");
+      var howNum = document.getElementById("howStep");
+      var howArcs = document.querySelectorAll(".aro-step");
+      function setHowStep(n) {
+        howSteps.forEach(function (el) {
+          var on = el.getAttribute("data-step") === String(n);
+          el.classList.toggle("is-active", on);
+          if (on) el.classList.add("seen"); // la interfaz del paso se queda "activada"
+        });
+        if (howNum && howNum.textContent !== String(n)) {
+          howNum.textContent = n;
+          var st = howNum.parentNode; st.classList.remove("bump"); void st.offsetWidth; st.classList.add("bump");
+        }
+        howArcs.forEach(function (c) { c.setAttribute("stroke-dasharray", (n / 3 * 100).toFixed(1) + " 100"); });
+      }
+      if ("IntersectionObserver" in window && howSteps.length) {
+        var howIo = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) setHowStep(Number(entry.target.getAttribute("data-step")));
+          });
+        }, { rootMargin: "-45% 0px -45% 0px" });
+        howSteps.forEach(function (el) { howIo.observe(el); });
+      }
+
+      // La tarjeta: el selector cambia la marca, el mensaje y el avance del aro
+      var BIZ = {
+        barberia: { name: "Barbería Norte", initials: "BN", label: "Norte", n: 4, total: 5, unit: "cortes", reward: "corte gratis", msg: "Llevas 4 de 5. El siguiente corte va por nuestra cuenta.", done: "Tu siguiente corte va por nuestra cuenta.", icoBg: "#0F4D3A", icoFg: "#F3EFE6" },
+        estetica: { name: "Estética Luna", initials: "EL", label: "Luna", n: 2, total: 6, unit: "visitas", reward: "tratamiento de regalo", msg: "2 de 6 visitas. Tu tratamiento de regalo te espera.", done: "Tu tratamiento de regalo te espera.", icoBg: "#F3EFE6", icoFg: "#0F2A22" },
+        tapioca:  { name: "Tapioca Sol", initials: "TS", label: "Sol", n: 7, total: 10, unit: "tapiocas", reward: "tapioca gratis", msg: "7 de 10. Te faltan 3 para tu tapioca gratis.", done: "Tu siguiente tapioca va por nuestra cuenta.", icoBg: "#0F2A22", icoFg: "#F3EFE6" }
+      };
+      var demo = { key: "barberia", n: 4 };
+      function bizMsg(b, n) {
+        if (n === b.n) return b.msg;                       // mensaje aprobado del estado inicial
+        if (n >= b.total) return b.done;
+        var k = b.total - n;
+        return n + " de " + b.total + ". Te " + (k === 1 ? "falta 1" : "faltan " + k) + " para tu " + b.reward + ".";
+      }
+      function renderBiz(b, n) {
+        var vals = { name: b.name, initials: b.initials, unit: b.unit, count: n + "/" + b.total, msg: bizMsg(b, n) };
+        bizcard.querySelectorAll("[data-k]").forEach(function (el) { el.textContent = vals[el.getAttribute("data-k")]; });
+        bizcard.querySelectorAll(".aro-biz-fill").forEach(function (c) { c.setAttribute("stroke-dasharray", (n / b.total * 100).toFixed(1) + " 100"); });
+        var done = n >= b.total;
+        bizcard.classList.toggle("is-complete", done);
+        var lbl = document.getElementById("visitLbl");
+        if (lbl) lbl.textContent = done ? "Empezar de nuevo" : "Suma una visita";
+        var plus = document.querySelector("#visitBtn .plus");
+        if (plus) plus.hidden = done;
+      }
+      var bizcard = document.getElementById("bizcard");
+      var bizTabs = document.querySelectorAll(".biz-switch [role=tab]");
+      function setBiz(key) {
+        var b = BIZ[key]; if (!b || !bizcard) return;
+        bizcard.setAttribute("data-theme", key);
+        if (!reduce) bizcard.querySelectorAll(".bizcard-panel, .bizcard-head").forEach(function (el) {
+          el.classList.remove("swap"); void el.offsetWidth; el.classList.add("swap");
+        });
+        demo.key = key; demo.n = b.n;                       // al cambiar de negocio, vuelve a su estado inicial
+        var fp = bizcard.querySelector(".bizcard-panel.is-flipped");
+        if (fp) { fp.classList.remove("is-flipped"); var cb = document.getElementById("codeBtn"); if (cb) { cb.textContent = "Mostrar mi código"; cb.setAttribute("aria-expanded", "false"); } }
+        renderBiz(b, b.n);
+        var ico = document.getElementById("homeIcon"), lbl = document.getElementById("homeLabel");
+        if (ico) { ico.textContent = b.initials; ico.style.background = b.icoBg; ico.style.color = b.icoFg; }
+        if (lbl) lbl.textContent = b.label;
+        bizTabs.forEach(function (t) { t.setAttribute("aria-selected", t.getAttribute("data-biz") === key ? "true" : "false"); });
+      }
+      // Suma una visita: el aro avanza; al completarse se vuelve durazno y aparece "¡Recompensa lista!"
+      var visitBtn = document.getElementById("visitBtn");
+      if (visitBtn && bizcard) visitBtn.addEventListener("click", function () {
+        var b = BIZ[demo.key];
+        if (demo.n >= b.total) { setBiz(demo.key); return; }
+        if (typeof showCode === "function") showCode(false);
+        demo.n += 1;
+        renderBiz(b, demo.n);
+        if (!reduce) {
+          var num = bizcard.querySelector(".aro-ui-num"); num.classList.remove("bump"); void num.offsetWidth; num.classList.add("bump");
+          if (demo.n >= b.total) { var f = bizcard.querySelector(".aro-biz-fill"); f.classList.remove("pulse"); void f.getBoundingClientRect(); f.classList.add("pulse"); }
+        }
+      });
+
+      // Para quién → La tarjeta con ese negocio seleccionado
+      document.querySelectorAll(".who-link[data-biz]").forEach(function (a) {
+        a.addEventListener("click", function () {
+          setBiz(a.getAttribute("data-biz"));
+          if (!reduce && bizcard) setTimeout(function () { bizcard.classList.remove("spotlight"); void bizcard.offsetWidth; bizcard.classList.add("spotlight"); }, 450);
+        });
+      });
+
+      // Editor vivo (Cómo funciona, paso 1)
+      var edName = document.getElementById("edName"), edReward = document.getElementById("edReward");
+      var pv = document.getElementById("edPreview"), pvName = document.getElementById("pvName"), pvReward = document.getElementById("pvReward");
+      if (edName && pvName) edName.addEventListener("input", function () { pvName.textContent = edName.value.trim() || "Tu negocio"; });
+      if (edReward && pvReward) edReward.addEventListener("input", function () { pvReward.textContent = edReward.value.trim() || "Tu recompensa"; });
+      var sw = document.querySelectorAll(".ui-swatches [role=radio]");
+      function pickColor(btn, focus) {
+        sw.forEach(function (o) { var on = o === btn; o.setAttribute("aria-checked", on ? "true" : "false"); o.tabIndex = on ? 0 : -1; });
+        if (pv) {
+          pv.setAttribute("data-c", btn.getAttribute("data-c"));
+          if (!reduce) { pv.classList.remove("pop"); void pv.offsetWidth; pv.classList.add("pop"); }
+        }
+        if (focus) btn.focus();
+      }
+      sw.forEach(function (btn, i) {
+        btn.addEventListener("click", function () { pickColor(btn); });
+        btn.addEventListener("keydown", function (e) {
+          var d = (e.key === "ArrowRight" || e.key === "ArrowDown") ? 1 : (e.key === "ArrowLeft" || e.key === "ArrowUp") ? -1 : 0;
+          if (!d) return;
+          e.preventDefault();
+          pickColor(sw[(i + d + sw.length) % sw.length], true);
+        });
+      });
+
+      bizTabs.forEach(function (t, i) {
+        t.addEventListener("click", function () { setBiz(t.getAttribute("data-biz")); });
+        t.addEventListener("keydown", function (e) {
+          var d = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+          if (!d) return;
+          var next = bizTabs[(i + d + bizTabs.length) % bizTabs.length];
+          next.focus(); setBiz(next.getAttribute("data-biz"));
+        });
+      });
+
+      // Cierre: el aro se completa y cambia a durazno al entrar en pantalla
+      var closeVisual = document.getElementById("closeVisual");
+      if (closeVisual) {
+        var closeAro = closeVisual.querySelector(".close-aro");
+        var finish = function () { closeVisual.classList.add("is-done"); if (closeAro) closeAro.classList.add("is-done"); };
+        if (reduce || !("IntersectionObserver" in window)) { finish(); }
+        else {
+          var closeIo = new IntersectionObserver(function (entries) {
+            if (entries[0].isIntersecting) { finish(); closeIo.disconnect(); }
+          }, { threshold: 0.5 });
+          closeIo.observe(closeVisual);
+        }
+      }
+
+
+      // v1.4 · 1. Guía según el celular (en el mockup se puede forzar con ?os=ios o ?os=android)
+      (function () {
+        var forced = (location.search.match(/[?&]os=(ios|android)/) || [])[1];
+        var ua = navigator.userAgent;
+        var os = forced || (/iPhone|iPad|iPod/.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1) ? "ios" : /Android/i.test(ua) ? "android" : null);
+        if (!os) return;
+        document.querySelectorAll(".steps-os li[data-os]").forEach(function (li) {
+          var mine = li.getAttribute("data-os") === os;
+          li.classList.add(mine ? "is-mine" : "is-dim");
+          if (mine) {
+            var t = document.createElement("span");
+            t.className = "mine-tag";
+            t.textContent = os === "ios" ? "Estás en iPhone" : "Estás en Android";
+            li.querySelector("strong").appendChild(t);
+          }
+        });
+      })();
+
+      // v1.4 · 2. "Mostrar mi código" voltea el panel de la tarjeta
+      var codeBtn = document.getElementById("codeBtn"), codeFace = document.getElementById("codeFace");
+      var bizPanel = bizcard ? bizcard.querySelector(".bizcard-panel") : null;
+      function showCode(on) {
+        if (!bizPanel || !codeBtn) return;
+        bizPanel.classList.toggle("is-flipped", on);
+        codeBtn.textContent = on ? "Ocultar mi código" : "Mostrar mi código";
+        codeBtn.setAttribute("aria-expanded", on ? "true" : "false");
+        if (codeFace) codeFace.setAttribute("aria-hidden", on ? "false" : "true");
+      }
+      if (codeBtn) codeBtn.addEventListener("click", function () { showCode(!bizPanel.classList.contains("is-flipped")); });
+
+      // v1.4 · 4. Mosaico de Avisos: ejemplo de aviso
+      document.querySelectorAll(".flip-tile").forEach(function (tile) {
+        var front = tile.querySelector(".face-front"), back = tile.querySelector(".face-back");
+        function flip(open) {
+          tile.classList.toggle("is-flipped", open);
+          front.toggleAttribute("inert", open); front.setAttribute("aria-hidden", open ? "true" : "false");
+          back.toggleAttribute("inert", !open); back.setAttribute("aria-hidden", open ? "false" : "true");
+          var opener = tile.querySelector('[data-flip="open"]'); if (opener) opener.setAttribute("aria-expanded", open ? "true" : "false");
+          var target = tile.querySelector(open ? '[data-flip="close"]' : '[data-flip="open"]');
+          if (target) setTimeout(function () { target.focus({ preventScroll: true }); }, reduce ? 0 : 200);
+        }
+        tile.querySelectorAll("[data-flip]").forEach(function (b) {
+          b.addEventListener("click", function () { flip(b.getAttribute("data-flip") === "open"); });
+        });
+      });
+
+      // v1.4 · 6. Filas de clientes: tocar muestra el motivo del estado
+      document.querySelectorAll(".ui-table tbody tr").forEach(function (tr) {
+        tr.addEventListener("click", function () {
+          var open = !tr.classList.contains("is-open");
+          tr.parentNode.querySelectorAll("tr").forEach(function (o) { o.classList.remove("is-open"); });
+          tr.classList.toggle("is-open", open);
+        });
+      });
+
+
+      // v1.4 · 8. El CTA del menú se oculta mientras el botón del hero está a la vista
+      (function () {
+        var nav = document.querySelector(".nav");
+        var heroCta = document.querySelector(".hero .hero-ctas .btn-cta");
+        if (!nav || !heroCta || !("IntersectionObserver" in window)) return;
+        nav.classList.add("hero-cta-visible");
+        var navCtaIo = new IntersectionObserver(function (entries) {
+          nav.classList.toggle("hero-cta-visible", entries[0].isIntersecting);
+        }, { rootMargin: "-76px 0px 0px 0px" });                // descuenta la altura del menú
+        navCtaIo.observe(heroCta);
+      })();
+
+      // Scroll reveal for section titles
+      if (!reduce && "IntersectionObserver" in window) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              io.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.2, rootMargin: "0px 0px -40px 0px" });
+        document.querySelectorAll(".reveal").forEach(function (el) { io.observe(el); });
+      } else {
+        document.querySelectorAll(".reveal").forEach(function (el) {
+          el.classList.add("is-visible");
+        });
+      }
+
+      // v1.3 · Aparición escalonada de bloques (una sola vez)
+      var revealEls = document.querySelectorAll("[data-reveal]");
+      if (!reduce && "IntersectionObserver" in window) {
+        var rio = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              var el = entry.target;
+              el.classList.add("is-in");
+              var step = el.closest(".how-step");
+              if (step) step.classList.add("seen"); // la interfaz del paso se activa al aparecer
+              if (el.classList.contains("featured")) setTimeout(function () { el.classList.add("risen"); }, 760); // respaldo de animationend
+              rio.unobserve(el);
+            }
+          });
+        }, { threshold: 0.15, rootMargin: "0px 0px -8% 0px" });
+        revealEls.forEach(function (el) { rio.observe(el); });
+      } else {
+        revealEls.forEach(function (el) { el.classList.add("is-in"); });
+        document.querySelectorAll(".how-step").forEach(function (st) { st.classList.add("seen"); });
+      }
+      // Negocio: al terminar de levantarse queda en estado fijo (así funciona su hover)
+      var featured = document.querySelector(".plan.featured");
+      if (featured) {
+        if (reduce) featured.classList.add("risen");
+        featured.addEventListener("animationend", function (e) { if (e.animationName === "planRise") featured.classList.add("risen"); });
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Manrope:wght@400;500;600;700;800&display=block" rel="stylesheet">
+<link rel="stylesheet" href="ciclo-v2.css">
+<style>
+.wrap{padding:38px 44px;height:1000px;display:flex;flex-direction:column;gap:22px}
+.head{display:flex;align-items:flex-end;justify-content:space-between}
+h1{font-size:64px;line-height:.85;text-transform:uppercase}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:1fr 1fr;gap:22px;flex:1;min-height:0}
+.card{padding:22px 24px;display:flex;flex-direction:column;gap:16px;position:relative}
+.card h2{font-size:32px;line-height:1;text-transform:uppercase}
+.card p,.card li{font-size:14.5px;line-height:1.45;color:#2E4A40}
+.card ul{padding-left:18px;display:flex;flex-direction:column;gap:6px}
+.row{display:flex;gap:14px;align-items:flex-end}
+.s{display:flex;flex-direction:column;align-items:center;gap:8px;font-size:12px;font-weight:700;color:#4D635A;text-align:center}
+.yes{color:var(--bosque);font-weight:800}.no{color:#A8461A;font-weight:800}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.spec{display:grid;grid-template-columns:repeat(4,1fr);border:var(--b);border-radius:14px;box-shadow:5px 5px 0 var(--noche);overflow:hidden;height:160px}
+.spec>div{padding:14px 16px;border-right:2px solid var(--noche);display:flex;flex-direction:column;gap:5px}
+.spec>div:last-child{border:0}
+.spec h3{font-size:24px;text-transform:uppercase;line-height:1}
+.spec p{font-size:13px;line-height:1.4}
+.x{position:relative}
+.x::after{content:"";position:absolute;left:-6px;right:-6px;top:50%;height:3px;background:#A8461A;transform:rotate(-12deg)}
+</style></head><body>
+<div class="wrap">
+ <div class="head">
+  <div><div class="lbl" style="margin-bottom:8px">LealTab · Fase 2 · Ciclo v2</div><h1 class="disp">Reglas rápidas del estilo</h1></div>
+  <div style="font-size:13px;max-width:520px;line-height:1.45;color:#2E4A40;text-align:right">Minimal en el orden, neobrutal en los detalles. Cuando dudes, quita un elemento antes de agregar otro. Valores orientativos: se cierran en Fase 3 y Fase 4.</div>
+ </div>
+ <div class="grid">
+  <!-- contorno -->
+  <div class="box card">
+   <h2 class="disp">1 · Contorno</h2>
+   <div class="row" style="gap:18px">
+    <div class="s"><div style="width:92px;height:58px;border:1.5px solid var(--noche);border-radius:10px;background:var(--claro)"></div>1.5 px<br>tablas, divisiones</div>
+    <div class="s"><div style="width:92px;height:58px;border:2.5px solid var(--noche);border-radius:10px;background:var(--claro)"></div>2–2.5 px<br>producto</div>
+    <div class="s"><div style="width:92px;height:58px;border:3px solid var(--noche);border-radius:10px;background:var(--durazno)"></div>3 px<br>redes, mostrador</div>
+   </div>
+   <ul><li>Siempre en <b>noche #0F2A22</b>, nunca negro puro.</li><li>Un solo grosor por pieza; no mezclar 2 px y 3 px en el mismo componente.</li><li>Iconos de línea con el mismo grosor que el contorno.</li></ul>
+  </div>
+  <!-- sombra -->
+  <div class="box card">
+   <h2 class="disp">2 · Sombra dura</h2>
+   <div class="row" style="gap:22px">
+    <div class="s"><div style="width:84px;height:58px;border:2px solid var(--noche);border-radius:8px;background:var(--menta);box-shadow:3px 3px 0 var(--noche)"></div>3 px · stickers</div>
+    <div class="s"><div style="width:84px;height:58px;border:2.5px solid var(--noche);border-radius:10px;background:var(--claro);box-shadow:5px 5px 0 var(--noche)"></div>4–5 px · botón, tarjeta</div>
+    <div class="s"><div style="width:84px;height:58px;border:3px solid var(--noche);border-radius:12px;background:var(--durazno);box-shadow:8px 8px 0 var(--noche)"></div>6–8 px · marketing</div>
+   </div>
+   <ul><li>Sin desenfoque, abajo a la derecha, a 45°.</li><li>Al presionar: el botón baja a su sombra (se mueve 4 px y la sombra desaparece) en 90 ms.</li><li>Máximo un nivel de sombra visible por zona.</li></ul>
+  </div>
+  <!-- radios -->
+  <div class="box card">
+   <h2 class="disp">3 · Radios</h2>
+   <div class="row" style="gap:14px">
+    <div class="s"><div style="width:66px;height:54px;border:2px solid var(--noche);border-radius:6px;background:var(--claro)"></div>6<br>sticker</div>
+    <div class="s"><div style="width:66px;height:54px;border:2px solid var(--noche);border-radius:10px;background:var(--claro)"></div>10<br>botón, campo</div>
+    <div class="s"><div style="width:66px;height:54px;border:2px solid var(--noche);border-radius:14px;background:var(--claro)"></div>14<br>tarjeta</div>
+    <div class="s"><div style="width:66px;height:54px;border:2px solid var(--noche);border-radius:24px;background:var(--claro)"></div>24+<br>contenedor</div>
+   </div>
+   <ul><li>Redondeado medio: amable, no infantil. Evitar pastillas 100 % redondas en botones.</li><li>Los aros son la única forma totalmente circular del sistema.</li><li>Tipografía: Archivo condensada 800 solo en títulos de 24 px o más; texto y cifras en Manrope con cifras tabulares.</li></ul>
+  </div>
+  <!-- stickers -->
+  <div class="box card">
+   <h2 class="disp">4 · Stickers</h2>
+   <div class="two">
+    <div><div class="yes" style="font-size:14px;margin-bottom:10px">Sí</div>
+     <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px"><span class="stk" style="background:var(--menta);transform:rotate(-4deg);font-size:13px">Nuevo</span><span class="stk flat" style="background:var(--durazno)">Casi premio</span></div>
+     <p>Estados y novedades con significado: Nuevo, Casi premio, Te extrañamos, Frecuente. En marketing, uno rotado ±3–6°. En producto, planos, sin rotar ni sombra.</p></div>
+    <div><div class="no" style="font-size:14px;margin-bottom:10px">No</div>
+     <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;opacity:.55"><span class="stk" style="background:var(--durazno);transform:rotate(8deg);font-size:12px">¡Oferta!</span><span class="stk" style="background:var(--menta);transform:rotate(-9deg);font-size:12px">Wow</span></div>
+     <p>Más de 2 por pieza; sobre precios, cifras, errores o textos legales; como adorno sin significado; urgencias falsas.</p></div>
+   </div>
+  </div>
+  <!-- aros -->
+  <div class="box card">
+   <h2 class="disp">5 · Aros</h2>
+   <div class="two">
+    <div><div class="yes" style="font-size:14px;margin-bottom:8px">Sí</div>
+     <svg viewBox="0 0 120 70" style="width:150px;height:84px"><g fill="none" stroke-linecap="round"><circle cx="64" cy="64" r="44" stroke="#0F2A22" stroke-width="16" stroke-dasharray="190 277" transform="rotate(-200 64 64)"/><circle cx="60" cy="60" r="44" stroke="#0F2A22" stroke-width="16" stroke-dasharray="190 277" transform="rotate(-200 60 60)"/><circle cx="60" cy="60" r="44" stroke="#FF9F6E" stroke-width="11" stroke-dasharray="190 277" transform="rotate(-200 60 60)"/></g></svg>
+     <p>Uno grande por composición, abierto (arco, no círculo cerrado), saliendo del encuadre o concéntrico. Como gráfica de avance o retención.</p></div>
+    <div><div class="no" style="font-size:14px;margin-bottom:8px">No</div>
+     <div class="x" style="display:flex;gap:5px;margin:14px 0 18px;width:max-content"><i style="width:24px;height:24px;border:2px solid var(--noche);border-radius:50%;background:var(--bosque)"></i><i style="width:24px;height:24px;border:2px solid var(--noche);border-radius:50%;background:var(--bosque)"></i><i style="width:24px;height:24px;border:2px solid var(--noche);border-radius:50%;background:var(--bosque)"></i><i style="width:24px;height:24px;border:2px solid var(--noche);border-radius:50%"></i><i style="width:24px;height:24px;border:2px solid var(--noche);border-radius:50%"></i></div>
+     <p>Hileras de aros iguales (eso es una tarjeta de sellos), más de 3 concéntricos, aros con iconos dentro o planetas.</p></div>
+   </div>
+  </div>
+  <!-- movimiento -->
+  <div class="box card">
+   <h2 class="disp">6 · Movimiento</h2>
+   <ul>
+    <li><b>Arco:</b> se dibuja en 500–700 ms con salida suave y un pequeño impulso final. Es la animación firma (carga, logro, cliente que regresa).</li>
+    <li><b>Botón:</b> baja a su sombra al presionar, en 90 ms; sin rebotes.</li>
+    <li><b>Sticker:</b> entra con un giro de 4° en 200 ms; solo en marketing.</li>
+    <li><b>Dashboard:</b> transiciones de 150–200 ms, sin efectos decorativos. Respeta "reducir movimiento".</li>
+   </ul>
+  </div>
+ </div>
+ <div class="spec">
+  <div style="background:var(--claro)"><div class="lbl">Más minimal</div><h3 class="disp">Dashboard</h3><p>Contornos de 1.5–2 px y sombra solo en el contenedor y el botón principal. Stickers planos como estados. Aros únicamente como gráfica de datos.</p></div>
+  <div style="background:var(--lino)"><div class="lbl">&nbsp;</div><h3 class="disp">Tarjeta PWA</h3><p>Manda la marca del negocio. Un aro de avance y como máximo un sticker. "Hecho con LealTab", discreto.</p></div>
+  <div style="background:var(--menta)"><div class="lbl">&nbsp;</div><h3 class="disp">Landing y correos</h3><p>Titular condensado grande, un aro protagonista, un sticker de novedad y botón con flecha en bloque.</p></div>
+  <div style="background:var(--durazno)"><div class="lbl" style="color:var(--noche)">Más expresivo →</div><h3 class="disp">Redes y mostrador</h3><p>Fondo de color pleno, contornos de 3 px, sombras de 6–8 px, stickers rotados y tipografía muy grande, legible a 2 m.</p></div>
+ </div>
+</div>
+</body></html>

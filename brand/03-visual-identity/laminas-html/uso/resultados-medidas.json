@@ -1,0 +1,38 @@
+{
+ "gaps": {
+  "L·e": 5.03,
+  "e·a1": 5.53,
+  "a1·l": 3.83,
+  "l·T": 6.57,
+  "T·a2": 9.75,
+  "a2·b": 3.83,
+  "isotipo (hueco L·gancho)": 26.79
+ },
+ "counters": {
+  "e contraforma 0": {
+   "diam_inscrito": 21.02,
+   "alto": 21.34,
+   "ancho": 23.35
+  },
+  "a1 contraforma 0": {
+   "diam_inscrito": 20.44,
+   "alto": 24.81,
+   "ancho": 21.34
+  },
+  "a2 contraforma 0": {
+   "diam_inscrito": 20.45,
+   "alto": 24.81,
+   "ancho": 21.35
+  },
+  "b contraforma 0": {
+   "diam_inscrito": 22.99,
+   "alto": 54.55,
+   "ancho": 22.99
+  }
+ },
+ "astas": {
+  "L": 75.53,
+  "l": 26.27,
+  "T": null
+ }
+}

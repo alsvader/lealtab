@@ -1,0 +1,13 @@
+{
+  "extraKnownMarketplaces": {
+    "voltagent-subagents": {
+      "source": {
+        "source": "github",
+        "repo": "VoltAgent/awesome-claude-code-subagents"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "voltagent-research@voltagent-subagents": true
+  }
+}

@@ -1,0 +1,326 @@
+{
+ "horizontal 48px": {
+  "C_px": 7.4,
+  "alfa": {
+   "hueco L·e": 0.45,
+   "hueco e·a1": 0.7,
+   "hueco a1·l": 0.32,
+   "hueco l·T": 0.43,
+   "hueco T·a2": 0.37,
+   "hueco a2·b": 0.37,
+   "contraforma e": 0.44,
+   "contraforma a1": 0.12,
+   "contraforma b": 0.19,
+   "hueco isotipo": 0.02
+  }
+ },
+ "horizontal 64px": {
+  "C_px": 9.9,
+  "alfa": {
+   "hueco L·e": 0.42,
+   "hueco e·a1": 0.53,
+   "hueco a1·l": 0.42,
+   "hueco l·T": 0.39,
+   "hueco T·a2": 0.3,
+   "hueco a2·b": 0.43,
+   "contraforma e": 0.19,
+   "contraforma a1": 0.33,
+   "contraforma b": 0.08,
+   "hueco isotipo": 0.03
+  }
+ },
+ "horizontal 72px": {
+  "C_px": 11.1,
+  "alfa": {
+   "hueco L·e": 0.52,
+   "hueco e·a1": 0.65,
+   "hueco a1·l": 0.58,
+   "hueco l·T": 0.36,
+   "hueco T·a2": 0.22,
+   "hueco a2·b": 0.58,
+   "contraforma e": 0.07,
+   "contraforma a1": 0.22,
+   "contraforma b": 0.03,
+   "hueco isotipo": 0.01
+  }
+ },
+ "horizontal 80px": {
+  "C_px": 12.4,
+  "alfa": {
+   "hueco L·e": 0.33,
+   "hueco e·a1": 0.29,
+   "hueco a1·l": 0.49,
+   "hueco l·T": 0.23,
+   "hueco T·a2": 0.27,
+   "hueco a2·b": 0.52,
+   "contraforma e": 0.05,
+   "contraforma a1": 0.04,
+   "contraforma b": 0.01,
+   "hueco isotipo": 0.0
+  }
+ },
+ "horizontal 96px": {
+  "C_px": 14.8,
+  "alfa": {
+   "hueco L·e": 0.34,
+   "hueco e·a1": 0.56,
+   "hueco a1·l": 0.24,
+   "hueco l·T": 0.19,
+   "hueco T·a2": 0.27,
+   "hueco a2·b": 0.19,
+   "contraforma e": 0.02,
+   "contraforma a1": 0.05,
+   "contraforma b": 0.0,
+   "hueco isotipo": 0.0
+  }
+ },
+ "horizontal 112px": {
+  "C_px": 17.3,
+  "alfa": {
+   "hueco L·e": 0.37,
+   "hueco e·a1": 0.55,
+   "hueco a1·l": 0.45,
+   "hueco l·T": 0.09,
+   "hueco T·a2": 0.11,
+   "hueco a2·b": 0.49,
+   "contraforma e": 0.0,
+   "contraforma a1": 0.0,
+   "contraforma b": 0.0,
+   "hueco isotipo": 0.0
+  }
+ },
+ "horizontal 128px": {
+  "C_px": 19.8,
+  "alfa": {
+   "hueco L·e": 0.33,
+   "hueco e·a1": 0.15,
+   "hueco a1·l": 0.36,
+   "hueco l·T": 0.12,
+   "hueco T·a2": 0.01,
+   "hueco a2·b": 0.37,
+   "contraforma e": 0.0,
+   "contraforma a1": 0.0,
+   "contraforma b": 0.0,
+   "hueco isotipo": 0.0
+  }
+ },
+ "vertical 32px": {
+  "C_px": 7.6,
+  "alfa": {
+   "hueco L·e": 0.6,
+   "hueco e·a1": 0.53,
+   "hueco a1·l": 0.75,
+   "hueco l·T": 0.68,
+   "hueco T·a2": 0.4,
+   "hueco a2·b": 0.67,
+   "contraforma e": 0.59,
+   "contraforma a1": 0.61,
+   "contraforma b": 0.13,
+   "hueco isotipo": 0.02
+  }
+ },
+ "vertical 40px": {
+  "C_px": 9.5,
+  "alfa": {
+   "hueco L·e": 0.48,
+   "hueco e·a1": 0.67,
+   "hueco a1·l": 0.61,
+   "hueco l·T": 0.49,
+   "hueco T·a2": 0.25,
+   "hueco a2·b": 0.7,
+   "contraforma e": 0.27,
+   "contraforma a1": 0.26,
+   "contraforma b": 0.12,
+   "hueco isotipo": 0.0
+  }
+ },
+ "vertical 48px": {
+  "C_px": 11.4,
+  "alfa": {
+   "hueco L·e": 0.48,
+   "hueco e·a1": 0.41,
+   "hueco a1·l": 0.46,
+   "hueco l·T": 0.4,
+   "hueco T·a2": 0.44,
+   "hueco a2·b": 0.58,
+   "contraforma e": 0.2,
+   "contraforma a1": 0.2,
+   "contraforma b": 0.0,
+   "hueco isotipo": 0.0
+  }
+ },
+ "vertical 56px": {
+  "C_px": 13.3,
+  "alfa": {
+   "hueco L·e": 0.44,
+   "hueco e·a1": 0.51,
+   "hueco a1·l": 0.59,
+   "hueco l·T": 0.26,
+   "hueco T·a2": 0.19,
+   "hueco a2·b": 0.52,
+   "contraforma e": 0.06,
+   "contraforma a1": 0.05,
+   "contraforma b": 0.0,
+   "hueco isotipo": 0.0
+  }
+ },
+ "vertical 64px": {
+  "C_px": 15.2,
+  "alfa": {
+   "hueco L·e": 0.29,
+   "hueco e·a1": 0.47,
+   "hueco a1·l": 0.55,
+   "hueco l·T": 0.31,
+   "hueco T·a2": 0.15,
+   "hueco a2·b": 0.31,
+   "contraforma e": 0.05,
+   "contraforma a1": 0.01,
+   "contraforma b": 0.0,
+   "hueco isotipo": 0.0
+  }
+ },
+ "vertical 80px": {
+  "C_px": 19.0,
+  "alfa": {
+   "hueco L·e": 0.35,
+   "hueco e·a1": 0.48,
+   "hueco a1·l": 0.26,
+   "hueco l·T": 0.3,
+   "hueco T·a2": 0.16,
+   "hueco a2·b": 0.44,
+   "contraforma e": 0.0,
+   "contraforma a1": 0.0,
+   "contraforma b": 0.0,
+   "hueco isotipo": 0.0
+  }
+ },
+ "wordmark 32px": {
+  "C_px": 7.6,
+  "alfa": {
+   "hueco L·e": 0.48,
+   "hueco e·a1": 0.49,
+   "hueco a1·l": 0.75,
+   "hueco l·T": 0.59,
+   "hueco T·a2": 0.41,
+   "hueco a2·b": 0.68,
+   "contraforma e": 0.57,
+   "contraforma a1": 0.63,
+   "contraforma b": 0.14
+  }
+ },
+ "wordmark 40px": {
+  "C_px": 9.5,
+  "alfa": {
+   "hueco L·e": 0.56,
+   "hueco e·a1": 0.65,
+   "hueco a1·l": 0.63,
+   "hueco l·T": 0.53,
+   "hueco T·a2": 0.28,
+   "hueco a2·b": 0.7,
+   "contraforma e": 0.45,
+   "contraforma a1": 0.35,
+   "contraforma b": 0.21
+  }
+ },
+ "wordmark 48px": {
+  "C_px": 11.4,
+  "alfa": {
+   "hueco L·e": 0.46,
+   "hueco e·a1": 0.43,
+   "hueco a1·l": 0.47,
+   "hueco l·T": 0.35,
+   "hueco T·a2": 0.38,
+   "hueco a2·b": 0.57,
+   "contraforma e": 0.15,
+   "contraforma a1": 0.19,
+   "contraforma b": 0.0
+  }
+ },
+ "wordmark 56px": {
+  "C_px": 13.3,
+  "alfa": {
+   "hueco L·e": 0.34,
+   "hueco e·a1": 0.58,
+   "hueco a1·l": 0.59,
+   "hueco l·T": 0.24,
+   "hueco T·a2": 0.28,
+   "hueco a2·b": 0.48,
+   "contraforma e": 0.1,
+   "contraforma a1": 0.12,
+   "contraforma b": 0.12
+  }
+ },
+ "wordmark 64px": {
+  "C_px": 15.2,
+  "alfa": {
+   "hueco L·e": 0.31,
+   "hueco e·a1": 0.51,
+   "hueco a1·l": 0.57,
+   "hueco l·T": 0.37,
+   "hueco T·a2": 0.09,
+   "hueco a2·b": 0.48,
+   "contraforma e": 0.06,
+   "contraforma a1": 0.02,
+   "contraforma b": 0.0
+  }
+ },
+ "wordmark 80px": {
+  "C_px": 19.0,
+  "alfa": {
+   "hueco L·e": 0.46,
+   "hueco e·a1": 0.55,
+   "hueco a1·l": 0.26,
+   "hueco l·T": 0.32,
+   "hueco T·a2": 0.14,
+   "hueco a2·b": 0.57,
+   "contraforma e": 0.0,
+   "contraforma a1": 0.0,
+   "contraforma b": 0.0
+  }
+ },
+ "isotipo 12px": {
+  "C_px": null,
+  "alfa": {
+   "hueco isotipo": 0.08
+  }
+ },
+ "isotipo 16px": {
+  "C_px": null,
+  "alfa": {
+   "hueco isotipo": 0.01
+  }
+ },
+ "isotipo 20px": {
+  "C_px": null,
+  "alfa": {
+   "hueco isotipo": 0.01
+  }
+ },
+ "isotipo 24px": {
+  "C_px": null,
+  "alfa": {
+   "hueco isotipo": 0.0
+  }
+ },
+ "isotipo 32px": {
+  "C_px": null,
+  "alfa": {
+   "hueco isotipo": 0.0
+  }
+ },
+ "isotipo pixel-fit 16px": {
+  "alfa": {
+   "hueco isotipo": 0.0
+  }
+ },
+ "isotipo pixel-fit 24px": {
+  "alfa": {
+   "hueco isotipo": 0.0
+  }
+ },
+ "isotipo pixel-fit 32px": {
+  "alfa": {
+   "hueco isotipo": 0.0
+  }
+ }
+}

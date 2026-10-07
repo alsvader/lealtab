@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LealTab — Preview de tokens (Fase 4)</title>
+  <link rel="stylesheet" href="tokens.css" />
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--color-bg);
+      color: var(--color-text);
+      font-family: var(--font-body);
+      font-size: var(--font-size-body);
+      line-height: var(--font-line-body);
+      padding: var(--space-6) var(--space-5) var(--space-8);
+    }
+    main { max-width: 960px; margin: 0 auto; }
+    h1 {
+      font-family: var(--font-display);
+      font-weight: var(--font-weight-black);
+      font-stretch: condensed;
+      font-variation-settings: "wdth" 75, "wght" 800;
+      font-size: var(--font-size-h2);
+      line-height: var(--font-line-h2);
+      margin: 0 0 var(--space-2);
+    }
+    .lead {
+      font-size: var(--font-size-lead);
+      font-weight: var(--font-weight-medium);
+      line-height: var(--font-line-lead);
+      color: var(--color-text-muted);
+      margin: 0 0 var(--space-6);
+    }
+    section { margin-bottom: var(--space-7); }
+    h2 {
+      font-family: var(--font-display);
+      font-weight: var(--font-weight-black);
+      font-variation-settings: "wdth" 75, "wght" 800;
+      font-size: var(--font-size-h4);
+      line-height: var(--font-line-h4);
+      margin: 0 0 var(--space-4);
+      padding-bottom: var(--space-2);
+      border-bottom: var(--border-hair) solid var(--color-border);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: var(--space-4);
+    }
+    .swatch {
+      background: var(--color-surface);
+      border: var(--border-product) solid var(--color-border);
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+    }
+    .swatch .chip {
+      height: 72px;
+      border-bottom: var(--border-hair) solid var(--color-border);
+    }
+    .swatch figcaption {
+      padding: var(--space-2) var(--space-3);
+      font-size: var(--font-size-caption);
+      font-weight: var(--font-weight-semibold);
+      line-height: var(--font-line-caption);
+    }
+    .swatch code {
+      display: block;
+      font-family: var(--font-body);
+      font-variant-numeric: tabular-nums;
+      font-weight: var(--font-weight-regular);
+      color: var(--color-text-muted);
+      font-size: var(--font-size-label);
+      margin-top: 2px;
+    }
+    .status-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-2) var(--space-3);
+      border: var(--border-product) solid var(--color-border);
+      border-radius: var(--radius-sticker);
+      font-size: var(--font-size-ui);
+      font-weight: var(--font-weight-semibold);
+      line-height: var(--font-line-ui);
+    }
+    .type-sample {
+      background: var(--color-surface);
+      border: var(--border-product) solid var(--color-border);
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-card);
+      padding: var(--space-5);
+      display: grid;
+      gap: var(--space-3);
+    }
+    .type-sample .display {
+      font-family: var(--font-display);
+      font-weight: var(--font-weight-black);
+      font-variation-settings: "wdth" 75, "wght" 800;
+      font-size: clamp(40px, 10vw, 96px);
+      line-height: var(--font-line-display);
+      margin: 0;
+    }
+    .type-sample .h3 {
+      font-family: var(--font-display);
+      font-weight: var(--font-weight-black);
+      font-variation-settings: "wdth" 75, "wght" 800;
+      font-size: var(--font-size-h3);
+      line-height: var(--font-line-h3);
+      margin: 0;
+    }
+    .type-sample .body { margin: 0; }
+    .type-sample .ui {
+      font-size: var(--font-size-ui);
+      font-weight: var(--font-weight-medium);
+      line-height: var(--font-line-ui);
+      margin: 0;
+    }
+    .type-sample .label {
+      font-size: var(--font-size-label);
+      font-weight: var(--font-weight-bold);
+      letter-spacing: var(--font-tracking-label);
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin: 0;
+    }
+    .type-sample .stat {
+      font-size: var(--font-size-stat);
+      font-weight: var(--font-weight-bold);
+      line-height: var(--font-line-stat);
+      letter-spacing: var(--font-tracking-stat);
+      font-variant-numeric: tabular-nums;
+      margin: 0;
+    }
+    .space-bars { display: grid; gap: var(--space-2); }
+    .space-row {
+      display: grid;
+      grid-template-columns: 72px 1fr 48px;
+      align-items: center;
+      gap: var(--space-3);
+      font-size: var(--font-size-caption);
+      font-weight: var(--font-weight-semibold);
+      font-variant-numeric: tabular-nums;
+    }
+    .bar {
+      height: 12px;
+      background: var(--color-bosque);
+      border: var(--border-hair) solid var(--color-border);
+      border-radius: 2px;
+    }
+    .shape-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-5);
+      align-items: flex-end;
+    }
+    .shape {
+      background: var(--color-surface);
+      border: var(--border-product) solid var(--color-border);
+      width: 96px;
+      height: 72px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding: var(--space-2);
+      font-size: var(--font-size-label);
+      font-weight: var(--font-weight-bold);
+      letter-spacing: var(--font-tracking-label);
+      text-transform: uppercase;
+    }
+    .ring {
+      width: 72px;
+      height: 72px;
+      border-radius: var(--radius-full);
+      border: var(--border-marketing) solid var(--color-bosque);
+      box-shadow: var(--shadow-button);
+      background: transparent;
+    }
+    .btn-demo {
+      display: inline-block;
+      background: var(--color-brand);
+      color: var(--color-text-on-bosque);
+      font-family: var(--font-body);
+      font-size: var(--font-size-ui);
+      font-weight: var(--font-weight-semibold);
+      padding: var(--space-3) var(--space-5);
+      border: var(--border-product) solid var(--color-border);
+      border-radius: var(--radius-control);
+      box-shadow: var(--shadow-button);
+      cursor: pointer;
+      transition: transform var(--duration-ui) var(--easing-standard),
+                  box-shadow var(--duration-ui) var(--easing-standard);
+    }
+    .btn-demo:active {
+      transform: translate(4px, 4px);
+      box-shadow: 0 0 0 var(--color-shadow);
+    }
+    .note {
+      margin-top: var(--space-4);
+      font-size: var(--font-size-caption);
+      color: var(--color-text-muted);
+    }
+    .motion-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+    }
+    .chip-dur {
+      background: var(--color-surface);
+      border: var(--border-product) solid var(--color-border);
+      border-radius: var(--radius-control);
+      padding: var(--space-3) var(--space-4);
+      font-size: var(--font-size-ui);
+      font-weight: var(--font-weight-semibold);
+      font-variant-numeric: tabular-nums;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Tokens · Fase 4</h1>
+    <p class="lead">Vista rápida para Aarón. Colores, tipo, espacio, radio y sombra de Ciclo v2. Sin componentes todavía.</p>
+
+    <section>
+      <h2>Color primitivo</h2>
+      <div class="grid">
+        <figure class="swatch"><div class="chip" style="background:var(--color-lino)"></div><figcaption>Lino<code>#F3EFE6</code></figcaption></figure>
+        <figure class="swatch"><div class="chip" style="background:var(--color-blanco-lino)"></div><figcaption>Blanco lino<code>#FFFDF8</code></figcaption></figure>
+        <figure class="swatch"><div class="chip" style="background:var(--color-noche)"></div><figcaption style="color:var(--color-lino);background:var(--color-noche)">Noche<code style="color:var(--color-menta)">#0F2A22</code></figcaption></figure>
+        <figure class="swatch"><div class="chip" style="background:var(--color-bosque)"></div><figcaption style="color:var(--color-lino);background:var(--color-bosque)">Bosque<code style="color:var(--color-menta)">#0F4D3A</code></figcaption></figure>
+        <figure class="swatch"><div class="chip" style="background:var(--color-menta)"></div><figcaption>Menta gris<code>#CFE3D6</code></figcaption></figure>
+        <figure class="swatch"><div class="chip" style="background:var(--color-durazno)"></div><figcaption>Durazno<code>#FF9F6E</code></figcaption></figure>
+        <figure class="swatch"><div class="chip" style="background:var(--color-gris-noche)"></div><figcaption style="color:var(--color-lino);background:var(--color-gris-noche)">Gris noche<code style="color:var(--color-menta)">#4D635A</code></figcaption></figure>
+      </div>
+    </section>
+
+    <section>
+      <h2>Estados (propuesta de cierre)</h2>
+      <div class="status-row">
+        <span class="badge" style="background:var(--color-success-bg);color:var(--color-success)">Frecuente</span>
+        <span class="badge" style="background:var(--color-risk-bg);color:var(--color-risk)">En riesgo</span>
+        <span class="badge" style="background:var(--color-error-bg);color:var(--color-error)">Error</span>
+      </div>
+      <p class="note">Siempre color + palabra. Rojo solo para errores. Durazno de marca ≠ fondo de riesgo (Durazno claro).</p>
+    </section>
+
+    <section>
+      <h2>Tipografía</h2>
+      <div class="type-sample">
+        <p class="display">Regresa</p>
+        <p class="h3">Clientes</p>
+        <p class="body">Tu tarjeta digital siempre a un toque. Manrope 400 · 16 / 1.55</p>
+        <p class="ui">Interfaz 14 · dashboard y tablas</p>
+        <p class="label">Etiqueta · tabla</p>
+        <p class="stat">68 %</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Espaciado (base 4)</h2>
+      <div class="space-bars">
+        <div class="space-row"><span>space.1</span><div class="bar" style="width:4px"></div><span>4</span></div>
+        <div class="space-row"><span>space.2</span><div class="bar" style="width:8px"></div><span>8</span></div>
+        <div class="space-row"><span>space.3</span><div class="bar" style="width:12px"></div><span>12</span></div>
+        <div class="space-row"><span>space.4</span><div class="bar" style="width:16px"></div><span>16</span></div>
+        <div class="space-row"><span>space.5</span><div class="bar" style="width:24px"></div><span>24</span></div>
+        <div class="space-row"><span>space.6</span><div class="bar" style="width:32px"></div><span>32</span></div>
+        <div class="space-row"><span>space.7</span><div class="bar" style="width:48px"></div><span>48</span></div>
+        <div class="space-row"><span>space.8</span><div class="bar" style="width:64px"></div><span>64</span></div>
+      </div>
+      <p class="note">Retícula: 12 col desktop (gutter 24) · 4 col mobile (gutter 16).</p>
+    </section>
+
+    <section>
+      <h2>Radio, borde y sombra</h2>
+      <div class="shape-row">
+        <div class="shape" style="border-radius:var(--radius-sticker);box-shadow:var(--shadow-sticker);border-width:var(--border-marketing)">6 · 3px</div>
+        <div class="shape" style="border-radius:var(--radius-control);box-shadow:var(--shadow-button)">10 · 4px</div>
+        <div class="shape" style="border-radius:var(--radius-card);box-shadow:var(--shadow-card)">14 · 5px</div>
+        <div class="shape" style="border-radius:var(--radius-container);box-shadow:var(--shadow-social);width:120px">24 · 6px</div>
+        <div class="ring" title="Aro — única forma circular"></div>
+      </div>
+      <p style="margin-top:var(--space-5)">
+        <button type="button" class="btn-demo">Presióname</button>
+      </p>
+      <p class="note">Sombras duras sin blur, abajo-derecha, color noche. El botón baja a su sombra al hacer clic.</p>
+    </section>
+
+    <section>
+      <h2>Movimiento</h2>
+      <div class="motion-chips">
+        <span class="chip-dur">fast 150 ms</span>
+        <span class="chip-dur">ui 200 ms</span>
+        <span class="chip-dur">arc 600 ms (firma)</span>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,785 @@
+{
+ "nota": "El SVG es la fuente. Los PNG, PDF e ICO son exportaciones automáticas (laminas-html/entregables/exportar.py); nunca se editan a mano.",
+ "archivos": {
+  "README.md": {
+   "sha256": "418192095f62cd9b7a587f68e561d0837322b4c4eb43975f394679062bf20809",
+   "bytes": 3486,
+   "tipo": "documentación",
+   "fuente": null
+  },
+  "entregables.png": {
+   "sha256": "0b5b7d1e2c5746891f537cae27997e9be36c6c57cd1cf8f2147d926c10ab8c39",
+   "bytes": 226868,
+   "tipo": "exportación automática",
+   "fuente": null
+  },
+  "entregables.svg": {
+   "sha256": "76bff48d9ef6f584e1f4619bbb07582cdb79200c4bf799c04b0e5f566d4dbaaf",
+   "bytes": 194348,
+   "tipo": "maestro SVG",
+   "fuente": null
+  },
+  "impresion/lealtab-horizontal-negro.pdf": {
+   "sha256": "9a339bc9e39d818bdddeae959c2037334f876f7354ae616a84ce0feb11440ef0",
+   "bytes": 5054,
+   "tipo": "exportación automática",
+   "fuente": "impresion/lealtab-horizontal-negro.svg"
+  },
+  "impresion/lealtab-horizontal-negro.svg": {
+   "sha256": "99cf838e9cf495588452a56e9c80992959298ca85bce8c39a1105bd4b28e4a8e",
+   "bytes": 5876,
+   "tipo": "maestro SVG",
+   "fuente": "svg/lealtab-horizontal-negro.svg"
+  },
+  "impresion/lealtab-horizontal-noche.pdf": {
+   "sha256": "d87b4dd7afe7e64d483fc3e1fb8c39d16ea90383e0549773c1a9b8cf8995326d",
+   "bytes": 5063,
+   "tipo": "exportación automática",
+   "fuente": "impresion/lealtab-horizontal-noche.svg"
+  },
+  "impresion/lealtab-horizontal-noche.svg": {
+   "sha256": "532ace3d8c2ab4ad98c8f59ea8c6cdf624e53b6905e39c4b0d11ca4208d04582",
+   "bytes": 5858,
+   "tipo": "maestro SVG",
+   "fuente": "svg/lealtab-horizontal-noche.svg"
+  },
+  "impresion/lealtab-isotipo-negro.pdf": {
+   "sha256": "8207164b8e9fe97eda140ca973eac293e758a2a0dd766ac81591aa3813034725",
+   "bytes": 1837,
+   "tipo": "exportación automática",
+   "fuente": "impresion/lealtab-isotipo-negro.svg"
+  },
+  "impresion/lealtab-isotipo-negro.svg": {
+   "sha256": "967c8cc08d298af4950d09358a26d01eeaadc0510ddba7359723fcf54908edb6",
+   "bytes": 1527,
+   "tipo": "maestro SVG",
+   "fuente": "svg/lealtab-isotipo-negro.svg"
+  },
+  "impresion/lealtab-isotipo-noche.pdf": {
+   "sha256": "9eb1555ab7444cef1d9f3078d955eb227dcc7ef666c41e0c3eb3f9b3bf275425",
+   "bytes": 1845,
+   "tipo": "exportación automática",
+   "fuente": "impresion/lealtab-isotipo-noche.svg"
+  },
+  "impresion/lealtab-isotipo-noche.svg": {
+   "sha256": "a34b8223880b6123256da237ccd31bf58e22e21d5d306e4c6107af836984fa13",
+   "bytes": 1509,
+   "tipo": "maestro SVG",
+   "fuente": "svg/lealtab-isotipo-noche.svg"
+  },
+  "impresion/lealtab-vertical-negro.pdf": {
+   "sha256": "50ec30c1ce48084d373570bd802a772a64f66e7427a6382a38a62e86c61983ab",
+   "bytes": 5090,
+   "tipo": "exportación automática",
+   "fuente": "impresion/lealtab-vertical-negro.svg"
+  },
+  "impresion/lealtab-vertical-negro.svg": {
+   "sha256": "ed0aa494e5298d02e56e5f44be0bb9b355c17950381c35ff19a36141776e8ee8",
+   "bytes": 5966,
+   "tipo": "maestro SVG",
+   "fuente": "svg/lealtab-vertical-negro.svg"
+  },
+  "impresion/lealtab-vertical-noche.pdf": {
+   "sha256": "4858a706c069b01b960ec2e23bd9759438f537ad9d0ed36196d50327238852a1",
+   "bytes": 5099,
+   "tipo": "exportación automática",
+   "fuente": "impresion/lealtab-vertical-noche.svg"
+  },
+  "impresion/lealtab-vertical-noche.svg": {
+   "sha256": "5b87a878af2787f8f7767dfd1b9934071aaede2ac93c6cfb88268580cbccf63e",
+   "bytes": 5948,
+   "tipo": "maestro SVG",
+   "fuente": "svg/lealtab-vertical-noche.svg"
+  },
+  "impresion/lealtab-wordmark-negro.pdf": {
+   "sha256": "13f97f5ddf5b591eb7121c0c61f7195ddb68aa571e3ee0999d46cba3047f60cf",
+   "bytes": 4308,
+   "tipo": "exportación automática",
+   "fuente": "impresion/lealtab-wordmark-negro.svg"
+  },
+  "impresion/lealtab-wordmark-negro.svg": {
+   "sha256": "723e465b6bfeaaeb935dc0432e2a8a16fb49e09ead51442f332a077727da69d0",
+   "bytes": 4867,
+   "tipo": "maestro SVG",
+   "fuente": "svg/lealtab-wordmark-negro.svg"
+  },
+  "impresion/lealtab-wordmark-noche.pdf": {
+   "sha256": "aaa2526a3071fc50e0eb1dd965b3b441a39f7148878a0e1d8cd71f52d1bd98aa",
+   "bytes": 4316,
+   "tipo": "exportación automática",
+   "fuente": "impresion/lealtab-wordmark-noche.svg"
+  },
+  "impresion/lealtab-wordmark-noche.svg": {
+   "sha256": "a44fd6b44690eb25d48f671f29e41748aa46fc668c79bba9c7c715a797cbd6b4",
+   "bytes": 4849,
+   "tipo": "maestro SVG",
+   "fuente": "svg/lealtab-wordmark-noche.svg"
+  },
+  "png/horizontal/lealtab-horizontal-blanco-con-area-1024.png": {
+   "sha256": "0eaa64ede4bc522e92bf3cb373522a2c94ffc45cd88e9c8af974205e8f00ec31",
+   "bytes": 13209,
+   "tipo": "exportación automática",
+   "fuente": "svg/lealtab-horizontal-blanco-con-area.svg"
+  },
+  "png/horizontal/lealtab-horizontal-blanco-con-area-2048.png": {
+   "sha256": "52b0b73a6abc6c66e2659e5c034214722979a59d70be2216e09ebb2ecc53fb2d",
+   "bytes": 29416,
+   "tipo": "exportación automática",
+   "fuente": "svg/lealtab-horizontal-blanco-con-area.svg"
+  },
+  "png/horizontal/lealtab-horizontal-blanco-con-area-512.png": {
+   "sha256": "2d43d781fb9802d0551d216ad64803602c14de808d7e14db2bb15284421eff63",
+   "bytes": 6114,
+   "tipo": "exportación automática",
+   "fuente": "svg/lealtab-horizontal-blanco-con-area.svg"
+  },
+  "png/horizontal/lealtab-horizontal-lino-con-area-1024.png": {
+   "sha256": "82fce96e830fef44d08e72c6fff4ba04af42fe456dddeb50112967d98ef38402",
+   "bytes": 17243,
+   "tipo": "exportación automática",
+   "fuente": "svg/lealtab-horizontal-lino-con-area.svg"
+  },
+  "png/horizontal/lealtab-horizontal-lino-con-area-2048.png": {
+   "sha256": "91cf74a8f0b5c33fa1d9745aaa561064f9388b4d39e2a3702f6b82e4cc2a3548",
+   "bytes": 37550,
+   "tipo": "exportación automática",
+   "fuente": "svg/lealtab-horizontal-lino-con-area.svg"
+  },
+  "png/horizontal/lealtab-horizontal-lino-con-area-512.png": {
+   "sha256": "f7cdf34a3121660188fa619b3a0dd0eede29b4fd2f9ddfc46d2667281c46e54c",
+   "bytes": 8076,
+   "tipo": "exportación automática",
+   "fuente": "svg/lealtab-horizontal-lino-con-area.svg"
+  },
+  "png/horizontal/lealtab-horizontal-lino-fondo-noche-con-area-1024.png": {
+   "sha256": "02558a6c3f7f0a5495bf7ea66eeadc6c5edbb674f2f15fe2b6721a89dc9c4827",
+   "bytes": 18531,
+   "tipo": "exportación automática",
+   "fuente": "svg/lealtab-horizontal-lino-fondo-noche-con-area.svg"
+  },
+  "png/horizontal/lealtab-horizontal-lino-fondo-noche-con-area-2048.png": {
+   "sha256": "229d7fd588e9e86c11c6ed68e473d554dd1300d7547636ded26872c0d1601aae",
+   "bytes": 40536,
+   "tipo": "exportación automática",
+   "fuente": "svg/lealtab-horizontal-lino-fondo-noche-con-area.svg"
+  },
+  "png/horizontal/lealtab-horizontal-lino-fondo-noche-con-area-512.png": {
+   "sha256": "3bbb623c2c98c0208df395d3cc1e81a52dee6042ae06b7e779d8839d91b5ec54",
+   "bytes": 8724,
+   "tipo": "exportación automática",
+   "fuente": "svg/lealtab-horizontal-lino-fondo-noche-con-area.svg"
+  },
+  "png/horizontal/lealtab-horizontal-negro-con-area-1024.png": {
+   "sha256": "9b0a6b894bca3e6088295275d0e66b1ae171740a73ad194c67e956d7d4ca05ca",
+   "bytes": 11930,
+   "tipo": "exportación automática",
+   "fuente": "svg/lealtab-horizontal-negro-con-area.svg"
+  },
+  "png/horizontal/lealtab-horizontal-negro-con-area-2048.png": {
+   "sha256": "4870b150650d090537eda05790f6039a32cdead27bacd83e9a299bf834605f98",
+   "bytes": 26792,
+   "tipo": "exportación automática",
+   "fuente": "svg/lealtab-horizontal-negro-con-area.svg"
+  },
+  "png/horizontal/lealtab-horizontal-negro-con-area-512.png": {
+   "sha256": "a66080dac4f54db94f35cc255628cad709653fbbf4fcab9d86231bdc76ed250c",
+   "bytes": 5448,
+   "tipo": "exportación automática",
+   "fuente": "svg/lealtab-horizontal-negro-con-area.svg"
+  },
+  "png/horizontal/lealtab-horizontal-noche-con-area-1024.png": {
+   "sha256": "9b4ac06c0ed44bbfffef042a491f14608ccbd47e3858247fc5a4d56e8430a85f",
+   "bytes": 17349,
+   "tipo": "exportación automática",
+   "fuente": "svg/lealtab-horizontal-noche-con-area.svg"
+  },
+  "png/horizontal/lealtab-horizontal-noche-con-area-2048.png": {
+   "sha256": "ab40433baa29874b66ff5357676688e0d7a5ab29f73c4d90d6d72b7503db41c7",
+   "bytes": 37683,
+   "tipo": "exportación automática",
+   "fuente": "svg/lealtab-horizontal-noche-con-area.svg"
+  },
+  "png/horizontal/lealtab-horizontal-noche-con-area-512.png": {
+   "sha256": "d5af39cf814bf8e3eeef8c38e1d72dcacb97bfdd301bbe98083470e342ed74d0",
+   "bytes": 8192,
+   "tipo": "exportación automática",
+   "fuente": "svg/lealtab-horizontal-noche-con-area.svg"
+  },
+  "png/isotipo/lealtab-isotipo-blanco-con-area-1024.png": {
+   "sha256": "95e4314337761c764cd50020b109668e8b7b2cf5955d186d95d0b613ba599cc2",
+   "bytes": 12912,
+   "tipo": "exportación automática",
+   "fuente": "svg/lealtab-isotipo-blanco-con-area.svg"
+  },
+  "png/isotipo/lealtab-isotipo-blanco-con-area-512.png": {
+   "sha256": "0a79520399ae4e38d3819ed93818fc3a45aceff558b03d73f193e82f5e7e630a",
+   "bytes": 5637,
+   "tipo": "exportación automática",
+   "fuente": "svg/lealtab-isotipo-blanco-con-area.svg"
+  },
+  "png/isotipo/lealtab-isotipo-lino-con-area-1024.png": {
+   "sha256": "2dce284a6c870fe5c09810e1a3db69687a0224799f8cd62c546a5bfdbb61e49a",
+   "bytes": 15382,
+   "tipo": "exportación automática",
+   "fuente": "svg/lealtab-isotipo-lino-con-area.svg"
+  },
+  "png/isotipo/lealtab-isotipo-lino-con-area-512.png": {
+   "sha256": "496aac0e0e6ef073afff1114cbb393bbed16de5a5cb9d0e785275a3f0db2052e",
+   "bytes": 6890,
+   "tipo": "exportación automática",
+   "fuente": "svg/lealtab-isotipo-lino-con-area.svg"
+  },
+  "png/isotipo/lealtab-isotipo-lino-fondo-noche-con-area-1024.png": {
+   "sha256": "8c570ee844c9cf4a24fae96c340e407913cda66baa9990b5c1c586832eb64b79",
+   "bytes": 17468,
+   "tipo": "exportación automática",
+   "fuente": "svg/lealtab-isotipo-lino-fondo-noche-con-area.svg"
+  },
+  "png/isotipo/lealtab-isotipo-lino-fondo-noche-con-area-512.png": {
+   "sha256": "befe635038965717c13ba070cec8c269a54e1c4c57a3f35c72be64745d6692e0",
+   "bytes": 7879,
+   "tipo": "exportación automática",
+   "fuente": "svg/lealtab-isotipo-lino-fondo-noche-con-area.svg"
+  },
+  "png/isotipo/lealtab-isotipo-negro-con-area-1024.png": {
+   "sha256": "8c136abc4dee37a7942d08f6ff971a7a4325371230b2e9061c885926f45a59e0",
+   "bytes": 11916,
+   "tipo": "exportación automática",
+   "fuente": "svg/lealtab-isotipo-negro-con-area.svg"
+  },
+  "png/isotipo/lealtab-isotipo-negro-con-area-512.png": {
+   "sha256": "ff2ae29b4d1cfb905e7f335647265304f34d3698076f2acf7f75c4184bceb35a",
+   "bytes": 4936,
+   "tipo": "exportación automática",
+   "fuente": "svg/lealtab-isotipo-negro-con-area.svg"
+  },
+  "png/isotipo/lealtab-isotipo-noche-con-area-1024.png": {
+   "sha256": "2b3c1b19db36824ee7486bf35017f93074719d32e863a90129cff663581e57e0",
+   "bytes": 15588,
+   "tipo": "exportación automática",
+   "fuente": "svg/lealtab-isotipo-noche-con-area.svg"
+  },
+  "png/isotipo/lealtab-isotipo-noche-con-area-512.png": {
+   "sha256": "26b00da96f56e2d11107518318d8609dafd21eaf247bdeea914820cf877d1521",
+   "bytes": 6982,
+   "tipo": "exportación automática",
+   "fuente": "svg/lealtab-isotipo-noche-con-area.svg"
+  },
+  "png/vertical/lealtab-vertical-blanco-con-area-1024.png": {
+   "sha256": "71c2b6396dbc2533ccf315a86fc221d96c4dae52867e69a9b3a640202bbb62e9",
+   "bytes": 21180,
+   "tipo": "exportación automática",
+   "fuente": "svg/lealtab-vertical-blanco-con-area.svg"
+  },
+  "png/vertical/lealtab-vertical-blanco-con-area-2048.png": {
+   "sha256": "458c1551a6ec48bb04bc1a2f0923feff27707a535c2bf7692ca11c0dcdf1bce0",
+   "bytes": 48994,
+   "tipo": "exportación automática",
+   "fuente": "svg/lealtab-vertical-blanco-con-area.svg"
+  },
+  "png/vertical/lealtab-vertical-blanco-con-area-512.png": {
+   "sha256": "bca0be30f8d90c7ae05d7c8b1d5dc89c4fa68bdbc94bb3286ec16728d90db172",
+   "bytes": 9525,
+   "tipo": "exportación automática",
+   "fuente": "svg/lealtab-vertical-blanco-con-area.svg"
+  },
+  "png/vertical/lealtab-vertical-lino-con-area-1024.png": {
+   "sha256": "a631143fadc1abc3913b48922cd0ab4f3c89f19eaf8fc34fecfd82481f4ed411",
+   "bytes": 27197,
+   "tipo": "exportación automática",
+   "fuente": "svg/lealtab-vertical-lino-con-area.svg"
+  },
+  "png/vertical/lealtab-vertical-lino-con-area-2048.png": {
+   "sha256": "969d09da44f0221c5a53c47a5198d70a122991295447b053d3244e567b640a6a",
+   "bytes": 60741,
+   "tipo": "exportación automática",
+   "fuente": "svg/lealtab-vertical-lino-con-area.svg"
+  },
+  "png/vertical/lealtab-vertical-lino-con-area-512.png": {
+   "sha256": "9bff057b330493a4f9c5a9bb5711dfd2f6e7c7f4fdc20ac79a8518b6822560f0",
+   "bytes": 12459,
+   "tipo": "exportación automática",
+   "fuente": "svg/lealtab-vertical-lino-con-area.svg"
+  },
+  "png/vertical/lealtab-vertical-lino-fondo-noche-con-area-1024.png": {
+   "sha256": "9a20514fc2543397fa1048d30500c76f5410ab895dc83c4f9cda7f4a5c4382be",
+   "bytes": 29404,
+   "tipo": "exportación automática",
+   "fuente": "svg/lealtab-vertical-lino-fondo-noche-con-area.svg"
+  },
+  "png/vertical/lealtab-vertical-lino-fondo-noche-con-area-2048.png": {
+   "sha256": "51718edfb565b0bd8b18dcf27f7944b965ac6dc24553eac688e4ae6d88aab7f8",
+   "bytes": 65404,
+   "tipo": "exportación automática",
+   "fuente": "svg/lealtab-vertical-lino-fondo-noche-con-area.svg"
+  },
+  "png/vertical/lealtab-vertical-lino-fondo-noche-con-area-512.png": {
+   "sha256": "c34037783194513793830603fad1b130c1312dabcdb3c48843b72569e9dd79f3",
+   "bytes": 13581,
+   "tipo": "exportación automática",
+   "fuente": "svg/lealtab-vertical-lino-fondo-noche-con-area.svg"
+  },
+  "png/vertical/lealtab-vertical-negro-con-area-1024.png": {
+   "sha256": "9189e7b76bacb0e0e66ed2eddd9d61e6081ac2f3824eba2fe190a80df89084d1",
+   "bytes": 19254,
+   "tipo": "exportación automática",
+   "fuente": "svg/lealtab-vertical-negro-con-area.svg"
+  },
+  "png/vertical/lealtab-vertical-negro-con-area-2048.png": {
+   "sha256": "526ad72909f11c272d9df1860e86474c05ef4babe7084dfd18941aba744feebc",
+   "bytes": 45475,
+   "tipo": "exportación automática",
+   "fuente": "svg/lealtab-vertical-negro-con-area.svg"
+  },
+  "png/vertical/lealtab-vertical-negro-con-area-512.png": {
+   "sha256": "071ffcbe2c2b405b3deea04c635fcb35014735ef85a113e10f83344aecffb77a",
+   "bytes": 8445,
+   "tipo": "exportación automática",
+   "fuente": "svg/lealtab-vertical-negro-con-area.svg"
+  },
+  "png/vertical/lealtab-vertical-noche-con-area-1024.png": {
+   "sha256": "6b98eb82299e7e0030d6cc2723737323c5103886656772edc5c8744e7d4542f6",
+   "bytes": 27379,
+   "tipo": "exportación automática",
+   "fuente": "svg/lealtab-vertical-noche-con-area.svg"
+  },
+  "png/vertical/lealtab-vertical-noche-con-area-2048.png": {
+   "sha256": "4aa04b759f202ac151f1cdfe7cafa08584203d5609efab0a56d8eba1af00b767",
+   "bytes": 61133,
+   "tipo": "exportación automática",
+   "fuente": "svg/lealtab-vertical-noche-con-area.svg"
+  },
+  "png/vertical/lealtab-vertical-noche-con-area-512.png": {
+   "sha256": "92c0e4a8ca7da859de13442227a24b00e16c6a5f0feba25ea460ba9752099d55",
+   "bytes": 12559,
+   "tipo": "exportación automática",
+   "fuente": "svg/lealtab-vertical-noche-con-area.svg"
+  },
+  "png/wordmark/lealtab-wordmark-blanco-con-area-1024.png": {
+   "sha256": "0be6995cb97473f2d900d0b7e29f4f44088790de72cd27acd92fac46eed0ba39",
+   "bytes": 13755,
+   "tipo": "exportación automática",
+   "fuente": "svg/lealtab-wordmark-blanco-con-area.svg"
+  },
+  "png/wordmark/lealtab-wordmark-blanco-con-area-512.png": {
+   "sha256": "5380448e13fb129142aba63e010bc6a89eed9cea8f718b35d658cccd7a078855",
+   "bytes": 6416,
+   "tipo": "exportación automática",
+   "fuente": "svg/lealtab-wordmark-blanco-con-area.svg"
+  },
+  "png/wordmark/lealtab-wordmark-lino-con-area-1024.png": {
+   "sha256": "df097bfb7ccb6ffd02b817ba34ad722c3765751a4afe8e4e1dbf0e8bdd4f43d2",
+   "bytes": 17881,
+   "tipo": "exportación automática",
+   "fuente": "svg/lealtab-wordmark-lino-con-area.svg"
+  },
+  "png/wordmark/lealtab-wordmark-lino-con-area-512.png": {
+   "sha256": "9addf9b14c011415dc4baa71bbde1adcb65f52551217584e4e4ab77d682284ec",
+   "bytes": 8551,
+   "tipo": "exportación automática",
+   "fuente": "svg/lealtab-wordmark-lino-con-area.svg"
+  },
+  "png/wordmark/lealtab-wordmark-lino-fondo-noche-con-area-1024.png": {
+   "sha256": "80a01e1afca761e890fd7dcd0eb24019c40027eb3ae1dc4e4fa7c1942b14ceb2",
+   "bytes": 19290,
+   "tipo": "exportación automática",
+   "fuente": "svg/lealtab-wordmark-lino-fondo-noche-con-area.svg"
+  },
+  "png/wordmark/lealtab-wordmark-lino-fondo-noche-con-area-512.png": {
+   "sha256": "7b99f51dc943fa260d13eff55d9ca896dd3b268ae883af1da07353702a32b375",
+   "bytes": 9228,
+   "tipo": "exportación automática",
+   "fuente": "svg/lealtab-wordmark-lino-fondo-noche-con-area.svg"
+  },
+  "png/wordmark/lealtab-wordmark-negro-con-area-1024.png": {
+   "sha256": "62750166f56d5eeff02283ca658860cb86d3973938ac34b093a8dc6d41aa32f1",
+   "bytes": 12392,
+   "tipo": "exportación automática",
+   "fuente": "svg/lealtab-wordmark-negro-con-area.svg"
+  },
+  "png/wordmark/lealtab-wordmark-negro-con-area-512.png": {
+   "sha256": "17e60aff65136205db5e5ca191148ec556afaec6e62ce1b6c257689544e5898e",
+   "bytes": 5831,
+   "tipo": "exportación automática",
+   "fuente": "svg/lealtab-wordmark-negro-con-area.svg"
+  },
+  "png/wordmark/lealtab-wordmark-noche-con-area-1024.png": {
+   "sha256": "c1699e223827ca8d158bf18383f349b6153f578561a7de75ac0a5c3d52aad523",
+   "bytes": 17912,
+   "tipo": "exportación automática",
+   "fuente": "svg/lealtab-wordmark-noche-con-area.svg"
+  },
+  "png/wordmark/lealtab-wordmark-noche-con-area-512.png": {
+   "sha256": "d8ac59a405d4ef22f4693b493c5ed60bb039d71168e9c361353b29e6f646ec7f",
+   "bytes": 8543,
+   "tipo": "exportación automática",
+   "fuente": "svg/lealtab-wordmark-noche-con-area.svg"
+  },
+  "redes/lealtab-avatar-lino-circulo-1080.png": {
+   "sha256": "9ef7211a98edcb84b57eb672c4e211d1ac5fe4000d6b5289e5327dd4d93b4e3b",
+   "bytes": 41085,
+   "tipo": "exportación automática",
+   "fuente": "iconos/avatar/lealtab-avatar-lino-400.svg"
+  },
+  "redes/lealtab-avatar-lino-circulo-400.png": {
+   "sha256": "d359fe046e7475b2e67b4c3b00301187c39e097315564637aa491da18ac9d63f",
+   "bytes": 13706,
+   "tipo": "exportación automática",
+   "fuente": "iconos/avatar/lealtab-avatar-lino-400.svg"
+  },
+  "redes/lealtab-avatar-lino-cuadrado-1080.png": {
+   "sha256": "d13860edd29e6591d534328187804789147cf3d64c4003711c7c4ff3635fcb43",
+   "bytes": 19054,
+   "tipo": "exportación automática",
+   "fuente": "redes/lealtab-avatar-lino-cuadrado.svg"
+  },
+  "redes/lealtab-avatar-lino-cuadrado-400.png": {
+   "sha256": "b11f3b752ee6923a28dc97298849b2a34ca6bf031c5e25be1fd881a6ea9d328f",
+   "bytes": 6070,
+   "tipo": "exportación automática",
+   "fuente": "redes/lealtab-avatar-lino-cuadrado.svg"
+  },
+  "redes/lealtab-avatar-lino-cuadrado.svg": {
+   "sha256": "20a6fb34455fca2c37584ae2a355f33b16e89adf21dc1cb2b8e2c1b50831d0f0",
+   "bytes": 1718,
+   "tipo": "maestro SVG",
+   "fuente": "iconos/avatar/lealtab-avatar-lino-400.svg (círculo → cuadrado)"
+  },
+  "redes/lealtab-avatar-noche-circulo-1080.png": {
+   "sha256": "41386ecefa57e9ab0f5e6abef16db55ffff5e4b7cdb72c047e3e61c07ae18cfe",
+   "bytes": 41129,
+   "tipo": "exportación automática",
+   "fuente": "iconos/avatar/lealtab-avatar-noche-400.svg"
+  },
+  "redes/lealtab-avatar-noche-circulo-400.png": {
+   "sha256": "3731975a0d9f32bee131261fa7e58ea922a229f21ce7fb804c93cc619942a383",
+   "bytes": 13786,
+   "tipo": "exportación automática",
+   "fuente": "iconos/avatar/lealtab-avatar-noche-400.svg"
+  },
+  "redes/lealtab-avatar-noche-cuadrado-1080.png": {
+   "sha256": "b2c2d8c75b234ec643fecedb84553b9cd47e8421dbb101823d4a08e148959126",
+   "bytes": 19034,
+   "tipo": "exportación automática",
+   "fuente": "redes/lealtab-avatar-noche-cuadrado.svg"
+  },
+  "redes/lealtab-avatar-noche-cuadrado-400.png": {
+   "sha256": "6e773e111bd3da3f7d489efa8049acf36ea2e1b6aa08ce28e1b2e45c336ef653",
+   "bytes": 6062,
+   "tipo": "exportación automática",
+   "fuente": "redes/lealtab-avatar-noche-cuadrado.svg"
+  },
+  "redes/lealtab-avatar-noche-cuadrado.svg": {
+   "sha256": "0f7aa600b71d5f35a7e714c29544d6698b19d6bdf72ccf44acecf5cf76a4162d",
+   "bytes": 1719,
+   "tipo": "maestro SVG",
+   "fuente": "iconos/avatar/lealtab-avatar-noche-400.svg (círculo → cuadrado)"
+  },
+  "redes/lealtab-portada-facebook-1640x624.png": {
+   "sha256": "8e149a8c860f17df126abd6d7e089ed4119ed5ef87d9d48da32e94fd1501b34d",
+   "bytes": 16148,
+   "tipo": "exportación automática",
+   "fuente": "redes/lealtab-portada-facebook.svg"
+  },
+  "redes/lealtab-portada-facebook.svg": {
+   "sha256": "3efe5c1fdc9b7c06eb8380a4f99df29555666b079c775cd4a76c6f174afe9396",
+   "bytes": 6096,
+   "tipo": "maestro SVG",
+   "fuente": "sistema/lealtab-horizontal-lino.svg"
+  },
+  "svg/lealtab-horizontal-blanco-con-area.svg": {
+   "sha256": "4de96c9b4f671312375ac3372ceaee4518e6ed35ffa4833ee0c2030f7e979318",
+   "bytes": 5939,
+   "tipo": "maestro SVG",
+   "fuente": "sistema/lealtab-horizontal-blanco.svg"
+  },
+  "svg/lealtab-horizontal-blanco.svg": {
+   "sha256": "9b3a6c31c3f05f3027b3a9a93aae1efe4201a08d2ae879cff1d434046704f190",
+   "bytes": 5865,
+   "tipo": "maestro SVG",
+   "fuente": "sistema/lealtab-horizontal-blanco.svg"
+  },
+  "svg/lealtab-horizontal-lino-con-area.svg": {
+   "sha256": "cf720ceeb7084dc80373c6e20c911344b5fbdfdd0f80512bf5e093d9eef226cf",
+   "bytes": 5931,
+   "tipo": "maestro SVG",
+   "fuente": "sistema/lealtab-horizontal-lino.svg"
+  },
+  "svg/lealtab-horizontal-lino-fondo-noche-con-area.svg": {
+   "sha256": "687c4c251569e082a65c09c973a0aecb7b9072a57b791e7cb08a2a0f6e1e6704",
+   "bytes": 6010,
+   "tipo": "maestro SVG",
+   "fuente": "sistema/lealtab-horizontal-lino-fondo-noche.svg"
+  },
+  "svg/lealtab-horizontal-lino-fondo-noche.svg": {
+   "sha256": "2194bd4eff69501a7df7434e03f4f29d790c88e59b7253615f140f98857f89e9",
+   "bytes": 6024,
+   "tipo": "maestro SVG",
+   "fuente": "sistema/lealtab-horizontal-lino-fondo-noche.svg"
+  },
+  "svg/lealtab-horizontal-lino.svg": {
+   "sha256": "e9d2accbb5f1be4d941ac21ba1780c5ff346b41ffc87b5dd8036555c63af5821",
+   "bytes": 5857,
+   "tipo": "maestro SVG",
+   "fuente": "sistema/lealtab-horizontal-lino.svg"
+  },
+  "svg/lealtab-horizontal-negro-con-area.svg": {
+   "sha256": "43d8ea11e459f64a40ada458f6be19b257ec4e6470a367c044772b4fa3a912bd",
+   "bytes": 5950,
+   "tipo": "maestro SVG",
+   "fuente": "sistema/lealtab-horizontal-negro.svg"
+  },
+  "svg/lealtab-horizontal-negro.svg": {
+   "sha256": "99cf838e9cf495588452a56e9c80992959298ca85bce8c39a1105bd4b28e4a8e",
+   "bytes": 5876,
+   "tipo": "maestro SVG",
+   "fuente": "sistema/lealtab-horizontal-negro.svg"
+  },
+  "svg/lealtab-horizontal-noche-con-area.svg": {
+   "sha256": "3fb10aebc3df105da7472e8a696d4dc6aa2614ab3b13449ddf3b2e3321d12735",
+   "bytes": 5932,
+   "tipo": "maestro SVG",
+   "fuente": "sistema/lealtab-horizontal-noche.svg"
+  },
+  "svg/lealtab-horizontal-noche.svg": {
+   "sha256": "532ace3d8c2ab4ad98c8f59ea8c6cdf624e53b6905e39c4b0d11ca4208d04582",
+   "bytes": 5858,
+   "tipo": "maestro SVG",
+   "fuente": "sistema/lealtab-horizontal-noche.svg"
+  },
+  "svg/lealtab-isotipo-blanco-con-area.svg": {
+   "sha256": "4f4a18193eb35b33f7c09c334785c4516a6789e4073596c2c3699ec2955db64c",
+   "bytes": 1590,
+   "tipo": "maestro SVG",
+   "fuente": "sistema/lealtab-isotipo-blanco.svg"
+  },
+  "svg/lealtab-isotipo-blanco.svg": {
+   "sha256": "dc7be2f8d31a316b649a503f85a3cb45cb588d8f38134068e7d477a001ef9b23",
+   "bytes": 1516,
+   "tipo": "maestro SVG",
+   "fuente": "sistema/lealtab-isotipo-blanco.svg"
+  },
+  "svg/lealtab-isotipo-lino-con-area.svg": {
+   "sha256": "5acba18a8006d49e89c9c9e6a584a3a5c0f9da89e0a04ee6f7ca7fcb6992e7ec",
+   "bytes": 1582,
+   "tipo": "maestro SVG",
+   "fuente": "sistema/lealtab-isotipo-lino.svg"
+  },
+  "svg/lealtab-isotipo-lino-fondo-noche-con-area.svg": {
+   "sha256": "3914f7ec061779bf9a4dd09d8e4a6c95c794f6d516979a42d1f2713a1eb6061c",
+   "bytes": 1658,
+   "tipo": "maestro SVG",
+   "fuente": "sistema/lealtab-isotipo-lino-fondo-noche.svg"
+  },
+  "svg/lealtab-isotipo-lino-fondo-noche.svg": {
+   "sha256": "e4298c996bf6f0cc9052d4aba0a3d739f94f766ed5da35922782c06fc9a9bb08",
+   "bytes": 1681,
+   "tipo": "maestro SVG",
+   "fuente": "sistema/lealtab-isotipo-lino-fondo-noche.svg"
+  },
+  "svg/lealtab-isotipo-lino.svg": {
+   "sha256": "e9aa8eedaadd9f6ca0a94ae25bd93da3f82bf38ec9fbead425396c3c506e1c38",
+   "bytes": 1508,
+   "tipo": "maestro SVG",
+   "fuente": "sistema/lealtab-isotipo-lino.svg"
+  },
+  "svg/lealtab-isotipo-negro-con-area.svg": {
+   "sha256": "70ff40d4bf6fcc38d0e80e8b29b24f9744eac24918dbb12d51eb77aeb417b180",
+   "bytes": 1601,
+   "tipo": "maestro SVG",
+   "fuente": "sistema/lealtab-isotipo-negro.svg"
+  },
+  "svg/lealtab-isotipo-negro.svg": {
+   "sha256": "967c8cc08d298af4950d09358a26d01eeaadc0510ddba7359723fcf54908edb6",
+   "bytes": 1527,
+   "tipo": "maestro SVG",
+   "fuente": "sistema/lealtab-isotipo-negro.svg"
+  },
+  "svg/lealtab-isotipo-noche-con-area.svg": {
+   "sha256": "be05adac74c2e3204e30268e1fbc6f7735a0bbf681b400e727164466ec656987",
+   "bytes": 1583,
+   "tipo": "maestro SVG",
+   "fuente": "sistema/lealtab-isotipo-noche.svg"
+  },
+  "svg/lealtab-isotipo-noche.svg": {
+   "sha256": "a34b8223880b6123256da237ccd31bf58e22e21d5d306e4c6107af836984fa13",
+   "bytes": 1509,
+   "tipo": "maestro SVG",
+   "fuente": "sistema/lealtab-isotipo-noche.svg"
+  },
+  "svg/lealtab-vertical-blanco-con-area.svg": {
+   "sha256": "94fd53b2971f6bbfc6baeb226c32dd98c534ebc55b3df2d77bc32127a0f9f812",
+   "bytes": 6029,
+   "tipo": "maestro SVG",
+   "fuente": "sistema/lealtab-vertical-blanco.svg"
+  },
+  "svg/lealtab-vertical-blanco.svg": {
+   "sha256": "37d6b81a2283a87ee79116806b5e54186035c81934e5053d6206523f36bc9c9d",
+   "bytes": 5955,
+   "tipo": "maestro SVG",
+   "fuente": "sistema/lealtab-vertical-blanco.svg"
+  },
+  "svg/lealtab-vertical-lino-con-area.svg": {
+   "sha256": "183ca8717c33e21761039da632c40cceb03fd3f5f2c8f74c4aa30e0fd260a5c8",
+   "bytes": 6021,
+   "tipo": "maestro SVG",
+   "fuente": "sistema/lealtab-vertical-lino.svg"
+  },
+  "svg/lealtab-vertical-lino-fondo-noche-con-area.svg": {
+   "sha256": "8fa0a98c488476159d6940385aa72a4e413bcb72a4397d42fc7d3c0ac18241d2",
+   "bytes": 6106,
+   "tipo": "maestro SVG",
+   "fuente": "sistema/lealtab-vertical-lino-fondo-noche.svg"
+  },
+  "svg/lealtab-vertical-lino-fondo-noche.svg": {
+   "sha256": "aa54683dbd6464291b8ec3be1812f112db68ee0a58f956cea444d637d5062213",
+   "bytes": 6079,
+   "tipo": "maestro SVG",
+   "fuente": "sistema/lealtab-vertical-lino-fondo-noche.svg"
+  },
+  "svg/lealtab-vertical-lino.svg": {
+   "sha256": "f80d19eb510cd3cec93286465be79f3bee34b7ae9db81bd84d7a3f07a6a4df46",
+   "bytes": 5947,
+   "tipo": "maestro SVG",
+   "fuente": "sistema/lealtab-vertical-lino.svg"
+  },
+  "svg/lealtab-vertical-negro-con-area.svg": {
+   "sha256": "68acc30caaed1e2113c9d3c247deb37074b3554538bca27a83a39936e8061364",
+   "bytes": 6040,
+   "tipo": "maestro SVG",
+   "fuente": "sistema/lealtab-vertical-negro.svg"
+  },
+  "svg/lealtab-vertical-negro.svg": {
+   "sha256": "ed0aa494e5298d02e56e5f44be0bb9b355c17950381c35ff19a36141776e8ee8",
+   "bytes": 5966,
+   "tipo": "maestro SVG",
+   "fuente": "sistema/lealtab-vertical-negro.svg"
+  },
+  "svg/lealtab-vertical-noche-con-area.svg": {
+   "sha256": "73e6418719d9417cfae78547b5a94dd93612abd1968de7132099b3da91329636",
+   "bytes": 6022,
+   "tipo": "maestro SVG",
+   "fuente": "sistema/lealtab-vertical-noche.svg"
+  },
+  "svg/lealtab-vertical-noche.svg": {
+   "sha256": "5b87a878af2787f8f7767dfd1b9934071aaede2ac93c6cfb88268580cbccf63e",
+   "bytes": 5948,
+   "tipo": "maestro SVG",
+   "fuente": "sistema/lealtab-vertical-noche.svg"
+  },
+  "svg/lealtab-wordmark-blanco-con-area.svg": {
+   "sha256": "acccb060195b32646d5613054cdcc1a6ac7fe60436d6c42bea5d211f64679eb2",
+   "bytes": 4930,
+   "tipo": "maestro SVG",
+   "fuente": "sistema/lealtab-wordmark-blanco.svg"
+  },
+  "svg/lealtab-wordmark-blanco.svg": {
+   "sha256": "5e5a85683c3ea2fe761dbe0b661fe77cbe00b8005f02fba8859e786ecc6dfc29",
+   "bytes": 4856,
+   "tipo": "maestro SVG",
+   "fuente": "sistema/lealtab-wordmark-blanco.svg"
+  },
+  "svg/lealtab-wordmark-lino-con-area.svg": {
+   "sha256": "5f26af3eb69e107e14f5e6f16b10f85dbb6c248d1fa3d5089db3bf1067e1dc45",
+   "bytes": 4922,
+   "tipo": "maestro SVG",
+   "fuente": "sistema/lealtab-wordmark-lino.svg"
+  },
+  "svg/lealtab-wordmark-lino-fondo-noche-con-area.svg": {
+   "sha256": "4bb95b2e2c353b86ee572eac1250810d9400217a9b6ee0fef17fee515bd4bc34",
+   "bytes": 5004,
+   "tipo": "maestro SVG",
+   "fuente": "sistema/lealtab-wordmark-lino-fondo-noche.svg"
+  },
+  "svg/lealtab-wordmark-lino-fondo-noche.svg": {
+   "sha256": "718c41c83dd6d5b42700a0a815ee74ab93ac194db4ef23c9ffe203e6b670b3b5",
+   "bytes": 5009,
+   "tipo": "maestro SVG",
+   "fuente": "sistema/lealtab-wordmark-lino-fondo-noche.svg"
+  },
+  "svg/lealtab-wordmark-lino.svg": {
+   "sha256": "6fde111389a3549b4f350830aaed43b79e892390dd44caaa3271e502ae179dc9",
+   "bytes": 4848,
+   "tipo": "maestro SVG",
+   "fuente": "sistema/lealtab-wordmark-lino.svg"
+  },
+  "svg/lealtab-wordmark-negro-con-area.svg": {
+   "sha256": "7dcef835be75a53460b18a92e49e6a208e3d6f2420a022bfa412e0d18a7c6c39",
+   "bytes": 4941,
+   "tipo": "maestro SVG",
+   "fuente": "sistema/lealtab-wordmark-negro.svg"
+  },
+  "svg/lealtab-wordmark-negro.svg": {
+   "sha256": "723e465b6bfeaaeb935dc0432e2a8a16fb49e09ead51442f332a077727da69d0",
+   "bytes": 4867,
+   "tipo": "maestro SVG",
+   "fuente": "sistema/lealtab-wordmark-negro.svg"
+  },
+  "svg/lealtab-wordmark-noche-con-area.svg": {
+   "sha256": "633e07e57b533b20457b253c8505115fa09c3f34ebf502018a79a89409dc148f",
+   "bytes": 4923,
+   "tipo": "maestro SVG",
+   "fuente": "sistema/lealtab-wordmark-noche.svg"
+  },
+  "svg/lealtab-wordmark-noche.svg": {
+   "sha256": "a44fd6b44690eb25d48f671f29e41748aa46fc668c79bba9c7c715a797cbd6b4",
+   "bytes": 4849,
+   "tipo": "maestro SVG",
+   "fuente": "sistema/lealtab-wordmark-noche.svg"
+  },
+  "verificacion-entregables.json": {
+   "sha256": "d8870d33e5faf29a87eda8362dafe09fc918184195123d7c2184eee4d20f6bd7",
+   "bytes": 33652,
+   "tipo": "documentación",
+   "fuente": null
+  },
+  "web/apple-touch-icon.png": {
+   "sha256": "330e87089efb40d120627aa0b0c0072c44df9789065b86f14eaa06ba53387b80",
+   "bytes": 2616,
+   "tipo": "exportación automática",
+   "fuente": "iconos/app/lealtab-apple-touch-icon-180-sangre.svg"
+  },
+  "web/favicon.ico": {
+   "sha256": "658d1b6ad71e77d40b82ed95cc86e5f5c8f3b6fe02e91a44f2ad66dc156b711c",
+   "bytes": 2328,
+   "tipo": "exportación automática",
+   "fuente": "iconos/favicon/favicon.ico"
+  },
+  "web/favicon.svg": {
+   "sha256": "8f8b4120a7b6e8da4218c84f0c5f1f6f714432f72747e9ffdf11fed49082a86d",
+   "bytes": 852,
+   "tipo": "maestro SVG",
+   "fuente": "iconos/favicon/favicon.svg"
+  },
+  "web/icon-192.png": {
+   "sha256": "bfcdbcfcb4166b97b879b6fdf684be86e8aa48b56ba2161c49673171ce1c4fcf",
+   "bytes": 4535,
+   "tipo": "exportación automática",
+   "fuente": "iconos/pwa/lealtab-pwa-192.svg"
+  },
+  "web/icon-512.png": {
+   "sha256": "feca59d7f2a1a39cbf630934b94d961988a6a7b5665b47df120ea13cf1efc925",
+   "bytes": 12764,
+   "tipo": "exportación automática",
+   "fuente": "iconos/pwa/lealtab-pwa-512.svg"
+  },
+  "web/icon-maskable-512.png": {
+   "sha256": "80233bf6d99ca0cee7d275d89fc218771c3ba8aaad5528154c454fbe9c108fc8",
+   "bytes": 7216,
+   "tipo": "exportación automática",
+   "fuente": "iconos/pwa/lealtab-pwa-maskable-512.svg"
+  },
+  "web/site.webmanifest": {
+   "sha256": "5b9504fb3c126eeecf4eafc03e5424ffdd8df91b9b87862d6149da773af0b86b",
+   "bytes": 664,
+   "tipo": "documentación",
+   "fuente": null
+  },
+  "web/snippet.html": {
+   "sha256": "363d58b04f53536ad9549d7f92668e591eb8a47f8f2986f623550530a5263a41",
+   "bytes": 363,
+   "tipo": "documentación",
+   "fuente": null
+  }
+ }
+}

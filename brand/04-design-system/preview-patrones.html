@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LealTab — Patrones de UI (Fase 4 · pieza 5)</title>
+  <link rel="stylesheet" href="tokens.css" />
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--color-bg);
+      color: var(--color-text);
+      font-family: var(--font-body);
+      font-size: var(--font-size-body);
+      line-height: var(--font-line-body);
+      padding: var(--space-6) var(--space-5) var(--space-8);
+    }
+    main { max-width: 960px; margin: 0 auto; }
+    h1 {
+      font-family: var(--font-display);
+      font-weight: var(--font-weight-black);
+      font-stretch: condensed;
+      font-variation-settings: "wdth" 75, "wght" 800;
+      font-size: var(--font-size-h2);
+      line-height: var(--font-line-h2);
+      margin: 0 0 var(--space-2);
+    }
+    .lead {
+      font-size: var(--font-size-lead);
+      font-weight: var(--font-weight-medium);
+      line-height: var(--font-line-lead);
+      color: var(--color-text-muted);
+      margin: 0 0 var(--space-6);
+    }
+    section { margin-bottom: var(--space-7); }
+    h2 {
+      font-family: var(--font-display);
+      font-weight: var(--font-weight-black);
+      font-variation-settings: "wdth" 75, "wght" 800;
+      font-size: var(--font-size-h4);
+      line-height: var(--font-line-h4);
+      margin: 0 0 var(--space-4);
+      padding-bottom: var(--space-2);
+      border-bottom: var(--border-hair) solid var(--color-border);
+    }
+    h3 {
+      font-family: var(--font-body);
+      font-weight: var(--font-weight-semibold);
+      font-size: var(--font-size-label);
+      line-height: var(--font-line-label);
+      margin: 0 0 var(--space-3);
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: var(--font-tracking-label);
+    }
+    .note {
+      font-size: var(--font-size-caption);
+      color: var(--color-text-muted);
+      margin: calc(-1 * var(--space-2)) 0 var(--space-4);
+    }
+    .ask {
+      border: var(--border-product-strong) solid var(--color-border);
+      border-radius: var(--radius-card);
+      background: var(--color-surface);
+      box-shadow: var(--shadow-card);
+      padding: var(--space-5);
+    }
+    .ask ul { margin: var(--space-2) 0 0; padding-left: var(--space-5); }
+    .ask li { margin-bottom: var(--space-2); }
+    code {
+      font-family: var(--font-body);
+      font-size: var(--font-size-caption);
+      font-variant-numeric: tabular-nums;
+      background: var(--color-support);
+      border: var(--border-hair) solid var(--color-border);
+      border-radius: var(--radius-sticker);
+      padding: 1px 6px;
+    }
+    .stack { display: flex; flex-direction: column; gap: var(--space-5); }
+    .row { display: flex; flex-wrap: wrap; gap: var(--space-5); align-items: flex-start; }
+    .row > * { flex: 1 1 280px; }
+
+    /* ——— Buttons (pieza 2) ——— */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+      font-family: var(--font-body);
+      font-weight: var(--font-weight-semibold);
+      line-height: 1.2;
+      text-decoration: none;
+      border-style: solid;
+      border-color: var(--color-border);
+      border-radius: var(--radius-control);
+      cursor: pointer;
+      user-select: none;
+      transition:
+        transform var(--duration-fast) var(--easing-standard),
+        box-shadow var(--duration-fast) var(--easing-standard),
+        border-width var(--duration-fast) var(--easing-standard);
+    }
+    .btn:focus { outline: none; }
+    .btn:focus-visible { box-shadow: var(--shadow-button), var(--focus-ring); }
+    .btn--sm {
+      padding: var(--space-2) var(--space-3);
+      font-size: var(--font-size-ui);
+      border-width: var(--border-product);
+    }
+    .btn--md {
+      padding: var(--space-3) var(--space-4);
+      font-size: var(--font-size-ui);
+      border-width: var(--border-product);
+    }
+    .btn--primary {
+      background: var(--color-brand);
+      color: var(--color-text-on-bosque);
+      box-shadow: var(--shadow-button);
+    }
+    .btn--primary:focus-visible { box-shadow: var(--shadow-button), var(--focus-ring); }
+    .btn--secondary {
+      background: var(--color-surface);
+      color: var(--color-text);
+      box-shadow: var(--shadow-button);
+    }
+    .btn--ghost {
+      background: transparent;
+      color: var(--color-text);
+      border-width: var(--border-product);
+      box-shadow: none;
+    }
+    .btn--ghost:focus-visible { box-shadow: var(--focus-ring); }
+    .btn--destructive {
+      background: var(--color-error);
+      color: var(--color-text-on-bosque);
+      box-shadow: var(--shadow-button);
+    }
+    .btn--flat { box-shadow: none !important; }
+    .btn--flat:focus-visible { box-shadow: var(--focus-ring) !important; }
+
+    /* ——— Inputs ——— */
+    .input, .select {
+      font-family: var(--font-body);
+      font-size: var(--font-size-ui);
+      font-weight: var(--font-weight-medium);
+      color: var(--color-text);
+      background: var(--color-surface);
+      border: var(--border-product) solid var(--color-border);
+      border-radius: var(--radius-control);
+      padding: var(--space-2) var(--space-3);
+      min-height: 36px;
+    }
+    .input:focus, .select:focus {
+      outline: none;
+      border-width: var(--border-product-strong);
+      box-shadow: var(--focus-ring);
+    }
+    .input::placeholder { color: var(--color-text-muted); }
+
+    /* ——— 1. Page header ——— */
+    .page-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: var(--space-4);
+      margin-bottom: var(--space-5);
+      padding: var(--space-5);
+      background: var(--color-surface);
+      border: var(--border-product) solid var(--color-border);
+      border-radius: var(--radius-card);
+    }
+    .page-header__label {
+      font-size: var(--font-size-label);
+      font-weight: var(--font-weight-bold);
+      letter-spacing: var(--font-tracking-label);
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin: 0 0 var(--space-1);
+    }
+    .page-header__title {
+      font-family: var(--font-body);
+      font-weight: var(--font-weight-bold);
+      font-size: var(--font-size-lead);
+      line-height: var(--font-line-lead);
+      margin: 0;
+    }
+    .page-header__sub {
+      font-size: var(--font-size-ui);
+      color: var(--color-text-muted);
+      margin: var(--space-1) 0 0;
+    }
+    .page-header__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      align-items: center;
+    }
+
+    /* ——— 2. Toolbar ——— */
+    .toolbar-demo {
+      background: var(--color-surface);
+      border: var(--border-product) solid var(--color-border);
+      border-radius: var(--radius-card);
+      overflow: hidden;
+    }
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-3);
+      padding: var(--space-4);
+      border-bottom: var(--border-hair) solid var(--color-border);
+    }
+    .toolbar__search { flex: 1 1 220px; max-width: 320px; width: 100%; }
+    .toolbar__meta {
+      width: 100%;
+      font-size: var(--font-size-caption);
+      color: var(--color-text-muted);
+      margin: calc(-1 * var(--space-1)) 0 0;
+    }
+    .mini-table { width: 100%; border-collapse: collapse; }
+    .mini-table th {
+      font-size: var(--font-size-label);
+      font-weight: var(--font-weight-bold);
+      letter-spacing: var(--font-tracking-label);
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      text-align: left;
+      padding: var(--space-3) var(--space-4);
+      border-bottom: var(--border-product) solid var(--color-border);
+      background: var(--color-surface);
+    }
+    .mini-table td {
+      font-size: var(--font-size-ui);
+      padding: var(--space-3) var(--space-4);
+      border-bottom: var(--border-hair) solid var(--color-border);
+    }
+    .mini-table tr:last-child td { border-bottom: none; }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      font-family: var(--font-body);
+      font-weight: var(--font-weight-bold);
+      font-size: var(--font-size-label);
+      letter-spacing: var(--font-tracking-label);
+      text-transform: uppercase;
+      border-radius: var(--radius-sticker);
+      border: var(--border-hair) solid var(--color-border);
+      padding: var(--space-1) var(--space-2);
+    }
+    .chip--success { background: var(--color-success-bg); color: var(--color-success); }
+    .chip--risk { background: var(--color-risk-bg); color: var(--color-risk); }
+
+    /* ——— 5. Empty page ——— */
+    .empty-page {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-width: 400px;
+      margin: 0 auto;
+      padding: var(--space-7) var(--space-5);
+      background: var(--color-surface);
+      border: var(--border-product) solid var(--color-border);
+      border-radius: var(--radius-card);
+    }
+    .empty-page__icon {
+      width: 40px;
+      height: 40px;
+      border: var(--border-product) solid var(--color-border);
+      border-radius: var(--radius-control);
+      margin-bottom: var(--space-4);
+      position: relative;
+    }
+    .empty-page__icon::before,
+    .empty-page__icon::after {
+      content: "";
+      position: absolute;
+      background: var(--color-border);
+    }
+    .empty-page__icon::before {
+      width: 16px; height: 2px; left: 11px; top: 14px;
+    }
+    .empty-page__icon::after {
+      width: 10px; height: 2px; left: 11px; top: 22px;
+    }
+    .empty-page__title {
+      font-weight: var(--font-weight-bold);
+      font-size: var(--font-size-lead);
+      margin: 0 0 var(--space-2);
+    }
+    .empty-page__hint {
+      font-size: var(--font-size-ui);
+      color: var(--color-text-muted);
+      margin: 0 0 var(--space-5);
+    }
+
+    /* ——— 6. Pagination / load more ——— */
+    .pager-demo, .loadmore-demo {
+      background: var(--color-surface);
+      border: var(--border-product) solid var(--color-border);
+      border-radius: var(--radius-card);
+      padding: var(--space-4) var(--space-5);
+    }
+    .pager {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-3);
+    }
+    .pager__meta {
+      font-size: var(--font-size-caption);
+      color: var(--color-text-muted);
+      font-variant-numeric: tabular-nums;
+    }
+    .pager__pages {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      align-items: center;
+    }
+    .page-btn {
+      min-width: 32px;
+      height: 32px;
+      padding: 0 var(--space-2);
+      font-family: var(--font-body);
+      font-weight: var(--font-weight-semibold);
+      font-size: var(--font-size-ui);
+      font-variant-numeric: tabular-nums;
+      border: var(--border-product) solid var(--color-border);
+      border-radius: var(--radius-control);
+      background: transparent;
+      color: var(--color-text);
+      cursor: pointer;
+    }
+    .page-btn.is-current {
+      background: var(--color-brand);
+      color: var(--color-text-on-bosque);
+    }
+    .loadmore-demo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-3);
+    }
+    .loadmore-demo .caption {
+      font-size: var(--font-size-caption);
+      color: var(--color-text-muted);
+      font-variant-numeric: tabular-nums;
+      margin: 0;
+    }
+
+    /* ——— 7. Nav shell ——— */
+    .shell {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      min-height: 220px;
+      border: var(--border-product) solid var(--color-border);
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      background: var(--color-bg);
+    }
+    .shell__sidebar {
+      background: var(--color-brand);
+      color: var(--color-text-on-bosque);
+      padding: var(--space-4);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+    .shell__brand {
+      font-weight: var(--font-weight-bold);
+      font-size: var(--font-size-ui);
+      margin: 0 0 var(--space-3);
+      letter-spacing: 0.02em;
+    }
+    .shell__nav-item {
+      font-size: var(--font-size-ui);
+      font-weight: var(--font-weight-medium);
+      padding: var(--space-2) var(--space-3);
+      border-radius: var(--radius-control);
+      border: var(--border-hair) solid transparent;
+    }
+    .shell__nav-item.is-active {
+      background: var(--color-support);
+      color: var(--color-brand);
+      border-color: var(--color-border);
+      font-weight: var(--font-weight-semibold);
+    }
+    .shell__content {
+      padding: var(--space-4);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+    .shell__content-bar {
+      height: 28px;
+      background: var(--color-surface);
+      border: var(--border-hair) solid var(--color-border);
+      border-radius: var(--radius-control);
+    }
+    .shell__content-block {
+      flex: 1;
+      min-height: 100px;
+      background: var(--color-surface);
+      border: var(--border-product) solid var(--color-border);
+      border-radius: var(--radius-card);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--font-size-caption);
+      color: var(--color-text-muted);
+    }
+    .shell-note {
+      font-size: var(--font-size-caption);
+      color: var(--color-text-muted);
+      margin: var(--space-3) 0 0;
+    }
+
+    /* ——— 3. Dialog ——— */
+    .dialog-stage {
+      position: relative;
+      min-height: 280px;
+      border: var(--border-product) solid var(--color-border);
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      background: var(--color-bg);
+    }
+    .dialog-stage__fake {
+      padding: var(--space-4);
+      opacity: 0.45;
+      pointer-events: none;
+    }
+    .dialog-overlay {
+      position: absolute;
+      inset: 0;
+      background: color-mix(in srgb, var(--color-noche) 40%, transparent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-4);
+    }
+    .dialog {
+      width: 100%;
+      max-width: 400px;
+      background: var(--color-surface);
+      border: var(--border-product) solid var(--color-border);
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-card);
+      padding: var(--space-5);
+    }
+    .dialog__title {
+      font-family: var(--font-body);
+      font-weight: var(--font-weight-bold);
+      font-size: var(--font-size-lead);
+      line-height: var(--font-line-lead);
+      margin: 0 0 var(--space-3);
+    }
+    .dialog__body {
+      font-size: var(--font-size-ui);
+      color: var(--color-text-muted);
+      margin: 0 0 var(--space-5);
+    }
+    .dialog__actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: var(--space-2);
+      flex-wrap: wrap;
+    }
+
+    /* ——— 4. Toasts ——— */
+    .toast-stack {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+      max-width: 360px;
+    }
+    .toast {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: var(--space-3);
+      padding: var(--space-3) var(--space-4);
+      border: var(--border-product) solid var(--color-border);
+      border-radius: var(--radius-control);
+      font-size: var(--font-size-ui);
+      font-weight: var(--font-weight-medium);
+    }
+    .toast--success {
+      background: var(--color-success-bg);
+      color: var(--color-success);
+    }
+    .toast--error {
+      background: var(--color-error-bg);
+      color: var(--color-error);
+    }
+    .toast__msg { margin: 0; flex: 1; }
+    .toast__msg strong { font-weight: var(--font-weight-bold); }
+    .toast__x {
+      background: none;
+      border: none;
+      color: inherit;
+      font-size: 16px;
+      line-height: 1;
+      cursor: pointer;
+      padding: 0;
+      opacity: 0.7;
+    }
+    .toast-pos {
+      font-size: var(--font-size-caption);
+      color: var(--color-text-muted);
+      margin: var(--space-3) 0 0;
+    }
+
+    /* Shot mode */
+    body.shot-1 .page-chrome,
+    body.shot-1 #sec-overlays,
+    body.shot-1 #sec-ask,
+    body.shot-2 .page-chrome,
+    body.shot-2 #sec-chrome,
+    body.shot-2 #sec-ask {
+      display: none !important;
+    }
+    body.shot-1,
+    body.shot-2 {
+      padding: var(--space-5);
+    }
+    body.shot-1 main,
+    body.shot-2 main {
+      max-width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header class="page-chrome">
+      <h1>Patrones de UI</h1>
+      <p class="lead">Fase 4 · pieza 5 (cierre) · tokens + piezas 2–4 · sin pantallas de dashboard (Fase 6).</p>
+    </header>
+
+    <!-- ===== SHOT 1: page chrome patterns ===== -->
+    <div id="sec-chrome">
+      <section>
+        <h2>1 · Page header + actions</h2>
+        <p class="note">Un primary · secondary/ghost planos en dashboard · Manrope (sin Archivo).</p>
+        <div class="page-header">
+          <div>
+            <p class="page-header__label">Clientes</p>
+            <h3 class="page-header__title" style="text-transform:none;letter-spacing:0;font-size:var(--font-size-lead);color:var(--color-text);">Clientes</h3>
+            <p class="page-header__sub">128 clientes · actualizado hace 2 h</p>
+          </div>
+          <div class="page-header__actions">
+            <button type="button" class="btn btn--ghost btn--md btn--flat">Exportar</button>
+            <button type="button" class="btn btn--secondary btn--md btn--flat">Importar</button>
+            <button type="button" class="btn btn--primary btn--md">Agregar cliente</button>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>2 · Filters / toolbar</h2>
+        <p class="note">Fuera del borde de la tabla · Limpiar solo con filtros activos · primary “Agregar” vive en el header.</p>
+        <div class="toolbar-demo">
+          <div class="toolbar">
+            <input class="input toolbar__search" type="search" placeholder="Buscar por nombre o tel" aria-label="Buscar clientes" />
+            <select class="select" aria-label="Estado">
+              <option>Todos los estados</option>
+              <option>Frecuente</option>
+              <option>En riesgo</option>
+            </select>
+            <select class="select" aria-label="Periodo">
+              <option>Últimos 30 días</option>
+              <option>Últimos 90 días</option>
+            </select>
+            <button type="button" class="btn btn--ghost btn--sm btn--flat">Limpiar</button>
+            <p class="toolbar__meta">12 resultados · filtros activos</p>
+          </div>
+          <table class="mini-table">
+            <thead>
+              <tr>
+                <th>Cliente</th>
+                <th>Visitas</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>María González</td>
+                <td style="font-variant-numeric:tabular-nums;">14</td>
+                <td><span class="chip chip--success">Frecuente</span></td>
+              </tr>
+              <tr>
+                <td>Luis Pérez</td>
+                <td style="font-variant-numeric:tabular-nums;">3</td>
+                <td><span class="chip chip--risk">En riesgo</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2>5 · Empty page</h2>
+        <p class="note">Vista sin datos · distinto del empty de card/tabla · CTA primary alineada al header.</p>
+        <div class="empty-page">
+          <div class="empty-page__icon" aria-hidden="true"></div>
+          <p class="empty-page__title">Aún no hay clientes</p>
+          <p class="empty-page__hint">Agrega el primero para empezar a registrar visitas.</p>
+          <button type="button" class="btn btn--primary btn--md">Agregar cliente</button>
+        </div>
+      </section>
+
+      <section>
+        <h2>6 · Paginación · Cargar más</h2>
+        <p class="note">Un patrón por vista · propuesta: paginación en tablas densas desktop · cargar más en mobile/feeds.</p>
+        <div class="row">
+          <div>
+            <h3>Paginación numérica</h3>
+            <div class="pager-demo">
+              <div class="pager">
+                <span class="pager__meta">Mostrando 1–20 de 128</span>
+                <div class="pager__pages">
+                  <button type="button" class="btn btn--ghost btn--sm btn--flat">Anterior</button>
+                  <button type="button" class="page-btn is-current" aria-current="page">1</button>
+                  <button type="button" class="page-btn">2</button>
+                  <button type="button" class="page-btn">3</button>
+                  <span class="pager__meta">…</span>
+                  <button type="button" class="page-btn">12</button>
+                  <button type="button" class="btn btn--ghost btn--sm btn--flat">Siguiente</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <h3>Cargar más</h3>
+            <div class="loadmore-demo">
+              <button type="button" class="btn btn--secondary btn--md btn--flat">Cargar más</button>
+              <p class="caption">20 de 128 clientes</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>7 · Nav shell (nota)</h2>
+        <p class="note">Solo esqueleto sidebar + content · pantallas de dashboard = Fase 6.</p>
+        <div class="shell" aria-hidden="true">
+          <aside class="shell__sidebar">
+            <p class="shell__brand">LealTab</p>
+            <div class="shell__nav-item is-active">Clientes</div>
+            <div class="shell__nav-item">Visitas</div>
+            <div class="shell__nav-item">Premios</div>
+            <div class="shell__nav-item">Ajustes</div>
+          </aside>
+          <div class="shell__content">
+            <div class="shell__content-bar"></div>
+            <div class="shell__content-block">content · header / tabla / form</div>
+          </div>
+        </div>
+        <p class="shell-note">Desktop ~220–260 px · activo menta sobre bosque · mobile: drawer / bottom nav (Fase 6).</p>
+      </section>
+    </div>
+
+    <!-- ===== SHOT 2: overlays ===== -->
+    <div id="sec-overlays">
+      <section>
+        <h2>3 · Confirmation dialog (destructivo)</h2>
+        <p class="note">Overlay noche ~40 % · Cancelar ghost + Eliminar destructive · nunca primary bosque para borrar.</p>
+        <div class="dialog-stage">
+          <div class="dialog-stage__fake">
+            <div class="page-header" style="margin:0;box-shadow:none;">
+              <div>
+                <p class="page-header__label">Clientes</p>
+                <p class="page-header__title">María González</p>
+              </div>
+            </div>
+          </div>
+          <div class="dialog-overlay" role="presentation">
+            <div class="dialog" role="alertdialog" aria-labelledby="dlg-title" aria-describedby="dlg-desc">
+              <h3 class="dialog__title" id="dlg-title" style="text-transform:none;letter-spacing:0;color:var(--color-text);">¿Eliminar a María González?</h3>
+              <p class="dialog__body" id="dlg-desc">Esta acción no se puede deshacer. Se pierden visitas y el historial del cliente.</p>
+              <div class="dialog__actions">
+                <button type="button" class="btn btn--ghost btn--md btn--flat">Cancelar</button>
+                <button type="button" class="btn btn--destructive btn--md">Eliminar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>4 · Toast / snackbar</h2>
+        <p class="note">Siempre color + palabra · éxito “Listo:” · error “Error:” · sin durazno de fondo.</p>
+        <div class="row">
+          <div>
+            <h3>Éxito</h3>
+            <div class="toast-stack">
+              <div class="toast toast--success" role="status">
+                <p class="toast__msg"><strong>Listo:</strong> cliente guardado</p>
+                <button type="button" class="toast__x" aria-label="Cerrar">×</button>
+              </div>
+              <div class="toast toast--success" role="status">
+                <p class="toast__msg"><strong>Listo:</strong> visita registrada</p>
+                <button type="button" class="toast__x" aria-label="Cerrar">×</button>
+              </div>
+            </div>
+          </div>
+          <div>
+            <h3>Error</h3>
+            <div class="toast-stack">
+              <div class="toast toast--error" role="alert">
+                <p class="toast__msg"><strong>Error:</strong> no se pudo eliminar</p>
+                <button type="button" class="toast__x" aria-label="Cerrar">×</button>
+              </div>
+              <div class="toast toast--error" role="alert">
+                <p class="toast__msg"><strong>Error:</strong> sin conexión · reintenta</p>
+                <button type="button" class="toast__x" aria-label="Cerrar">×</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="toast-pos">Posición propuesta: arriba-derecha (desktop) · abajo-centro (mobile) · ~4 s éxito / ~6 s error.</p>
+      </section>
+    </div>
+
+    <section id="sec-ask">
+      <h2>Qué aprobar</h2>
+      <div class="ask">
+        <ul>
+          <li>Page header Manrope + 1 primary; toolbar fuera de la tabla</li>
+          <li>Dialog: Cancelar + Eliminar destructive; copy “¿Eliminar a {nombre}?”</li>
+          <li>Toast “Listo:” / “Error:” con palabra; empty page con CTA</li>
+          <li>Cargar más (mobile) + paginación (desktop densas); nav shell solo nota</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LealTab — Botones y campos (Fase 4 · pieza 2)</title>
+  <link rel="stylesheet" href="tokens.css" />
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--color-bg);
+      color: var(--color-text);
+      font-family: var(--font-body);
+      font-size: var(--font-size-body);
+      line-height: var(--font-line-body);
+      padding: var(--space-6) var(--space-5) var(--space-8);
+    }
+    main { max-width: 880px; margin: 0 auto; }
+    h1 {
+      font-family: var(--font-display);
+      font-weight: var(--font-weight-black);
+      font-stretch: condensed;
+      font-variation-settings: "wdth" 75, "wght" 800;
+      font-size: var(--font-size-h2);
+      line-height: var(--font-line-h2);
+      margin: 0 0 var(--space-2);
+    }
+    .lead {
+      font-size: var(--font-size-lead);
+      font-weight: var(--font-weight-medium);
+      line-height: var(--font-line-lead);
+      color: var(--color-text-muted);
+      margin: 0 0 var(--space-6);
+    }
+    section { margin-bottom: var(--space-7); }
+    h2 {
+      font-family: var(--font-display);
+      font-weight: var(--font-weight-black);
+      font-variation-settings: "wdth" 75, "wght" 800;
+      font-size: var(--font-size-h4);
+      line-height: var(--font-line-h4);
+      margin: 0 0 var(--space-4);
+      padding-bottom: var(--space-2);
+      border-bottom: var(--border-hair) solid var(--color-border);
+    }
+    h3 {
+      font-family: var(--font-body);
+      font-weight: var(--font-weight-semibold);
+      font-size: var(--font-size-ui);
+      line-height: var(--font-line-ui);
+      margin: 0 0 var(--space-3);
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: var(--font-tracking-label);
+      font-size: var(--font-size-label);
+    }
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-4);
+      align-items: center;
+      margin-bottom: var(--space-5);
+    }
+    .note {
+      font-size: var(--font-size-caption);
+      color: var(--color-text-muted);
+      margin: calc(-1 * var(--space-3)) 0 var(--space-5);
+    }
+    .panel {
+      background: var(--color-surface);
+      border: var(--border-product) solid var(--color-border);
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-card);
+      padding: var(--space-5);
+      margin-bottom: var(--space-5);
+    }
+    .panel.flat {
+      box-shadow: none;
+    }
+    code {
+      font-family: var(--font-body);
+      font-size: var(--font-size-caption);
+      font-variant-numeric: tabular-nums;
+      background: var(--color-support);
+      border: var(--border-hair) solid var(--color-border);
+      border-radius: var(--radius-sticker);
+      padding: 1px 6px;
+    }
+    .ask {
+      border: var(--border-product-strong) solid var(--color-border);
+      border-radius: var(--radius-card);
+      background: var(--color-surface);
+      box-shadow: var(--shadow-card);
+      padding: var(--space-5);
+    }
+    .ask ul { margin: var(--space-2) 0 0; padding-left: var(--space-5); }
+    .ask li { margin-bottom: var(--space-2); }
+
+    /* ——— Buttons ——— */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+      font-family: var(--font-body);
+      font-weight: var(--font-weight-semibold);
+      line-height: 1.2;
+      text-decoration: none;
+      border-style: solid;
+      border-color: var(--color-border);
+      border-radius: var(--radius-control);
+      cursor: pointer;
+      user-select: none;
+      transition:
+        transform var(--duration-fast) var(--easing-standard),
+        box-shadow var(--duration-fast) var(--easing-standard),
+        border-width var(--duration-fast) var(--easing-standard),
+        background-color var(--duration-ui) var(--easing-standard);
+      -webkit-tap-highlight-color: transparent;
+    }
+    .btn:focus { outline: none; }
+    .btn:focus-visible {
+      box-shadow: var(--shadow-button), var(--focus-ring);
+    }
+    .btn--sm {
+      padding: var(--space-2) var(--space-3);
+      font-size: var(--font-size-ui);
+      border-width: var(--border-product);
+    }
+    .btn--md {
+      padding: var(--space-3) var(--space-4);
+      font-size: var(--font-size-ui);
+      border-width: var(--border-product);
+    }
+    .btn--lg {
+      padding: var(--space-4) var(--space-5);
+      font-size: var(--font-size-body);
+      border-width: var(--border-product);
+    }
+    .btn--primary {
+      background: var(--color-brand);
+      color: var(--color-text-on-bosque);
+      box-shadow: var(--shadow-button);
+    }
+    .btn--primary:hover:not(:disabled):not(.is-loading) {
+      border-width: var(--border-product-strong);
+    }
+    .btn--secondary {
+      background: var(--color-surface);
+      color: var(--color-text);
+      box-shadow: var(--shadow-button);
+    }
+    .btn--secondary:hover:not(:disabled):not(.is-loading) {
+      border-width: var(--border-product-strong);
+    }
+    .btn--ghost {
+      background: transparent;
+      color: var(--color-text);
+      box-shadow: none;
+      border-width: var(--border-product);
+    }
+    .btn--ghost:hover:not(:disabled):not(.is-loading) {
+      background: var(--color-support);
+    }
+    .btn--ghost:focus-visible {
+      box-shadow: var(--focus-ring);
+    }
+    .btn--destructive {
+      background: var(--color-error);
+      color: var(--color-text-on-bosque);
+      box-shadow: var(--shadow-button);
+    }
+    .btn--destructive:hover:not(:disabled):not(.is-loading) {
+      border-width: var(--border-product-strong);
+    }
+    .btn--marketing {
+      background: var(--color-accent);
+      color: var(--color-text);
+      box-shadow: var(--shadow-button);
+    }
+    .btn--marketing:hover:not(:disabled):not(.is-loading) {
+      border-width: var(--border-product-strong);
+    }
+    .btn--flat {
+      box-shadow: none;
+    }
+    .btn--flat:focus-visible {
+      box-shadow: var(--focus-ring);
+    }
+    .btn:active:not(:disabled):not(.is-loading),
+    .btn.is-pressed:not(:disabled):not(.is-loading) {
+      transform: translate(4px, 4px);
+      box-shadow: none;
+    }
+    .btn:disabled,
+    .btn.is-disabled {
+      background: var(--color-support);
+      color: var(--color-text-muted);
+      box-shadow: none;
+      cursor: not-allowed;
+      opacity: 0.7;
+      transform: none;
+    }
+    .btn.is-loading {
+      cursor: wait;
+      opacity: 0.85;
+      pointer-events: none;
+    }
+    .btn.is-loading::after {
+      content: "";
+      width: 0.7em;
+      height: 0.7em;
+      border: 2px solid currentColor;
+      border-right-color: transparent;
+      border-radius: var(--radius-full);
+      animation: spin var(--duration-arc) linear infinite;
+      margin-left: 2px;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Demo-forced states (no interaction) */
+    .demo-active {
+      transform: translate(4px, 4px);
+      box-shadow: none !important;
+    }
+    .demo-focus {
+      box-shadow: var(--shadow-button), var(--focus-ring) !important;
+    }
+    .demo-focus.btn--ghost,
+    .demo-focus.btn--flat {
+      box-shadow: var(--focus-ring) !important;
+    }
+
+    /* ——— Fields ——— */
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+      max-width: 360px;
+      margin-bottom: var(--space-5);
+    }
+    .field-label {
+      font-family: var(--font-body);
+      font-weight: var(--font-weight-semibold);
+      font-size: var(--font-size-ui);
+      line-height: var(--font-line-ui);
+      color: var(--color-text);
+    }
+    .field-hint {
+      font-size: var(--font-size-caption);
+      line-height: var(--font-line-caption);
+      color: var(--color-text-muted);
+      margin: 0;
+    }
+    .field-error {
+      font-size: var(--font-size-caption);
+      line-height: var(--font-line-caption);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-error);
+      margin: 0;
+    }
+    .input,
+    .textarea,
+    .select {
+      font-family: var(--font-body);
+      font-size: var(--font-size-ui);
+      line-height: var(--font-line-ui);
+      font-weight: var(--font-weight-medium);
+      color: var(--color-text);
+      background: var(--color-surface);
+      border: var(--border-product) solid var(--color-border);
+      border-radius: var(--radius-control);
+      padding: var(--space-3) var(--space-4);
+      width: 100%;
+      transition:
+        border-width var(--duration-fast) var(--easing-standard),
+        border-color var(--duration-fast) var(--easing-standard),
+        box-shadow var(--duration-fast) var(--easing-standard);
+    }
+    .input::placeholder,
+    .textarea::placeholder {
+      color: var(--color-text-muted);
+      font-weight: var(--font-weight-regular);
+    }
+    .input:focus,
+    .textarea:focus,
+    .select:focus {
+      outline: none;
+      border-width: var(--border-product-strong);
+      box-shadow: var(--focus-ring);
+    }
+    .input.is-error,
+    .textarea.is-error,
+    .select.is-error {
+      border-color: var(--color-error);
+    }
+    .input.is-error:focus,
+    .textarea.is-error:focus,
+    .select.is-error:focus {
+      box-shadow: 0 0 0 3px var(--color-error-bg);
+    }
+    .input:disabled,
+    .textarea:disabled,
+    .select:disabled,
+    .input.is-disabled {
+      background: var(--color-support);
+      color: var(--color-text-muted);
+      cursor: not-allowed;
+      opacity: 0.85;
+    }
+    .textarea {
+      min-height: var(--space-8);
+      resize: vertical;
+    }
+    .select {
+      appearance: none;
+      background-image:
+        linear-gradient(45deg, transparent 50%, var(--color-noche) 50%),
+        linear-gradient(135deg, var(--color-noche) 50%, transparent 50%);
+      background-position:
+        calc(100% - 18px) calc(50% - 3px),
+        calc(100% - 12px) calc(50% - 3px);
+      background-size: 6px 6px, 6px 6px;
+      background-repeat: no-repeat;
+      padding-right: var(--space-6);
+    }
+    .fields-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: var(--space-4) var(--space-5);
+    }
+    .tag {
+      display: inline-block;
+      font-size: var(--font-size-label);
+      font-weight: var(--font-weight-bold);
+      letter-spacing: var(--font-tracking-label);
+      text-transform: uppercase;
+      background: var(--color-support);
+      border: var(--border-hair) solid var(--color-border);
+      border-radius: var(--radius-sticker);
+      padding: 2px 8px;
+      margin-bottom: var(--space-2);
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Botones y campos</h1>
+    <p class="lead">Pieza 2 · controles base con tokens aprobados. Probá el press: el botón baja a su sombra.</p>
+
+    <section>
+      <h2>Variantes</h2>
+      <div class="row">
+        <button type="button" class="btn btn--md btn--primary">Guardar cambios</button>
+        <button type="button" class="btn btn--md btn--secondary">Cancelar</button>
+        <button type="button" class="btn btn--md btn--ghost">Ver más</button>
+        <button type="button" class="btn btn--md btn--destructive">Eliminar cliente</button>
+        <button type="button" class="btn btn--md btn--primary" disabled>Disabled</button>
+      </div>
+      <p class="note">Primary = bosque + lino · Secondary = surface · Ghost sin sombra · Destructive = error + lino</p>
+
+      <h3>CTA marketing (no producto)</h3>
+      <div class="row">
+        <button type="button" class="btn btn--md btn--marketing">Empieza gratis</button>
+      </div>
+      <p class="note">Durazno + texto noche — solo landing / redes / mostrador.</p>
+    </section>
+
+    <section>
+      <h2>Tamaños</h2>
+      <div class="row">
+        <button type="button" class="btn btn--sm btn--primary">Pequeño</button>
+        <button type="button" class="btn btn--md btn--primary">Mediano</button>
+        <button type="button" class="btn btn--lg btn--primary">Grande</button>
+      </div>
+      <p class="note"><code>sm</code> 8×12 · <code>md</code> 12×16 · <code>lg</code> 16×24 — Manrope siempre</p>
+    </section>
+
+    <section>
+      <h2>Estados (primary)</h2>
+      <div class="row">
+        <div>
+          <span class="tag">Default</span><br />
+          <button type="button" class="btn btn--md btn--primary">Continuar</button>
+        </div>
+        <div>
+          <span class="tag">Hover</span><br />
+          <button type="button" class="btn btn--md btn--primary" style="border-width: var(--border-product-strong)">Continuar</button>
+        </div>
+        <div>
+          <span class="tag">Pressed</span><br />
+          <button type="button" class="btn btn--md btn--primary demo-active" tabindex="-1">Continuar</button>
+        </div>
+        <div>
+          <span class="tag">Focus</span><br />
+          <button type="button" class="btn btn--md btn--primary demo-focus" tabindex="-1">Continuar</button>
+        </div>
+        <div>
+          <span class="tag">Disabled</span><br />
+          <button type="button" class="btn btn--md btn--primary" disabled>Continuar</button>
+        </div>
+        <div>
+          <span class="tag">Loading</span><br />
+          <button type="button" class="btn btn--md btn--primary is-loading" aria-busy="true">Cargando…</button>
+        </div>
+      </div>
+      <p class="note">Presioná los botones de arriba para sentir el press real (translate 4 px + sombra off).</p>
+    </section>
+
+    <section>
+      <h2>Dashboard (más minimal)</h2>
+      <div class="panel flat">
+        <div class="row" style="margin-bottom: 0">
+          <button type="button" class="btn btn--md btn--primary">Guardar</button>
+          <button type="button" class="btn btn--md btn--secondary btn--flat">Cancelar</button>
+          <button type="button" class="btn btn--md btn--ghost">Descartar</button>
+        </div>
+      </div>
+      <p class="note">Sombra solo en el primary; secondary y ghost planos dentro del panel.</p>
+    </section>
+
+    <section>
+      <h2>Campos</h2>
+      <div class="fields-grid">
+        <div class="field">
+          <label class="field-label" for="f-default">Nombre del negocio</label>
+          <input class="input" id="f-default" type="text" placeholder="Ej. Barbería Norte" />
+          <p class="field-hint">Así lo verán tus clientes en la tarjeta.</p>
+        </div>
+
+        <div class="field">
+          <label class="field-label" for="f-focus">Correo (probá el foco)</label>
+          <input class="input" id="f-focus" type="email" value="hola@lealtab.com" />
+          <p class="field-hint">Tab o clic para ver borde 2.5 px + anillo menta.</p>
+        </div>
+
+        <div class="field">
+          <label class="field-label" for="f-error">WhatsApp</label>
+          <input class="input is-error" id="f-error" type="tel" value="123" aria-invalid="true" aria-describedby="f-error-msg" />
+          <p class="field-error" id="f-error-msg">Error: escribe un número con 10 dígitos.</p>
+        </div>
+
+        <div class="field">
+          <label class="field-label" for="f-disabled">Plan</label>
+          <input class="input" id="f-disabled" type="text" value="Inicio" disabled />
+          <p class="field-hint">No se puede editar en este momento.</p>
+        </div>
+
+        <div class="field">
+          <label class="field-label" for="f-area">Nota interna</label>
+          <textarea class="textarea" id="f-area" placeholder="Algo que quieras recordar del cliente…"></textarea>
+          <p class="field-hint">Mismo chrome que el input.</p>
+        </div>
+
+        <div class="field">
+          <label class="field-label" for="f-select">Sucursal</label>
+          <select class="select" id="f-select">
+            <option>Centro</option>
+            <option>Norte</option>
+            <option>Plaza</option>
+          </select>
+          <p class="field-hint">Select con la misma cromática.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Para aprobar</h2>
+      <div class="ask">
+        <p style="margin: 0">Aarón, ¿cerramos esta pieza con:</p>
+        <ul>
+          <li>Primary bosque / secondary surface / ghost / destructive rojo / disabled</li>
+          <li>Tamaños sm · md · lg</li>
+          <li>Press 4 px + sombra off; focus ring menta</li>
+          <li>Campo con label + hint + error con palabra</li>
+          <li>Dashboard: sombra solo en primary</li>
+        </ul>
+        <p style="margin: var(--space-4) 0 0; color: var(--color-text-muted); font-size: var(--font-size-caption)">
+          Detalle en <code>02-botones-y-campos.md</code>. Si el halo menta o el destructive en rojo pleno no te late, lo ajustamos.
+        </p>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,335 @@
+{
+ "fecha": "2026-10-05",
+ "estado": "Íconos digitales · aprobado 2026-10-05",
+ "congelados": {
+  "lealtab-master-frozen.svg": {
+   "sha256": "18e949212be392167cf0719f5142c9081ba547f50c2ba6b6bf37fc4defc36c77",
+   "igual_al_registrado_en_sistema": true
+  },
+  "lealtab-vertical-frozen.svg": {
+   "sha256": "8ca6ee15aff62416cc395cd4cccfc5a5b4c8d29764ea1725dfea3f49a3ac5377",
+   "igual_al_registrado_en_sistema": true
+  }
+ },
+ "d_congelados_sha256": {
+  "isotipo-pieza-l": "2facb2f3b38d2a41ddfee47b966c4fc1bb040304e1a4743b54efcd997284ecba",
+  "isotipo-pieza-gancho": "81ef2992439f7b58784db0841014da40b1d3e879ef047457ceda766da5af9e2d"
+ },
+ "iconos_grandes": {
+  "app/lealtab-app-icon-180.svg": {
+   "paths_identicos": 2,
+   "de": 2,
+   "ok": true,
+   "errores": [],
+   "viewBox": "0 0 180 180",
+   "sha256_archivo": "fcb5c9db10c74e70e3d1d05e566e64fdcfea8e926c2e3562e978e1778f9bc95b"
+  },
+  "app/lealtab-apple-touch-icon-180-sangre.svg": {
+   "paths_identicos": 2,
+   "de": 2,
+   "ok": true,
+   "errores": [],
+   "viewBox": "0 0 180 180",
+   "sha256_archivo": "7be4955e6e2698380f3a9e25bec91b8d1136ea64a7f4bf2636106286e43f93f1"
+  },
+  "avatar/lealtab-avatar-lino-400.svg": {
+   "paths_identicos": 2,
+   "de": 2,
+   "ok": true,
+   "errores": [],
+   "viewBox": "0 0 400 400",
+   "sha256_archivo": "37fbecc055ee3a7cfdb1cc8118c6051bec76b0894e1cb6471dbc0c8de9f2a1b8"
+  },
+  "avatar/lealtab-avatar-noche-400.svg": {
+   "paths_identicos": 2,
+   "de": 2,
+   "ok": true,
+   "errores": [],
+   "viewBox": "0 0 400 400",
+   "sha256_archivo": "df8bb6cd6f3b42f6214d637050dd5ae59d00757343521280cadcfb15bef536d7"
+  },
+  "pwa/lealtab-pwa-192.svg": {
+   "paths_identicos": 2,
+   "de": 2,
+   "ok": true,
+   "errores": [],
+   "viewBox": "0 0 192 192",
+   "sha256_archivo": "b034cf11aa563b0e71729e1168f885584c0cb9d98e6ee38246cc226207325a3a"
+  },
+  "pwa/lealtab-pwa-512.svg": {
+   "paths_identicos": 2,
+   "de": 2,
+   "ok": true,
+   "errores": [],
+   "viewBox": "0 0 512 512",
+   "sha256_archivo": "554233e6536b77661418a3f02fd8ac2d246aff4fac44bc3c3fdb2528520fe8c9"
+  },
+  "pwa/lealtab-pwa-maskable-512.svg": {
+   "paths_identicos": 2,
+   "de": 2,
+   "ok": true,
+   "errores": [],
+   "viewBox": "0 0 512 512",
+   "sha256_archivo": "cac49c9c2e1f7336db285715af9a9c8486fc227e838f0e621b6a7891dc04bce3"
+  },
+  "iconos-digitales.svg": {
+   "paths_identicos": 2,
+   "de": 2,
+   "ok": true,
+   "errores": [],
+   "viewBox": "0 0 1600 1000",
+   "sha256_archivo": "776cc15685fe46b89f56b56a33916902e8ecb5d7ceeac5c4045fd335a60080ae"
+  }
+ },
+ "derivados_pixel_fit": {
+  "favicon/descartado/opcion-a/favicon.svg": {
+   "tipo": "DERIVADO (pixel-fit, trazados nuevos)",
+   "marcado_como_derivado": true,
+   "usa_d_congelado": false,
+   "grupo": "isotipo-ajustado-32px",
+   "viewBox": "0 0 32 32",
+   "d_sha256": {
+    "pieza-l-ajustada": "2dc1cb9a946b93ceb6047f9794ddc9ded7a59700e176839db5e9d660739b6741",
+    "pieza-gancho-ajustada": "3cf401be653f5cfea835728f9dad88211c5cdafd1ed7f15879d15f6a2fa76541"
+   },
+   "ok": true
+  },
+  "favicon/favicon.svg": {
+   "tipo": "DERIVADO (pixel-fit, trazados nuevos)",
+   "marcado_como_derivado": true,
+   "usa_d_congelado": false,
+   "grupo": "isotipo-ajustado-32px",
+   "viewBox": "0 0 32 32",
+   "d_sha256": {
+    "pieza-l-ajustada": "21c1cd66988e982f4bad479b48fd4f0be1de701f5a0fde91ca97ffefacfc19fc",
+    "pieza-gancho-ajustada": "5b7dfadecd440325f5801f1348965f995b37b4d8969c8da5ab1ffc6c83ea63a4"
+   },
+   "ok": true
+  },
+  "pixel/lealtab-isotipo-16px.svg": {
+   "tipo": "DERIVADO (pixel-fit, trazados nuevos)",
+   "marcado_como_derivado": true,
+   "usa_d_congelado": false,
+   "grupo": "isotipo-ajustado-16px",
+   "viewBox": "0 0 16 16",
+   "d_sha256": {
+    "pieza-l-ajustada": "a0a139877b34468f977c6012309f2410607e4003bad1521069ea47ee6c62b35f",
+    "pieza-gancho-ajustada": "a554266cfbd3a94eed14aba690be0646b6b42aceb62846bd9255188417daf991"
+   },
+   "ok": true
+  },
+  "pixel/lealtab-isotipo-24px.svg": {
+   "tipo": "DERIVADO (pixel-fit, trazados nuevos)",
+   "marcado_como_derivado": true,
+   "usa_d_congelado": false,
+   "grupo": "isotipo-ajustado-24px",
+   "viewBox": "0 0 24 24",
+   "d_sha256": {
+    "pieza-l-ajustada": "803406e16b845be7bb05a1991a85dd6b34b4dd6ae0fd45b47eccb3275e5566e5",
+    "pieza-gancho-ajustada": "805305e7204232733bbed027e04d5b42b817adb238def44cb0abee79b914ec8c"
+   },
+   "ok": true
+  },
+  "pixel/lealtab-isotipo-32px.svg": {
+   "tipo": "DERIVADO (pixel-fit, trazados nuevos)",
+   "marcado_como_derivado": true,
+   "usa_d_congelado": false,
+   "grupo": "isotipo-ajustado-32px",
+   "viewBox": "0 0 32 32",
+   "d_sha256": {
+    "pieza-l-ajustada": "2dc1cb9a946b93ceb6047f9794ddc9ded7a59700e176839db5e9d660739b6741",
+    "pieza-gancho-ajustada": "3cf401be653f5cfea835728f9dad88211c5cdafd1ed7f15879d15f6a2fa76541"
+   },
+   "ok": true
+  },
+  "pixel/lealtab-isotipo-48px.svg": {
+   "tipo": "DERIVADO (pixel-fit, trazados nuevos)",
+   "marcado_como_derivado": true,
+   "usa_d_congelado": false,
+   "grupo": "isotipo-ajustado-48px",
+   "viewBox": "0 0 48 48",
+   "d_sha256": {
+    "pieza-l-ajustada": "24b5baab084ff6c9e8e49c5194126a4c5afc97583413282a79eb1cbf9e9ddda7",
+    "pieza-gancho-ajustada": "475d5284ed295ed5b6268347fc3dd7dee030c17cd6b9fd70e029a6c1606f054c"
+   },
+   "ok": true
+  }
+ },
+ "png": {
+  "app/lealtab-app-icon-180.png": [
+   180,
+   180
+  ],
+  "app/lealtab-apple-touch-icon-180-sangre.png": [
+   180,
+   180
+  ],
+  "avatar/lealtab-avatar-lino-400.png": [
+   400,
+   400
+  ],
+  "avatar/lealtab-avatar-noche-400.png": [
+   400,
+   400
+  ],
+  "favicon/descartado/opcion-a/favicon-16.png": [
+   16,
+   16
+  ],
+  "favicon/descartado/opcion-a/favicon-32.png": [
+   32,
+   32
+  ],
+  "favicon/descartado/opcion-a/favicon-48.png": [
+   48,
+   48
+  ],
+  "favicon/favicon-16.png": [
+   16,
+   16
+  ],
+  "favicon/favicon-32.png": [
+   32,
+   32
+  ],
+  "favicon/favicon-48.png": [
+   48,
+   48
+  ],
+  "favicon/prueba-pestanas.png": [
+   570,
+   472
+  ],
+  "iconos-digitales.png": [
+   1600,
+   1000
+  ],
+  "pixel/lealtab-isotipo-16px-800.png": [
+   130,
+   130
+  ],
+  "pixel/lealtab-isotipo-16px.png": [
+   16,
+   16
+  ],
+  "pixel/lealtab-isotipo-24px-800.png": [
+   194,
+   194
+  ],
+  "pixel/lealtab-isotipo-24px.png": [
+   24,
+   24
+  ],
+  "pixel/lealtab-isotipo-32px-800.png": [
+   258,
+   258
+  ],
+  "pixel/lealtab-isotipo-32px.png": [
+   32,
+   32
+  ],
+  "pixel/lealtab-isotipo-48px-800.png": [
+   386,
+   386
+  ],
+  "pixel/lealtab-isotipo-48px.png": [
+   48,
+   48
+  ],
+  "pwa/lealtab-pwa-192.png": [
+   192,
+   192
+  ],
+  "pwa/lealtab-pwa-512.png": [
+   512,
+   512
+  ],
+  "pwa/lealtab-pwa-maskable-512-prueba-mascara.png": [
+   1616,
+   552
+  ],
+  "pwa/lealtab-pwa-maskable-512.png": [
+   512,
+   512
+  ]
+ },
+ "favicon_ico": {
+  "oficial (opción B) · favicon/favicon.ico": {
+   "tamaños": [
+    [
+     16,
+     16
+    ],
+    [
+     32,
+     32
+    ],
+    [
+     48,
+     48
+    ]
+   ],
+   "frames_identicos_a_pixel_fit": {
+    "16": true,
+    "32": true,
+    "48": true
+   },
+   "sha256": "658d1b6ad71e77d40b82ed95cc86e5f5c8f3b6fe02e91a44f2ad66dc156b711c"
+  },
+  "DESCARTADA (opción A) · favicon/descartado/opcion-a/favicon.ico": {
+   "tamaños": [
+    [
+     16,
+     16
+    ],
+    [
+     32,
+     32
+    ],
+    [
+     48,
+     48
+    ]
+   ],
+   "frames_identicos_a_pixel_fit": {
+    "16": true,
+    "32": true,
+    "48": true
+   },
+   "sha256": "35fb81e25e0810bda27fcf6fb5095135cbc0b37b91062cb99d403f58c2829705"
+  }
+ },
+ "maskable": {
+  "radio_max_isotipo_px": 154.62,
+  "radio_zona_segura_px": 204.8,
+  "holgura_px": 50.18,
+  "porcentaje_de_zona_segura": 75.5,
+  "se_recorta": false,
+  "ancho_isotipo": "50 % del lado (256 px de 512)",
+  "metodo": "píxeles distintos del fondo noche en el PNG 512; distancia máxima al centro vs radio 0.4 × 512"
+ },
+ "png_tamaños_esperados_ok": {
+  "app/lealtab-app-icon-180.png": true,
+  "pwa/lealtab-pwa-192.png": true,
+  "pwa/lealtab-pwa-512.png": true,
+  "pwa/lealtab-pwa-maskable-512.png": true,
+  "avatar/lealtab-avatar-lino-400.png": true,
+  "avatar/lealtab-avatar-noche-400.png": true,
+  "iconos-digitales.png": true,
+  "pixel/lealtab-isotipo-16px.png": true,
+  "pixel/lealtab-isotipo-24px.png": true,
+  "pixel/lealtab-isotipo-32px.png": true,
+  "pixel/lealtab-isotipo-48px.png": true,
+  "pixel/lealtab-isotipo-16px-800.png": true,
+  "pixel/lealtab-isotipo-24px-800.png": true,
+  "pixel/lealtab-isotipo-32px-800.png": true,
+  "pixel/lealtab-isotipo-48px-800.png": true
+ },
+ "resumen": {
+  "todo_ok": true,
+  "iconos_grandes_ok": 8,
+  "iconos_grandes": 8,
+  "derivados_marcados": 6,
+  "derivados": 6
+ }
+}

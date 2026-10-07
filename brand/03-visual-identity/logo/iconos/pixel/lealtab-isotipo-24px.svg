@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" shape-rendering="geometricPrecision">
+  <title>LealTab · isotipo ajustado a píxel 24 px · noche</title>
+  <desc>DERIVADO · trazados NUEVOS ajustados a la rejilla de 24 px a partir del isotipo congelado (no son los d del master). Grosor 5 px, bordes rectos en píxel entero. Aprobado 2026-10-05.</desc>
+  <g id="isotipo-ajustado-24px" fill="#0F2A22" data-derivado="pixel-fit">
+    <path id="pieza-l-ajustada" d="M1 4.5A2.5 2.5 0 0 1 6 4.5V15A1 1 0 0 0 7 16H13.5A2.5 2.5 0 0 1 13.5 21H7A6 6 0 0 1 1 15Z"/>
+    <path id="pieza-gancho-ajustada" d="M14.5 2H17A6 6 0 0 1 23 8V15.5A2.5 2.5 0 0 1 18 15.5V8A1 1 0 0 0 17 7H14.5A2.5 2.5 0 0 1 14.5 2Z"/>
+  </g>
+</svg>

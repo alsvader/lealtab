@@ -1,0 +1,195 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Manrope:wght@400;500;600;700;800&display=block" rel="stylesheet">
+<link rel="stylesheet" href="ciclo-v2.css">
+<style>
+.wrap{display:grid;grid-template-columns:400px 1fr 300px;gap:30px;padding:40px 44px;height:1000px}
+.left{display:flex;flex-direction:column;gap:20px}
+h1{font-size:96px;line-height:.82;text-transform:uppercase}
+.idea{font-size:15.5px;line-height:1.45;color:#2E4A40}
+.pal{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.sw{border:2px solid var(--noche);border-radius:10px;height:72px;padding:6px 7px;display:flex;flex-direction:column;justify-content:flex-end;font-size:9.5px;line-height:1.25}
+.sw b{font-size:10.5px}
+.role{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;margin-bottom:auto}
+.spec{display:flex;flex-direction:column;gap:8px;border-top:2px solid var(--noche);padding-top:16px}
+.stks{display:flex;flex-wrap:wrap;gap:12px 10px;padding:4px 0}
+.mid{display:grid;grid-template-rows:420px 1fr;gap:30px;min-width:0}
+.bot{display:grid;grid-template-columns:1.35fr 1fr;gap:30px;min-height:0}
+.tagm{position:absolute;font-size:9.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#6E7F77}
+/* hero */
+.hero{position:relative;padding:26px 32px;overflow:hidden}
+.nav{display:flex;align-items:center;gap:22px;font-size:13px;font-weight:600}
+.nav .logo{font-family:'Archivo';font-stretch:75%;font-weight:800;font-size:24px;margin-right:auto}
+.hero h2{font-size:60px;line-height:.9;margin-top:30px;max-width:430px;position:relative;z-index:2}
+.hero p{font-size:15px;line-height:1.45;max-width:380px;margin-top:16px;color:#2E4A40;position:relative;z-index:2}
+.hero .ctas{display:flex;gap:16px;margin-top:24px;align-items:center;position:relative;z-index:2}
+.rings{position:absolute;right:-30px;top:78px;width:310px;height:310px}
+/* dash */
+.dash{position:relative;padding:20px 22px;display:flex;flex-direction:column;gap:14px;overflow:hidden}
+.dash .hd{display:flex;align-items:baseline;justify-content:space-between}
+.dash h3{font-size:26px;line-height:1}
+.kp{display:grid;grid-template-columns:repeat(3,1fr);border:1.5px solid var(--noche);border-radius:10px}
+.kp>div{padding:10px 12px;border-right:1.5px solid var(--noche)}.kp>div:last-child{border:0;border-radius:0 8px 8px 0}
+.kp .n{font-size:24px;font-weight:700;letter-spacing:-.02em}
+.kp .l{font-size:11px;color:#4D635A;font-weight:600}
+.kp .d{font-size:10.5px;font-weight:700;color:var(--bosque)}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#6E7F77;text-align:left;padding:4px 4px 6px;font-weight:700}
+td{padding:7px 4px;border-top:1px solid #DAD4C6}
+td.r{text-align:right}
+/* poster */
+.poster{position:relative;background:var(--durazno);padding:22px;display:flex;flex-direction:column;overflow:hidden}
+.poster h4{font-size:46px;line-height:.88;text-transform:uppercase;position:relative;z-index:2}
+.qr{width:92px;height:92px;display:grid;grid-template-columns:repeat(13,1fr);gap:1px;background:var(--claro);padding:7px;border:2px solid var(--noche);border-radius:10px;box-shadow:3px 3px 0 var(--noche)}
+.qr i{background:var(--noche)}.qr i.w{background:transparent}
+.pring{position:absolute;right:14px;bottom:16px;width:150px;height:150px}
+/* phone */
+.phonecol{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px}
+.phone{width:280px;height:580px;border:3px solid var(--noche);border-radius:40px;box-shadow:7px 7px 0 var(--noche);background:var(--claro);padding:14px;position:relative}
+.scr{border-radius:28px;height:100%;background:var(--lino);overflow:hidden;display:flex;flex-direction:column;padding:16px 16px 14px}
+.sb{display:flex;justify-content:space-between;font-size:11px;font-weight:700}
+.biz{margin-top:14px;display:flex;align-items:center;gap:10px}
+.bizlogo{width:38px;height:38px;border-radius:10px;background:#1E1E1E;color:#F3EFE6;display:grid;place-items:center;font-family:'Archivo';font-weight:800;font-size:15px;border:2px solid var(--noche)}
+.prog{margin-top:16px;padding:14px;position:relative}
+.cta2{margin-top:auto}
+</style></head><body>
+<div class="wrap">
+ <!-- LEFT -->
+ <div class="left">
+  <div class="lbl">LealTab · Fase 2 · Ruta elegida</div>
+  <h1 class="disp">Ciclo<br><span style="color:var(--bosque)">v2</span></h1>
+  <p class="idea">Cada regreso cierra un círculo y abre el siguiente. Ahora con contorno y sombra dura: minimal en el orden, con carácter en los detalles.</p>
+  <div>
+   <div class="lbl" style="margin-bottom:8px">Paleta y roles</div>
+   <div class="pal">
+    <div class="sw" style="background:var(--lino)"><span class="role">Fondo</span><b>Lino</b>#F3EFE6</div>
+    <div class="sw" style="background:var(--noche);color:var(--lino)"><span class="role">Contorno</span><b>Noche</b>#0F2A22</div>
+    <div class="sw" style="background:var(--bosque);color:var(--lino)"><span class="role">Protagonista</span><b>Bosque</b>#0F4D3A</div>
+    <div class="sw" style="background:var(--durazno)"><span class="role">Acento</span><b>Durazno</b>#FF9F6E</div>
+    <div class="sw" style="background:var(--menta)"><span class="role">Apoyo</span><b>Menta gris</b>#CFE3D6</div>
+   </div>
+   <div style="font-size:11px;color:#4D635A;margin-top:8px;line-height:1.4">Sin acento extra: el durazno basta. Contornos y sombras siempre en noche, nunca negro puro.</div>
+  </div>
+  <div class="spec">
+   <div class="lbl">Títulos · Archivo condensada 800</div>
+   <div class="disp" style="font-size:40px;line-height:.92">Haz que tus clientes siempre regresen.</div>
+   <div class="lbl" style="margin-top:6px">Texto y cifras · Manrope (cifras tabulares)</div>
+   <div style="font-size:14px;line-height:1.45;color:#2E4A40">Ves quién regresa y quién no. Lista en minutos, sin contratos.</div>
+   <div class="num" style="font-size:22px;font-weight:700;letter-spacing:-.01em">68% · 1,284 · c/ 19 días</div>
+  </div>
+  <div>
+   <div class="lbl" style="margin-bottom:10px">Stickers</div>
+   <div class="stks">
+    <span class="stk" style="background:var(--menta);transform:rotate(-4deg)">Nuevo</span>
+    <span class="stk" style="background:var(--durazno);transform:rotate(3deg)">Casi premio</span>
+    <span class="stk" style="background:var(--claro);transform:rotate(-2deg)">Te extrañamos</span>
+    <span class="stk" style="background:var(--bosque);color:var(--lino);transform:rotate(4deg)">Frecuente</span>
+   </div>
+  </div>
+  <div style="margin-top:auto;display:flex;flex-direction:column;gap:10px;border-top:2px solid var(--noche);padding-top:14px">
+   <div class="lbl">Botón principal · contorno 2.5 px · sombra 4 px</div>
+   <span class="btn" style="background:var(--durazno);align-self:flex-start"><span>Empieza gratis</span><i>→</i></span>
+  </div>
+ </div>
+ <!-- MID -->
+ <div class="mid">
+  <div class="box hero">
+   <div class="nav"><span class="logo">LealTab</span><span>Producto</span><span>Precios</span><span>Lo que viene</span></div>
+   <h2 class="disp">Haz que tus clientes siempre regresen.</h2>
+   <p>Tu tarjeta digital y cada vuelta de tus clientes, en un solo lugar. De una sucursal a muchas.</p>
+   <div class="ctas"><span class="btn" style="background:var(--durazno)"><span>Crea tu tarjeta gratis</span><i>→</i></span><span style="font-size:13px;font-weight:700;text-decoration:underline;text-underline-offset:4px">Ver precios</span></div>
+   <svg class="rings" viewBox="0 0 400 400">
+    <g transform="translate(8 8)" fill="none" stroke="#0F2A22" stroke-linecap="round">
+     <circle cx="200" cy="200" r="165" stroke-width="42" stroke-dasharray="830 1037" transform="rotate(-80 200 200)"/>
+     <circle cx="200" cy="200" r="105" stroke-width="42" stroke-dasharray="470 660" transform="rotate(-80 200 200)"/>
+    </g>
+    <g fill="none" stroke-linecap="round" transform="rotate(-80 200 200)">
+     <circle cx="200" cy="200" r="165" stroke="#0F2A22" stroke-width="42" stroke-dasharray="830 1037"/>
+     <circle cx="200" cy="200" r="165" stroke="#0F4D3A" stroke-width="36" stroke-dasharray="830 1037"/>
+     <circle cx="200" cy="200" r="105" stroke="#0F2A22" stroke-width="42" stroke-dasharray="470 660"/>
+     <circle cx="200" cy="200" r="105" stroke="#FF9F6E" stroke-width="36" stroke-dasharray="470 660"/>
+    </g>
+    <circle cx="200" cy="200" r="34" fill="#CFE3D6" stroke="#0F2A22" stroke-width="3"/>
+   </svg>
+   <span class="stk" style="position:absolute;right:228px;top:70px;background:var(--menta);transform:rotate(-6deg);z-index:3">Nuevo · Avisos</span>
+   <span class="tagm" style="right:24px;bottom:10px">Landing · encabezado</span>
+  </div>
+  <div class="bot">
+   <div class="box dash">
+    <div class="hd"><h3 class="disp">Clientes</h3><span style="font-size:11px;color:#6E7F77;font-weight:600">Barbería Don Chuy · 30 días</span></div>
+    <div class="kp num">
+     <div><div class="l">Regresaron</div><div class="n">68%</div><div class="d">▲ 6 pts</div></div>
+     <div><div class="l">Entre visitas</div><div class="n">19 d</div><div class="d" style="color:#6E7F77">estable</div></div>
+     <div style="background:#FFE6D8"><div class="l">En riesgo</div><div class="n">12</div><div class="d" style="color:#A8461A">+5 sem sin venir</div></div>
+    </div>
+    <table class="num">
+     <tr><th>Cliente</th><th>Visitas</th><th>Última</th><th></th></tr>
+     <tr><td><b>Luis Hernández</b></td><td>14</td><td>hace 6 d</td><td class="r"><span class="stk flat" style="background:var(--bosque);color:var(--lino)">Frecuente</span></td></tr>
+     <tr><td><b>Carlos Pérez</b></td><td>6</td><td>hace 41 d</td><td class="r"><span class="stk flat" style="background:var(--claro)">Te extrañamos</span></td></tr>
+     <tr><td><b>Andrés Sosa</b></td><td>4</td><td>hace 15 d</td><td class="r"><span class="stk flat" style="background:var(--durazno)">Casi premio</span></td></tr>
+     <tr><td><b>Iván Torres</b></td><td>1</td><td>hace 2 d</td><td class="r"><span class="stk flat" style="background:var(--menta)">Nuevo</span></td></tr>
+    </table>
+    <div style="display:flex;align-items:flex-end;gap:14px;margin-top:auto">
+     <div class="lbl" style="font-size:9.5px;width:90px;line-height:1.35">Regresos por semana</div>
+     <div class="num" style="display:flex;align-items:flex-end;gap:6px;height:44px;flex:1">
+      <i style="display:block;flex:1;height:45%;background:var(--menta);border:1.5px solid var(--noche);border-radius:4px 4px 0 0"></i>
+      <i style="display:block;flex:1;height:55%;background:var(--menta);border:1.5px solid var(--noche);border-radius:4px 4px 0 0"></i>
+      <i style="display:block;flex:1;height:50%;background:var(--menta);border:1.5px solid var(--noche);border-radius:4px 4px 0 0"></i>
+      <i style="display:block;flex:1;height:68%;background:var(--menta);border:1.5px solid var(--noche);border-radius:4px 4px 0 0"></i>
+      <i style="display:block;flex:1;height:74%;background:var(--menta);border:1.5px solid var(--noche);border-radius:4px 4px 0 0"></i>
+      <i style="display:block;flex:1;height:100%;background:var(--bosque);border:1.5px solid var(--noche);border-radius:4px 4px 0 0"></i>
+     </div>
+    </div>
+    <span class="tagm" style="right:22px;bottom:10px;display:none">Dashboard · minimal</span>
+   </div>
+   <div class="box poster">
+    <div class="lbl" style="color:var(--noche)">Tapioca Luna</div>
+    <h4 class="disp" style="margin-top:10px">Junta 8.<br>La 9 va por<br>nuestra cuenta.</h4>
+    <span class="stk" style="background:var(--claro);transform:rotate(-5deg);margin-top:14px;align-self:flex-start;position:relative;z-index:2">Sin descargar nada</span>
+    <div style="margin-top:auto;display:flex;align-items:flex-end;gap:12px;position:relative;z-index:2"><div class="qr" id="qr"></div></div>
+    <svg class="pring" viewBox="0 0 300 300" style="overflow:visible">
+     <circle cx="157" cy="157" r="105" fill="none" stroke="#0F2A22" stroke-width="50" stroke-linecap="round" stroke-dasharray="500 660" transform="rotate(-100 157 157)"/>
+     <g transform="rotate(-100 150 150)" fill="none" stroke-linecap="round"><circle cx="150" cy="150" r="105" stroke="#0F2A22" stroke-width="50" stroke-dasharray="500 660"/><circle cx="150" cy="150" r="105" stroke="#0F4D3A" stroke-width="44" stroke-dasharray="500 660"/></g>
+    </svg>
+    <span class="tagm" style="right:16px;top:12px;color:var(--noche)">Mostrador</span>
+   </div>
+  </div>
+ </div>
+ <!-- PHONE -->
+ <div class="phonecol">
+  <div class="phone">
+   <div class="scr">
+    <div class="sb num"><span>9:41</span><span>●●● ▮</span></div>
+    <div class="biz"><div class="bizlogo">DC</div><div><div style="font-weight:800;font-size:15px">Barbería Don Chuy</div><div style="font-size:11px;color:#4D635A">Hola, Andrés</div></div></div>
+    <div class="box prog">
+     <div class="lbl">Tu próximo premio</div>
+     <svg viewBox="0 0 200 200" style="width:170px;height:170px;display:block;margin:6px auto 0">
+      <circle cx="104" cy="104" r="76" fill="none" stroke="#0F2A22" stroke-width="26" stroke-linecap="round" stroke-dasharray="382 478" transform="rotate(-90 104 104)"/>
+      <circle cx="100" cy="100" r="76" fill="none" stroke="#E4DED0" stroke-width="20"/>
+      <circle cx="100" cy="100" r="76" fill="none" stroke="#0F2A22" stroke-width="26" stroke-linecap="round" stroke-dasharray="382 478" transform="rotate(-90 100 100)"/>
+      <circle cx="100" cy="100" r="76" fill="none" stroke="#0F4D3A" stroke-width="20" stroke-linecap="round" stroke-dasharray="382 478" transform="rotate(-90 100 100)"/>
+      <text x="100" y="104" text-anchor="middle" font-family="Archivo" font-stretch="75%" font-weight="800" font-size="46" fill="#0F2A22">4/5</text>
+      <text x="100" y="128" text-anchor="middle" font-family="Manrope" font-weight="700" font-size="12" fill="#4D635A">cortes</text>
+     </svg>
+     <span class="stk" style="position:absolute;right:-10px;top:30px;background:var(--durazno);transform:rotate(6deg)">Casi premio</span>
+     <div style="font-size:12.5px;text-align:center;font-weight:600;margin-top:6px;line-height:1.35">Al quinto, el siguiente corte va por nuestra cuenta.</div>
+    </div>
+    <div style="margin-top:16px;font-size:11.5px;display:flex;flex-direction:column;gap:7px">
+     <div class="lbl" style="font-size:9.5px">Tus visitas</div>
+     <div class="num" style="display:flex;justify-content:space-between;border-top:1px solid #DAD4C6;padding-top:6px"><span style="font-weight:700">Corte + barba</span><span>12 sep</span></div>
+     <div class="num" style="display:flex;justify-content:space-between;border-top:1px solid #DAD4C6;padding-top:6px"><span style="font-weight:700">Corte</span><span>22 ago</span></div>
+    </div>
+    <div class="cta2"><span class="btn" style="background:var(--menta);width:100%;justify-content:space-between"><span>Mostrar mi código</span><i>→</i></span></div>
+    <div style="text-align:center;font-size:9.5px;color:#6E7F77;margin-top:10px;font-weight:600">Hecho con LealTab</div>
+   </div>
+  </div>
+  <div class="tagm" style="position:static">Tarjeta del cliente · PWA</div>
+  <div style="font-size:11px;color:#4D635A;text-align:center;line-height:1.4;max-width:260px">La marca del negocio manda; LealTab firma discreto.</div>
+ </div>
+</div>
+<script>
+const q=document.getElementById('qr');let s=23;function r(){s=(s*9301+49297)%233280;return s/233280}
+for(let y=0;y<13;y++)for(let x=0;x<13;x++){const i=document.createElement('i');const f=(x<4&&y<4)||(x>8&&y<4)||(x<4&&y>8);let on=r()>.5;
+if(f){const lx=x>8?x-9:x,ly=y>8?y-9:y;on=(lx==0||lx==3||ly==0||ly==3||(lx>0&&lx<3&&ly>0&&ly<3))}
+if(!on)i.className='w';q.appendChild(i)}
+</script>
+</body></html>

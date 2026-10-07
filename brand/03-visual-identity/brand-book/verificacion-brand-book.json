@@ -1,0 +1,226 @@
+{
+  "fecha": "2026-10-06",
+  "estado": "Aprobado 2026-10-06",
+  "paginas": {
+    "01-portada": {
+      "usa_logo": true,
+      "trazados_congelados_encontrados": 9,
+      "todos_coinciden_sha256": true,
+      "derivados_pixel_fit": [],
+      "imagenes_raster": 0,
+      "etiqueta_aprobado": true
+    },
+    "02-indice": {
+      "usa_logo": true,
+      "trazados_congelados_encontrados": 9,
+      "todos_coinciden_sha256": true,
+      "derivados_pixel_fit": [],
+      "imagenes_raster": 0,
+      "etiqueta_aprobado": true
+    },
+    "03-que-es-lealtab": {
+      "usa_logo": true,
+      "trazados_congelados_encontrados": 9,
+      "todos_coinciden_sha256": true,
+      "derivados_pixel_fit": [],
+      "imagenes_raster": 0,
+      "etiqueta_aprobado": true
+    },
+    "04-personalidad": {
+      "usa_logo": true,
+      "trazados_congelados_encontrados": 9,
+      "todos_coinciden_sha256": true,
+      "derivados_pixel_fit": [],
+      "imagenes_raster": 0,
+      "etiqueta_aprobado": true
+    },
+    "05-voz-y-tono": {
+      "usa_logo": true,
+      "trazados_congelados_encontrados": 9,
+      "todos_coinciden_sha256": true,
+      "derivados_pixel_fit": [],
+      "imagenes_raster": 0,
+      "etiqueta_aprobado": true
+    },
+    "06-concepto-isotipo": {
+      "usa_logo": true,
+      "trazados_congelados_encontrados": 9,
+      "todos_coinciden_sha256": true,
+      "derivados_pixel_fit": [],
+      "imagenes_raster": 0,
+      "etiqueta_aprobado": true
+    },
+    "07-versiones": {
+      "usa_logo": true,
+      "trazados_congelados_encontrados": 9,
+      "todos_coinciden_sha256": true,
+      "derivados_pixel_fit": [],
+      "imagenes_raster": 0,
+      "etiqueta_aprobado": true
+    },
+    "08-colores-del-logo": {
+      "usa_logo": true,
+      "trazados_congelados_encontrados": 9,
+      "todos_coinciden_sha256": true,
+      "derivados_pixel_fit": [],
+      "imagenes_raster": 0,
+      "etiqueta_aprobado": true
+    },
+    "09-area-de-proteccion": {
+      "usa_logo": true,
+      "trazados_congelados_encontrados": 9,
+      "todos_coinciden_sha256": true,
+      "derivados_pixel_fit": [],
+      "imagenes_raster": 0,
+      "etiqueta_aprobado": true
+    },
+    "10-tamanos-minimos": {
+      "usa_logo": true,
+      "trazados_congelados_encontrados": 9,
+      "todos_coinciden_sha256": true,
+      "derivados_pixel_fit": [
+        "pieza-gancho-ajustada",
+        "pieza-l-ajustada"
+      ],
+      "imagenes_raster": 0,
+      "etiqueta_aprobado": true
+    },
+    "11-usos-correctos": {
+      "usa_logo": true,
+      "trazados_congelados_encontrados": 9,
+      "todos_coinciden_sha256": true,
+      "derivados_pixel_fit": [],
+      "imagenes_raster": 0,
+      "etiqueta_aprobado": true
+    },
+    "12-usos-incorrectos-horizontal": {
+      "usa_logo": true,
+      "trazados_congelados_encontrados": 9,
+      "todos_coinciden_sha256": true,
+      "derivados_pixel_fit": [
+        "pieza-gancho-ajustada",
+        "pieza-l-ajustada"
+      ],
+      "imagenes_raster": 0,
+      "etiqueta_aprobado": true
+    },
+    "13-usos-incorrectos-vertical": {
+      "usa_logo": true,
+      "trazados_congelados_encontrados": 9,
+      "todos_coinciden_sha256": true,
+      "derivados_pixel_fit": [],
+      "imagenes_raster": 0,
+      "etiqueta_aprobado": true
+    },
+    "14-iconos-digitales-favicon": {
+      "usa_logo": true,
+      "trazados_congelados_encontrados": 21,
+      "todos_coinciden_sha256": true,
+      "derivados_pixel_fit": [
+        "pieza-gancho-ajustada",
+        "pieza-l-ajustada"
+      ],
+      "imagenes_raster": 0,
+      "etiqueta_aprobado": true
+    },
+    "15-paleta": {
+      "usa_logo": true,
+      "trazados_congelados_encontrados": 9,
+      "todos_coinciden_sha256": true,
+      "derivados_pixel_fit": [],
+      "imagenes_raster": 0,
+      "etiqueta_aprobado": true
+    },
+    "16-tipografia": {
+      "usa_logo": true,
+      "trazados_congelados_encontrados": 9,
+      "todos_coinciden_sha256": true,
+      "derivados_pixel_fit": [],
+      "imagenes_raster": 0,
+      "etiqueta_aprobado": true
+    },
+    "17-iconografia": {
+      "usa_logo": true,
+      "trazados_congelados_encontrados": 9,
+      "todos_coinciden_sha256": true,
+      "derivados_pixel_fit": [],
+      "imagenes_raster": 0,
+      "etiqueta_aprobado": true
+    },
+    "18-aro-y-movimiento": {
+      "usa_logo": true,
+      "trazados_congelados_encontrados": 11,
+      "todos_coinciden_sha256": true,
+      "derivados_pixel_fit": [],
+      "imagenes_raster": 0,
+      "etiqueta_aprobado": true
+    },
+    "19-ilustracion": {
+      "usa_logo": true,
+      "trazados_congelados_encontrados": 9,
+      "todos_coinciden_sha256": true,
+      "derivados_pixel_fit": [],
+      "imagenes_raster": 0,
+      "etiqueta_aprobado": true
+    },
+    "20-stickers": {
+      "usa_logo": true,
+      "trazados_congelados_encontrados": 9,
+      "todos_coinciden_sha256": true,
+      "derivados_pixel_fit": [],
+      "imagenes_raster": 0,
+      "etiqueta_aprobado": true
+    },
+    "21-fotografia": {
+      "usa_logo": true,
+      "trazados_congelados_encontrados": 9,
+      "todos_coinciden_sha256": true,
+      "derivados_pixel_fit": [],
+      "imagenes_raster": 0,
+      "etiqueta_aprobado": true
+    },
+    "22-ejemplos-de-aplicacion": {
+      "usa_logo": true,
+      "trazados_congelados_encontrados": 11,
+      "todos_coinciden_sha256": true,
+      "derivados_pixel_fit": [],
+      "imagenes_raster": 0,
+      "etiqueta_aprobado": true
+    },
+    "23-que-archivo-usar": {
+      "usa_logo": true,
+      "trazados_congelados_encontrados": 9,
+      "todos_coinciden_sha256": true,
+      "derivados_pixel_fit": [],
+      "imagenes_raster": 0,
+      "etiqueta_aprobado": true
+    },
+    "24-pendientes": {
+      "usa_logo": true,
+      "trazados_congelados_encontrados": 9,
+      "todos_coinciden_sha256": true,
+      "derivados_pixel_fit": [],
+      "imagenes_raster": 0,
+      "etiqueta_aprobado": true
+    }
+  },
+  "textos_medidos": 557,
+  "textos_que_no_caben": [],
+  "sha256_referencia": {
+    "isotipo-pieza-l": "2facb2f3b38d2a41ddfee47b966c4fc1bb040304e1a4743b54efcd997284ecba",
+    "isotipo-pieza-gancho": "81ef2992439f7b58784db0841014da40b1d3e879ef047457ceda766da5af9e2d",
+    "wm-L": "3ec5ef758c3f239cb0bdab5da3dfd226ea7dae108adc1d6a69851a0295a69a27",
+    "wm-e": "1ea1fe1b4489fcb47dfb17cc0e100497d25e728cb2b14d9383787211ab9f861f",
+    "wm-a1": "62bd31940ea9a085a34541f5f0a20335fbf62715eb76d86e9dc96823149c4879",
+    "wm-l": "c29c6707cd5acc44592c56aab752271091ccd364f1f979de402cd596c5c7bdb1",
+    "wm-T": "0ff8fdc3db823e884af2819551d924f6ceae5e0d95e88223a339e312c0194b3b",
+    "wm-a2": "3f84d693ddf002737105cf446872695a14442af7cf8e2a8ab23ee55974a13710",
+    "wm-b": "6db24b615a56fb6c31969e993149e4c322f334980173db375c9d75f58e1e1bbd"
+  },
+  "pdf": {
+    "paginas": 24,
+    "tamano": "1440 x 810 pts (508 × 285.75 mm = 1920 × 1080 px a 96 ppp)",
+    "imagenes_raster": 0
+  },
+  "todo_ok": true
+}

@@ -1,0 +1,131 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=block" rel="stylesheet">
+<link rel="stylesheet" href="base.css">
+<style>
+body{background:#F5F6F8;color:#0B0D12;font-family:'Geist',sans-serif}
+.mono{font-family:'Geist Mono',monospace}
+h1{font-size:68px;font-weight:600;letter-spacing:-.045em;line-height:.95}
+.idea{font-size:18px;line-height:1.4;color:#3A3F4B;max-width:440px}
+.spec{border-top:1px solid #D9DCE3;padding-top:18px;display:flex;flex-direction:column;gap:10px}
+.spec .lema{font-size:34px;font-weight:600;letter-spacing:-.035em;line-height:1.05}
+.spec .body{font-size:14px;line-height:1.5;color:#3A3F4B}
+.spec .meta{font-family:'Geist Mono';font-size:11px;color:#6B7180}
+/* hero */
+.hero{background:#0B0D12;color:#F5F6F8;padding:30px 36px}
+.nav{display:flex;align-items:center;gap:26px;font-size:13px;color:#9097A6}
+.nav .logo{color:#fff;font-weight:600;font-size:17px;letter-spacing:-.02em;margin-right:auto}
+.nav .btn{background:#F5F6F8;color:#0B0D12;padding:7px 14px;border-radius:7px;font-weight:500}
+.hero h2{font-size:50px;font-weight:600;letter-spacing:-.045em;line-height:1;margin-top:42px;max-width:620px}
+.hero p{color:#9097A6;font-size:16px;margin-top:14px;max-width:500px;line-height:1.45}
+.hero .cta{display:flex;gap:10px;margin-top:22px}
+.hero .cta span{padding:10px 16px;border-radius:8px;font-size:14px;font-weight:500}
+.rhythm{position:absolute;left:36px;right:36px;bottom:26px;height:46px}
+.rhythm .line{position:absolute;left:0;right:0;top:22px;height:1px;background:#262B36}
+.rhythm .d{position:absolute;top:16px;width:13px;height:13px;border-radius:50%;background:#3D4BFF;box-shadow:0 0 0 4px rgba(61,75,255,.18)}
+.rhythm .lbl{position:absolute;top:-2px;font-family:'Geist Mono';font-size:10px;color:#6B7180}
+/* dash */
+.dash{background:#fff;border:1px solid #E3E6EC;padding:22px 24px;display:flex;flex-direction:column;gap:16px}
+.dash .top{display:flex;align-items:baseline;gap:10px}
+.dash .top h3{font-size:17px;font-weight:600;letter-spacing:-.02em}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.kpi{border:1px solid #EBEDF1;border-radius:10px;padding:12px}
+.kpi .n{font-size:26px;font-weight:600;letter-spacing:-.03em}
+.kpi .l{font-size:11.5px;color:#6B7180}
+.kpi .up{font-family:'Geist Mono';font-size:10.5px;color:#14996B}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+td,th{padding:7px 4px;border-bottom:1px solid #F0F1F4;text-align:left}
+th{font-weight:500;color:#8A90A0;font-size:11px}
+.pill{font-family:'Geist Mono';font-size:10px;padding:2px 7px;border-radius:99px}
+.dots{display:flex;gap:4px}.dots i{width:7px;height:7px;border-radius:50%;background:#3D4BFF;display:block}.dots i.o{background:#E3E6EC}
+/* poster */
+.poster{background:#fff;border:1px solid #E3E6EC;padding:26px;display:flex;flex-direction:column}
+.poster .biz{font-size:12px;color:#6B7180}
+.poster h4{font-size:30px;font-weight:600;letter-spacing:-.04em;line-height:1.02;margin-top:14px}
+.qr{width:116px;height:116px;display:grid;grid-template-columns:repeat(13,1fr);gap:1px;margin-top:auto}
+.qr i{background:#0B0D12;border-radius:1px}.qr i.w{background:transparent}
+.poster .foot{display:flex;justify-content:space-between;align-items:end;margin-top:14px;font-size:10.5px;color:#8A90A0}
+.claves{margin-top:auto;display:flex;flex-direction:column;gap:7px;font-size:12.5px;color:#3A3F4B;border-top:1px solid #D9DCE3;padding-top:14px}
+.claves span{display:inline-block;width:92px;font-size:10.5px;color:#3D4BFF;text-transform:uppercase;letter-spacing:.08em}
+.prow{position:relative;height:40px;margin-top:26px}
+.prow .line{position:absolute;left:0;right:0;top:14px;height:1px;background:#D9DCE3}
+.prow i{position:absolute;top:8px;width:13px;height:13px;border-radius:50%;background:#3D4BFF}
+.prow i.o{background:#fff;border:1.5px solid #C5CAD4}
+.prow em{position:absolute;top:28px;font-style:normal;font-family:'Geist Mono';font-size:10px;color:#8A90A0}
+</style></head><body>
+<div class="wrap">
+ <div class="left">
+  <div class="kicker mono" style="color:#6B7180">LealTab · Fase 2 · Ruta 1 de 3</div>
+  <h1>Ritmo</h1>
+  <p class="idea">Regresar es un ritmo. LealTab hace visible el compás de cada cliente —cada cuánto viene, cuándo se atrasa— con la precisión de un buen instrumento.</p>
+  <div>
+   <div class="sw">
+    <div class="chip" style="background:#0B0D12;color:#fff"><b>Tinta</b>#0B0D12</div>
+    <div class="chip" style="background:#3D4BFF;color:#fff"><b>Cobalto</b>#3D4BFF</div>
+    <div class="chip" style="background:#5BE0B3;color:#0B0D12"><b>Menta</b>#5BE0B3</div>
+    <div class="chip" style="background:#9097A6;color:#fff"><b>Grafito</b>#9097A6</div>
+    <div class="chip" style="background:#fff;border:1px solid #D9DCE3"><b>Papel</b>#F5F6F8</div>
+   </div>
+   <p class="note mono" style="margin-top:8px">Colores exploratorios · fría · alto contraste · cobalto protagonista</p>
+  </div>
+  <div class="spec">
+   <div class="meta">Grotesca neo + monoespaciada · ref. Geist / Geist Mono</div>
+   <div style="font-size:84px;font-weight:600;letter-spacing:-.05em;line-height:.9">Aa <span class="mono" style="font-size:44px;font-weight:400;letter-spacing:-.02em;color:#3D4BFF">21d</span></div>
+   <div class="lema">Haz que tus clientes siempre regresen.</div>
+   <div class="body">Ves quién regresa y quién no. Lista en minutos, sin contratos y con tus datos siempre descargables.</div>
+   <div class="meta">0123456789 · regresó hace 18 días · próxima visita ≈ 3 sem</div>
+  </div>
+  <div class="claves">
+   <div><span class="mono">Foto</span>Manos y mostrador en detalle, luz fría y limpia; poca foto, mucho producto.</div>
+   <div><span class="mono">Ilustración</span>Ninguna figurativa: líneas de tiempo, puntos y datos como gráfico.</div>
+   <div><span class="mono">Movimiento</span>Preciso y corto (150–250 ms); los puntos aparecen al compás.</div>
+  </div>
+ </div>
+ <div class="right">
+  <div class="mock hero">
+   <div class="tag mono" style="color:#9097A6;top:auto;bottom:80px">Landing · encabezado</div>
+   <div class="nav"><span class="logo">LealTab</span><span>Producto</span><span>Precios</span><span>Lo que viene</span><span class="btn">Empieza gratis</span></div>
+   <h2>Haz que tus clientes siempre regresen.</h2>
+   <p>Tarjeta digital para tu negocio, con datos claros de quién regresa y quién no.</p>
+   <div class="cta"><span style="background:#3D4BFF">Crea tu tarjeta</span><span style="border:1px solid #2A303C;color:#C9CED8">Ver cómo funciona</span></div>
+   <div class="rhythm" id="rh"><div class="line"></div></div>
+  </div>
+  <div class="bottom">
+   <div class="mock dash">
+    <div class="tag mono">Dashboard · Clientes</div>
+    <div class="top"><h3>Clientes</h3><span class="mono" style="font-size:11px;color:#8A90A0">Barbería Don Chuy · últimos 30 días</span></div>
+    <div class="kpis">
+     <div class="kpi"><div class="l">Regresaron</div><div class="n">68%</div><div class="up">▲ 6 pts</div></div>
+     <div class="kpi"><div class="l">Visita promedio</div><div class="n mono" style="font-size:22px">c/ 19 d</div><div class="up" style="color:#8A90A0">estable</div></div>
+     <div class="kpi"><div class="l">En riesgo</div><div class="n">12</div><div class="up" style="color:#C2410C">sin venir +5 sem</div></div>
+    </div>
+    <table>
+     <tr><th>Cliente</th><th>Ritmo</th><th>Última visita</th><th>Estado</th></tr>
+     <tr><td>Luis Hernández</td><td><div class="dots"><i></i><i></i><i></i><i></i><i class="o"></i></div></td><td class="mono">hace 6 d</td><td><span class="pill" style="background:#E6FBF3;color:#14996B">frecuente</span></td></tr>
+     <tr><td>Carlos Pérez</td><td><div class="dots"><i></i><i></i><i class="o"></i><i class="o"></i><i class="o"></i></div></td><td class="mono">hace 41 d</td><td><span class="pill" style="background:#FFF1E8;color:#C2410C">en riesgo</span></td></tr>
+     <tr><td>Andrés Sosa</td><td><div class="dots"><i></i><i></i><i></i><i class="o"></i><i class="o"></i></div></td><td class="mono">hace 15 d</td><td><span class="pill" style="background:#EEF0FF;color:#3D4BFF">al día</span></td></tr>
+     <tr><td>Jorge Ramírez</td><td><div class="dots"><i></i><i></i><i></i><i></i><i></i></div></td><td class="mono">hace 2 d</td><td><span class="pill" style="background:#E6FBF3;color:#14996B">frecuente</span></td></tr>
+     <tr><td>Iván Torres</td><td><div class="dots"><i></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i></div></td><td class="mono">hace 9 d</td><td><span class="pill" style="background:#F1F2F5;color:#6B7180">nuevo</span></td></tr>
+    </table>
+   </div>
+   <div class="mock poster">
+    <div class="tag mono">Mostrador · cartel</div>
+    <div class="biz mono">Tapioca Luna × LealTab</div>
+    <h4>Tu tarjeta, en tu celular. Escanea y listo.</h4>
+    <div style="font-size:13px;color:#3A3F4B;margin-top:8px">Junta 8 y la 9 va por nuestra cuenta.</div>
+    <div class="prow"><div class="line"></div><i style="left:0"></i><i style="left:12%"></i><i style="left:24%"></i><i style="left:36%"></i><i style="left:48%"></i><i class="o" style="left:60%"></i><i class="o" style="left:72%"></i><i class="o" style="left:84%"></i><i class="o" style="left:95%;border-color:#5BE0B3;border-style:dashed"></i><em style="left:0">5 de 9</em><em style="right:0">la 9 va por nuestra cuenta</em></div>
+    <div class="qr" id="qr"></div>
+    <div class="foot"><span class="mono">Sin descargar nada</span><span>Hecho con LealTab</span></div>
+   </div>
+  </div>
+ </div>
+</div>
+<script>
+const rh=document.getElementById('rh');const pts=[0,9,18,27,36,45,54,63,72,84,93];
+pts.forEach((p,i)=>{const d=document.createElement('div');d.className='d';d.style.left=(p)+'%';if(i==9){d.style.background='transparent';d.style.border='1.5px dashed #5BE0B3';d.style.boxShadow='none'}rh.appendChild(d);});
+[['sem 1',0],['sem 4',27],['sem 8',54],['hoy',84]].forEach(([t,p])=>{const l=document.createElement('div');l.className='lbl';l.style.left=p+'%';l.textContent=t;rh.appendChild(l)});
+const q=document.getElementById('qr');let s=7;function r(){s=(s*9301+49297)%233280;return s/233280}
+for(let y=0;y<13;y++)for(let x=0;x<13;x++){const i=document.createElement('i');const f=(x<4&&y<4)||(x>8&&y<4)||(x<4&&y>8);let on=r()>.5;
+if(f){const lx=x>8?x-9:x,ly=y>8?y-9:y;on=(lx==0||lx==3||ly==0||ly==3||(lx>0&&lx<3&&ly>0&&ly<3));if(lx==4||ly==4)on=false}
+if(!on)i.className='w';q.appendChild(i)}
+</script>
+</body></html>

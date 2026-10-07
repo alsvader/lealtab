@@ -1,0 +1,30 @@
+/**
+ * Copy y datos de la landing (copia exacta de la v1.7).
+ * Cada tarea agrega SOLO su bloque dentro de los marcadores de abajo.
+ */
+
+/** Enlaces del sitio, centralizados. Los que valen "#" siguen pendientes (igual que en la v1.7). */
+export const LINKS = {
+  /** PWA de LealTab (alta de negocio y acceso). */
+  app: "https://app.lealtab.com",
+  /**
+   * WhatsApp con el mensaje precargado. Es el enlace tal cual está en la v1.7.
+   * TODO: URL real (confirmar que 525588063606 es el número definitivo).
+   */
+  whatsapp:
+    "https://wa.me/525588063606?text=Hola%2C%20vi%20la%20p%C3%A1gina%20de%20LealTab%20y%20quiero%20saber%20m%C3%A1s%20sobre%20la%20tarjeta%20digital%20para%20mi%20negocio.",
+  instagram: "https://www.instagram.com/getlealtab",
+  /** Aviso de privacidad. TODO: URL real (el documento aún no existe). */
+  privacy: "#",
+  /** Términos y condiciones. TODO: URL real (el documento aún no existe). */
+  terms: "#",
+} as const;
+
+// ───────────────────────── T2: Nav, Hero, Footer ─────────────────────────
+// (vacío: lo agrega la tarea T2)
+
+// ───────────────────────── T3: Cómo funciona, La tarjeta ─────────────────────────
+// (vacío: lo agrega la tarea T3)
+
+// ───────────────────────── T4: Para quién, Precios, Confianza, Lo que viene, Cierre + FAQ ─────────────────────────
+// (vacío: lo agrega la tarea T4)

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" width="180" height="180">
+  <title>LealTab · apple-touch-icon 180 a sangre (iOS aplica su máscara) · Aprobado 2026-10-05</title>
+  <desc>Trazados de #isotipo copiados sin cambios de logo/master/lealtab-master-frozen.svg (congelado 2026-10-05). Solo cambian fill, viewBox, transform de grupo y fondo. Ancho del isotipo = 58 % del lado; centrado óptico: +2.44 u en x, -1.17 u en y respecto al centro de la caja (proporcional a la escala).</desc>
+  <rect id="fondo" width="180" height="180" fill="#0F2A22"/>
+  <g id="lealtab-isotipo" fill="#F3EFE6" transform="translate(38.947 45.243) scale(0.470270)">
+    <g id="isotipo">
+      <path id="isotipo-pieza-l" d="M52 26V130Q52 133.47 52.56 135.44Q54.53 136 58 136H124Q129.17 136 133.95 137.98Q138.73 139.96 142.38 143.62Q146.04 147.27 148.02 152.05Q150 156.83 150 162Q150 167.17 148.02 171.95Q146.04 176.73 142.38 180.38Q138.73 184.04 133.95 186.02Q129.17 188 124 188H58Q31.23 188 15.62 172.38Q0 156.77 0 130V26Q0 20.83 1.98 16.05Q3.96 11.27 7.62 7.62Q11.27 3.96 16.05 1.98Q20.83 0 26 0Q31.17 0 35.95 1.98Q40.73 3.96 44.38 7.62Q48.04 11.27 50.02 16.05Q52 20.83 52 26Z"/>
+      <path id="isotipo-pieza-gancho" d="M140 0H164Q190.77 0 206.38 15.62Q222 31.23 222 58V130Q222 135.17 220.02 139.95Q218.04 144.73 214.38 148.38Q210.73 152.04 205.95 154.02Q201.17 156 196 156Q190.83 156 186.05 154.02Q181.27 152.04 177.62 148.38Q173.96 144.73 171.98 139.95Q170 135.17 170 130V58Q170 54.53 169.44 52.56Q167.47 52 164 52H140Q134.83 52 130.05 50.02Q125.27 48.04 121.62 44.38Q117.96 40.73 115.98 35.95Q114 31.17 114 26Q114 20.83 115.98 16.05Q117.96 11.27 121.62 7.62Q125.27 3.96 130.05 1.98Q134.83 0 140 0Z"/>
+    </g>
+  </g>
+</svg>

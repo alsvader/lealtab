@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LealTab — Cards y estados (Fase 4 · pieza 3)</title>
+  <link rel="stylesheet" href="tokens.css" />
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--color-bg);
+      color: var(--color-text);
+      font-family: var(--font-body);
+      font-size: var(--font-size-body);
+      line-height: var(--font-line-body);
+      padding: var(--space-6) var(--space-5) var(--space-8);
+    }
+    main { max-width: 920px; margin: 0 auto; }
+    h1 {
+      font-family: var(--font-display);
+      font-weight: var(--font-weight-black);
+      font-stretch: condensed;
+      font-variation-settings: "wdth" 75, "wght" 800;
+      font-size: var(--font-size-h2);
+      line-height: var(--font-line-h2);
+      margin: 0 0 var(--space-2);
+    }
+    .lead {
+      font-size: var(--font-size-lead);
+      font-weight: var(--font-weight-medium);
+      line-height: var(--font-line-lead);
+      color: var(--color-text-muted);
+      margin: 0 0 var(--space-6);
+    }
+    section { margin-bottom: var(--space-7); }
+    h2 {
+      font-family: var(--font-display);
+      font-weight: var(--font-weight-black);
+      font-variation-settings: "wdth" 75, "wght" 800;
+      font-size: var(--font-size-h4);
+      line-height: var(--font-line-h4);
+      margin: 0 0 var(--space-4);
+      padding-bottom: var(--space-2);
+      border-bottom: var(--border-hair) solid var(--color-border);
+    }
+    h3 {
+      font-family: var(--font-body);
+      font-weight: var(--font-weight-semibold);
+      font-size: var(--font-size-label);
+      line-height: var(--font-line-label);
+      margin: 0 0 var(--space-3);
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: var(--font-tracking-label);
+    }
+    .note {
+      font-size: var(--font-size-caption);
+      color: var(--color-text-muted);
+      margin: calc(-1 * var(--space-2)) 0 var(--space-4);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: var(--space-5);
+      margin-bottom: var(--space-5);
+    }
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+      align-items: center;
+      margin-bottom: var(--space-4);
+    }
+    .ask {
+      border: var(--border-product-strong) solid var(--color-border);
+      border-radius: var(--radius-card);
+      background: var(--color-surface);
+      box-shadow: var(--shadow-card);
+      padding: var(--space-5);
+    }
+    .ask ul { margin: var(--space-2) 0 0; padding-left: var(--space-5); }
+    .ask li { margin-bottom: var(--space-2); }
+    code {
+      font-family: var(--font-body);
+      font-size: var(--font-size-caption);
+      font-variant-numeric: tabular-nums;
+      background: var(--color-support);
+      border: var(--border-hair) solid var(--color-border);
+      border-radius: var(--radius-sticker);
+      padding: 1px 6px;
+    }
+
+    /* ——— Card ——— */
+    .card {
+      background: var(--color-surface);
+      color: var(--color-text);
+      border: var(--border-product) solid var(--color-border);
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transition:
+        transform var(--duration-fast) var(--easing-standard),
+        box-shadow var(--duration-fast) var(--easing-standard),
+        border-width var(--duration-fast) var(--easing-standard);
+    }
+    .card--flat {
+      box-shadow: none;
+    }
+    .card--flat.card--hair {
+      border-width: var(--border-hair);
+    }
+    .card--elevated {
+      box-shadow: var(--shadow-card);
+    }
+    .card--interactive {
+      cursor: pointer;
+      text-align: left;
+      width: 100%;
+      font: inherit;
+      padding: 0;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+    .card--interactive:hover {
+      border-width: var(--border-product-strong);
+    }
+    .card--interactive:focus-visible {
+      outline: none;
+      box-shadow: var(--shadow-card), var(--focus-ring);
+    }
+    .card--flat.card--interactive:focus-visible {
+      box-shadow: var(--focus-ring);
+    }
+    .card--interactive:active {
+      transform: translate(2px, 2px);
+      box-shadow: none;
+    }
+    .card__header,
+    .card__body,
+    .card__footer {
+      padding: var(--space-4) var(--space-5);
+    }
+    .card__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-3);
+      border-bottom: var(--border-hair) solid var(--color-border);
+    }
+    .card__title {
+      margin: 0;
+      font-family: var(--font-body);
+      font-weight: var(--font-weight-bold);
+      font-size: var(--font-size-body);
+      line-height: var(--font-line-ui);
+      color: var(--color-text);
+      text-transform: none;
+      letter-spacing: 0;
+    }
+    .card__footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-3);
+      border-top: var(--border-hair) solid var(--color-border);
+      font-size: var(--font-size-caption);
+      color: var(--color-text-muted);
+    }
+    .card__meta { color: var(--color-text-muted); font-size: var(--font-size-caption); }
+    .card__stat {
+      font-weight: var(--font-weight-bold);
+      font-size: var(--font-size-stat);
+      line-height: var(--font-line-stat);
+      letter-spacing: var(--font-tracking-stat);
+      font-variant-numeric: tabular-nums;
+      margin: 0 0 var(--space-2);
+    }
+    .card__hint {
+      margin: 0;
+      color: var(--color-text-muted);
+      font-size: var(--font-size-ui);
+      line-height: var(--font-line-ui);
+    }
+    .card__empty {
+      text-align: center;
+      padding: var(--space-5) var(--space-4);
+    }
+    .card__empty-title {
+      margin: 0 0 var(--space-2);
+      font-weight: var(--font-weight-semibold);
+      font-size: var(--font-size-ui);
+    }
+    .card__error-msg {
+      margin: 0 0 var(--space-3);
+      color: var(--color-error);
+      font-size: var(--font-size-ui);
+      font-weight: var(--font-weight-medium);
+    }
+    .card--error-state {
+      border-color: var(--color-error);
+    }
+    .skeleton {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+    .skeleton__bar {
+      height: 12px;
+      border-radius: var(--radius-sticker);
+      background: var(--color-support);
+      border: var(--border-hair) solid var(--color-border);
+    }
+    .skeleton__bar--sm { width: 40%; }
+    .skeleton__bar--md { width: 70%; }
+    .skeleton__bar--lg { width: 100%; height: 48px; }
+
+    /* Accent callout (Durazno solo franja) */
+    .card--accent-edge {
+      border-left: 4px solid var(--color-accent);
+    }
+
+    /* ——— Chips ——— */
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-1);
+      font-family: var(--font-body);
+      font-weight: var(--font-weight-bold);
+      font-size: var(--font-size-label);
+      line-height: var(--font-line-label);
+      letter-spacing: var(--font-tracking-label);
+      text-transform: uppercase;
+      padding: var(--space-1) var(--space-2);
+      border-radius: var(--radius-sticker);
+      border: var(--border-hair) solid var(--color-border);
+      white-space: nowrap;
+    }
+    .chip--success {
+      color: var(--color-success);
+      background: var(--color-success-bg);
+    }
+    .chip--risk {
+      color: var(--color-risk);
+      background: var(--color-risk-bg);
+    }
+    .chip--error {
+      color: var(--color-error);
+      background: var(--color-error-bg);
+    }
+
+    /* Mini buttons (reuse pieza 2 chrome, sm) */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-body);
+      font-weight: var(--font-weight-semibold);
+      font-size: var(--font-size-ui);
+      line-height: 1.2;
+      border-style: solid;
+      border-color: var(--color-border);
+      border-radius: var(--radius-control);
+      cursor: pointer;
+      padding: var(--space-2) var(--space-3);
+      transition:
+        transform var(--duration-fast) var(--easing-standard),
+        box-shadow var(--duration-fast) var(--easing-standard),
+        border-width var(--duration-fast) var(--easing-standard);
+    }
+    .btn:focus-visible {
+      outline: none;
+      box-shadow: var(--focus-ring);
+    }
+    .btn--primary {
+      background: var(--color-brand);
+      color: var(--color-text-on-bosque);
+      border-width: var(--border-product);
+      box-shadow: var(--shadow-button);
+    }
+    .btn--secondary {
+      background: var(--color-surface);
+      color: var(--color-text);
+      border-width: var(--border-product);
+      box-shadow: var(--shadow-button);
+    }
+    .btn--ghost {
+      background: transparent;
+      color: var(--color-text);
+      border-width: var(--border-product);
+      box-shadow: none;
+    }
+    .btn--flat {
+      box-shadow: none;
+    }
+    .btn--primary:active,
+    .btn--secondary:active {
+      transform: translate(4px, 4px);
+      box-shadow: none;
+    }
+    .icon-line {
+      display: inline-block;
+      width: 32px;
+      height: 32px;
+      border: var(--border-product) solid var(--color-border);
+      border-radius: var(--radius-control);
+      margin-bottom: var(--space-3);
+      position: relative;
+    }
+    .icon-line::before,
+    .icon-line::after {
+      content: "";
+      position: absolute;
+      background: var(--color-text-muted);
+    }
+    .icon-line::before {
+      width: 14px; height: 2px; left: 8px; top: 11px;
+    }
+    .icon-line::after {
+      width: 10px; height: 2px; left: 8px; top: 17px;
+    }
+
+    /* Shot mode: isolate sections for PNG capture */
+    body.shot-cards .page-chrome,
+    body.shot-cards #sec-estados,
+    body.shot-cards #sec-ask,
+    body.shot-estados .page-chrome,
+    body.shot-estados #sec-cards,
+    body.shot-estados #sec-ask {
+      display: none !important;
+    }
+    body.shot-cards,
+    body.shot-estados {
+      padding: var(--space-5);
+    }
+    body.shot-cards main,
+    body.shot-estados main {
+      max-width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header class="page-chrome">
+      <h1>Cards y estados</h1>
+      <p class="lead">Fase 4 · pieza 3 · tokens aprobados · Manrope en UI · chips con palabra · dashboard flat.</p>
+    </header>
+
+    <section id="sec-cards">
+      <h2>1 · Variantes de card</h2>
+      <p class="note">Surface <code>blanco-lino</code> · radio <code>14</code> · sombra <code>5px</code> dura (salvo flat).</p>
+
+      <div class="grid">
+        <article class="card">
+          <header class="card__header">
+            <h3 class="card__title">Default</h3>
+            <span class="chip chip--success">Frecuente</span>
+          </header>
+          <div class="card__body">
+            <p class="card__stat">23</p>
+            <p class="card__hint">Clientes que regresaron esta semana.</p>
+          </div>
+          <footer class="card__footer">
+            <span>Actualizado hace 2 h</span>
+            <button type="button" class="btn btn--ghost btn--flat">Ver</button>
+          </footer>
+        </article>
+
+        <article class="card card--elevated">
+          <header class="card__header">
+            <h3 class="card__title">Elevated</h3>
+          </header>
+          <div class="card__body">
+            <p class="card__hint">Misma cromática que default; nombre semántico cuando la card es el foco de la vista.</p>
+          </div>
+          <footer class="card__footer">
+            <span>Detalle / panel</span>
+            <button type="button" class="btn btn--secondary">Abrir</button>
+          </footer>
+        </article>
+
+        <article class="card card--flat">
+          <header class="card__header">
+            <h3 class="card__title">Flat / dashboard</h3>
+            <span class="chip chip--risk">En riesgo</span>
+          </header>
+          <div class="card__body">
+            <p class="card__stat">5</p>
+            <p class="card__hint">Sin sombra. Densidad del tablero.</p>
+          </div>
+          <footer class="card__footer">
+            <span>Dashboard</span>
+            <button type="button" class="btn btn--ghost btn--flat">Avisar</button>
+          </footer>
+        </article>
+
+        <button type="button" class="card card--interactive" aria-label="Card interactiva: María López">
+          <header class="card__header">
+            <span class="card__title">Interactive</span>
+            <span class="chip chip--success">Frecuente</span>
+          </header>
+          <div class="card__body">
+            <p class="card__hint" style="margin:0">María López · hover borde 2.5 · pressed 2 px · focus menta.</p>
+          </div>
+        </button>
+      </div>
+
+      <h3>Anatomía + acento Durazno (solo franja)</h3>
+      <div class="grid">
+        <article class="card card--accent-edge">
+          <header class="card__header">
+            <span class="card__title">Header</span>
+            <span class="chip chip--success">Frecuente</span>
+          </header>
+          <div class="card__body">
+            <p class="card__hint" style="margin:0 0 var(--space-2)">Body — contenido. Durazno solo como borde izquierdo de 4 px (acento), nunca fill.</p>
+          </div>
+          <footer class="card__footer">
+            <span>Footer · meta</span>
+            <button type="button" class="btn btn--primary">Primario</button>
+          </footer>
+        </article>
+
+        <article class="card card--flat card--hair">
+          <div class="card__body">
+            <h3 style="margin:0 0 var(--space-2);text-transform:none;letter-spacing:0;font-size:var(--font-size-ui);color:var(--color-text-muted)">Solo body · flat hair</h3>
+            <p class="card__stat">68%</p>
+            <p class="card__hint">Retención del mes. Sin header ni footer.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="sec-estados">
+      <h2>2 · Chips de estado</h2>
+      <p class="note">Color + palabra · Manrope · planos en producto · sin Archivo.</p>
+      <div class="row">
+        <span class="chip chip--success">Frecuente</span>
+        <span class="chip chip--risk">En riesgo</span>
+        <span class="chip chip--risk">Te extrañamos</span>
+        <span class="chip chip--error">Error</span>
+      </div>
+      <p class="note">“En riesgo” en listados · “Te extrañamos” en avisos · mismo par tostado / durazno claro.</p>
+
+      <h3>Chips en contexto (card flat)</h3>
+      <div class="grid">
+        <article class="card card--flat">
+          <header class="card__header">
+            <span class="card__title">Ana Ruiz</span>
+            <span class="chip chip--success">Frecuente</span>
+          </header>
+          <div class="card__body">
+            <p class="card__hint" style="margin:0">Última visita hace 4 días · cada ~2 semanas.</p>
+          </div>
+        </article>
+        <article class="card card--flat">
+          <header class="card__header">
+            <span class="card__title">Luis Méndez</span>
+            <span class="chip chip--risk">En riesgo</span>
+          </header>
+          <div class="card__body">
+            <p class="card__hint" style="margin:0">Lleva 3 semanas sin venir.</p>
+          </div>
+        </article>
+        <article class="card card--flat">
+          <header class="card__header">
+            <span class="card__title">Sincronización</span>
+            <span class="chip chip--error">Error</span>
+          </header>
+          <div class="card__body">
+            <p class="card__hint" style="margin:0">No se pudo guardar el aviso.</p>
+          </div>
+        </article>
+      </div>
+
+      <h2>3 · Empty · loading · error</h2>
+      <div class="grid">
+        <article class="card card--flat">
+          <header class="card__header">
+            <span class="card__title">Empty</span>
+          </header>
+          <div class="card__body card__empty">
+            <span class="icon-line" aria-hidden="true"></span>
+            <p class="card__empty-title">Aún no hay clientes</p>
+            <p class="card__hint" style="margin:0 0 var(--space-4)">Cuando alguien se registre en tu tarjeta, aparece aquí.</p>
+            <button type="button" class="btn btn--secondary btn--flat">Agregar cliente</button>
+          </div>
+        </article>
+
+        <article class="card card--flat" aria-busy="true">
+          <header class="card__header">
+            <span class="card__title">Loading</span>
+          </header>
+          <div class="card__body">
+            <div class="skeleton" aria-label="Cargando…">
+              <div class="skeleton__bar skeleton__bar--lg"></div>
+              <div class="skeleton__bar skeleton__bar--md"></div>
+              <div class="skeleton__bar skeleton__bar--sm"></div>
+            </div>
+            <p class="card__meta" style="margin:var(--space-3) 0 0">Cargando…</p>
+          </div>
+        </article>
+
+        <article class="card card--flat card--error-state">
+          <header class="card__header">
+            <span class="card__title">Error</span>
+            <span class="chip chip--error">Error</span>
+          </header>
+          <div class="card__body">
+            <p class="card__error-msg">Error: no se pudo cargar la lista.</p>
+            <p class="card__hint" style="margin:0 0 var(--space-4)">Revisa tu conexión e inténtalo de nuevo.</p>
+            <button type="button" class="btn btn--ghost">Reintentar</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="sec-ask" class="page-chrome">
+      <div class="ask">
+        <h2 style="border:0;padding:0;margin:0 0 var(--space-2)">Para aprobar</h2>
+        <ul>
+          <li>Anatomía header / body / footer</li>
+          <li>Variantes default · elevated · flat · interactive</li>
+          <li>Chips Frecuente / En riesgo / Error (planos)</li>
+          <li>Empty · loading · error con palabra</li>
+          <li>Presión interactive 2 px (vs botón 4 px)</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+  <script>
+    (function () {
+      var q = new URLSearchParams(location.search).get("shot");
+      if (q === "cards") document.body.classList.add("shot-cards");
+      if (q === "estados") document.body.classList.add("shot-estados");
+    })();
+  </script>
+</body>
+</html>

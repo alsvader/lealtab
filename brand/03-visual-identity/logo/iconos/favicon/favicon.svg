@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" shape-rendering="geometricPrecision">
+  <title>LealTab · favicon oficial (opción B) · isotipo lino sobre cuadrado redondeado noche</title>
+  <desc>DERIVADO · trazados NUEVOS ajustados a la rejilla de 32 px a partir del isotipo congelado (no son los d del master). Grosor 5 px, bordes rectos en píxel entero. Aprobado 2026-10-05.</desc>
+  <rect id="fondo" width="32" height="32" rx="7" fill="#0F2A22"/>
+  <g id="isotipo-ajustado-32px" fill="#F3EFE6" data-derivado="pixel-fit">
+    <path id="pieza-l-ajustada" d="M5 8.5A2.5 2.5 0 0 1 10 8.5V19A1 1 0 0 0 11 20H17.5A2.5 2.5 0 0 1 17.5 25H11A6 6 0 0 1 5 19Z"/>
+    <path id="pieza-gancho-ajustada" d="M18.5 6H21A6 6 0 0 1 27 12V19.5A2.5 2.5 0 0 1 22 19.5V12A1 1 0 0 0 21 11H18.5A2.5 2.5 0 0 1 18.5 6Z"/>
+  </g>
+</svg>

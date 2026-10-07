@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420">
+<title>LealTab — Logo master v0.1</title>
+<desc>Construcción vectorial inicial de la dirección Equilibrada. Isotipo editable y wordmark de referencia.</desc>
+<rect width="1200" height="420" fill="#F3EFE6"/>
+<g id="isotipo" fill="none" stroke="#0F2A22" stroke-width="58" stroke-linecap="round" stroke-linejoin="round">
+<path d="M180 142 V246 Q180 278 212 278 H284"/>
+<path d="M284 142 H316 Q348 142 348 174 V246"/>
+</g>
+<g id="wordmark-reference" fill="#0F2A22">
+<text x="440" y="266" font-family="Archivo Condensed, Archivo Narrow, Arial Narrow, sans-serif" font-size="152" font-weight="800" letter-spacing="-4">LealTab</text>
+</g>
+<g fill="#0F2A22" opacity=".55" font-family="Arial, sans-serif" font-size="18">
+<text x="180" y="360">Logo master v0.1 · Equilibrada · vector base</text>
+</g>
+</svg>

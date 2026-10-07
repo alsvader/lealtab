@@ -1,0 +1,129 @@
+/**
+ * LealTab Design Tokens — Fase 4 · pieza 1
+ * Fuente: paleta-y-tipografia.md + Ciclo v2 (rutas-creativas.md)
+ * No inventar hexes; Durazno solo acento; Noche en lugar de negro.
+ */
+
+@import url("https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75,700;75,800&family=Manrope:wght@400;500;600;700&display=swap");
+
+:root {
+  /* ——— Color: primitivos ——— */
+  --color-lino: #f3efe6;
+  --color-blanco-lino: #fffdf8;
+  --color-noche: #0f2a22;
+  --color-bosque: #0f4d3a;
+  --color-menta: #cfe3d6;
+  --color-durazno: #ff9f6e;
+  --color-gris-noche: #4d635a;
+
+  /* Estados funcionales (cierre Fase 4) */
+  --color-tostado: #a8461a;
+  --color-durazno-claro: #ffe6d8;
+  --color-rojo: #b42318;
+  --color-rosa-claro: #fdecea;
+
+  /* ——— Color: semánticos ——— */
+  --color-bg: var(--color-lino);
+  --color-surface: var(--color-blanco-lino);
+  --color-text: var(--color-noche);
+  --color-text-muted: var(--color-gris-noche);
+  --color-text-on-bosque: var(--color-lino);
+  --color-border: var(--color-noche);
+  --color-shadow: var(--color-noche);
+  --color-brand: var(--color-bosque);
+  --color-accent: var(--color-durazno);
+  --color-support: var(--color-menta);
+
+  --color-success: var(--color-bosque);
+  --color-success-bg: var(--color-menta);
+  --color-risk: var(--color-tostado);
+  --color-risk-bg: var(--color-durazno-claro);
+  --color-error: var(--color-rojo);
+  --color-error-bg: var(--color-rosa-claro);
+
+  /* ——— Tipografía ——— */
+  --font-display: Archivo, "Arial Narrow", sans-serif;
+  --font-body: Manrope, system-ui, sans-serif;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-black: 800;
+  --font-width-condensed: 75;
+
+  --font-size-display: 96px;
+  --font-size-h1: 64px;
+  --font-size-h2: 44px;
+  --font-size-h3: 32px;
+  --font-size-h4: 24px;
+  --font-size-lead: 20px;
+  --font-size-body: 16px;
+  --font-size-ui: 14px;
+  --font-size-caption: 12px;
+  --font-size-label: 11px;
+  --font-size-stat: 32px;
+  --font-size-sticker-sm: 11px;
+  --font-size-sticker: 13px;
+  --font-size-sticker-lg: 15px;
+
+  --font-line-display: 0.9;
+  --font-line-h1: 0.92;
+  --font-line-h2: 0.95;
+  --font-line-h3: 1;
+  --font-line-h4: 1.05;
+  --font-line-lead: 1.5;
+  --font-line-body: 1.55;
+  --font-line-ui: 1.45;
+  --font-line-caption: 1.4;
+  --font-line-label: 1.3;
+  --font-line-stat: 1.1;
+
+  --font-tracking-label: 0.12em;
+  --font-tracking-stat: -0.02em;
+  --font-tracking-sticker: 0.02em;
+
+  /* ——— Espaciado (base 4) ——— */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+
+  /* ——— Radio ——— */
+  --radius-sticker: 6px;
+  --radius-control: 10px;
+  --radius-card: 14px;
+  --radius-container: 24px;
+  --radius-full: 9999px;
+
+  /* ——— Borde ——— */
+  --border-hair: 1.5px;
+  --border-product: 2px;
+  --border-product-strong: 2.5px;
+  --border-marketing: 3px;
+
+  /* ——— Sombra dura (sin blur) ——— */
+  --shadow-sticker: 3px 3px 0 var(--color-shadow);
+  --shadow-button: 4px 4px 0 var(--color-shadow);
+  --shadow-card: 5px 5px 0 var(--color-shadow);
+  --shadow-social: 6px 6px 0 var(--color-shadow);
+  --shadow-storefront: 8px 8px 0 var(--color-shadow);
+
+  /* ——— Movimiento ——— */
+  --duration-fast: 150ms;
+  --duration-ui: 200ms;
+  --duration-arc: 600ms;
+  --easing-standard: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  /* ——— Foco (pieza 2 · botones y campos) ——— */
+  --focus-ring: 0 0 0 3px var(--color-menta);
+
+  /* ——— Retícula ——— */
+  --grid-columns-desktop: 12;
+  --grid-columns-mobile: 4;
+  --grid-gutter-desktop: var(--space-5);
+  --grid-gutter-mobile: var(--space-4);
+}
