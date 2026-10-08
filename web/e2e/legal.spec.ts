@@ -32,7 +32,7 @@ for (const { path, doc, footerLabel } of PAGES) {
       await expect(page.getByRole("heading", { level: 1 })).toHaveText(doc.title);
       await expect(page).toHaveTitle(`${doc.title} · LealTab`);
       await expect(page.locator('meta[name="description"]')).toHaveAttribute("content", doc.description);
-      await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", `https://lealtab.com${path}`);
+      await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", `https://www.lealtab.com${path}`);
       // OG heredado del layout
       await expect(page.locator('meta[property="og:image"]')).toHaveCount(1);
       await expect(page.locator("html")).toHaveAttribute("lang", "es-MX");
@@ -201,10 +201,10 @@ test.describe("Nav y Footer fuera de la home", () => {
 
 test("sitemap.xml y robots.txt listan las tres rutas", async ({ request }) => {
   const sitemap = await (await request.get("/sitemap.xml")).text();
-  for (const p of ["https://lealtab.com/", "https://lealtab.com/aviso-de-privacidad", "https://lealtab.com/terminos-y-condiciones"]) {
+  for (const p of ["https://www.lealtab.com/", "https://www.lealtab.com/aviso-de-privacidad", "https://www.lealtab.com/terminos-y-condiciones"]) {
     expect(sitemap).toContain(`<loc>${p}</loc>`);
   }
   const robots = await (await request.get("/robots.txt")).text();
-  expect(robots).toContain("Sitemap: https://lealtab.com/sitemap.xml");
+  expect(robots).toContain("Sitemap: https://www.lealtab.com/sitemap.xml");
   expect(robots).toMatch(/Allow: \//);
 });

@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { archivo, manrope } from "./fonts";
-import { OG_BASE } from "@/lib/site";
+import { OG_BASE, SITE_URL } from "@/lib/site";
 import "@/styles/globals.css";
 
 const TITLE = "LealTab · Haz que tus clientes siempre regresen";
@@ -11,7 +11,7 @@ const OG_DESCRIPTION =
 
 // Mismo <head> que la v1.7 (+ íconos de brand/03-visual-identity/.../entregables/web/snippet.html)
 export const metadata: Metadata = {
-  metadataBase: new URL("https://lealtab.com"),
+  metadataBase: new URL(SITE_URL),
   title: TITLE,
   description: DESCRIPTION,
   icons: {
