@@ -1,0 +1,47 @@
+/* Confianza (#confianza). v1.7: 1107-1141, 1620-1623, 1649.
+   Portado literal de brand/05-marketing/03-mockup-landing-v1.7.html (CSS). Nombres globales entre :global(). */
+
+/* ——— Confianza v1.2: compromisos en cuadrícula sin cajas ——— */
+.trust-sec { background: var(--color-surface); padding: var(--space-8) 0; }
+@media (min-width: 900px) { .trust-sec { padding: calc(var(--space-8) * 1.5) 0; } }
+.trust-sec h2 { font-size: clamp(36px, 9.5vw, 52px); max-width: 14ch; }
+.trust {
+  list-style: none;
+  margin: var(--space-6) 0 0;
+  padding: 0;
+  display: grid;
+  column-gap: var(--space-8);
+}
+@media (min-width: 760px) { .trust { grid-template-columns: 1fr 1fr; margin-top: var(--space-7); } }
+.trust-item {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: var(--space-4);
+  padding: var(--space-5) 0;
+}
+.trust-item img { width: 28px; height: 28px; margin-top: 2px; }
+.trust-item h3 {
+  font-size: clamp(var(--font-size-h4), 3vw, 30px);
+  line-height: var(--font-line-h4);
+}
+.trust-item p { margin: var(--space-2) 0 0; max-width: 38ch; }
+.trust-item a {
+  font-weight: var(--font-weight-semibold);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  border-radius: 4px;
+}
+.trust-item a:hover { color: var(--color-bosque); }
+.trust-item a:focus-visible { box-shadow: var(--focus-ring); }
+.trust-cta { margin-top: var(--space-6); display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-4); }
+.trust-cta p { margin: 0; color: var(--color-text-muted); }
+
+/* 3. Íconos que se dibujan (como el aro) */
+.draw path { stroke-dasharray: 1 1; }
+:global(.js) .trust-item .draw path { stroke-dashoffset: 1; opacity: 0; transition: stroke-dashoffset 600ms var(--easing-standard) calc(var(--d, 0ms) + 150ms), opacity 1ms linear calc(var(--d, 0ms) + 150ms); }
+:global(.js) .trust-item:global(.is-in) .draw path { stroke-dashoffset: 0; opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  :global(.js) .trust-item .draw path { stroke-dashoffset: 0; opacity: 1; transition: none; }
+}

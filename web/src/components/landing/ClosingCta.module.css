@@ -1,0 +1,119 @@
+/* Cierre + FAQ (#cta-final, #faq). v1.7: 1199-1301, 1677-1678 y 1681 y 1686 (.sticker-reward), 1766.
+   Portado literal de brand/05-marketing/03-mockup-landing-v1.7.html (CSS). Nombres globales entre :global(). */
+
+/* ——— Cierre v1.2: el aro se completa en durazno + CTA ——— */
+.cta-final { position: relative; overflow: clip; padding: var(--space-8) 0; }
+@media (min-width: 900px) { .cta-final { padding: calc(var(--space-8) * 1.5) 0 var(--space-8); } }
+.close-grid { display: grid; gap: var(--space-5); align-items: center; }
+@media (min-width: 900px) { .close-grid { grid-template-columns: 1fr 1fr; gap: var(--space-8); } }
+.close-visual { position: relative; height: 300px; order: -1; }
+@media (min-width: 900px) { .close-visual { height: 520px; order: 0; } }
+.close-aro { position: absolute; max-width: none; width: 340px; top: 50%; left: calc(100% - 250px); transform: translateY(-50%); }
+@media (min-width: 900px) { .close-aro { width: 620px; left: calc(100% - 400px); } }
+.close-aro .fill,
+.close-aro .fill-edge { stroke-dasharray: 100 100; }
+.close-aro .fill { stroke: var(--color-durazno); }
+:global(.js) .close-aro:not(:global(.is-done)) .fill,
+:global(.js) .close-aro:not(:global(.is-done)) .fill-edge { stroke-dasharray: 0 100; opacity: 0; }
+:global(.js) .close-aro:not(:global(.is-done)) .fill { stroke: var(--color-bosque); }
+.close-aro:global(.is-done) .fill,
+.close-aro:global(.is-done) .fill-edge { animation: closeDraw 650ms var(--easing-standard) both; }
+.close-aro:global(.is-done) .fill { animation: closeDraw 650ms var(--easing-standard) both, closeTurn 200ms var(--easing-standard) 650ms both, closePulse 360ms var(--easing-standard) 850ms 1; }
+.close-aro:global(.is-done) .fill-edge { animation: closeDraw 650ms var(--easing-standard) both, closeEdgePulse 360ms var(--easing-standard) 850ms 1; }
+@keyframes closeDraw {
+  0%   { stroke-dasharray: 0 100; opacity: 0; }
+  4%   { opacity: 1; }
+  100% { stroke-dasharray: 100 100; opacity: 1; }
+}
+@keyframes closeTurn { from { stroke: var(--color-bosque); } to { stroke: var(--color-durazno); } }
+@keyframes closePulse { 0%, 100% { stroke-width: 44; } 45% { stroke-width: 50; } }
+@keyframes closeEdgePulse { 0%, 100% { stroke-width: 49; } 45% { stroke-width: 55; } }
+.sticker-reward {
+  position: absolute;
+  left: calc(100% - 290px);
+  bottom: 34px;
+  padding: 7px 12px;
+  background: var(--color-durazno);
+  color: var(--color-noche);
+  border: var(--border-product-strong) solid var(--color-noche);
+  border-radius: var(--radius-sticker);
+  box-shadow: var(--shadow-sticker);
+  font-family: var(--font-display);
+  font-variation-settings: "wdth" 75, "wght" 800;
+  font-size: var(--font-size-sticker-lg);
+  letter-spacing: var(--font-tracking-sticker);
+  text-transform: uppercase;
+  line-height: 1;
+  white-space: nowrap;
+  transform: rotate(-4deg);
+}
+@media (min-width: 900px) { .sticker-reward { left: calc(100% - 440px); bottom: 40px; font-size: 18px; } }
+/* Cifra dentro del aro: cierra la historia del hero (4/5 → 5/5) */
+.close-count {
+  position: absolute;
+  top: 50%;
+  left: calc(100% - 82px);
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: var(--color-noche);
+}
+@media (min-width: 900px) { .close-count { left: calc(100% - 94px); } }
+.close-count .num {
+  display: block;
+  font-weight: var(--font-weight-bold);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: var(--font-tracking-stat);
+  line-height: 1;
+  font-size: clamp(52px, 14vw, 96px);
+}
+.close-count .unit {
+  display: block;
+  margin-top: var(--space-2);
+  font-size: var(--font-size-ui);
+  font-weight: var(--font-weight-semibold);
+}
+@media (min-width: 900px) { .close-count .unit { font-size: var(--font-size-lead); } }
+:global(.js) .close-visual:not(:global(.is-done)) .close-count { opacity: 0; }
+.close-visual:global(.is-done) .close-count { animation: closeCountIn 240ms var(--easing-standard) 650ms both; }
+@keyframes closeCountIn {
+  from { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+  to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+:global(.js) .close-visual:not(:global(.is-done)) .sticker-reward { opacity: 0; }
+.close-visual:global(.is-done) .sticker-reward { animation: stickerInReward 240ms var(--easing-standard) 1000ms both; }
+@keyframes stickerInReward {
+  0%   { opacity: 0; transform: scale(0.6) rotate(-16deg); }
+  60%  { opacity: 1; transform: scale(1.06) rotate(-2deg); }
+  100% { opacity: 1; transform: scale(1) rotate(-4deg); }
+}
+.cta-final h2 {
+  font-size: clamp(56px, 15vw, var(--font-size-display));
+  line-height: var(--font-line-display);
+}
+.cta-final :global(.lead) { margin: var(--space-4) 0 var(--space-6); color: var(--color-text); }
+.cta-final .wa-hint { margin: var(--space-4) 0 0; font-size: var(--font-size-ui); color: var(--color-text-muted); }
+.cta-final .wa-hint a { text-decoration: underline; text-underline-offset: 3px; border-radius: 4px; }
+.cta-final .wa-hint a:focus-visible { box-shadow: var(--focus-ring); }
+@media (max-width: 559px) { .cta-final :global(.btn-cta) { width: 100%; } }
+
+/* FAQ v1.7: todas las respuestas a la vista (antes acordeón), en lista de dos columnas */
+.faq { display: grid; gap: var(--space-5); margin-top: calc(var(--space-8) * 1.5); }
+@media (min-width: 900px) { .faq { grid-template-columns: 0.8fr 1.2fr; gap: var(--space-8); } }
+.faq h2 { font-size: clamp(32px, 8vw, var(--font-size-h2)); line-height: var(--font-line-h2); max-width: 10ch; }
+.faq-list { margin: 0; display: grid; gap: var(--space-6) var(--space-7); }
+@media (min-width: 700px) { .faq-list { grid-template-columns: 1fr 1fr; } }
+.faq-item dt { font-weight: var(--font-weight-bold); font-size: var(--font-size-body); line-height: 1.4; }
+.faq-item dd { margin: var(--space-2) 0 0; color: var(--color-text-muted); line-height: var(--font-line-body); max-width: 42ch; }
+
+/* v1.4 · 9. El sticker responde al mouse (v1.7 1675-1682, solo .sticker-reward) */
+@media (hover: hover) {
+  .sticker-reward {
+    transition: rotate var(--duration-ui) var(--easing-standard), translate var(--duration-ui) var(--easing-standard), box-shadow var(--duration-ui) var(--easing-standard);
+  }
+  .sticker-reward:hover { rotate: 4deg; translate: -2px -2px; box-shadow: 5px 5px 0 var(--color-shadow); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sticker-reward:hover { rotate: 0deg; translate: 0 0; }
+  .close-aro .fill, .close-aro .fill-edge, .sticker-reward, .close-count { animation: none !important; }
+}

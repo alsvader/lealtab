@@ -1,0 +1,62 @@
+/* ——— Footer v1.2: capítulo final en bosque, logo lino, enlaces por columnas ——— */
+.footer {
+  background: var(--color-bosque);
+  color: var(--color-lino);
+  border-top: var(--border-marketing) solid var(--color-noche);
+  padding: var(--space-8) 0 var(--space-5);
+}
+.footer-grid { display: grid; gap: var(--space-7); }
+@media (min-width: 900px) {
+  .footer-grid { grid-template-columns: 1.3fr 2fr; gap: var(--space-8); align-items: start; }
+}
+.footer-logo { height: 36px; width: auto; }
+.footer-tagline {
+  margin: var(--space-5) 0 0;
+  font-family: var(--font-display);
+  font-variation-settings: "wdth" 75, "wght" 800;
+  /* Firefox calcula `ch` sin aplicar font-variation-settings: con la fuente variable de next/font
+     (ancho 100 por defecto) 15ch salía ~20 % más ancho y el titular quedaba en 2 líneas en vez de 3.
+     font-stretch lleva el mismo ancho a `ch`; en Chromium y WebKit no cambia nada. */
+  font-stretch: 75%;
+  font-size: clamp(32px, 8vw, var(--font-size-h2));
+  line-height: var(--font-line-h2);
+  max-width: 15ch;
+}
+.footer-cols { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-6) var(--space-5); }
+@media (min-width: 640px) { .footer-cols { grid-template-columns: repeat(3, 1fr); } }
+.footer-col h3 {
+  font-family: var(--font-body);
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--font-tracking-label);
+  text-transform: uppercase;
+  color: var(--color-menta);
+  margin: 0 0 var(--space-4);
+}
+.footer-col ul { display: flex; flex-direction: column; gap: var(--space-3); }
+.footer-col a {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-semibold);
+  border-radius: 4px;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+}
+.footer-col a:hover { text-decoration: underline; color: var(--color-menta); }
+.footer-col a:focus-visible,
+.footer-legal a:focus-visible { box-shadow: var(--focus-ring); }
+.footer-legal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-3) var(--space-5);
+  margin-top: var(--space-8);
+  padding-top: var(--space-4);
+  border-top: var(--border-hair) solid color-mix(in srgb, var(--color-lino) 40%, transparent);
+  font-size: var(--font-size-ui);
+}
+.footer-legal p { margin: 0; }
+.footer-legal-links { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-5); }
+.footer-legal a { text-decoration: underline; text-underline-offset: 3px; border-radius: 4px; }
+.footer-legal a:hover { color: var(--color-menta); }
+.footer-home { display: inline-flex; border-radius: var(--radius-control); }
+.footer-home:focus-visible { box-shadow: var(--focus-ring); }

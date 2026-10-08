@@ -1,0 +1,223 @@
+/* La tarjeta · portado literal de la v1.7 (rangos en src/styles/globals.css). Globales: .aro-ui, .aro-ui-num, .fill, .face*, .is-flipped, .lead. */
+/* ——— La tarjeta v1.2: una tarjeta grande que toma la marca de cada negocio ——— */
+.showcase {
+  background: var(--color-menta);
+  padding: var(--space-7) 0;
+}
+@media (min-width: 900px) {
+  .showcase { padding: calc(var(--space-8) * 1.5) 0; }
+}
+.showcase-grid { display: grid; gap: var(--space-6); align-items: center; }
+@media (min-width: 900px) {
+  .showcase-grid { grid-template-columns: 1fr 1fr; gap: var(--space-8); }
+}
+.showcase h2 {
+  font-size: clamp(40px, 10.5vw, var(--font-size-h1));
+  line-height: var(--font-line-h1);
+  max-width: 16ch;
+}
+.showcase :global(.lead) { margin-top: var(--space-4); max-width: 30ch; color: var(--color-text); }
+
+/* Selector de negocio */
+.biz-switch {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-6);
+}
+.biz-switch button {
+  padding: 10px var(--space-4);
+  border: var(--border-product) solid var(--color-border);
+  border-radius: var(--radius-control);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-ui);
+  transition: background var(--duration-ui) var(--easing-standard), color var(--duration-ui) var(--easing-standard);
+}
+.biz-switch button[aria-selected="true"] {
+  background: var(--color-bosque);
+  color: var(--color-lino);
+  box-shadow: var(--shadow-sticker);
+}
+.biz-switch button:focus-visible { box-shadow: var(--focus-ring); }
+.showcase-note { margin: var(--space-4) 0 0; font-size: var(--font-size-ui); color: var(--color-text-muted); }
+
+/* Tarjeta grande (temas dentro de la paleta) */
+.bizcard {
+  --card-bg: var(--color-bosque);
+  --card-fg: var(--color-lino);
+  --card-btn: var(--color-menta);
+  width: min(100%, 420px);
+  justify-self: center;
+  background: var(--card-bg);
+  color: var(--card-fg);
+  border: var(--border-marketing) solid var(--color-noche);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-storefront);
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  transition: background var(--duration-ui) var(--easing-standard), color var(--duration-ui) var(--easing-standard), box-shadow var(--duration-ui) var(--easing-standard);
+}
+.bizcard[data-theme="estetica"] { --card-bg: var(--color-lino); --card-fg: var(--color-noche); }
+.bizcard[data-theme="tapioca"]  { --card-bg: var(--color-noche); --card-fg: var(--color-lino); }
+/* Sobre noche, la sombra noche no se distingue (paleta-y-tipografia.md): se quita */
+.bizcard[data-theme="tapioca"] { box-shadow: none; }
+.bizcard-head { display: flex; align-items: center; gap: var(--space-3); }
+.bizcard-badge {
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  border: var(--border-product) solid var(--color-noche);
+  background: var(--card-fg);
+  color: var(--card-bg);
+  display: grid; place-items: center;
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-ui);
+}
+.bizcard-name {
+  font-family: var(--font-display);
+  font-variation-settings: "wdth" 75, "wght" 800;
+  font-size: 28px;
+  line-height: 1;
+}
+.bizcard-panel {
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: var(--border-product) solid var(--color-noche);
+  border-radius: var(--radius-card);
+  padding: var(--space-4);
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+.bizcard-panel :global(.aro-ui) { width: 128px; height: 128px; }
+@media (min-width: 900px) { .bizcard-panel :global(.aro-ui) { width: 148px; height: 148px; } }
+.bizcard-panel :global(.aro-ui-num) { font-size: clamp(30px, 8vw, 38px); }
+.bizcard-panel :global(.fill) { transition: stroke-dasharray var(--duration-arc) var(--easing-standard); }
+.bizcard-msg { margin: 0; font-size: var(--font-size-body); line-height: 1.45; }
+.bizcard-btn {
+  display: block;
+  text-align: center;
+  padding: var(--space-3);
+  border: var(--border-product) solid var(--color-noche);
+  border-radius: var(--radius-control);
+  background: var(--card-btn);
+  color: var(--color-noche);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-ui);
+}
+.bizcard-sign { margin: calc(var(--space-3) * -1) 0 0; text-align: center; font-size: 11px; opacity: 0.8; }
+
+/* Instalación: pantalla de inicio + guía, sin cajas extra */
+.install {
+  display: grid;
+  gap: var(--space-6);
+  margin-top: var(--space-8);
+}
+@media (min-width: 900px) {
+  .install { grid-template-columns: 1fr 1fr; gap: var(--space-8); }
+}
+.install h3 { font-size: var(--font-size-h4); line-height: var(--font-line-h4); }
+.install-copy { margin: var(--space-2) 0 0; max-width: 38ch; }
+.homegrid {
+  margin-top: var(--space-5);
+  display: grid;
+  grid-template-columns: repeat(4, 56px);
+  gap: var(--space-4) var(--space-5);
+}
+.homegrid .tile { display: flex; flex-direction: column; align-items: center; gap: 6px; font-size: 11px; font-weight: var(--font-weight-semibold); }
+.homegrid .ico {
+  width: 56px; height: 56px;
+  border-radius: 14px;
+  border: var(--border-product) solid var(--color-noche);
+  background: var(--color-blanco-lino);
+}
+.homegrid .ico.is-biz {
+  display: grid; place-items: center;
+  background: var(--color-bosque);
+  color: var(--color-lino);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-ui);
+  box-shadow: var(--shadow-sticker);
+  transition: background var(--duration-ui) var(--easing-standard), color var(--duration-ui) var(--easing-standard);
+}
+.homegrid .ico.ghost { opacity: 0.55; }
+.steps-os { list-style: none; margin: var(--space-5) 0 0; padding: 0; display: grid; gap: var(--space-5); }
+.steps-os li { display: grid; grid-template-columns: 120px 1fr; gap: var(--space-3); }
+.steps-os strong { font-weight: var(--font-weight-bold); }
+.steps-os p { margin: 0; }
+.install-foot { margin: var(--space-5) 0 0; font-weight: var(--font-weight-semibold); }
+/* 4. La tarjeta: el panel cambia con un fundido corto al elegir otro negocio */
+.bizcard-panel.swap, .bizcard-head.swap { animation: bizSwap 220ms var(--easing-standard); }
+@keyframes bizSwap { from { opacity: 0.35; translate: 0 6px; } to { opacity: 1; translate: 0 0; } }
+/* Hover del botón de la tarjeta (v1.7 1460, dentro de @media (hover: hover); .pwa-code es del Hero) */
+@media (hover: hover) {
+  .bizcard-btn { transition: transform var(--duration-fast) var(--easing-standard); }
+}
+/* Suma una visita */
+.bizcard-wrap { width: min(100%, 420px); justify-self: center; display: flex; flex-direction: column; gap: var(--space-5); }
+.bizcard-wrap .bizcard { width: 100%; }
+.bizcard-panel { position: relative; }
+.visit-demo { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3) var(--space-4); }
+.visit-demo p { margin: 0; font-size: var(--font-size-ui); color: var(--color-text-muted); }
+.visit-demo .plus { font-weight: 800; font-size: 18px; line-height: 1; }
+.bizcard-panel :global(.aro-ui-num).bump { animation: statBump 260ms var(--easing-standard); }
+.bizcard-panel :global(.fill) { transition: stroke-dasharray var(--duration-arc) var(--easing-standard), stroke var(--duration-ui) var(--easing-standard) 450ms; }
+.bizcard.is-complete .bizcard-panel :global(.fill) { stroke: var(--color-durazno); }
+.bizcard.is-complete .bizcard-panel :global(.fill).pulse { animation: uiPulse 360ms var(--easing-standard) 600ms 1; }
+@keyframes uiPulse { 0%, 100% { stroke-width: 11; } 45% { stroke-width: 13; } }
+.sticker-done {
+  position: absolute; top: -14px; right: -12px; z-index: 2;
+  padding: 6px 10px;
+  background: var(--color-durazno); color: var(--color-noche);
+  border: var(--border-product-strong) solid var(--color-noche);
+  border-radius: var(--radius-sticker);
+  box-shadow: var(--shadow-sticker);
+  font-family: var(--font-display); font-variation-settings: "wdth" 75, "wght" 800;
+  font-size: var(--font-size-sticker); letter-spacing: var(--font-tracking-sticker); text-transform: uppercase; line-height: 1;
+  white-space: nowrap; rotate: 4deg;
+  opacity: 0; visibility: hidden;
+}
+.bizcard.is-complete .sticker-done { visibility: visible; animation: stickerDone 240ms var(--easing-standard) 700ms both; }
+@keyframes stickerDone {
+  0%   { opacity: 0; scale: 0.6; rotate: -12deg; }
+  60%  { opacity: 1; scale: 1.06; rotate: 0deg; }
+  100% { opacity: 1; scale: 1; rotate: 4deg; }
+}
+.bizcard.spotlight { animation: spotlight 520ms var(--easing-standard) 1; }
+@keyframes spotlight {
+  0%   { translate: 0 0; }
+  40%  { translate: 0 -6px; }
+  100% { translate: 0 0; }
+}
+/* Reduced motion (v1.7 1549-1551; .ui-preview.pop es de Cómo funciona) */
+@media (prefers-reduced-motion: reduce) {
+  .bizcard-panel :global(.fill) { transition: none; }
+  .bizcard.is-complete .sticker-done { animation: none; opacity: 1; }
+  .bizcard.spotlight, .bizcard.is-complete .bizcard-panel :global(.fill).pulse { animation: none; }
+}
+/* ——— v1.4 · Microinteracciones (segunda tanda) ——— */
+/* 1. Guía según el celular */
+.steps-os li { padding: var(--space-3) var(--space-4); margin: 0 0 0 calc(var(--space-4) * -1); border-radius: var(--radius-card); border: var(--border-product) solid transparent; transition: opacity var(--duration-ui) var(--easing-standard); }
+.steps-os li.is-mine { background: var(--color-surface); border-color: var(--color-noche); order: -1; }
+.steps-os li.is-dim { opacity: 0.55; }
+.steps-os strong .mine-tag { display: block; margin-top: var(--space-1); color: var(--color-bosque); font-size: var(--font-size-label); font-weight: var(--font-weight-bold); letter-spacing: var(--font-tracking-label); text-transform: uppercase; }
+.steps-os { display: flex; flex-direction: column; }
+.bizcard-panel { background: none; border: 0; padding: 0; display: block; perspective: 900px; }
+.bizcard-panel :global(.face) {
+  background: var(--color-surface); color: var(--color-text);
+  border: var(--border-product) solid var(--color-noche); border-radius: var(--radius-card);
+  padding: var(--space-4); display: flex; align-items: center; gap: var(--space-4);
+}
+.bizcard-panel :global(.face-back) { justify-content: center; }
+.bizcard-panel .qr { width: 96px; height: 96px; flex-shrink: 0; }
+.bizcard-panel :global(.face-back) p { margin: 0; display: flex; flex-direction: column; gap: var(--space-1); }
+.bizcard-panel :global(.face-back) span { font-size: var(--font-size-ui); color: var(--color-text-muted); }
+button.bizcard-btn { width: 100%; cursor: pointer; transition: transform var(--duration-fast) var(--easing-standard); }
+button.bizcard-btn:active { transform: translate(2px, 2px); }
+button.bizcard-btn:focus-visible { box-shadow: var(--focus-ring); }
+.bizcard-panel:global(.is-flipped) .sticker-done { visibility: hidden; }
+/* Sin palabras sueltas al final del nombre (v1.7 1720; h2/h3 ya están en globals.css) */
+.bizcard-name { text-wrap: balance; }

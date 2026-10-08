@@ -33,6 +33,17 @@
  *  ClosingCta   1199-1301 (cierre + FAQ), 1675-1682 y 1686 (.sticker-reward), 1766
  *  Los envoltorios @media (hover: hover) y @media (prefers-reduced-motion) de las líneas
  *  1447-1461, 1463-1470, 1548-1552, 1647-1651, 1675-1682 y 1684-1687 se recrean en cada módulo.
+ *
+ * ── Cómo portar a CSS Modules (probado con Turbopack, Next 16.4) ──────────────────────
+ *  · Nombres globales (.btn-cta, .js, .is-in, .risen, .aro-ui, .flip-inner...) se escriben
+ *    :global(.btn-cta) en el módulo y como string normal en JSX (className="btn-cta").
+ *  · Toda regla necesita al menos una clase/id local o ir envuelta en :global(...). Un `h2 {}`
+ *    suelto falla ("Selector is not pure"); `:global(body.nav-open) { ... }` sí funciona.
+ *  · Las @keyframes son locales al módulo y NO se pueden referenciar desde otro (ni con
+ *    :global): si dos módulos usan la misma (p. ej. statBump), se declara en cada uno.
+ *  · El RevealObserver agrega por DOM las clases `is-visible`, `is-in`, `risen` y el atributo
+ *    `data-seen`: esos elementos deben tener className estático en React (si cambia entre
+ *    renders, React reescribe el atributo y borra la clase). Contrato en RevealObserver.tsx.
  */
 
 @import "tailwindcss";
@@ -416,15 +427,15 @@ h3, .h3 {
 .sec-head.center-block { text-align: center; }
 .sec-head .lead { margin-top: var(--space-3); }
 
-/* Scroll reveal */
-.reveal {
+/* Scroll reveal (solo con JS: sin JS los titulares se ven de inmediato) */
+.js .reveal {
   opacity: 0;
   transform: translateY(12px);
   transition:
     opacity var(--duration-arc) var(--easing-standard),
     transform var(--duration-arc) var(--easing-standard);
 }
-.reveal.is-visible {
+.js .reveal.is-visible {
   opacity: 1;
   transform: none;
 }
@@ -474,7 +485,7 @@ main:focus { outline: none; }
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-  .reveal { opacity: 1; transform: none; }
+  .js .reveal { opacity: 1; transform: none; }
   .js [data-reveal] { opacity: 1; translate: 0 0; transition: none; }
   .flip-inner { transition: none; }
 }

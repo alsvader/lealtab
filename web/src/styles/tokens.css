@@ -6,9 +6,13 @@
  * COPIA de brand/04-design-system/tokens.css (fuente de verdad del diseño).
  * Diferencias respecto al original, y solo estas:
  *  - Sin el @import de Google Fonts: las fuentes se cargan con next/font (src/app/fonts.ts).
- *  - --font-display y --font-body apuntan a las variables de next/font (--font-archivo,
- *    --font-manrope), con los mismos fallbacks.
- * Si cambia el original, repetir la copia y reaplicar estas dos diferencias.
+ *  - Ninguna en --font-display ni --font-body: se nombran las familias directamente, como en
+ *    el original. Con Turbopack, next/font las registra como "Archivo" y "Manrope" (sin hash).
+ *    No se usan var(--font-archivo/--font-manrope) porque traen "Archivo Fallback" y
+ *    "Manrope Fallback" (Arial ajustada), que Turbopack genera aunque fonts.ts pida
+ *    adjustFontFallback: false; eso cambiaba la flecha "→" y el instante previo a la carga.
+ *    Si se cambia a webpack (que agrega hash al nombre), volver a las variables.
+ * Si cambia el original, repetir la copia y reaplicar esta diferencia.
  */
 
 :root {
@@ -47,8 +51,8 @@
   --color-error-bg: var(--color-rosa-claro);
 
   /* ——— Tipografía ——— */
-  --font-display: var(--font-archivo), "Arial Narrow", sans-serif;
-  --font-body: var(--font-manrope), system-ui, sans-serif;
+  --font-display: Archivo, "Arial Narrow", sans-serif;
+  --font-body: Manrope, system-ui, sans-serif;
   --font-weight-regular: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;

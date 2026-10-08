@@ -1,0 +1,151 @@
+/* Precios (#precios). v1.7: 1000-1105, 1430-1445, 1449-1451, 1464 y 1466-1468 (.plan...), 1625-1631, 1650.
+   Portado literal de brand/05-marketing/03-mockup-landing-v1.7.html (CSS). Nombres globales entre :global(). */
+
+/* ——— Precios v1.2: prueba arriba, Negocio destacado sin durazno ——— */
+.pricing-sec { padding: var(--space-7) 0 var(--space-8); }
+@media (min-width: 900px) { .pricing-sec { padding: calc(var(--space-8) * 1.5) 0; } }
+.pricing-head { display: grid; gap: var(--space-5); align-items: end; }
+@media (min-width: 900px) { .pricing-head { grid-template-columns: 1.2fr 0.8fr; gap: var(--space-8); } }
+.pricing-head h2 { font-size: clamp(36px, 9.5vw, 52px); max-width: 14ch; }
+.trial { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-4); }
+.trial p { margin: 0; font-size: var(--font-size-lead); font-weight: var(--font-weight-semibold); line-height: var(--font-line-lead); max-width: 26ch; }
+
+.pricing {
+  display: grid;
+  gap: var(--space-5);
+  margin-top: var(--space-7);
+}
+@media (min-width: 900px) {
+  .pricing { grid-template-columns: 1fr 1.15fr 0.8fr; align-items: stretch; gap: var(--space-5); margin-block: var(--space-8) var(--space-7); }
+}
+.plan {
+  background: var(--color-surface);
+  border: var(--border-product) solid var(--color-border);
+  border-radius: var(--radius-card);
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+/* Negocio: el plan que queremos vender. Bloque bosque, más ancho y más alto */
+.plan.featured {
+  background: var(--color-bosque);
+  color: var(--color-text-on-bosque);
+  border-width: var(--border-marketing);
+  box-shadow: var(--shadow-storefront);
+}
+@media (min-width: 900px) {
+  .plan.featured { margin-block: calc(var(--space-5) * -1); padding: var(--space-6) var(--space-5); }
+}
+.plan.featured .plan-name { font-size: var(--font-size-h3); color: var(--color-lino); }
+.plan.featured .plan-price { font-size: clamp(52px, 14vw, 72px); }
+.plan.featured .plan-price small { color: var(--color-text-on-bosque); }
+.plan.featured :global(.btn-cta-label) { background: var(--color-blanco-lino); color: var(--color-noche); }
+.plan.muted {
+  background: transparent;
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--color-border) 35%, transparent);
+}
+/* Móvil: Negocio primero */
+.plan.order-inicio { order: 2; }
+.plan.order-negocio { order: 1; }
+.plan.order-pro { order: 3; }
+@media (min-width: 900px) {
+  .plan.order-inicio, .plan.order-negocio, .plan.order-pro { order: unset; }
+}
+.plan-top { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); min-height: 34px; }
+.plan-name {
+  font-family: var(--font-display);
+  font-variation-settings: "wdth" 75, "wght" 800;
+  font-size: var(--font-size-h4);
+  line-height: 1;
+}
+.plan-chip {
+  padding: 6px 12px;
+  background: var(--color-menta);
+  color: var(--color-noche);
+  border: var(--border-product) solid var(--color-border);
+  border-radius: var(--radius-sticker);
+  box-shadow: var(--shadow-sticker);
+  font-family: var(--font-display);
+  font-variation-settings: "wdth" 75, "wght" 800;
+  font-size: var(--font-size-sticker-lg);
+  line-height: 1;
+  letter-spacing: var(--font-tracking-sticker);
+  text-transform: uppercase;
+}
+.plan-price {
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--font-weight-bold);
+  font-size: clamp(44px, 12vw, 56px);
+  letter-spacing: var(--font-tracking-stat);
+  line-height: 1;
+}
+.plan-price small {
+  display: block;
+  margin-top: var(--space-2);
+  font-size: var(--font-size-ui);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0;
+  color: var(--color-text-muted);
+}
+.plan.muted .plan-price { font-size: var(--font-size-h4); font-weight: var(--font-weight-semibold); color: var(--color-text-muted); }
+.plan ul { display: flex; flex-direction: column; gap: var(--space-3); flex: 1; }
+.plan li {
+  display: flex;
+  gap: var(--space-2);
+  align-items: flex-start;
+  font-size: var(--font-size-body);
+  line-height: 1.4;
+}
+.plan li svg { width: 20px; height: 20px; flex-shrink: 0; margin-top: 1px; }
+.plan.muted li { color: var(--color-text-muted); }
+.plan :global(.btn-cta) { width: 100%; }
+.plan :global(.btn) { width: 100%; }
+.pricing-note {
+  margin: var(--space-6) 0 0;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-ui);
+}
+
+/* 5. Precios: Negocio se levanta de su sombra (inverso del botón presionado) */
+:global(.js) .plan.featured[data-reveal] { opacity: 1; translate: 0 0; box-shadow: 0 0 0 var(--color-shadow); transform: translate(8px, 8px); transition: none; }
+:global(.js) .plan.featured[data-reveal]:global(.is-in) { animation: planRise 560ms var(--easing-standard) 160ms both; }
+@keyframes planRise {
+  0%   { transform: translate(8px, 8px); box-shadow: 0 0 0 var(--color-shadow); }
+  70%  { transform: translate(-1px, -1px); box-shadow: 9px 9px 0 var(--color-shadow); }
+  100% { transform: none; box-shadow: var(--shadow-storefront); }
+}
+:global(.js) .plan.featured:global(.risen) { animation: none; transform: none; box-shadow: var(--shadow-storefront); }
+:global(.js) .plan.featured .plan-chip { opacity: 0; }
+:global(.js) .plan.featured:global(.is-in) .plan-chip { animation: chipPop 240ms var(--easing-standard) 620ms both; }
+@keyframes chipPop {
+  0%   { opacity: 0; scale: 0.6; rotate: -8deg; }
+  60%  { opacity: 1; scale: 1.06; rotate: 0deg; }
+  100% { opacity: 1; scale: 1; rotate: 0deg; }
+}
+
+/* 5. Checks de Negocio uno por uno, después de levantarse */
+:global(.js) .plan.featured li { opacity: 0; translate: -8px 0; transition: opacity 240ms var(--easing-standard), translate 300ms var(--easing-standard); }
+:global(.js) .plan.featured:global(.is-in) li { opacity: 1; translate: 0 0; }
+.plan.featured li:nth-child(1) { transition-delay: 700ms; }
+.plan.featured li:nth-child(2) { transition-delay: 780ms; }
+.plan.featured li:nth-child(3) { transition-delay: 860ms; }
+.plan.featured li:nth-child(4) { transition-delay: 940ms; }
+
+/* 6. Hovers (v1.7 1447-1461, solo .plan). La regla de la línea 1451 (lista con dos selectores de distinta
+   especificidad) se separa en dos: lightningcss agrupa las listas en :is(), que toma la especificidad MAYOR
+   de la lista y rompería el orden de cascada frente a reduced-motion. */
+@media (hover: hover) {
+  .plan:not(.muted) { transition: transform var(--duration-ui) var(--easing-standard), box-shadow var(--duration-ui) var(--easing-standard); }
+  .plan:not(.muted):not(.featured):hover { transform: translate(-3px, -3px); box-shadow: 4px 4px 0 var(--color-shadow); }
+  .plan.featured:global(.risen):hover { transform: translate(-2px, -2px); box-shadow: 10px 10px 0 var(--color-shadow); }
+  :global(html:not(.js)) .plan.featured:hover { transform: translate(-2px, -2px); box-shadow: 10px 10px 0 var(--color-shadow); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :global(.js) .plan.featured[data-reveal]:global(.is-in), :global(.js) .plan.featured:global(.is-in) .plan-chip { animation: none !important; opacity: 1; translate: 0 0; }
+  :global(.js) .plan.featured[data-reveal], :global(.js) .plan.featured:global(.risen) { transform: none; box-shadow: var(--shadow-storefront); }
+  :global(.js) .plan.featured .plan-chip { opacity: 1; scale: 1; transition: none; }
+  :global(.js) .plan.featured li { opacity: 1; translate: 0 0; transition: none; }
+}

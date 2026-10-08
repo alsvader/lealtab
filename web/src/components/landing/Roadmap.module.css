@@ -1,0 +1,114 @@
+/* Lo que viene (#lo-que-viene). v1.7: 1143-1197, 1452-1455, 1469 (.roadmap-item:hover), 1583-1618, 1720 (.roadmap-item strong).
+   Portado literal de brand/05-marketing/03-mockup-landing-v1.7.html (CSS). Nombres globales entre :global(). */
+
+/* ——— Lo que viene v1.2: capítulo en bosque, lista sin cajas ——— */
+.roadmap {
+  background: var(--color-bosque);
+  color: var(--color-lino);
+  border-block: var(--border-marketing) solid var(--color-noche);
+  padding: var(--space-8) 0;
+}
+@media (min-width: 900px) { .roadmap { padding: calc(var(--space-8) * 1.75) 0; } }
+.roadmap-grid { display: grid; gap: var(--space-6); }
+@media (min-width: 900px) {
+  .roadmap-grid { grid-template-columns: 0.9fr 1.1fr; gap: var(--space-8); align-items: start; }
+}
+.roadmap h2 {
+  color: var(--color-lino);
+  font-size: clamp(56px, 16vw, var(--font-size-display));
+  line-height: var(--font-line-display);
+}
+.roadmap :global(.lead) { margin-top: var(--space-4); max-width: 30ch; color: var(--color-lino); }
+/* Mosaicos en noche sobre bosque: más profundidad sin parecer funciones disponibles */
+.roadmap-list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-4); }
+@media (min-width: 640px) { .roadmap-list { grid-template-columns: 1fr 1fr; } }
+.roadmap-item {
+  background: var(--color-noche);
+  border: var(--border-product) solid color-mix(in srgb, var(--color-lino) 28%, transparent);
+  border-radius: var(--radius-card);
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+}
+.roadmap-top { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); }
+.roadmap-ico {
+  width: 52px; height: 52px;
+  display: grid; place-items: center;
+  background: var(--color-menta);
+  border: var(--border-product) solid var(--color-noche);
+  border-radius: 12px;
+}
+.roadmap-ico img { width: 28px; height: 28px; }
+.roadmap-item .tag {
+  color: var(--color-menta);
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--font-tracking-label);
+  text-transform: uppercase;
+}
+.roadmap-item strong {
+  display: block;
+  margin-top: var(--space-5);
+  font-family: var(--font-display);
+  font-variation-settings: "wdth" 75, "wght" 800;
+  font-weight: 800;
+  font-size: clamp(var(--font-size-h4), 2.6vw, 30px);
+  line-height: 1;
+}
+.roadmap-item p { margin: var(--space-2) 0 0; color: color-mix(in srgb, var(--color-lino) 88%, transparent); }
+
+.roadmap-item.flip-tile { background: none; border: 0; padding: 0; perspective: 1000px; display: block; }
+.flip-tile > :global(.flip-inner) { height: 100%; }
+.flip-tile :global(.face) {
+  height: 100%;
+  background: var(--color-noche);
+  border: var(--border-product) solid color-mix(in srgb, var(--color-lino) 28%, transparent);
+  border-radius: var(--radius-card);
+  padding: var(--space-5);
+  display: flex; flex-direction: column;
+}
+.flip-tile :global(.face-back) { gap: var(--space-4); }
+/* v1.6 · Avisos destacado en menta: el único mosaico con ejemplo interactivo */
+.flip-tile :global(.face) { background: var(--color-menta); color: var(--color-noche); border-color: var(--color-noche); }
+.flip-tile .tag { color: var(--color-bosque); }
+.flip-tile :global(.face) p { color: var(--color-noche); }
+.flip-tile .roadmap-ico { background: var(--color-blanco-lino); }
+.flip-tile .tile-btn { color: var(--color-bosque); }
+.flip-tile .tile-btn:hover { color: var(--color-noche); }
+.flip-tile :global(.face-front) p { margin-bottom: var(--space-4); }
+.tile-btn {
+  align-self: flex-start; margin-top: auto; padding: 2px 0;
+  color: var(--color-menta); font-weight: var(--font-weight-semibold);
+  text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 5px;
+  border-radius: 4px;
+}
+.tile-btn:hover { color: var(--color-lino); }
+.tile-btn:focus-visible { box-shadow: var(--focus-ring); }
+.notif {
+  display: flex; gap: var(--space-3); align-items: flex-start;
+  background: var(--color-surface); color: var(--color-noche);
+  border: var(--border-product) solid var(--color-noche); border-radius: var(--radius-card);
+  padding: var(--space-3);
+}
+.notif :global(.pwa-badge) { width: 36px; height: 36px; flex-shrink: 0; }
+.notif b { display: block; font-size: var(--font-size-ui); }
+.notif span:not(:global(.pwa-badge)) { display: block; font-size: var(--font-size-ui); line-height: 1.4; margin-top: 2px; }
+
+/* Mosaico de Avisos volteado: React lo marca con data-flipped (no con la clase is-flipped, para que
+   el RevealObserver pueda seguir tocando la clase del <li>). Mismo efecto que `.is-flipped .flip-inner`. */
+.flip-tile[data-flipped="true"] > :global(.flip-inner) { transform: rotateY(180deg); }
+
+/* Hovers (v1.7 1447-1461, solo Roadmap) */
+@media (hover: hover) {
+  .roadmap-ico { transition: rotate var(--duration-ui) var(--easing-standard), scale var(--duration-ui) var(--easing-standard); }
+  .roadmap-item { transition: border-color var(--duration-ui) var(--easing-standard); }
+  .roadmap-item:hover { border-color: color-mix(in srgb, var(--color-lino) 60%, transparent); }
+  .roadmap-item:hover .roadmap-ico { rotate: -8deg; scale: 1.06; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .roadmap-item:hover .roadmap-ico { rotate: 0deg; scale: 1; }
+}
+
+/* Sin palabras sueltas al final (v1.7 1720) */
+.roadmap-item strong { text-wrap: balance; }

@@ -8,12 +8,11 @@ const DESCRIPTION =
 const OG_DESCRIPTION =
   "Tu tarjeta de lealtad, ahora en el celular de tus clientes. Prueba gratis 30 días.";
 
-// Mismo <head> que la v1.7 (+ íconos y manifest de brand/03-visual-identity/.../entregables/web/snippet.html)
+// Mismo <head> que la v1.7 (+ íconos de brand/03-visual-identity/.../entregables/web/snippet.html)
 export const metadata: Metadata = {
   metadataBase: new URL("https://lealtab.com"),
   title: TITLE,
   description: DESCRIPTION,
-  manifest: "/site.webmanifest",
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "16x16 32x32 48x48" },

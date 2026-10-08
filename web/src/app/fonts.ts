@@ -13,6 +13,8 @@ export const archivo = Archivo({
   variable: "--font-archivo",
   // La landing usa Archivo condensado (wdth 75). El fallback automático de next/font imita
   // a Arial de ancho normal (más ancho); sin él, la cadena cae a "Arial Narrow" como en tokens.css.
+  // OJO: Turbopack (Next 16.4.0) ignora esta opción y sigue generando "Archivo Fallback";
+  // con webpack sí se respeta. Solo afecta el instante previo a que cargue la fuente.
   adjustFontFallback: false,
 });
 
@@ -22,4 +24,7 @@ export const manrope = Manrope({
   weight: ["400", "500", "600", "700"],
   display: "swap",
   variable: "--font-manrope",
+  // Sin "Manrope Fallback" (Arial), los glifos que Manrope no trae (p. ej. "→") caen a
+  // system-ui como en la v1.7. Turbopack 16.4 la ignora; por eso tokens.css nombra la familia directamente.
+  adjustFontFallback: false,
 });

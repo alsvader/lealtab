@@ -1,0 +1,248 @@
+/* ——— Hero v1.2: lema + aro protagonista (Ciclo v2, nivel landing) ——— */
+.hero {
+  position: relative;
+  overflow: clip; /* el aro sale del encuadre; solo él rompe el borde */
+  overflow-clip-margin: 0;
+  padding: var(--space-6) 0 var(--space-7);
+}
+@media (min-width: 900px) {
+  .hero { padding: var(--space-7) 0 var(--space-8); }
+}
+.hero-grid {
+  display: grid;
+  gap: var(--space-6);
+  align-items: center;
+}
+@media (min-width: 900px) {
+  .hero-grid {
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: var(--space-7);
+  }
+}
+.hero-title {
+  font-size: clamp(48px, 12.5vw, 64px);
+  line-height: var(--font-line-display);
+  letter-spacing: -0.015em;
+}
+@media (min-width: 900px) {
+  .hero-title {
+    font-size: clamp(72px, 6.6vw, 92px);
+  }
+}
+.hero-copy :global(.lead) {
+  margin-top: var(--space-5);
+  max-width: 34ch;
+  color: var(--color-text);
+}
+.hero-ctas {
+  margin-top: var(--space-6);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4) var(--space-5);
+}
+.hero-note {
+  margin: var(--space-4) 0 0;
+  font-size: var(--font-size-ui);
+  color: var(--color-text-muted);
+  font-weight: var(--font-weight-medium);
+}
+
+@media (max-width: 559px) {
+  .hero-ctas :global(.btn-cta) { width: 100%; }
+}
+/* Escena: aro grande + celular + sticker */
+.hero-visual {
+  position: relative;
+  padding-top: var(--space-6);
+  width: 100%;
+  max-width: 400px; /* tableta: celular y aro siguen juntos */
+  margin-inline: auto;
+}
+@media (min-width: 900px) {
+  .hero-visual { height: 640px; padding-top: 0; max-width: none; }
+}
+/* Centro del aro arriba a la derecha del celular: el final del 4/5 y la
+   visita 5 en durazno (cuadrante superior izquierdo) quedan siempre a la vista. */
+.hero-aro {
+  position: absolute;
+  z-index: 0;
+  width: 420px;
+  left: calc(100% - 161px);
+  top: -16px;
+}
+@media (min-width: 900px) {
+  .hero-aro { width: 560px; left: calc(50% + 150px - 280px); top: -96px; }
+}
+.hero-aro .aro-fill,
+.hero-aro .aro-fill-edge {
+  stroke-dasharray: 80 100;
+  animation: aroDraw 650ms var(--easing-standard) 250ms both;
+}
+.hero-aro .aro-tip,
+.hero-aro .aro-tip-edge { opacity: 0; }
+.hero-aro .aro-tip { animation: aroTipIn 200ms var(--easing-standard) 900ms forwards, aroTipPulse 360ms var(--easing-standard) 1100ms 1; }
+.hero-aro .aro-tip-edge { animation: aroTipIn 200ms var(--easing-standard) 900ms forwards, aroTipEdgePulse 360ms var(--easing-standard) 1100ms 1; }
+@keyframes aroTipIn { to { opacity: 1; } }
+/* Pulso ~4 % sobre el grosor del aro */
+@keyframes aroTipPulse {
+  0%, 100% { stroke-width: 44; }
+  45%      { stroke-width: 50; }
+}
+@keyframes aroTipEdgePulse {
+  0%, 100% { stroke-width: 49; }
+  45%      { stroke-width: 55; }
+}
+@keyframes aroDraw {
+  0%   { stroke-dasharray: 0 100; opacity: 0; }
+  4%   { opacity: 1; }
+  80%  { stroke-dasharray: 83 100; } /* se pasa 3 % y regresa una vez */
+  100% { stroke-dasharray: 80 100; opacity: 1; }
+}
+
+/* Phone mock */
+.phone {
+  position: relative;
+  z-index: 1;
+  width: 236px;
+  background: var(--color-noche);
+  border: var(--border-marketing) solid var(--color-noche);
+  border-radius: 36px;
+  box-shadow: var(--shadow-storefront);
+  padding: 10px;
+}
+@media (min-width: 900px) {
+  .phone { position: absolute; bottom: 0; left: 50%; width: 272px; transform: translateX(-70%); }
+}
+.phone-notch {
+  width: 88px;
+  height: 20px;
+  background: var(--color-noche);
+  border-radius: 0 0 14px 14px;
+  margin: 0 auto 6px;
+}
+.phone-screen {
+  background: var(--color-lino);
+  border-radius: 26px;
+  padding: var(--space-4) var(--space-4) var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.pwa-head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+.pwa-biz { font-weight: var(--font-weight-bold); font-size: var(--font-size-ui); line-height: 1.2; }
+.pwa-hello { font-size: var(--font-size-caption); color: var(--color-text-muted); }
+/* Panel de avance de la tarjeta (brand book p. 22): blanco lino, sin sombra */
+.loyalty-card {
+  position: relative;
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: var(--border-product) solid var(--color-noche);
+  border-radius: var(--radius-card);
+  padding: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+.loyalty-card :global(.aro-ui) { width: 68px; height: 68px; }
+.loyalty-card :global(.aro-ui-num) { font-size: 18px; }
+.loyalty-card .reward-line {
+  font-size: var(--font-size-ui);
+  line-height: 1.4;
+  margin: 0;
+}
+.visits :global(.label) { display: block; margin-bottom: var(--space-1); }
+.visits li {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--space-2) 0;
+  border-top: var(--border-hair) solid color-mix(in srgb, var(--color-border) 22%, transparent);
+  font-size: var(--font-size-ui);
+  font-variant-numeric: tabular-nums;
+}
+.visits li span:first-child { font-weight: var(--font-weight-semibold); }
+.visits li span:last-child { color: var(--color-text-muted); }
+.pwa-code {
+  display: block;
+  text-align: center;
+  padding: var(--space-3);
+  background: var(--color-bosque);
+  color: var(--color-lino);
+  border: var(--border-product) solid var(--color-noche);
+  border-radius: var(--radius-control);
+  box-shadow: var(--shadow-sticker);
+  font-size: var(--font-size-ui);
+  font-weight: var(--font-weight-bold);
+}
+.pwa-sign {
+  margin: 0;
+  text-align: center;
+  font-size: 10px;
+  color: var(--color-text-muted);
+}
+
+/* Sticker "Casi premio" (marketing: rotado, contorno 2.5, sombra 3) */
+.sticker {
+  position: absolute;
+  z-index: 2;
+  top: -16px;
+  right: -30px;
+  padding: 6px 10px;
+  background: var(--color-menta);
+  color: var(--color-noche);
+  border: var(--border-product-strong) solid var(--color-noche);
+  border-radius: var(--radius-sticker);
+  box-shadow: var(--shadow-sticker);
+  font-family: var(--font-display);
+  font-variation-settings: "wdth" 75, "wght" 800;
+  font-size: var(--font-size-sticker-lg);
+  letter-spacing: var(--font-tracking-sticker);
+  text-transform: uppercase;
+  line-height: 1;
+  white-space: nowrap;
+  transform: rotate(4deg);
+  animation: stickerIn 240ms var(--easing-standard) 1300ms both;
+}
+@keyframes stickerIn {
+  0%   { opacity: 0; transform: scale(0.6) rotate(-12deg); }
+  60%  { opacity: 1; transform: scale(1.06) rotate(0deg); }
+  100% { opacity: 1; transform: scale(1) rotate(4deg); }
+}
+
+/* ——— v1.3 · Capa de movimiento: entrada del hero en secuencia (titular, bajada, CTA, nota); el celular sube con un rebote ——— */
+:global(.js) .hero-seq { animation: heroIn 900ms var(--easing-standard) var(--d, 0ms) both; }
+:global(.js) .hero .phone { animation: phoneIn 950ms var(--easing-standard) 300ms both; }
+@keyframes heroIn { from { opacity: 0; translate: 0 24px; } to { opacity: 1; translate: 0 0; } }
+@keyframes phoneIn {
+  0%   { opacity: 0; translate: 0 64px; }
+  72%  { opacity: 1; translate: 0 -5px; }
+  100% { opacity: 1; translate: 0 0; }
+}
+
+/* ——— v1.3 · 6. Hovers ——— */
+@media (hover: hover) {
+  .pwa-code { transition: transform var(--duration-fast) var(--easing-standard); }
+}
+
+/* ——— v1.4 · 9. Los stickers responden al mouse: se enderezan y se levantan sobre su sombra ——— */
+@media (hover: hover) {
+  .sticker {
+    transition: rotate var(--duration-ui) var(--easing-standard), translate var(--duration-ui) var(--easing-standard), box-shadow var(--duration-ui) var(--easing-standard);
+  }
+  .sticker:hover { rotate: -4deg; translate: -2px -2px; box-shadow: 5px 5px 0 var(--color-shadow); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :global(.js) .hero-seq, :global(.js) .hero .phone { animation: none !important; opacity: 1; translate: 0 0; }
+  .sticker:hover { rotate: 0deg; translate: 0 0; }
+  .hero-aro .aro-fill,
+  .hero-aro .aro-fill-edge { animation: none; stroke-dasharray: 80 100; }
+  .hero-aro .aro-tip,
+  .hero-aro .aro-tip-edge { animation: none; opacity: 1; }
+  .sticker { animation: none; }
+}
