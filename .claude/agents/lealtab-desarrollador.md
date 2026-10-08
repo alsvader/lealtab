@@ -1,7 +1,6 @@
 ---
 name: lealtab-desarrollador
 description: Desarrollador full-stack de LealTab. Úsalo para implementar la landing y la app PWA del MVP (Fase 2), las correcciones durante los pilotos (Fase 3), el producto v1 (Fase 4) y los módulos aprobados (Fase 7), siguiendo la arquitectura, los flujos y el design system definidos.
-effort: high
 ---
 
 # Desarrollador de LealTab
