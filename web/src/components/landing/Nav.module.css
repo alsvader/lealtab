@@ -168,4 +168,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .nav-actions :global(.btn-cta.btn-cta-sm) { transition: none; }
+  /* Corrección sobre la v1.7: la regla global deja `visibility` en transición de 0.01 ms, así que el
+     panel sigue oculto cuando Nav le pasa el foco y el foco se pierde. Sin transición, se ve al instante. */
+  .nav-drawer, .nav-drawer.open { transition: none !important; }
 }

@@ -17,10 +17,16 @@ const DESKTOP_QUERY = "(min-width: 1024px)";
  *  - CTA del menú: oculto mientras el CTA del hero (`[data-hero-cta]`) está a la vista.
  *    El HTML del servidor ya lleva `hero-cta-visible`; el CSS solo lo aplica bajo `.js`
  *    (clase puesta antes de pintar), así que sin JS el CTA se ve, igual que en la v1.7.
+ *
+ * Fuera de la home (páginas legales): `basePath="/"` antepone la ruta de la home a los enlaces de
+ * sección (`#precios` pasa a `/#precios`) y el logo lleva a `/`. Ahí no hay secciones ni Hero, así que
+ * no se observa nada: ningún enlace queda marcado y el CTA del menú se ve desde el HTML del servidor.
+ * La home no pasa la prop y su HTML no cambia.
  */
-export function Nav() {
+export function Nav({ basePath }: { basePath?: string }) {
+  const offHome = basePath !== undefined;
   const [open, setOpen] = useState(false);
-  const [heroCtaVisible, setHeroCtaVisible] = useState(true);
+  const [heroCtaVisible, setHeroCtaVisible] = useState(!offHome);
   const [activeIds, setActiveIds] = useState<ReadonlySet<string>>(() => new Set());
   const toggleRef = useRef<HTMLButtonElement>(null);
   const drawerRef = useRef<HTMLDivElement>(null);
@@ -57,7 +63,7 @@ export function Nav() {
 
   // Sección activa (Cómo funciona o Precios...)
   useEffect(() => {
-    if (!("IntersectionObserver" in window)) return;
+    if (offHome || !("IntersectionObserver" in window)) return;
     const io = new IntersectionObserver(
       (entries) => {
         setActiveIds((prev) => {
@@ -76,10 +82,11 @@ export function Nav() {
       if (el) io.observe(el);
     });
     return () => io.disconnect();
-  }, []);
+  }, [offHome]);
 
   // El CTA del menú entra cuando el del hero sale de la vista
   useEffect(() => {
+    if (offHome) return; // sin Hero: el CTA ya nace visible (estado inicial)
     const heroCta = document.querySelector("[data-hero-cta]");
     if (!heroCta || !("IntersectionObserver" in window)) {
       // Sin observador no se puede saber: el CTA del menú se queda visible (como en la v1.7).
@@ -94,7 +101,7 @@ export function Nav() {
     );
     io.observe(heroCta);
     return () => io.disconnect();
-  }, []);
+  }, [offHome]);
 
   /** Clic en un enlace del menú móvil: cierra y suelta el scroll antes de que el navegador salte al ancla. */
   const closeFromLink = () => {
@@ -103,11 +110,13 @@ export function Nav() {
   };
 
   const current = (href: string) => (activeIds.has(href.slice(1)) ? "true" : undefined);
+  /** Enlace de sección: `#precios` en la home, `/#precios` fuera de ella. */
+  const sectionHref = (href: string) => (offHome ? `${basePath}${href}` : href);
 
   return (
     <header className={`${styles.nav}${heroCtaVisible ? ` ${styles["hero-cta-visible"]}` : ""}`}>
       <div className={`wrap ${styles["nav-inner"]}`}>
-        <a className={styles["nav-home"]} href={NAV.homeHref} aria-label={NAV.homeLabel}>
+        <a className={styles["nav-home"]} href={offHome ? basePath : NAV.homeHref} aria-label={NAV.homeLabel}>
           <img
             className={styles["nav-logo"]}
             src={NAV.logo.src}
@@ -118,7 +127,7 @@ export function Nav() {
         </a>
         <nav className={styles["nav-links"]} aria-label={NAV.linksLabel}>
           {NAV_LINKS.map((link) => (
-            <a key={link.href} href={link.href} aria-current={current(link.href)}>
+            <a key={link.href} href={sectionHref(link.href)} aria-current={current(link.href)}>
               {link.label}
             </a>
           ))}
@@ -158,7 +167,7 @@ export function Nav() {
         <div className={`${styles["nav-drawer-inner"]} wrap`}>
           <nav className={styles["nav-drawer-links"]} aria-label={NAV.drawerLinksLabel}>
             {NAV_LINKS.map((link) => (
-              <a key={link.href} href={link.href} aria-current={current(link.href)} onClick={closeFromLink}>
+              <a key={link.href} href={sectionHref(link.href)} aria-current={current(link.href)} onClick={closeFromLink}>
                 {link.label}
               </a>
             ))}

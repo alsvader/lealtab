@@ -1,0 +1,186 @@
+/* Página legal: lectura sobria con los tokens de la landing (lino, noche, bosque; Archivo + Manrope).
+   Sin animaciones de aparición. Móvil: cabecera, índice, secciones. Escritorio (>= 1024 px): índice fijo
+   a la izquierda y columna de texto de ~68 caracteres a la derecha. */
+
+.page { padding-block: var(--space-5) var(--space-8); }
+@media (min-width: 768px) { .page { padding-block: var(--space-6) calc(var(--space-8) * 1.5); } }
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: "head" "toc" "body";
+  gap: var(--space-6);
+}
+@media (min-width: 1024px) {
+  .layout {
+    grid-template-columns: 248px minmax(0, 70ch);
+    grid-template-areas: "toc head" "toc body";
+    column-gap: var(--space-8);
+    row-gap: var(--space-7);
+    align-items: start;
+  }
+}
+
+/* ——— Cabecera ——— */
+.head { grid-area: head; }
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  font-size: var(--font-size-ui);
+  font-weight: var(--font-weight-semibold);
+  border-radius: 4px;
+}
+.back-text {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+.back:hover { color: var(--color-bosque); }
+.head h1 {
+  margin-top: var(--space-4);
+  font-size: clamp(36px, 9vw, 56px);
+  line-height: var(--font-line-h1);
+  text-wrap: balance;
+}
+.updated {
+  margin: var(--space-4) 0 0;
+  font-size: var(--font-size-ui);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-muted);
+}
+.intro { margin-top: var(--space-5); }
+.intro p {
+  margin: 0 0 var(--space-4);
+  font-size: clamp(17px, 2.2vw, 19px);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.6;
+}
+.intro > :last-child { margin-bottom: 0; }
+
+/* ——— Índice ——— */
+.toc {
+  grid-area: toc;
+  background: var(--color-surface);
+  border: var(--border-hair) solid var(--color-border);
+  border-radius: var(--radius-card);
+  padding: var(--space-4) var(--space-5) var(--space-2);
+}
+.toc-title {
+  margin: 0 0 var(--space-1);
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--font-tracking-label);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+.toc ol { list-style: none; margin: 0; padding: 0; }
+.toc li + li { border-top: var(--border-hair) solid color-mix(in srgb, var(--color-noche) 14%, transparent); }
+.toc a {
+  display: flex;
+  gap: var(--space-2);
+  align-items: baseline;
+  min-height: 44px;
+  padding: var(--space-3) 0;
+  font-size: var(--font-size-ui);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.35;
+  border-radius: 4px;
+}
+.toc a:hover { color: var(--color-bosque); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.toc-num {
+  flex: none;
+  /* "10." ocupa 3ch: con ancho fijo y alineado a la derecha, los títulos quedan en la misma columna */
+  min-width: 3ch;
+  text-align: right;
+  color: var(--color-bosque);
+  font-variant-numeric: tabular-nums;
+}
+@media (min-width: 1024px) {
+  /* Riel a la izquierda, sin tarjeta: el índice acompaña la lectura. Solo se fija si cabe en pantalla. */
+  .toc {
+    background: none;
+    border: 0;
+    border-left: var(--border-hair) solid color-mix(in srgb, var(--color-noche) 25%, transparent);
+    border-radius: 0;
+    padding: 0 0 0 var(--space-5);
+  }
+  .toc-title { margin-bottom: var(--space-3); }
+  .toc li + li { border-top: 0; }
+  .toc a { min-height: 0; padding: var(--space-2) 0; }
+}
+@media (min-width: 1024px) and (min-height: 760px) {
+  .toc { position: sticky; top: calc(76px + var(--space-5)); }
+}
+
+/* ——— Secciones ——— */
+.body { grid-area: body; }
+.section {
+  padding-top: var(--space-6);
+  margin-top: var(--space-6);
+  border-top: var(--border-hair) solid color-mix(in srgb, var(--color-noche) 22%, transparent);
+}
+.section:first-child { padding-top: 0; margin-top: 0; border-top: 0; }
+.section h2 {
+  display: flex;
+  gap: var(--space-3);
+  align-items: baseline;
+  font-size: clamp(24px, 3.4vw, 30px);
+  line-height: 1.08;
+  scroll-margin-top: var(--space-4);
+}
+.num { flex: none; color: var(--color-bosque); font-variant-numeric: tabular-nums; }
+
+.prose { margin-top: var(--space-4); }
+.prose p {
+  margin: 0 0 var(--space-4);
+  line-height: 1.7;
+}
+.prose ul {
+  list-style: disc;
+  margin: 0 0 var(--space-4);
+  padding-left: 1.25em;
+}
+.prose li {
+  line-height: 1.7;
+  padding-left: var(--space-1);
+}
+.prose li + li { margin-top: var(--space-2); }
+.prose li::marker { color: var(--color-bosque); }
+.prose > :last-child { margin-bottom: 0; }
+
+/* Enlaces dentro del texto */
+.intro a,
+.prose a {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-bosque);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  overflow-wrap: anywhere;
+  border-radius: 4px;
+}
+.intro a:hover,
+.prose a:hover { color: var(--color-noche); }
+
+.end { margin: var(--space-7) 0 0; }
+
+/* Texto solo para lectores de pantalla */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Foco: el anillo global ya aplica a los enlaces; en los de este módulo se asegura el radio. */
+.back:focus-visible,
+.toc a:focus-visible,
+.intro a:focus-visible,
+.prose a:focus-visible { box-shadow: var(--focus-ring); }

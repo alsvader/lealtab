@@ -301,3 +301,7 @@ Al revisar a ojo `02-webkit-1280-la-tarjeta-v17-vs-web.png` se ve que, **en repo
 - **Primera revisión en el iPhone real:** al cargar, La tarjeta debe mostrar el aro (no el QR) y el mosaico de Avisos su frente; después, "Mostrar mi código" y "Ver un ejemplo" deben voltear y regresar bien. Repetir en el visor integrado de WhatsApp e Instagram.
 - Si en Safari real fallara, la corrección sería no depender de `backface-visibility`: ocultar la cara que no está al frente con `visibility` sincronizada con la mitad de la transición. No se aplica sin evidencia.
 
+
+## R2.12 Corrección posterior: foco del menú móvil con movimiento reducido
+
+Encontrada al agregar las páginas legales (`e2e/legal.spec.ts`, que emula `prefers-reduced-motion: reduce`). **Heredada de la v1.7** (comprobado en la v1.7 con Pixel 7 e iPhone 13): con movimiento reducido, al abrir el menú móvil el foco no pasaba al panel (quedaba en el botón o en `body`). Causa: la regla global de reduced-motion deja la transición de `visibility` del panel en 0.01 ms, así que el panel sigue oculto cuando `Nav` le pasa el foco. Corrección en `web/src/components/landing/Nav.module.css`: sin transición en el panel bajo `prefers-reduced-motion: reduce`. Verificado en la home y en las páginas legales (Chromium y WebKit, toque y clic); suite completa en verde (295 pasan, 50 omitidas por diseño). Sin cambio visible para quien no usa movimiento reducido.

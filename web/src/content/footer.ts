@@ -34,7 +34,6 @@ export const FOOTER = {
   ],
   copyright: "© 2026 LealTab",
   legalLabel: "Legal",
-  // pendiente: el documento aún no existe (LINKS.privacy y LINKS.terms valen "#")
   legal: [
     { href: LINKS.privacy, label: "Aviso de privacidad" },
     { href: LINKS.terms, label: "Términos y condiciones" },

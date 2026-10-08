@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { archivo, manrope } from "./fonts";
+import { OG_BASE } from "@/lib/site";
 import "@/styles/globals.css";
 
 const TITLE = "LealTab · Haz que tus clientes siempre regresen";
@@ -20,21 +21,7 @@ export const metadata: Metadata = {
     ],
     apple: "/apple-touch-icon.png",
   },
-  openGraph: {
-    type: "website",
-    locale: "es_MX",
-    siteName: "LealTab",
-    title: TITLE,
-    description: OG_DESCRIPTION,
-    images: [
-      {
-        url: "/og/lealtab-og-1200x630.png",
-        width: 1200,
-        height: 630,
-        alt: "LealTab: Haz que tus clientes siempre regresen.",
-      },
-    ],
-  },
+  openGraph: { ...OG_BASE, title: TITLE, description: OG_DESCRIPTION },
   twitter: { card: "summary_large_image" },
 };
 

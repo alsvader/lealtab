@@ -3,7 +3,7 @@
  * Cada tarea agrega SOLO su bloque dentro de los marcadores de abajo.
  */
 
-/** Enlaces del sitio, centralizados. Los que valen "#" siguen pendientes (igual que en la v1.7). */
+/** Enlaces del sitio, centralizados. */
 export const LINKS = {
   /** PWA de LealTab (alta de negocio y acceso). */
   app: "https://app.lealtab.com",
@@ -14,10 +14,10 @@ export const LINKS = {
   whatsapp:
     "https://wa.me/525588063606?text=Hola%2C%20vi%20la%20p%C3%A1gina%20de%20LealTab%20y%20quiero%20saber%20m%C3%A1s%20sobre%20la%20tarjeta%20digital%20para%20mi%20negocio.",
   instagram: "https://www.instagram.com/getlealtab",
-  /** Aviso de privacidad. TODO: URL real (el documento aún no existe). */
-  privacy: "#",
-  /** Términos y condiciones. TODO: URL real (el documento aún no existe). */
-  terms: "#",
+  /** Aviso de privacidad (página propia: src/app/aviso-de-privacidad). */
+  privacy: "/aviso-de-privacidad",
+  /** Términos y condiciones (página propia: src/app/terminos-y-condiciones). */
+  terms: "/terminos-y-condiciones",
 } as const;
 
 // ───────────────────────── T2: Nav, Hero, Footer ─────────────────────────
