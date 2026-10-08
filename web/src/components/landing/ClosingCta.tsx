@@ -13,7 +13,7 @@ export function ClosingCta() {
           <div>
             <h2 className="reveal">{CLOSING.heading}</h2>
             <p className="lead">{CLOSING.lead}</p>
-            <BtnCta href={LINKS.app}>{CLOSING.cta}</BtnCta>
+            <BtnCta href={LINKS.createCard} target="_blank" rel="noopener">{CLOSING.cta}</BtnCta>
             <p className={styles["wa-hint"]}>
               {CLOSING.waHint.before}
               <a href={LINKS.whatsapp} target="_blank" rel="noopener">

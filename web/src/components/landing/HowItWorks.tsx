@@ -73,7 +73,7 @@ export function HowItWorks() {
                 <span className="caption">pasos</span>
               </div>
             </div>
-            <BtnCta className={s["how-cta-desktop"]} href={LINKS.app}>Crea tu tarjeta gratis</BtnCta>
+            <BtnCta className={s["how-cta-desktop"]} href={LINKS.createCard} target="_blank" rel="noopener">Crea tu tarjeta gratis</BtnCta>
           </div>
 
           <ol className={s["how-steps"]} role="list">
@@ -155,7 +155,7 @@ export function HowItWorks() {
           </ol>
         </div>
         <div className={s["how-cta-mobile"]}>
-          <BtnCta className={s["how-cta-mobile-btn"]} href={LINKS.app}>Crea tu tarjeta gratis</BtnCta>
+          <BtnCta className={s["how-cta-mobile-btn"]} href={LINKS.createCard} target="_blank" rel="noopener">Crea tu tarjeta gratis</BtnCta>
         </div>
       </div>
     </section>

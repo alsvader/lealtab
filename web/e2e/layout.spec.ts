@@ -38,7 +38,10 @@ test.describe("Sin scroll horizontal y misma altura que la v1.7", () => {
 
       // Paridad con la v1.7: ni más ancho ni más alto
       expect(web.sw).toBeLessThanOrEqual(Math.max(web.cw, v17.sw));
-      expect(Math.abs(web.h - v17.h)).toBeLessThanOrEqual(1);
+      // Diferencia intencional: sin "Entrar" en el footer (oculto hasta que exista app.lealtab.com),
+      // la columna "Cuenta" pierde una fila (37 px) cuando las columnas se apilan en móvil.
+      const filaEntrar = w < 768 ? 37 : 0;
+      expect(Math.abs(web.h - (v17.h - filaEntrar))).toBeLessThanOrEqual(1);
       if (v17.sw > v17.cw) {
         // Defecto heredado de la v1.7 (ver informe QA, ronda 2): a 320 px el hero se sale 33 px a la derecha
         testInfo.annotations.push({ type: "heredado de la v1.7", description: `scrollWidth ${v17.sw} > ${v17.cw} a ${w} px` });

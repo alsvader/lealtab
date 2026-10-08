@@ -13,6 +13,10 @@ export const LINKS = {
    */
   whatsapp:
     "https://wa.me/525588063606?text=Hola%2C%20vi%20la%20p%C3%A1gina%20de%20LealTab%20y%20quiero%20saber%20m%C3%A1s%20sobre%20la%20tarjeta%20digital%20para%20mi%20negocio.",
+  /** CTA "Crea tu tarjeta gratis": por ahora abre WhatsApp con el mensaje de alta precargado. */
+  createCard:
+    "https://wa.me/525588063606?text=" +
+    encodeURIComponent("Hola, quiero crear mi tarjeta de lealtad digital con LealTab."),
   instagram: "https://www.instagram.com/getlealtab",
   /** Aviso de privacidad (página propia: src/app/aviso-de-privacidad). */
   privacy: "/aviso-de-privacidad",

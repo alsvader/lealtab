@@ -4,7 +4,7 @@ import { LINKS } from "./landing";
 export const HERO = {
   title: "Haz que tus clientes siempre regresen.",
   lead: "Tu tarjeta de lealtad, ahora en el celular de tus clientes. La instalan con un toque, sin descargar nada.",
-  cta: { href: LINKS.app, label: "Crea tu tarjeta gratis" },
+  cta: { href: LINKS.createCard, label: "Crea tu tarjeta gratis" },
   secondary: { href: "#como-funciona", label: "Ver cómo funciona ↓" },
   note: "Prueba gratis 30 días. Sin tarjeta de crédito.",
   phone: {

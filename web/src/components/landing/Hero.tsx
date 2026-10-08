@@ -21,7 +21,7 @@ export function Hero() {
             {HERO.lead}
           </p>
           <div className={`${styles["hero-ctas"]} ${styles["hero-seq"]}`} style={revealDelay(300)}>
-            <BtnCta href={HERO.cta.href} data-hero-cta>
+            <BtnCta href={HERO.cta.href} target="_blank" rel="noopener" data-hero-cta>
               {HERO.cta.label}
             </BtnCta>
             <a className="link-arrow" href={HERO.secondary.href}>

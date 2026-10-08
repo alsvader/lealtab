@@ -69,7 +69,7 @@ test.describe("Precios, cierre y FAQ", () => {
     await expect(page.locator("#faq dt")).not.toHaveCount(0);
     const dts = await page.locator("#faq dt").count();
     expect(await page.locator("#faq dd").count()).toBe(dts);
-    await expect(page.locator('a[href="https://app.lealtab.com"]').first()).toBeAttached();
+    await expect(page.locator('a[href^="https://wa.me/525588063606?text=Hola%2C%20quiero%20crear"]').first()).toBeAttached();
   });
 });
 

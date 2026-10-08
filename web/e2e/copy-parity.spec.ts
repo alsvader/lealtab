@@ -33,6 +33,11 @@ test.describe("Paridad de copy con la v1.7", () => {
     const v17 = await extract(ref);
     await ref.close();
 
+    // Diferencia intencional: "Entrar" está oculto hasta que exista app.lealtab.com (ver Nav.tsx).
+    const sinEntrar = (t: string) => t.replace(/^(¿Ya tienes cuenta\? )?Entrar$/gm, "").replace(/ \| (¿Ya tienes cuenta\? )?Entrar(?= \|)/g, "");
+    v17.text = sinEntrar(v17.text);
+    v17.all = sinEntrar(v17.all);
+
     expect(norm(v17.text).length).toBeGreaterThan(2000); // la extracción no está vacía
     expect(norm(web.text)).toBe(norm(v17.text));
     expect(web.all).toBe(v17.all);

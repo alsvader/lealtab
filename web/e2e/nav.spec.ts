@@ -40,12 +40,12 @@ test.describe("Menú móvil (a 390 px)", () => {
     expect(browserName).toBeTruthy();
   });
 
-  test("el CTA del panel lleva a la app y el panel se cierra al pasar a escritorio", async ({ page, press, openLanding, isMobile }) => {
+  test("el CTA del panel abre WhatsApp y el panel se cierra al pasar a escritorio", async ({ page, press, openLanding, isMobile }) => {
     await openLanding();
     const toggle = page.locator("#navToggle");
     const drawer = page.locator("#navDrawer");
     await press(toggle);
-    await expect(drawer.locator("a.btn-cta, a[class*=btn-cta]").first()).toHaveAttribute("href", /app\.lealtab\.com/);
+    await expect(drawer.locator("a.btn-cta, a[class*=btn-cta]").first()).toHaveAttribute("href", /wa\.me\/525588063606/);
 
     test.skip(isMobile, "El cambio de tamaño de ventana solo se prueba en escritorio");
     await page.setViewportSize({ width: 1280, height: 800 });
