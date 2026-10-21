@@ -1,12 +1,14 @@
 # ADR-001: Modelo de PWA, una por negocio o una sola app LealTab
 
-- **Estado:** Propuesto (revisión 2). La recomendación (opción B) está **condicionada** a dos validaciones (sección 5.1). Pendiente de la confirmación del fundador; cuando la dé, el `lealtab-coordinador` lo registra en `docs/decisiones.md`.
+- **Estado:** **Decidido (2026-10-20).** Opción B: una sola PWA LealTab, con "Mis tarjetas" en el MVP. Registrado como D-013 en `docs/decisiones.md`. Las dos validaciones de la sección 5.1 siguen pendientes y son requisito antes de arrancar el piloto (D-017).
 - **Fecha:** 4 oct 2026
 - **Autor:** `lealtab-arquitecto`
 - **Responde a:** sección 7 de `docs/02-plan-de-trabajo.md` y punto 1 de la sección 11 de `docs/03-propuesta.md`.
 - **Restricciones vigentes:** D-001 (tarjeta web/PWA, sin wallets; instalar es opcional) y D-002 (plataforma propia, sin marca blanca).
 
 > **Nota de revisión (4 oct 2026).** La revisión 1 recomendaba la opción H (una PWA por negocio). El fundador prefiere un solo ícono LealTab con la lista de tarjetas en el perfil del cliente. Esta revisión reevalúa la comparación con argumentos que la revisión 1 subestimó: una sola transferencia de sesión en iOS, el alta del segundo negocio, un solo permiso de push y que la tarjeta sigue con la marca del negocio. También reconoce que el argumento del ícono propio no está validado. La recomendación cambia a **B, condicionada**. H queda documentada como alternativa fuerte (sección 5.4) y es el plan de respaldo si fallan las validaciones.
+
+> **Decisión del fundador (20 oct 2026).** Se elige B: una sola app LealTab y la pantalla C0 "Mis tarjetas" entra al MVP (diseño aprobado en `06-product-design/`). La cuenta del cliente se identifica por su WhatsApp. Ni las entrevistas sobre el ícono ni la consulta legal LFPDPPP se han hecho: quedan como requisito antes del piloto. Si fallan, H sigue siendo el respaldo (sección 5.4). Además, la "PWA del cajero" en `/caja/` que asume este ADR se sustituye por **N5 Mostrador dentro del panel** (`/panel/`), con la cuenta compartida del negocio (D-010), y el QR del cliente cambia cada 60 s con validación sin conexión (D-014, D-015).
 
 ## 1. Contexto
 
@@ -104,16 +106,16 @@ Escala: ●●● muy bien · ●● aceptable · ● mal.
   - En iOS, con B, el cliente pasa **una sola vez** por la transferencia de sesión y concede **un solo** permiso de push (H11).
   - Instalar es opcional (D-001): el que no instala no ve ningún ícono en ninguna de las opciones.
 - **Dueño.** "Tu ícono en el celular de tus clientes" es tangible en la venta presencial, pero **no está validado**: nadie sabe todavía si un dueño de PyME compra por eso o por "tus clientes regresan". Con B, el negocio no pierde su marca: la tarjeta sigue tematizada (logo, colores, nombre, premio). Lo único que cambia es el ícono de inicio. Sigue la objeción probable de que el dueño sienta que construye la marca de LealTab con sus clientes `[SUPUESTO, validar en entrevistas]`. Si existe, la respuesta comercial es el **ícono propio como módulo de pago en Fase 7** (sección 8).
-- **Cajero.** No cambia nada. Escanea el QR rotativo y busca por teléfono igual en todas las opciones, porque la PWA del cajero es aparte (`lealtab.com/caja/`).
+- **Staff (mostrador).** No cambia nada. Escanea el QR rotativo y busca por WhatsApp igual en todas las opciones, porque el mostrador (N5) vive dentro del panel del dueño (`/panel/`), no en la app del cliente. *(Antes: PWA del cajero aparte en `/caja/`; sustituida por D-010.)*
 - **Marca LealTab.** Con B gana visibilidad ante el consumidor y un canal propio para productos futuros (Passes, Campaigns), aunque el comprador sigue siendo el dueño. Esa visibilidad **no** autoriza usar los datos para fines propios (por ejemplo, recomendar otros negocios) sin un ADR nuevo y revisión legal (sección 6).
 
-## 5. Decisión recomendada
+## 5. Decisión recomendada (adoptada el 2026-10-20)
 
 **Opción B: una sola PWA LealTab, con la lista de tarjetas en el perfil del cliente**, condicionada a las dos validaciones de la sección 5.1. Hasta que se resuelvan, se construye todo lo que sirve para B y para H (identidad, tarjeta por negocio, sesión, caché), y se deja para el final la única pieza que cambia entre ellas: el manifest y el ícono.
 
 ### 5.1 Validaciones previas y qué pasa si fallan
 
-Las dos se resuelven **antes de abrir a los pilotos**. Pasar de B a A después obliga a cada cliente a reinstalar (sección 9), así que no conviene decidir con pilotos ya instalados.
+**Estado (20 oct 2026): ninguna se ha hecho; las dos son requisito antes de arrancar el piloto (D-017).** Las dos se resuelven **antes de abrir a los pilotos**. Pasar de B a A después obliga a cada cliente a reinstalar (sección 9), así que no conviene decidir con pilotos ya instalados.
 
 | Validación | Pregunta | Responsable | Si pasa | Si falla |
 |---|---|---|---|---|
@@ -134,7 +136,7 @@ Notas:
    - Íconos de 192, 512 y maskable de LealTab, más un `<link rel="apple-touch-icon">` de 180 px de LealTab en el layout de `/c/` (H4).
 2. **Scope `/c/` y no `/`.** Lo que importa es que las URLs del QR (`/c/{slug}/`) queden **dentro** del scope: así no aparece la barra del navegador al abrir una tarjeta desde la lista (H2) y, en Android, el filtro de intent de la WebAPK cubre los QR (H16, S7). `/c/` lo logra igual que `/`, sin capturar rutas que no son del cliente:
    - La landing (`/`) y el panel del dueño (`/panel/`) no deben abrirse dentro de la app del cliente.
-   - La PWA del cajero (`/caja/`) tiene su propio manifest y scope. Como el scope es un prefijo de texto y termina en `/` (H2), `/caja/` **no** queda dentro de `/c/`. Con scope `/` sí se traslaparían, y en Android dos WebAPK con scopes anidados compiten por las mismas URLs `[SUPUESTO]`.
+   - *(Sustituido por D-010: el mostrador vive en N5 dentro de `/panel/`, que ya queda fuera de `/c/`.)* La PWA del cajero (`/caja/`) tiene su propio manifest y scope. Como el scope es un prefijo de texto y termina en `/` (H2), `/caja/` **no** queda dentro de `/c/`. Con scope `/` sí se traslaparían, y en Android dos WebAPK con scopes anidados compiten por las mismas URLs `[SUPUESTO]`.
 3. **Estructura de URLs:**
    - `/c/` → "Mis tarjetas" (la pantalla de inicio de la app instalada). `/mis-tarjetas` redirige a `/c/` para usarlo en copy y mensajes.
    - `/c/{slug}/` → tarjeta del negocio. Es lo que imprime el QR del mostrador, igual que en H.
@@ -270,7 +272,7 @@ El subdominio da aislamiento por el navegador, pero cuesta de 2 a 3 días entre 
 | Clientes que preguntan "¿qué es LealTab?" o buscan la app en tiendas | Anecdótico | Frecuente: reforzar el copy de la guía y la tarjeta |
 | Abiertas en navegador integrado y conversión a instalación | Medir por SO | Valida S4 |
 
-**Pruebas técnicas de la semana 3**, antes de abrir a los pilotos, en un iPhone con iOS 18 y 26 y un Android con Chrome estable:
+**Pruebas técnicas durante el desarrollo del MVP**, antes de abrir a los pilotos, en un iPhone con iOS 18 y 26 y un Android con Chrome estable:
 
 1. Instalación de LealTab desde `/c/{slug}/` en iOS y Android: nombre, ícono, `id` y `start_url` correctos (H4, H12).
 2. Transferencia con `install_token` (S1, S5).
@@ -278,7 +280,7 @@ El subdominio da aislamiento por el navegador, pero cuesta de 2 a 3 días entre 
 4. `<meta name="theme-color">` por tarjeta en modo standalone.
 5. "Agregar a inicio" desde el navegador integrado de WhatsApp e Instagram (S4).
 6. iOS 26 con "Abrir como app web" desactivado.
-7. Que la PWA del cajero (`/caja/`) y la del cliente (`/c/`) se instalen como apps distintas y no se capturen enlaces entre ellas.
+7. Que el panel con N5 Mostrador (`/panel/`) no se abra dentro de la app del cliente (`/c/`) y no se capturen enlaces entre ellos.
 8. **Solo si se vuelve a H:** dos negocios instalados desde el mismo origen (S1, S2) y cambio de nombre o color después de instalar (S3).
 
 ## 11. Fuentes (consultadas el 4 oct 2026)

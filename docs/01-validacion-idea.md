@@ -1,5 +1,11 @@
 # LealTab: Informe 01, Validación de la idea
 
+> **Histórico (20 oct 2026).** Se conserva como fuente de los datos de mercado y competencia; no se reescribe. Lo que ya no rige:
+> - El "NO-GO al plan de 7 fases, marca primero" quedó rebasado: Aarón decidió hacer la marca completa antes del MVP (Fases 1 a 4 cerradas).
+> - "Cobrar desde el piloto" lo sustituye D-004 (un mes de prueba gratis) y D-012 (link de pago a precio especial de piloto al terminar).
+> - Los referentes de marca que aquí se cuestionan se aprobaron en la Fase 1.
+> - Plan vigente, por fases y sin fechas: `docs/02-plan-de-trabajo.md`; decisiones: `docs/decisiones.md`.
+
 > **Nota (4 oct 2026):** este informe se conserva tal como lo entregó la validación. Dos de sus recomendaciones fueron reemplazadas por decisiones del fundador. Ver `docs/decisiones.md`:
 > - **D-001:** la tarjeta del MVP es web (PWA), sin Apple ni Google Wallet.
 > - **D-002:** no se usa marca blanca; los pilotos usan la plataforma propia.

@@ -1,5 +1,7 @@
 # PRD · Migración de la landing v1.7 a Next.js
 
+> **Histórico · Cerrado (20 oct 2026).** La migración ya se ejecutó. La fuente de verdad de la landing es `web/` (D-008): lo que diga `web/` manda sobre este PRD y sobre el mockup v1.7. "Fase 2" se refiere a la numeración anterior de `docs/`; en el mapa de fases vigente esto es parte de la Fase 5 (Marketing). La idea de que `web/` aloje la PWA después sigue vigente para la Fase 7. Pendientes a confirmar contra `web/`: URLs legales y enlace de WhatsApp.
+
 Fase 2 · 7 de octubre de 2026 · Orquestador: Claude Opus 5.5 · Ejecución: subagentes en Sonnet 5.5
 
 ## 1. Objetivo
