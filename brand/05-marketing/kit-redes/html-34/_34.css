@@ -1,0 +1,15 @@
+/* LealTab kit redes · versión 3:4 (1080×1440) — se carga después de ../html/_base.css */
+.feed34 {
+  width: 1080px;
+  height: 1440px;
+  position: relative;
+  overflow: hidden;
+  font-family: var(--font-body);
+  color: var(--noche);
+  background: var(--lino);
+}
+/* Margen seguro: 72 px por lado (cubre también un recorte 4:5 de 45 px arriba/abajo). */
+.pad34 { padding: 88px 72px 80px; }
+.illus34 { width: 620px; max-width: 620px; border-radius: 14px; display: block; }
+.feed34.bg-bosque { background: var(--bosque); color: var(--lino); }
+.feed34.bg-noche { background: var(--noche); color: var(--lino); }

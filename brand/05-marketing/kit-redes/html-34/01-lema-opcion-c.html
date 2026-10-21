@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="../html/_base.css" />
+  <link rel="stylesheet" href="_34.css" />
+  <!-- OPCIÓN C · propuesta final (8 oct 2026): B + titular más arriba (y=750) + subtítulo 42 px. Base basada en v3 · 7 oct 2026: parte de v1 (aro + badge) con los ajustes aprobados por Aarón.
+       Aro: copia solo para este post con avance y "3/8" en lino (lt-aro-marketing-parcial-3de8-sobre-bosque-post01.svg); el asset compartido no cambia.
+       Estilos solo de esta página; _base.css y _34.css sin cambios. Respaldos: 01-lema-v1.* (original) y 01-lema-v2.* (versión sin aro). -->
+  <style>
+    .p01 { display:flex; flex-direction:column; justify-content:space-between; }
+    .p01 .top { display:flex; flex-direction:row; align-items:center; gap:24px; position:relative; z-index:1; }
+    .p01 .logo { height:72px; width:auto; align-self:center; flex:none; }
+    .p01 .badge-lg { font-size:28px; padding:14px 24px; border-width:3px; box-shadow:5px 5px 0 #0F2A22; border-radius:8px; background:#CFE3D6; flex:none; }
+    .p01 .bottom { display:flex; flex-direction:column; position:relative; z-index:1; max-width:900px; }
+    .p01 .headline { font-size:116px; line-height:0.9; }
+    .p01 .sub { margin-top:40px; color:#CFE3D6; font-size:36px; max-width:760px; }
+    .p01 .foot { margin-top:80px; display:flex; justify-content:space-between; align-items:flex-end; width:936px; }
+    .p01 .foot .handle { font-size:24px; color:#CFE3D6; }
+    .p01 .foot .url { font-size:24px; font-weight:700; color:#F3EFE6; line-height:1.4; }
+      /* Opción B (8 oct 2026): titular más grande. 136 px no cabe en 936 px ("Haz que tus clientes" mide ~1022 px); 124 px es el mayor tamaño que conserva el corte en dos líneas. */
+    .p01 .bottom { max-width:936px; }
+    .p01 .headline { font-size:124px; white-space:nowrap; }
+      /* Opción C: bloque arriba (titular en y=750), pie fijo abajo, subtítulo 42 px. */
+    .p01 .bottom { position:absolute; top:750px; bottom:80px; left:72px; right:72px; max-width:none; }
+    .p01 .sub { font-size:42px; max-width:none; }
+    .p01 .foot { margin-top:auto; width:auto; }
+  </style>
+</head>
+<body>
+  <div class="feed34 bg-bosque pad34 p01">
+    <img class="aro-corner" src="../../../03-visual-identity/recursos/aro/lt-aro-marketing-parcial-3de8-sobre-bosque-post01.svg" alt="" style="right:-40px;top:-90px;width:480px;height:480px;" />
+    <div class="top">
+      <img class="logo" src="../../../03-visual-identity/logo/entregables/svg/lealtab-horizontal-lino.svg" alt="LealTab" />
+      <span class="badge badge-lg">Nuevo</span>
+    </div>
+    <div class="bottom">
+      <h1 class="display headline">Haz que tus clientes<br>siempre regresen.</h1>
+      <p class="lead sub">Tu tarjeta de lealtad,<br>ahora en el celular de tus clientes.</p>
+      <div class="foot">
+        <span class="handle">@getlealtab</span>
+        <span class="url">lealtab.com</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

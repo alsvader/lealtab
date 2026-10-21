@@ -1,5 +1,8 @@
 #!/bin/bash
 # Render kit-redes HTML → PNG (Ciclo v2). Run from anywhere.
+# Versión 3:4 (1080×1440) de los 7 posts: ver render-34.sh (html-34/ → 34/).
+# story-01-cta: aro movido arriba a la derecha (7 oct 2026); la versión anterior quedó en story-01-cta-v1.png / html/story-01-cta-v1.html.
+# story-01-cta refinada (7 oct 2026): sin aro/botón/@, hueco para sticker de enlace; versión previa en story-01-cta-v2.*.
 set -euo pipefail
 DIR="$(cd "$(dirname "$0")/html" && pwd)"
 OUT="$(cd "$(dirname "$0")" && pwd)"

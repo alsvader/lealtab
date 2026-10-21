@@ -3,22 +3,33 @@
 <head>
   <meta charset="utf-8" />
   <link rel="stylesheet" href="_base.css" />
+  <!-- Refinamiento 7 oct 2026 (crítica Dirección Creativa): sin aro, sin @getlealtab, sin botón dibujado.
+       Todo lo importante entre y=250 y y=1580 (zona segura de la UI de Instagram).
+       Hueco libre de ~520×140 bajo el texto para el sticker de enlace (no se ve en la exportación).
+       Estilos solo de esta página; _base.css sin cambios. Versiones anteriores: story-01-cta-v1.* y story-01-cta-v2.* -->
+  <style>
+    .s01 > * { position:absolute; left:72px; }
+    .s01 .logo { top:250px; height:80px; width:auto; }
+    .s01 .block { top:760px; display:flex; flex-direction:column; max-width:900px; }
+    .s01 .headline { font-size:88px; }
+    .s01 .text { margin-top:40px; color:#CFE3D6; font-size:32px; max-width:780px; }
+    .s01 .sticker-slot { margin-top:56px; width:520px; height:140px; }
+    .s01 .foot { bottom:340px; display:flex; flex-direction:column; gap:12px; }
+    .s01 .foot .terms { color:#CFE3D6; font-weight:600; font-size:28px; line-height:1.4; }
+    .s01 .foot .url { color:#F3EFE6; font-weight:700; font-size:24px; line-height:1.4; }
+  </style>
 </head>
 <body>
-  <div class="story bg-bosque pad-story" style="display:flex;flex-direction:column;justify-content:space-between;">
-    <img class="aro-corner" src="../../../03-visual-identity/recursos/aro/lt-aro-marketing-parcial-3de8.svg" alt="" style="right:-80px;top:40%;width:520px;height:520px;" />
-    <div class="stack gap-32" style="position:relative;z-index:1;">
-      <img class="logo-h-lg" src="../../../03-visual-identity/logo/entregables/svg/lealtab-horizontal-lino.svg" alt="LealTab" />
-      <span class="handle handle-on-dark">@getlealtab</span>
+  <div class="story bg-bosque s01">
+    <img class="logo" src="../../../03-visual-identity/logo/entregables/svg/lealtab-horizontal-lino.svg" alt="LealTab" />
+    <div class="block">
+      <h1 class="display headline">Crea tu tarjeta hoy.</h1>
+      <p class="lead text">Es gratis empezar.<br>Tus clientes la instalan con un toque.</p>
+      <div class="sticker-slot" aria-hidden="true"></div>
     </div>
-    <div class="stack gap-40" style="position:relative;z-index:1;max-width:900px;">
-      <h1 class="display" style="font-size:88px;">Crea tu tarjeta hoy.</h1>
-      <p class="lead" style="color:#CFE3D6;font-size:32px;max-width:780px;">Es gratis empezar. Tus clientes la instalan con un toque.</p>
-      <div class="btn btn-lg" style="background:#F3EFE6;color:#0F2A22;align-self:flex-start;">Crea tu tarjeta gratis</div>
-    </div>
-    <div class="stack gap-16" style="position:relative;z-index:1;">
-      <p class="body" style="color:#CFE3D6;font-weight:600;">Prueba 30 días · Sin tarjeta de crédito</p>
-      <p class="lead" style="color:#FF9F6E;font-size:24px;font-weight:700;">lealtab.com</p>
+    <div class="foot">
+      <p class="terms">Prueba 30 días · Sin tarjeta de crédito</p>
+      <p class="url">lealtab.com</p>
     </div>
   </div>
 </body>
