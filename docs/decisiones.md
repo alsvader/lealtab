@@ -203,7 +203,7 @@ Formato: fecha · decisión · motivo · alternativas descartadas · quién deci
     - En local, Docker Compose levanta Supabase con sus contenedores y la app web.
     - En producción, Vercel compila `web/`; no despliega el contenedor.
     - Todo cambio a la base de datos es una migración de Supabase en `supabase/migrations`. Las migraciones corren durante el build de Vercel.
-- **Motivo:** un solo proyecto y un solo despliegue para la landing y el producto, en el mismo origen que pide D-022. Detalle en `docs/fase-2/adr/002-stack.md`.
+- **Motivo:** un solo proyecto y un solo despliegue para la landing y el producto, en el mismo origen que pide D-022. Detalle en `docs/adr/002-stack.md`.
 - **Consecuencias:**
   - Sustituye la mención de PostHog en `.claude/agents/lealtab-desarrollador.md`. Ese archivo hay que actualizarlo en el repo; no se tocó aquí.
   - Confirma las opciones que el ADR-001 §6 y `01-validacion-idea.md` §7.2 dejaban abiertas («Supabase si usamos»).

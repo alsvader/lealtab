@@ -1,6 +1,6 @@
 # ADR-002: Stack del producto (MVP)
 
-- **Fuente de verdad del stack técnico.** Si este ADR y la sección 7.6 del [PRD del MVP](../../prd/PRD-lealtab-mvp.md) difieren, manda este ADR.
+- **Fuente de verdad del stack técnico.** Si este ADR y la sección 7.6 del [PRD del MVP](../prd/PRD-lealtab-mvp.md) difieren, manda este ADR.
 - **Estado:** **Decidido (2026-10-21).** Registrado como D-023 en `docs/decisiones.md`.
 - **Fecha:** 21 oct 2026
 - **Decidió:** Aarón López Sosa (fundador)

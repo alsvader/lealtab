@@ -9,7 +9,7 @@
 | Uso | Referencia de producto antes de arrancar la Fase 7 (Desarrollo) |
 | Estado | **Borrador para aprobación de Aarón**. La Fase 6 está cerrada (2026-10-20) |
 
-**Fuentes.** `PLAN.md`; `00-brief/resumen-inicial.md`; `01-brand-strategy/` (audiencia y posicionamiento, identidad de marca, competidores); `06-product-design/` (piezas 01 a 07, `entrega/mapa-pantallas.png`, `investigacion-limite-sellos.md`); `revision-docs-2026-10-20.md` (incluida la sección 6, «Huecos resueltos con Aarón»); `docs/decisiones.md` (D-001 a [D-023](../decisiones.md)), [`docs/fase-2/adr/002-stack.md`](../fase-2/adr/002-stack.md), `docs/01-validacion-idea.md`, `docs/02-plan-de-trabajo.md` v3, `docs/03-propuesta.md` v0.3, `docs/fase-2/adr/001-modelo-pwa.md` y `docs/fase-2/legal-notas.md`.
+**Fuentes.** `PLAN.md`; `00-brief/resumen-inicial.md`; `01-brand-strategy/` (audiencia y posicionamiento, identidad de marca, competidores); `06-product-design/` (piezas 01 a 07, `entrega/mapa-pantallas.png`, `investigacion-limite-sellos.md`); `revision-docs-2026-10-20.md` (incluida la sección 6, «Huecos resueltos con Aarón»); `docs/decisiones.md` (D-001 a [D-023](../decisiones.md)), [`docs/adr/002-stack.md`](../adr/002-stack.md), `docs/01-validacion-idea.md`, `docs/02-plan-de-trabajo.md` v3, `docs/03-propuesta.md` v0.3, `docs/adr/001-modelo-pwa.md` y `docs/fase-2/legal-notas.md`.
 
 **Reglas de este documento.**
 - Solo se usan datos que vienen de las fuentes. Lo que las fuentes no resuelven dice **Por definir**.
@@ -24,7 +24,7 @@
 | v1.0 | Primera versión, armada con las fuentes al 20 oct 2026 (D-001 a D-017) |
 | v1.1 | Limpieza de contradicciones aprobada por Aarón: sin fechas de calendario, Fase 6 cerrada, nombres de eventos unificados, «30 días» de prueba, N3 sin color de acento. Decisiones del 21 oct: bloqueo fijo de 2 min (D-014), entrada del dueño con código o contraseña (D-005), código de recuperación por WhatsApp con la API de pago (D-011), analítica propia sin cookies (D-018) |
 | v1.2 | Decisiones del 21 oct: nombre del cliente por negocio y teléfono como único identificador global (D-019), sin límite de clientes en Inicio durante el piloto (D-020), una sola sucursal en el MVP (D-021), producto en lealtab.com con `/c/` y `/panel/` (D-022), X libre en «1 cada X horas» (D-014) y Gate 1 pendiente del precio de piloto (PQ-02). Revisión final: todas las decisiones D-001 a D-022 reflejadas (sección 13) y preguntas abiertas al día (sección 12) |
-| v1.3 | Stack decidido por Aarón ([D-023](../decisiones.md), [ADR-002](../fase-2/adr/002-stack.md)): requisitos RNF-STK en 7.6, PQ-16 cerrada, PQ-13 reducida a la elección y el costo del proveedor del código por WhatsApp. Después, reglas del stack de Aarón (21 oct): React Server Components por defecto, Docker para local, migraciones de Supabase en el build de Vercel (RNF-STK-11 a 15) |
+| v1.3 | Stack decidido por Aarón ([D-023](../decisiones.md), [ADR-002](../adr/002-stack.md)): requisitos RNF-STK en 7.6, PQ-16 cerrada, PQ-13 reducida a la elección y el costo del proveedor del código por WhatsApp. Después, reglas del stack de Aarón (21 oct): React Server Components por defecto, Docker para local, migraciones de Supabase en el build de Vercel (RNF-STK-11 a 15) |
 
 ---
 
@@ -400,7 +400,7 @@ Diagrama: `06-product-design/mapa-flujos-mvp.png`. Pantallas: `06-product-design
 | RNF-REN-02 | El mostrador aguanta la hora pico de una cafetería (lo señala D-003). Objetivo numérico: **Por definir** | D-003 |
 | RNF-REN-03 | Funciona con mala conexión en el local gracias al modo sin conexión | 02-plan §3 |
 | RNF-REN-04 | Tiempos de carga de la tarjeta y del panel, disponibilidad y respaldos: **Por definir** (las fuentes no fijan cifras) | — |
-| RNF-REN-05 | Dominio y rutas: decididos (D-022, RNF-PWA-03). Stack y alojamiento: decididos ([D-023](../decisiones.md)), ver 7.6 | D-022; [D-023](../decisiones.md); [ADR-002](../fase-2/adr/002-stack.md) |
+| RNF-REN-05 | Dominio y rutas: decididos (D-022, RNF-PWA-03). Stack y alojamiento: decididos ([D-023](../decisiones.md)), ver 7.6 | D-022; [D-023](../decisiones.md); [ADR-002](../adr/002-stack.md) |
 | RNF-REN-06 | Costo de infraestructura hasta el Gate 1: hosting y base de datos de USD 20 a 50 al mes `[SUPUESTO]`, por validar con los planes de Vercel y Supabase. Se suma el costo por mensaje del proveedor del código de recuperación por WhatsApp: **Por definir** (PQ-13) | 03-propuesta §10; D-011 |
 
 ### 7.5 Accesibilidad, idioma y diseño
@@ -414,9 +414,9 @@ Diagrama: `06-product-design/mapa-flujos-mvp.png`. Pantallas: `06-product-design
 | RNF-DIS-01 | Se usan los tokens de `04-design-system/tokens.css` tal cual, sin inventar colores | 07-entrega |
 | RNF-DIS-02 | Español de México, de tú. Copy clave según 07-entrega §6. En producción va el logotipo aprobado (en los wireframes es texto provisional) | 07-entrega §6; piezas 03 y 04 |
 
-### 7.6 Stack técnico ([D-023](../decisiones.md); [ADR-002](../fase-2/adr/002-stack.md))
+### 7.6 Stack técnico ([D-023](../decisiones.md); [ADR-002](../adr/002-stack.md))
 
-**Fuente de verdad:** el stack técnico se define en [ADR-002](../fase-2/adr/002-stack.md). Esta sección lo resume; si las dos difieren, manda el ADR-002.
+**Fuente de verdad:** el stack técnico se define en [ADR-002](../adr/002-stack.md). Esta sección lo resume; si las dos difieren, manda el ADR-002.
 
 | ID | Requisito | Fuente |
 |---|---|---|
@@ -430,11 +430,11 @@ Diagrama: `06-product-design/mapa-flujos-mvp.png`. Pantallas: `06-product-design
 | RNF-STK-08 | Alojamiento en **Vercel**, junto con la landing, en `lealtab.com` | [D-023](../decisiones.md); D-022 |
 | RNF-STK-09 | Cobro con link de pago de Stripe o Mercado Pago, sin cambios (RF-COB-04) | D-012; [D-023](../decisiones.md) |
 | RNF-STK-10 | Antes del piloto, comprobar que Vercel, Supabase y el proveedor de WhatsApp no pongan cookies ni carguen recursos de terceros, y confirmar en qué región guardan los datos (PQ-18) | [D-023](../decisiones.md); legal-notas §3 riesgo 6 |
-| RNF-STK-11 | **React Server Components por defecto**; Tailwind CSS; shadcn/ui como capa estándar de componentes base | [D-023](../decisiones.md) (reglas del 21 oct); [ADR-002](../fase-2/adr/002-stack.md) §2.1 |
-| RNF-STK-12 | La app está **lista para contenedores**: Docker, Docker Compose y un **Dockerfile multi-stage** | [D-023](../decisiones.md); [ADR-002](../fase-2/adr/002-stack.md) §2.1 |
-| RNF-STK-13 | **Desarrollo local dockerizado:** Docker Compose levanta Supabase con sus contenedores y la app web | [D-023](../decisiones.md); [ADR-002](../fase-2/adr/002-stack.md) §2.1 |
-| RNF-STK-14 | **Producción:** Vercel compila `web/`; el contenedor no se despliega en producción | [D-023](../decisiones.md); [ADR-002](../fase-2/adr/002-stack.md) §2.1 |
-| RNF-STK-15 | **Todo cambio a la base es una migración de Supabase** en `supabase/migrations`, y las migraciones corren durante el build de Vercel. Riesgos a cuidar: que solo corran en builds de producción (no en vista previa), credenciales en variables de entorno de Vercel, y que una migración fallida haga fallar el build | [D-023](../decisiones.md); [ADR-002](../fase-2/adr/002-stack.md) §2.1 y §4 |
+| RNF-STK-11 | **React Server Components por defecto**; Tailwind CSS; shadcn/ui como capa estándar de componentes base | [D-023](../decisiones.md) (reglas del 21 oct); [ADR-002](../adr/002-stack.md) §2.1 |
+| RNF-STK-12 | La app está **lista para contenedores**: Docker, Docker Compose y un **Dockerfile multi-stage** | [D-023](../decisiones.md); [ADR-002](../adr/002-stack.md) §2.1 |
+| RNF-STK-13 | **Desarrollo local dockerizado:** Docker Compose levanta Supabase con sus contenedores y la app web | [D-023](../decisiones.md); [ADR-002](../adr/002-stack.md) §2.1 |
+| RNF-STK-14 | **Producción:** Vercel compila `web/`; el contenedor no se despliega en producción | [D-023](../decisiones.md); [ADR-002](../adr/002-stack.md) §2.1 |
+| RNF-STK-15 | **Todo cambio a la base es una migración de Supabase** en `supabase/migrations`, y las migraciones corren durante el build de Vercel. Riesgos a cuidar: que solo corran en builds de producción (no en vista previa), credenciales en variables de entorno de Vercel, y que una migración fallida haga fallar el build | [D-023](../decisiones.md); [ADR-002](../adr/002-stack.md) §2.1 y §4 |
 
 Nota: `.claude/agents/lealtab-desarrollador.md` en el repo todavía menciona PostHog. Hay que actualizarlo para que diga «tabla propia de eventos en Supabase» ([D-023](../decisiones.md)).
 
@@ -546,19 +546,19 @@ Los negocios que entren después del corte de altas forman la segunda tanda y cu
 | PQ-10 | **Pendiente de Diseño de Producto:** ajustar N1 para entrar con contraseña y para restablecerla por correo (vigencia del enlace, reglas de la contraseña, intentos). *(El color de acento ya se resolvió: N3 no lo lleva.)* | Diseño de Producto | D-005 (2026-10-21); PLAN |
 | PQ-11 | Fichas por oficio con datos propios (ciclo de visita y ticket mínimo, sobre todo en tapiocas) | Entrevistas | revisión §5; 03-propuesta §3 |
 | PQ-12 | Diseño de C5 «Mis datos», que no tiene wireframe | Diseño | 01-mapa §3 |
-| PQ-13 | **Pendiente: proveedor del código por WhatsApp**, el que se conecta al hook de teléfono/OTP de Supabase Auth: cuál se elige y cuánto cuesta por mensaje | Aarón y desarrollo, antes del piloto | D-011 (cambio parcial 2026-10-21); [D-023](../decisiones.md); [ADR-002](../fase-2/adr/002-stack.md) §3 |
+| PQ-13 | **Pendiente: proveedor del código por WhatsApp**, el que se conecta al hook de teléfono/OTP de Supabase Auth: cuál se elige y cuánto cuesta por mensaje | Aarón y desarrollo, antes del piloto | D-011 (cambio parcial 2026-10-21); [D-023](../decisiones.md); [ADR-002](../adr/002-stack.md) §3 |
 | ~~PQ-14~~ | ~~Lista final de eventos~~ **Cerrada (2026-10-21):** nombres unificados en `07-entrega` §5, `docs/02-plan` y este PRD (RF-EVT-01 a 03) | — | 07-entrega §5 |
 | PQ-15 | ¿Cuántas horas por semana hay para construir y cuántas para vender en persona? | Aarón | 03-propuesta §11 |
-| ~~PQ-16~~ | ~~Stack y proveedor de alojamiento~~ **Cerrada (Aarón, 2026-10-21):** Next.js en `web/`, Supabase y Vercel ([D-023](../decisiones.md), sección 7.6). La revisión de cookies y región de los proveedores pasa a PQ-18 | — | [D-023](../decisiones.md); [ADR-002](../fase-2/adr/002-stack.md) |
+| ~~PQ-16~~ | ~~Stack y proveedor de alojamiento~~ **Cerrada (Aarón, 2026-10-21):** Next.js en `web/`, Supabase y Vercel ([D-023](../decisiones.md), sección 7.6). La revisión de cookies y región de los proveedores pasa a PQ-18 | — | [D-023](../decisiones.md); [ADR-002](../adr/002-stack.md) |
 | PQ-17 | Cómo se activa la cuenta después del pago por link (manual hasta que exista el cobro automático) | Aarón | D-012 |
 | PQ-18 | **Pendiente: actualizar el aviso de privacidad** para cubrir los eventos de uso de la analítica propia sin cookies (decidido en D-018). También: revisar que Vercel, Supabase y el proveedor de WhatsApp no pongan cookies, decidir si se nombran en el aviso y si tratan datos fuera de México (RNF-STK-10) | Aarón con abogado, antes del piloto | D-018; legal-notas §5 |
 | PQ-19 | Reglas de «corregir sellos» en N7 (motivo, límites, bitácora) y qué pasa con el avance si cambia el número de sellos de la tarjeta | Diseño | Pieza 05 |
 | PQ-20 | Definición de «semana» del resumen y del «intervalo habitual» con una sola visita | Diseño y desarrollo | — |
 | PQ-21 | Búsqueda de marca en el IMPI y la WIPO | Aarón | 02-plan §2 |
-| PQ-22 | Detalles de implementación que las fuentes no fijan: de dónde sale la zona horaria del negocio (RF-ALT-06), si X en «1 cada X horas» acepta fracciones (RF-SEL-06), si el CSV incluye el detalle de visitas (RF-CLI-06), dónde se guardan la tanda y la versión del producto del negocio (sección 8), vigencia del código de recuperación e intentos (RF-APP-15), plantilla y cuenta que pida el proveedor de WhatsApp, cómo se relaciona la `identidad` del cliente con Supabase Auth (RNF-STK-04), y si el alta de un segundo negocio sin sesión usa el código por WhatsApp o la confirmación sin costo del ADR-001 (§5.2 punto 6) | Desarrollo | [ADR-002](../fase-2/adr/002-stack.md) §3 |
+| PQ-22 | Detalles de implementación que las fuentes no fijan: de dónde sale la zona horaria del negocio (RF-ALT-06), si X en «1 cada X horas» acepta fracciones (RF-SEL-06), si el CSV incluye el detalle de visitas (RF-CLI-06), dónde se guardan la tanda y la versión del producto del negocio (sección 8), vigencia del código de recuperación e intentos (RF-APP-15), plantilla y cuenta que pida el proveedor de WhatsApp, cómo se relaciona la `identidad` del cliente con Supabase Auth (RNF-STK-04), y si el alta de un segundo negocio sin sesión usa el código por WhatsApp o la confirmación sin costo del ADR-001 (§5.2 punto 6) | Desarrollo | [ADR-002](../adr/002-stack.md) §3 |
 | PQ-23 | Respaldo si la API de WhatsApp Business falla y el cliente no recibe su código de recuperación (R-18) | Desarrollo y Aarón | D-011 |
 | PQ-24 | Objetivos numéricos de rendimiento y operación: hora pico en cafeterías, tiempos de carga, disponibilidad y respaldos (RNF-REN-02 y RNF-REN-04) | Desarrollo | D-003 |
-| PQ-25 | Librería de escaneo de QR en el navegador para N5 Mostrador, que funcione sin conexión (RNF-STK-07) | Desarrollo | [D-023](../decisiones.md); [ADR-002](../fase-2/adr/002-stack.md) §3 |
+| PQ-25 | Librería de escaneo de QR en el navegador para N5 Mostrador, que funcione sin conexión (RNF-STK-07) | Desarrollo | [D-023](../decisiones.md); [ADR-002](../adr/002-stack.md) §3 |
 
 ---
 

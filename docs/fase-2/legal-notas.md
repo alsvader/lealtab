@@ -19,7 +19,7 @@
 | Sitio de la autoridad: https://www.gob.mx/buengobierno | Confirma que la Secretaría Anticorrupción y Buen Gobierno tiene hoy la protección de datos en posesión de particulares. |
 | LFPC art. 2 (consumidor y microempresas): https://sdv.com.mx/compendio/ley-federal-de-proteccion-al-consumidor/articulo-2/ | Solo para el riesgo 7 (sección 3). Secundaria. |
 | Olon, Términos y Aviso (URLs arriba) | Modelo de estructura. |
-| `docs/fase-2/adr/001-modelo-pwa.md`, sección 6 | Roles responsable/encargado (propuesta pendiente de revisión legal). |
+| `docs/adr/001-modelo-pwa.md`, sección 6 | Roles responsable/encargado (propuesta pendiente de revisión legal). |
 | `web/src/content/pricing.ts`, `closing.ts` (FAQ), `trust.ts`, `roadmap.ts`, `landing.ts` | Planes, precios, prueba, compromisos y enlaces. |
 
 ## 2. Checklist de requisitos de la LFPDPPP 2025 y cómo se cubrió

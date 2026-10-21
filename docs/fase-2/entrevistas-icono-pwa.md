@@ -1,7 +1,7 @@
 # Bloque de entrevista: ícono de la PWA (por negocio o LealTab)
 
 - **Para:** entrevistas E1 con dueños (Fase 2, semanas 2–4).
-- **Alimenta:** ADR-001 (`docs/fase-2/adr/001-modelo-pwa.md`), sección 10, métrica "Dueños que citan mi ícono/mi marca como motivo de compra".
+- **Alimenta:** ADR-001 (`docs/adr/001-modelo-pwa.md`), sección 10, métrica "Dueños que citan mi ícono/mi marca como motivo de compra".
 - **Hipótesis que se prueba:** "Tu ícono en el celular de tus clientes" es un motivo de compra para el dueño. `[SUPUESTO, sin validar]`
 - **Nota:** todavía no existe el kit general (`docs/fase-2/entrevistas/kit.md`). Cuando exista, este bloque se integra ahí como anexo.
 
