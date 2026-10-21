@@ -137,7 +137,7 @@ Notas:
 2. **Scope `/c/` y no `/`.** Lo que importa es que las URLs del QR (`/c/{slug}/`) queden **dentro** del scope: así no aparece la barra del navegador al abrir una tarjeta desde la lista (H2) y, en Android, el filtro de intent de la WebAPK cubre los QR (H16, S7). `/c/` lo logra igual que `/`, sin capturar rutas que no son del cliente:
    - La landing (`/`) y el panel del dueño (`/panel/`) no deben abrirse dentro de la app del cliente.
    - *(Sustituido por D-010: el mostrador vive en N5 dentro de `/panel/`, que ya queda fuera de `/c/`.)* La PWA del cajero (`/caja/`) tiene su propio manifest y scope. Como el scope es un prefijo de texto y termina en `/` (H2), `/caja/` **no** queda dentro de `/c/`. Con scope `/` sí se traslaparían, y en Android dos WebAPK con scopes anidados compiten por las mismas URLs `[SUPUESTO]`.
-3. **Estructura de URLs:**
+3. **Estructura de URLs** *(confirmada como D-022, 21 oct 2026: todo vive en `lealtab.com`, la app del cliente en `/c/` y el panel en `/panel/`; no se usa `app.lealtab.com`)*:
    - `/c/` → "Mis tarjetas" (la pantalla de inicio de la app instalada). `/mis-tarjetas` redirige a `/c/` para usarlo en copy y mensajes.
    - `/c/{slug}/` → tarjeta del negocio. Es lo que imprime el QR del mostrador, igual que en H.
    - `/c/{slug}/registro`, `/c/recuperar`, `/c/cuenta`, `/c/privacidad`.
@@ -193,14 +193,14 @@ El subdominio da aislamiento por el navegador, pero cuesta de 2 a 3 días entre 
 
 ## 6. Identidad del cliente y privacidad
 
-- **Modelo (sirve igual para B y para H):**
+- **Modelo (sirve igual para B y para H).** *Adoptado tal cual como D-019 (21 oct 2026): el teléfono es el único identificador global y cada negocio guarda su propio nombre del cliente en `cliente_negocio`, con estado `activa`/`por_confirmar`. Reflejado en `06-product-design/07-entrega-desarrollo.md` §3.*
   - `identidad`: el teléfono en E.164, verificado o no, y sus sesiones por dispositivo. Pertenece a la plataforma.
   - `cliente_negocio`: el nombre, el consentimiento, la fecha de alta, el estado (`activa` o `por_confirmar`, sección 5.2, punto 6) y la relación con un `negocio_id`.
   - `tarjeta` y `evento`: siempre con `negocio_id`.
 
   El mismo WhatsApp en tres negocios es **una** identidad con **tres** `cliente_negocio` independientes. Con B, "Mis tarjetas" es la lista de los `cliente_negocio` activos de la identidad con sesión.
-- **Separación:** el panel del dueño y todas las consultas filtran por `negocio_id` (con RLS en Postgres si usamos Supabase). Un negocio **nunca** ve si su cliente está inscrito en otro negocio. La única vista que cruza negocios es "Mis tarjetas", y solo la ve el propio cliente con su sesión.
-- **Recuperación:** con B se hace una sola vez, desde `/c/recuperar`, con verificación del cajero o un enlace firmado, y recupera todas las tarjetas de la identidad. Con H se hace por negocio, desde `/c/{slug}/recuperar`.
+- **Separación:** el panel del dueño y todas las consultas filtran por `negocio_id` (con RLS en Postgres en Supabase; stack confirmado en D-023 y ADR-002). Un negocio **nunca** ve si su cliente está inscrito en otro negocio. La única vista que cruza negocios es "Mis tarjetas", y solo la ve el propio cliente con su sesión.
+- **Recuperación:** con B se hace una sola vez, desde `/c/recuperar`, y recupera todas las tarjetas de la identidad. *(Actualizado 21 oct 2026, decisión de Aarón, cambio parcial de D-011: cuando el cliente cambia de teléfono, recupera con un **código enviado por WhatsApp** mediante la API de WhatsApp Business, de pago. Antes: verificación del cajero o un enlace firmado. Costo y configuración de la API: pendientes.)* Con H se hace por negocio, desde `/c/{slug}/recuperar`.
 - **LFPDPPP (nueva ley, DOF 20 mar 2025):** propongo que el **negocio sea el responsable** de los datos de su programa y que **LealTab actúe como encargado**, con un contrato de encargo en cada alta (informe 01, riesgo 9). Reservar la `identidad` compartida solo para autenticar y mostrarle al cliente sus propias tarjetas, sin usos propios de LealTab, es lo que buscaría sostener ese rol de encargado `[SUPUESTO, requiere revisión legal: validación 5.1 a]`.
 
   Si el abogado concluye que "Mis tarjetas" ya convierte a LealTab en responsable de esa cuenta, aplica la sección 5.1. En cualquier caso, si mañana se usan los datos para fines propios (por ejemplo, recomendar otros negocios), LealTab sí pasa a ser responsable: necesitará su propio aviso de privacidad y un consentimiento explícito. Ese cambio debe pasar por un ADR y por un abogado.

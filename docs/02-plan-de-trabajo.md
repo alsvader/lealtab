@@ -22,7 +22,7 @@
 | 3 | Identidad visual | ✅ | Logo, paleta y brand book aprobados |
 | 4 | Design System | ✅ | 5 piezas aprobadas |
 | 5 | Marketing de lanzamiento | ⏸️ En pausa | Landing en `web/` publicada ✅, perfil de IG confirmado, posts 8-9 e historias decididos |
-| 6 | Diseño de producto del MVP | 🟡 En curso | Flujos ✅, pantallas N0-N8 y C0-C5 aprobadas, ADR-001 cerrado ✅, eventos definidos y **PRD del MVP aprobado** |
+| 6 | Diseño de producto del MVP | ✅ Cerrada (2026-10-20) | Flujos ✅, pantallas N0-N8 y C0-C4 aprobadas ✅ (C5 en alcance, sin wireframe todavía), ADR-001 cerrado ✅, eventos definidos ✅ (`07-entrega` §5). **PRD del MVP: borrador en revisión** (`lealtab/07-desarrollo/PRD-lealtab-mvp.md`) |
 | 7 | Desarrollo del MVP + piloto 0 | Pendiente | Un local real usa el flujo completo una semana sin errores bloqueantes; al menos 10 pilotos confirmados por escrito, de 3 oficios o más; entrevistas sobre el ícono y consulta legal LFPDPPP hechas (D-017) |
 | 8 | Pilotos y Gate 1 | Pendiente | Gate 1 según D-004 (sección 4) |
 | 9 | Producto v1 y Gate 2 | Pendiente | Lo piden los datos. Gate 2: ≥15 clientes de pago, MRR ≥ MXN 7,500, churn ≤8 % y un canal de ≤6 h por cliente |
@@ -44,12 +44,12 @@ Fuente de detalle: `06-product-design/` (mapa de flujos y piezas 2 a 6, aprobada
 | Pieza | Descripción |
 |---|---|
 | **Landing** (lealtab.com, `web/`) | Para el dueño, con CTA "Empieza gratis", ayuda por WhatsApp aparte y precios públicos (D-006, D-008) |
-| **Alta del negocio (N1-N4)** | Autoservicio en menos de 5 min, sin llamada de ventas ni tarjeta de crédito: cuenta (código por correo de 10 min), datos del negocio, tarjeta (4 a 12 sellos, recompensa, color, sello de bienvenida) y cartel QR del mostrador (D-005) |
+| **Alta del negocio (N1-N4)** | Autoservicio en menos de 5 min, sin llamada de ventas ni tarjeta de crédito: cuenta (correo + código de 10 min o contraseña, D-005 actualizado 2026-10-21), datos del negocio, tarjeta (4 a 12 sellos, recompensa, sello de bienvenida) y cartel QR del mostrador (D-005) |
 | **App del cliente (C0-C5)** | Una sola PWA LealTab (D-013). Se abre desde el QR del mostrador; registro con nombre + WhatsApp y aviso de privacidad, sin contraseña. "Mis tarjetas" con las tarjetas de varios negocios, cada una con su marca. Muestra los sellos, la recompensa y un QR personal que cambia cada 60 s. "Mis datos" para ver o borrar la cuenta |
 | **Instalación PWA** | Manifest y service worker. Aviso de instalación en Android/Chrome; en iOS, una guía visual de "Compartir → Agregar a inicio". Instalar es opcional |
 | **Recuperación de tarjeta** | Con el número de WhatsApp si el cliente cambia de teléfono o borra datos |
 | **Mostrador (N5)** | Dentro del panel, con la cuenta compartida del negocio. Escanea el QR del cliente o lo busca por WhatsApp; estados escanear, confirmar sello y canjear |
-| **Antiabuso** | QR rotativo (60 s, validable sin conexión con 10 min de margen), 1 sello por día por defecto, configurable a "1 cada X horas" o "Sin límite", bloqueo de 1 a 2 min contra escaneo doble y registro de quién dio cada sello (D-014) |
+| **Antiabuso** | QR rotativo (60 s, validable sin conexión con 10 min de margen), 1 sello por día por defecto, configurable a "1 cada X horas" o "Sin límite", bloqueo fijo de 2 min contra escaneo doble y registro de quién dio cada sello (D-014) |
 | **Sin conexión primero** | Sellos y canjes se guardan en el teléfono y se sincronizan después; el servidor decide y lo rechazado va a Clientes → Por revisar. Canje sin conexión con límite (D-015) |
 | **Recompensa y canje** | Configurable por negocio, con canje confirmado por el staff |
 | **Inicio (N0)** | Resumen semanal, solo en el panel (D-011) |
@@ -58,7 +58,7 @@ Fuente de detalle: `06-product-design/` (mapa de flujos y piezas 2 a 6, aprobada
 | **Ajustes (N8)** | Negocio, tarjeta, límite de sellos, plan y prueba, aviso de privacidad y soporte. "Activar mi plan" abre WhatsApp (D-012) |
 | **Cobro en el piloto** | Link de pago de Stripe o Mercado Pago a precio especial de piloto (monto y duración: Por definir) |
 | **"Hecho con LealTab"** | En la tarjeta y el cartel, en todos los planes (D-016) |
-| **Eventos de medición** | Lista final: Por definir en la Fase 6. Mínimos en la sección 4, más `resumen_semanal_visto` |
+| **Eventos de medición** | Lista final en `06-product-design/07-entrega-desarrollo.md` §5, con los nombres unificados (`negocio_alta_completada` con `tanda`, `sello_registrado`, `canje_registrado`, `resumen_semanal_visto`) y los eventos del ADR-001 §10 |
 
 ### Fuera (hasta un gate)
 
@@ -98,11 +98,11 @@ Estrategia, dirección creativa, identidad visual y design system cerrados. Entr
 
 Landing publicada en `web/`. Se retoma después de la Fase 6; lo pendiente está en `PLAN.md`.
 
-### Fase 6: Diseño de producto del MVP 🟡
+### Fase 6: Diseño de producto del MVP ✅ Cerrada (2026-10-20)
 
-Aprobado: mapa de flujos, tarjeta del cliente, mostrador y quién regresa, alta y configuración, inicio/clientes/ajustes y estados de error y vacío. Falta para el PRD: métricas del producto, lista final de eventos, requisitos no funcionales, reglas pendientes y modelo de datos (base en ADR-001 §6), y la hoja de entrega para desarrollo.
+Aprobado: mapa de flujos, tarjeta del cliente, mostrador y quién regresa, alta y configuración, inicio/clientes/ajustes y estados de error y vacío, y la hoja de entrega para desarrollo (`07-entrega-desarrollo.md`, con eventos y modelo de datos). C5 Mis datos queda en alcance sin wireframe.
 
-**Criterio de salida:** PRD del MVP aprobado.
+**PRD del MVP:** borrador en revisión en `lealtab/07-desarrollo/PRD-lealtab-mvp.md` (métricas del producto, requisitos no funcionales y preguntas abiertas).
 
 ### Fase 7: Desarrollo del MVP + piloto 0
 
@@ -113,7 +113,7 @@ Aprobado: mapa de flujos, tarjeta del cliente, mostrador y quién regresa, alta 
 
 ### Fase 8: Pilotos y Gate 1
 
-**Formato (D-004):** Aarón recluta en persona hasta 20 negocios (barberías, estéticas, tapiocas y cafeterías, idealmente en Villahermosa). Cada negocio tiene **un mes de prueba gratis, que es su piloto**, y empieza cuando se da de alta. Al terminar paga con link de pago a precio especial de piloto (D-012). Se registra la fecha de alta y la versión del producto de cada negocio. Capacidad realista: 8–10 altas por semana si llegan confirmados; 4–6 si se recluta y activa a la vez `[SUPUESTO]`.
+**Formato (D-004):** Aarón recluta en persona hasta 20 negocios (barberías, estéticas, tapiocas y cafeterías, idealmente en Villahermosa). Cada negocio tiene **30 días de prueba gratis, que son su piloto**, y empieza cuando se da de alta. Al terminar paga con link de pago a precio especial de piloto (D-012). Se registra la fecha de alta y la versión del producto de cada negocio. Capacidad realista: 8–10 altas por semana si llegan confirmados; 4–6 si se recluta y activa a la vez `[SUPUESTO]`.
 
 | Tarea | Entregable |
 |---|---|
@@ -139,7 +139,7 @@ Aprobado: mapa de flujos, tarjeta del cliente, mostrador y quién regresa, alta 
 
 **Segunda tanda:** los negocios que entren después del corte cuentan para el Gate 2.
 
-**Eventos mínimos** (lista final en la Fase 6): `negocio_alta` (oficio, fecha, tanda), `cliente_registrado`, `sello_otorgado`, `canje_confirmado`, `resumen_semanal_visto`; fuera de la app, clientes que visitaron por día (tickets o conteo) y registro de pagos (fecha, monto sin IVA, método).
+**Eventos mínimos** (lista final en `06-product-design/07-entrega-desarrollo.md` §5): `negocio_alta_completada` (oficio, fecha, tanda), `cliente_registrado`, `sello_registrado`, `canje_registrado`, `resumen_semanal_visto`, más los del ADR-001 §10 (`pwa_instalada`, `guia_instalacion_mostrada`, `install_token_canjeado`, `recuperacion_completada`, `tarjeta_por_confirmar_creada`, `tarjeta_confirmada`, `app_abierta`); fuera de la app, clientes que visitaron por día (tickets o conteo) y registro de pagos (fecha, monto sin IVA, método).
 
 **E6 adaptado a la PWA (`[SUPUESTO]`):**
 - ≥85% de los que escanean el QR completan el registro.
@@ -188,13 +188,13 @@ Gate 3: MRR ≥ MXN 30,000 con ≥60 clientes, y el módulo pedido por ≥3 clie
 | `lealtab-director-creativo` | 5 | Creative Direction, identidad y brand book |
 | `lealtab-growth` | 6 | Canales, referidos y expansión |
 
-## 6. Siguientes pasos (Fase 6)
+## 6. Siguientes pasos (cierre de la Fase 6 y arranque de la Fase 7)
 
-1. Hoja de entrega para desarrollo.
-2. Métricas del producto y lista final de eventos.
-3. Requisitos no funcionales (rendimiento, sin conexión, accesibilidad, LFPDPPP) y modelo de datos.
+1. ~~Hoja de entrega para desarrollo.~~ ✅ Aprobada (2026-10-20).
+2. ~~Lista final de eventos.~~ ✅ En `07-entrega` §5 (nombres unificados el 2026-10-21).
+3. Revisar y aprobar el PRD del MVP (borrador en `lealtab/07-desarrollo/PRD-lealtab-mvp.md`, con métricas del producto y requisitos no funcionales).
 4. Definir el precio especial de piloto y su duración.
-5. Redactar y aprobar el PRD del MVP.
+5. Diseñar C5 Mis datos.
 
 ## 7. Pregunta del arquitecto (cerrada)
 

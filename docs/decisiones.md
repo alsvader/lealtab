@@ -61,7 +61,7 @@ Formato: fecha · decisión · motivo · alternativas descartadas · quién deci
 
 ## D-005 · 4 oct 2026 · El negocio se da de alta solo, sin llamada de ventas
 
-- **Decisión:** el alta es autoservicio desde el MVP: cuenta, datos del negocio, tarjeta y cartel QR en menos de 5 minutos, sin llamada de ventas y sin tarjeta de crédito durante la prueba (flujo F1, pantallas N1 a N4). El dueño entra con un código por correo que dura 10 minutos.
+- **Decisión:** el alta es autoservicio desde el MVP: cuenta, datos del negocio, tarjeta y cartel QR en menos de 5 minutos, sin llamada de ventas y sin tarjeta de crédito durante la prueba (flujo F1, pantallas N1 a N4). El dueño entra con correo + código (el código dura 10 minutos) **o** con contraseña. *(Cambio 21 oct 2026, decisión de Aarón: antes era solo código por correo, sin contraseña. Se agrega la contraseña opcional con restablecimiento por correo; N1 se ajusta.)*
 - **Motivo:** decisión del fundador (Fase 1, elementos de confianza del MVP; diseño aprobado en la Fase 6).
 - **Consecuencias:** sustituye el "alta la haces tú" y el "autoservicio fuera" del plan original, y la cuña "hecho por nosotros en 24 h" de la propuesta. En el piloto queda la ayuda de arranque en persona y por WhatsApp.
 - **Decidió:** fundador.
@@ -106,6 +106,7 @@ Formato: fecha · decisión · motivo · alternativas descartadas · quién deci
 - **Decisión:** el resumen semanal entra al MVP como la pantalla N0 Inicio, lo primero que ve el dueño al entrar. No se envía por WhatsApp. Se mide con el evento `resumen_semanal_visto` (negocio, semana).
 - **Motivo:** es más simple y no depende de la API de WhatsApp Business (cobro por mensaje y plantillas aprobadas).
 - **Consecuencias:** si en el piloto pocos dueños lo abren, en la v1 se evalúa un aviso por WhatsApp o correo.
+- **Cambio parcial (21 oct 2026, decisión de Aarón):** el MVP **sí usa la API de WhatsApp Business (de pago)** para un caso: el código con el que el cliente recupera su tarjeta (o sus tarjetas) cuando cambia de teléfono. El resumen semanal sigue solo en el panel. Pendiente: costo por mensaje y configuración de la API (cuenta, número y plantilla aprobada).
 - **Alternativa descartada:** resumen semanal por WhatsApp.
 - **Decidió:** fundador.
 
@@ -127,8 +128,8 @@ Formato: fecha · decisión · motivo · alternativas descartadas · quién deci
 
 - **Decisión:**
   - El QR personal del cliente cambia cada 60 segundos, para que no sirva una captura de pantalla. El mostrador lo puede validar sin conexión, con 10 minutos de margen.
-  - Por defecto, **1 sello por cliente por día**, que se reinicia a medianoche en la zona horaria del negocio. En N8 Ajustes el negocio puede cambiarlo a "1 cada X horas" (mínimo sugerido 2 h) o a "Sin límite" (con advertencia).
-  - Siempre hay un bloqueo de 1 a 2 minutos contra escaneos dobles.
+  - Por defecto, **1 sello por cliente por día**, que se reinicia a medianoche en la zona horaria del negocio. En N8 Ajustes el negocio puede cambiarlo a "1 cada X horas" o a "Sin límite" (con advertencia). En "1 cada X horas", **cada negocio elige X libremente**: 2 h es solo una sugerencia, no un mínimo obligatorio. El piso de cualquier regla es el bloqueo fijo de 2 minutos contra escaneos dobles. *(Aclarado 21 oct 2026, decisión de Aarón.)*
+  - Siempre hay un bloqueo **fijo de 2 minutos** contra escaneos dobles, también con "Sin límite". *(Actualizado 21 oct 2026, decisión de Aarón: antes decía "de 1 a 2 minutos".)*
   - Queda registrado quién dio cada sello y cuándo (con la cuenta compartida, "quién" es el dispositivo del mostrador), visible en el historial de N7.
 - **Motivo:** ninguna plataforma revisada limita a un sello por semana; la mayoría deja el límite al negocio y la protección real es la confirmación del staff con registro (`06-product-design/investigacion-limite-sellos.md`).
 - **Alternativa descartada:** 1 sello por semana.
@@ -149,4 +150,62 @@ Formato: fecha · decisión · motivo · alternativas descartadas · quién deci
 ## D-017 · 20 oct 2026 · Validaciones pendientes antes del piloto
 
 - **Decisión:** no se han hecho ni las entrevistas con dueños sobre el ícono de la app ni la consulta legal de privacidad (LFPDPPP) que pide el ADR-001. Las dos son requisito antes de arrancar el piloto (criterio de salida de la fase de desarrollo del MVP).
+- **Decidió:** fundador.
+
+## D-018 · 21 oct 2026 · Analítica propia, sin cookies
+
+- **Decisión:** la analítica de uso del MVP es propia (eventos registrados por LealTab en su propio servidor), sin cookies y sin herramientas de analítica de terceros. Los eventos son los de `06-product-design/07-entrega-desarrollo.md` §5.
+- **Condición:** antes de arrancar el piloto hay que actualizar el aviso de privacidad para que cubra los eventos de uso (qué se registra, para qué y por cuánto tiempo).
+- **Consecuencias:** el aviso actual de lealtab.com dice que no hay cookies ni analítica; esa línea se reescribe para el producto. Se suma a la consulta legal LFPDPPP (D-017).
+- **Decidió:** fundador.
+
+## D-019 · 21 oct 2026 · Cada negocio guarda su propio nombre del cliente; el teléfono es el único identificador global
+
+- **Decisión:** se adopta el modelo de identidad del ADR-001 §6. La `identidad` de plataforma solo guarda el teléfono (WhatsApp en E.164), que es el **único identificador global**, y sus sesiones. Cada negocio tiene su propio `cliente_negocio` con el nombre que el cliente dio en ese negocio, su consentimiento, su fecha de alta y su estado (`activa` o `por_confirmar`). La tarjeta y los eventos cuelgan del `cliente_negocio` y siempre llevan `negocio_id`.
+- **Motivo:** mantiene separados los datos de cada negocio (un negocio nunca ve el nombre que el cliente dio en otro) y sostiene la propuesta de que LealTab actúe como encargado, pendiente de la consulta legal (D-017).
+- **Consecuencias:** sustituye la entidad `cliente` con nombre global de `06-product-design/07-entrega-desarrollo.md` §3. Una tarjeta nueva ligada a un teléfono sin sesión nace `por_confirmar` y no aparece en Mis tarjetas hasta que el cliente la acepta en la app o el cajero la verifica al dar el primer sello (ADR-001 §5.2, punto 6).
+- **Decidió:** fundador.
+
+## D-020 · 21 oct 2026 · Sin límite de clientes en el plan Inicio durante el piloto
+
+- **Decisión:** durante el piloto, los negocios no tienen límite de clientes en el plan Inicio. El límite público de 200 clientes de Inicio (D-006) no se aplica en el piloto.
+- **Por definir:** qué pasa al llegar a 200 clientes en Inicio después del piloto, y si cuentan los clientes totales o los activos (D-003 dice «activos»).
+- **Motivo:** las cafeterías ponían a prueba el límite de 200 (D-003); quitarlo en el piloto evita frenar a un negocio a mitad de su prueba.
+- **Decidió:** fundador.
+
+## D-021 · 21 oct 2026 · El MVP maneja una sola sucursal
+
+- **Decisión:** el MVP soporta **una sucursal** por negocio. Varias sucursales, **hasta 3** (plan Negocio), llegan después del MVP.
+- **Consecuencias:** el cliente ideal se describe como negocios de 1 a 3 sucursales (antes `03-propuesta.md` decía 1–4). La landing en `web/` tiene una inconsistencia: `pricing.ts` ofrece "Hasta 3 sucursales" en el plan Negocio y `roadmap.ts` lista "Varias sucursales" como "Próximamente". Se alinea cuando se retome la Fase 5 (Marketing); `web/` no se toca ahora.
+- **Decidió:** fundador.
+
+## D-022 · 21 oct 2026 · El producto vive en lealtab.com, con las rutas /c/ y /panel/
+
+- **Decisión:** el producto se sirve en el dominio principal `lealtab.com`: la app del cliente en `/c/` y el panel del negocio (incluido N5 Mostrador) en `/panel/`. No se usa `app.lealtab.com`.
+- **Motivo:** es la estructura del ADR-001 §5.2: un solo origen, el scope de la PWA en `/c/` cubre las URLs del QR del mostrador y el panel queda fuera de la app del cliente.
+- **Consecuencias:** sustituye "Producto en app.lealtab.com" de `01-brand-strategy/identidad-de-marca.md` y la mención en `docs/fase-2/legal-notas.md`. La landing sigue en `/` (`web/`, D-008).
+- **Decidió:** fundador.
+
+## D-023 · 21 oct 2026 · Stack del producto
+
+- **Decisión:**
+  - **Lenguaje y framework:** TypeScript + Next.js (App Router), en el mismo proyecto que la landing (`web/`), con las rutas `/c/` y `/panel/` (D-022).
+  - **Interfaz y paquetes:** Tailwind + shadcn/ui y pnpm, como en `web/`.
+  - **Datos y acceso:** Supabase: Postgres, Auth (correo + código o contraseña, D-005) y RLS que filtra por `negocio_id`.
+  - **Analítica:** los eventos de uso van a una tabla propia en Supabase, sin cookies y sin PostHog (D-018).
+  - **Alojamiento:** Vercel, junto con la landing.
+  - **Código de recuperación por WhatsApp (D-011):** se envía con el hook de teléfono/OTP de Supabase Auth, con un proveedor externo configurado en Supabase. Proveedor: **Por definir**.
+  - **Escaneo del QR:** una librería de escaneo en el navegador. Librería: **Por definir**.
+  - **Cobro:** link de pago de Stripe o Mercado Pago, sin cambios (D-012).
+  - **Reglas de frontend (agregadas el 21 oct 2026):** React Server Components por defecto; Tailwind CSS; shadcn/ui como capa estándar de componentes base.
+  - **Reglas de infraestructura (agregadas el 21 oct 2026):**
+    - La app está lista para contenedores: Docker, Docker Compose y un Dockerfile multi-stage.
+    - En local, Docker Compose levanta Supabase con sus contenedores y la app web.
+    - En producción, Vercel compila `web/`; no despliega el contenedor.
+    - Todo cambio a la base de datos es una migración de Supabase en `supabase/migrations`. Las migraciones corren durante el build de Vercel.
+- **Motivo:** un solo proyecto y un solo despliegue para la landing y el producto, en el mismo origen que pide D-022. Detalle en `docs/fase-2/adr/002-stack.md`.
+- **Consecuencias:**
+  - Sustituye la mención de PostHog en `.claude/agents/lealtab-desarrollador.md`. Ese archivo hay que actualizarlo en el repo; no se tocó aquí.
+  - Confirma las opciones que el ADR-001 §6 y `01-validacion-idea.md` §7.2 dejaban abiertas («Supabase si usamos»).
+  - Vercel, Supabase y el proveedor del código por WhatsApp tratan datos por cuenta de LealTab. La revisión de cookies, de si se nombran en el aviso y de si tratan datos fuera de México (`legal-notas.md` §3, riesgo 6) entra en la consulta legal (D-017) y en la actualización del aviso (D-018).
 - **Decidió:** fundador.

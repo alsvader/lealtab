@@ -39,7 +39,7 @@
 | Autoridad y vía de queja (3, 40) | "Si no estás conforme": Secretaría Anticorrupción y Buen Gobierno, 15 días hábiles | Cubierto |
 | Persona o área que atiende las solicitudes (29) | "ARCO": "el área de privacidad de LealTab" | Parcial: hay que designarla de verdad (riesgo 3) |
 | Aviso **simplificado** al recabar por medios electrónicos, con enlace al integral (16-II) | No hay recolección en el sitio; la conversación de WhatsApp sí es un medio electrónico | **Pendiente fuera de mis archivos** (riesgo 4) |
-| Cookies y analítica | "Cookies, analítica y recursos de terceros": no existen; si se agregan, se actualiza el aviso antes y se pide el consentimiento que corresponda | Cubierto |
+| Cookies y analítica | "Cookies, analítica y recursos de terceros": no existen; si se agregan, se actualiza el aviso antes y se pide el consentimiento que corresponda | Cubierto para la landing. **Pendiente para el producto (D-018, 21 oct 2026):** el MVP tendrá analítica propia sin cookies (eventos de uso); el aviso debe cubrirla antes del piloto |
 
 ## 3. Riesgos
 
@@ -48,7 +48,7 @@
 3. **Persona o área de datos personales (art. 29).** El texto menciona "el área de privacidad", pero la ley pide designar a una persona o departamento. Hay que hacerlo internamente y que sea quien lea `contacto@lealtab.com`.
 4. **Aviso simplificado en el WhatsApp de la landing (art. 16-II).** Recomiendo al coordinador y al desarrollador: una línea junto a los botones de WhatsApp ("Al escribirnos, conoces nuestro aviso de privacidad", con enlace) o un mensaje automático con el enlace en la primera respuesta. Hoy el único aviso es el enlace del pie.
 5. **Roles responsable/encargado (Términos, "Los datos de tus clientes").** La ley nueva define "responsable" como cualquier particular que trate datos (art. 2, XIV y XVI), y Hogan Lovells subraya que ya no depende de que decida sobre el tratamiento. Eso puede dejar a LealTab como responsable, al menos de la cuenta del cliente final. El texto afirma el rol de encargado como lo propone el ADR-001 (sección 6, pendiente de revisión legal y validación 5.1 a). Si el abogado concluye otra cosa, hay que reescribir esa sección y publicar un aviso propio para clientes finales. Posible faltante: contrato o anexo de encargo (temas típicos: ayuda con derechos ARCO, subencargados, vulneraciones, devolución o supresión al terminar).
-6. **Proveedor de alojamiento sin nombrar.** El texto lo describe sin nombre. Al elegirlo hay que (a) comprobar que no ponga cookies ni cargue recursos de terceros (p. ej., si va detrás de un CDN o WAF), porque "no usa cookies" quedaría falso; (b) decidir si se nombra en el aviso; y (c) saber si trata datos fuera de México.
+6. **Proveedor de alojamiento sin nombrar.** El texto lo describe sin nombre. Al elegirlo hay que (a) comprobar que no ponga cookies ni cargue recursos de terceros (p. ej., si va detrás de un CDN o WAF), porque "no usa cookies" quedaría falso; (b) decidir si se nombra en el aviso; y (c) saber si trata datos fuera de México. *(Actualizado 21 oct 2026, D-023: alojamiento en Vercel, base de datos y autenticación en Supabase, y un proveedor externo, por definir, para el código por WhatsApp. Los puntos (a) a (c) siguen pendientes con estos proveedores.)*
 7. **Posible trato de consumidor a microempresas.** El art. 2 de la LFPC puede dar acciones de consumidor a microempresas acreditadas. Hay que preguntar al abogado si las cláusulas de renuncia a fuero, limitación de responsabilidad y cambios unilaterales sirven frente a ellas, y si estos Términos son contrato de adhesión con obligación o conveniencia de registro ante Profeco. `[SUPUESTO]`: no verifiqué la norma de registro aplicable.
 8. **Reglamento.** Según fuente secundaria, no hay reglamento nuevo y el de 2011 se aplica en lo que no contradiga la ley. Verificar en el DOF antes de publicar.
 9. **Afirmaciones que dependen de la operación real** (confirmar o quitar): "no vendemos ni transferimos tus datos"; "los mensajes los atiende únicamente el equipo de LealTab"; "te respondemos en 20 días hábiles"; soporte "te atiende una persona" (viene de `trust.ts`).
@@ -78,6 +78,7 @@ Cada una está redactada con la opción que indico (conservadora, y en varias, l
 
 ## 5. Pendientes para otras fases o agentes
 
-- **Aviso de privacidad de la plataforma (app.lealtab.com)** y, si el abogado lo exige, aviso para clientes finales: fase de la plataforma (relacionado con ADR-001, validación 5.1 a).
+- **Aviso de privacidad de la plataforma (`lealtab.com/c/` y `lealtab.com/panel/`; D-022, 21 oct 2026, sustituye app.lealtab.com)** y, si el abogado lo exige, aviso para clientes finales: fase de la plataforma (relacionado con ADR-001, validación 5.1 a).
 - **Aviso simplificado** junto al CTA de WhatsApp: desarrollador de la landing (riesgo 4).
-- **Cuando se agregue analítica o cookies** (PRD sección 7): actualizar el aviso antes de activarlas y diseñar el consentimiento.
+- **Analítica del producto (D-018, 21 oct 2026):** será propia y sin cookies. Antes del piloto, actualizar el aviso para cubrir los eventos de uso (`07-entrega-desarrollo.md` §5): qué datos lleva cada evento, la finalidad, el plazo de conservación y si hace falta consentimiento. Si más adelante se agregan cookies o herramientas de terceros, se vuelve a actualizar el aviso antes de activarlas.
+- **Recuperación por WhatsApp (D-011, cambio del 21 oct 2026):** el código de recuperación se envía con la API de WhatsApp Business. Revisar con el abogado si Meta actúa como proveedor o subencargado y cómo se menciona en el aviso.

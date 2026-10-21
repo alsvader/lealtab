@@ -16,7 +16,7 @@
 ## 3. Cliente ideal
 
 Dueño-operador de un negocio de visita recurrente:
-- 1–4 sucursales, empezando en Villahermosa
+- Hasta 3 sucursales, empezando en Villahermosa. El MVP maneja una sola sucursal; varias, hasta 3, llegan después (D-021)
 - Clientes que vuelven seguido (el ciclo de visita cambia por oficio: semanas en barberías y estéticas, días en cafeterías y tapiocas)
 - Ticket mínimo: Por definir (el ≥ MXN 120 original no está validado para tapiocas)
 - Clientela de 18–40 años, activa en Instagram y WhatsApp
@@ -66,7 +66,7 @@ El detalle completo del alcance, lo que queda fuera y los riesgos de la PWA est�
 | **Negocio** (recomendado) | ~MXN 449/mes + IVA | Clientes ilimitados, varias tarjetas, hasta 3 sucursales |
 | **Pro** | Próximamente, sin precio | — |
 
-**Piloto:** al terminar su mes gratis, cada negocio paga con link de Stripe o Mercado Pago a un precio especial de piloto los primeros meses (monto y duración: Por definir). El cobro automático se construye durante los pilotos (D-012). "Hecho con LealTab" va en todos los planes (D-016).
+**Piloto:** al terminar sus 30 días gratis, cada negocio paga con link de Stripe o Mercado Pago a un precio especial de piloto los primeros meses (monto y duración: Por definir). El cobro automático se construye durante los pilotos (D-012). "Hecho con LealTab" va en todos los planes (D-016).
 
 **Contexto de precios:** la competencia local va de MXN 0 a 550 al mes. LealTab compite por servicio y resultados medibles, no por precio.
 
