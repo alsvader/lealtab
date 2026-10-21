@@ -140,7 +140,7 @@ Corresponden a la hipótesis de precios: entrada ($199–$299), principal (~$449
 
 ### Dominio y redes
 
-- **Sitio:** lealtab.com. Producto en app.lealtab.com; documentación técnica, más adelante, en docs.lealtab.com.
+- **Sitio:** lealtab.com. El producto vive en el mismo dominio: la app del cliente en `lealtab.com/c/` y el panel del negocio en `lealtab.com/panel/` *(D-022, 21 oct 2026; antes decía "Producto en app.lealtab.com")*. Documentación técnica, más adelante, en docs.lealtab.com.
 - **Redes:** @getlealtab en Instagram, TikTok, X, YouTube y LinkedIn. El "get" solo vive en el usuario, nunca en el logo ni en textos ("síguenos en Instagram: @getlealtab").
 - **Tarjeta del cliente final:** la marca protagonista es la del negocio; LealTab aparece discreta ("Hecho con LealTab"), lo que también nos da difusión.
 

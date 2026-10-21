@@ -30,7 +30,7 @@ La marca no cambia desde el día uno (nombre, logo, personalidad premium, lema).
 
 ### Precios (hipótesis que se valida en el piloto) ✅ Aprobado
 
-- Prueba gratis de 14 a 30 días.
+- Prueba gratis de 14 a 30 días. *(Resuelto: 30 días, D-006.)*
 - Plan de entrada: $199 a $299 MXN al mes.
 - Plan principal: alrededor de $449 MXN al mes.
 - Plan Pro: $899 a $1,199 MXN al mes; llega después, junto con el paso a la Propuesta B.
@@ -38,7 +38,9 @@ La marca no cambia desde el día uno (nombre, logo, personalidad premium, lema).
 
 ### Piloto ✅ Aprobado
 
-Barberías, estéticas y salones de belleza, negocios de tapioca y cafeterías, hasta 20 negocios, idealmente en Villahermosa. Gimnasios quedan para después. Aarón recluta a los negocios en persona; cada uno tiene **un mes de prueba gratis, que es su piloto**, y al terminar se mide si paga (desde $299 sin IVA). Altas para el Gate 1 hasta el 17 nov; Gate 1 el 23 dic; los que entren después empiezan el 7 ene (ver D-004 en `docs/decisiones.md`).
+Barberías, estéticas y salones de belleza, negocios de tapioca y cafeterías, hasta 20 negocios, idealmente en Villahermosa. Gimnasios quedan para después. Aarón recluta a los negocios en persona; cada uno tiene **30 días de prueba gratis, que son su piloto**, y al terminar se mide si paga (desde $299 sin IVA). Sin calendario: hay un corte de altas para la primera tanda (Por definir), que es la que cuenta para el Gate 1; los que entren después forman la segunda tanda y cuentan para el Gate 2. El Gate 1 se evalúa cuando todos los de la primera tanda terminan su prueba y su ventana de cobro, con los criterios de D-004 (ver `docs/decisiones.md` y la Fase 8 de `docs/02-plan-de-trabajo.md`).
+
+> **Historial:** las fechas que tenía este punto (altas hasta el 17 nov, Gate 1 el 23 dic, segunda tanda el 7 ene) y la meta de "MVP en producción el 8 nov" ya no rigen. Desde el 2026-10-20 el plan va por fases con criterio de salida, sin fechas.
 
 > **Cambio 2026-10-07 (Aarón):** se suman las cafeterías y el piloto se amplía de 5–10 a 20 negocios. Antes: "Barberías, estéticas y negocios de tapioca, entre 5 y 10 negocios… Cafeterías y gimnasios quedan para después." En la landing, por ahora, las cafeterías aparecen en la línea final de Para quién (no como fila propia).
 
@@ -48,10 +50,6 @@ Barberías, estéticas y salones de belleza, negocios de tapioca y cafeterías, 
 - Después: factura CFDI, pagos en OXXO o SPEI, página de seguridad y API pública.
 
 Detalle en `01-brand-strategy/audiencia-y-posicionamiento.md` (sección final).
-
-### Decisión menor pendiente
-
-- Si el plan Pro puede quitar la leyenda "Hecho con LealTab".
 
 ### Identidad visual (Fase 3) ✅ Cerrada (2026-10-06)
 
@@ -77,6 +75,22 @@ Detalle en `01-brand-strategy/audiencia-y-posicionamiento.md` (sección final).
 - Patrones (pieza 5) ✅ Aprobados (2026-10-06): `04-design-system/05-patrones.md`.
 - Las 5 piezas del Design System están aprobadas.
 
+### Product Design (Fase 6) ✅ Cerrada (2026-10-20)
+
+- Piezas 01 a 07 aprobadas en `06-product-design/`: mapa de flujos, tarjeta del cliente C1-C4, N5 Mostrador y N6 Quién regresa, alta N1-N4, N0 Inicio, N7 Clientes, N8 Ajustes y C0 Mis tarjetas, estados de error y vacío, y la hoja de entrega con `entrega/mapa-pantallas.png`.
+- **C5 Mis datos** (ver y borrar la cuenta) está en el alcance del MVP (D-010), pero **todavía no tiene wireframe**. Se diseña al arrancar la Fase 7.
+- El bloqueo contra el doble escaneo es fijo de **2 minutos** (D-014, decidido el 2026-10-21).
+- PRD del MVP: borrador en revisión en `07-desarrollo/PRD-lealtab-mvp.md`.
+- **Pendiente (Diseño de Producto):** ajustar la pantalla N1 para entrar con contraseña además del código por correo, con el flujo de recuperación (restablecer contraseña por correo). Lo pide el cambio de D-005 del 2026-10-21.
+- **Pendiente:** costo y configuración de la API de WhatsApp Business para el código de recuperación de la tarjeta del cliente (cuenta, número, plantilla aprobada y costo por mensaje). Lo pide el cambio parcial de D-011 del 2026-10-21.
+- **Pendiente antes del piloto:** actualizar el aviso de privacidad para cubrir los eventos de uso de la analítica propia sin cookies (D-018).
+- **Pendiente (Por definir):** qué pasa al llegar al límite de 200 clientes del plan Inicio después del piloto, y si cuentan los clientes totales o los activos. Durante el piloto no hay límite (D-020).
+- **Pendiente (Por definir):** quién cuenta como negocio que paga en el Gate 1 (criterio b, hoy ≥ $299 sin IVA). Se decide cuando se fije el precio especial de piloto, porque depende de él (decisión de Aarón, 2026-10-21).
+- Sucursales (D-021): el MVP maneja una sola sucursal; varias, hasta 3, llegan después.
+- Stack del producto decidido (D-023, `docs/fase-2/adr/002-stack.md`): Next.js en `web/`, Tailwind + shadcn/ui, pnpm, Supabase (Postgres, Auth, RLS por `negocio_id`, tabla propia de eventos) y Vercel. Por definir: el proveedor del código por WhatsApp (hook de Supabase Auth) y la librería de escaneo de QR.
+- **Pendiente (repo):** actualizar `.claude/agents/lealtab-desarrollador.md` para quitar PostHog y decir «tabla propia de eventos en Supabase» (D-023).
+- Criterio de salida de la Fase 7 (Desarrollo): ver `docs/02-plan-de-trabajo.md`.
+
 ### Marketing (Fase 5) — ⏸️ En pausa (2026-10-20)
 
 - Estructura de landing ✅ (`05-marketing/01-estructura-landing.md` v1.1). Precios en landing: prueba gratis 30 días; Inicio $299 MXN/mes + IVA (200 clientes, 1 tarjeta, 1 sucursal); Negocio ~$449 + IVA, recomendado (ilimitado, varias tarjetas, hasta 3 sucursales); Pro «Próximamente» sin precio; precio de fundador solo en trato directo con el piloto.
@@ -88,6 +102,7 @@ Detalle en `01-brand-strategy/audiencia-y-posicionamiento.md` (sección final).
 - Perfil de Instagram @getlealtab ✅ Aprobado (2026-10-07) (`07-perfil-instagram.md` + `perfil-instagram/`): avatar noche, nombre "LealTab · Tarjeta de lealtad digital", bio recomendada (134 caracteres), categoría Software, enlace lealtab.com, botón de WhatsApp, 6 destacados (4 al lanzar) y cuadrícula con 3 fijados. Los posts del perfil se suben en 3:4 (`kit-redes/34/`).
 - Landing publicada en `https://www.lealtab.com` (verificado 2026-10-09 y 2026-10-12).
 - Post 01 "Lema" en 3:4 ✅ Aprobado (2026-10-12): opción D tal cual, en `kit-redes/34/01-lema.png`.
+- **Pendiente para Marketing (al retomar la Fase 5):** alinear la landing en `web/` con D-021. Hoy `pricing.ts` ofrece "Hasta 3 sucursales" en el plan Negocio y `roadmap.ts` lista "Varias sucursales" como "Próximamente". No se edita `web/` hasta entonces.
 - Pendientes de Aarón para el perfil: confirmar que `+52 55 8806 3606` es WhatsApp Business, correo de contacto (opcional), confirmar que @getlealtab está registrado y si se diseñan los posts 8 y 9 y las historias de Instalar y Preguntas.
 
 ## Dirección creativa aprobada (Fase 2)
@@ -109,7 +124,7 @@ Detalle en `01-brand-strategy/audiencia-y-posicionamiento.md` (sección final).
 | 4 | Design System: tokens, spacing, radius, grids, componentes, formularios, cards, tablas, estados, patrones | `04-design-system/` | Diseño de Producto | ✅ Cerrada (2026-10-06) |
 | 5 | Marketing: landing page, redes, emails, presentaciones, otros materiales | `05-marketing/` | Marketing y Lanzamiento | ⏸️ En pausa (2026-10-20); se retoma después |
 | 6 | Product Design: dashboard, UX, módulos, flujos principales | `06-product-design/` | Diseño de Producto | ✅ Cerrada (2026-10-20) |
-| 7 | Desarrollo: implementación sobre la base de estrategia, identidad y producto | `07-desarrollo/` | Desarrollo (por crear) | ⏳ Pendiente |
+| 7 | Desarrollo: implementación sobre la base de estrategia, identidad y producto. Sale cuando un local real usa el flujo completo una semana sin errores bloqueantes, hay ≥10 pilotos confirmados por escrito de ≥3 oficios y están hechas las entrevistas del ícono y la consulta legal LFPDPPP | `07-desarrollo/` | Desarrollo (por crear) | ⏳ Pendiente |
 
 Los agentes de cada fase se crean cuando esa fase empieza; LealTab PM avisa a Aarón en ese momento.
 
@@ -171,7 +186,7 @@ Los agentes de cada fase se crean cuando esa fase empieza; LealTab PM avisa a Aa
 - 2026-10-07: Se instala el skill `redesign-existing-projects` (Leonxlnx/taste-skill). Se crea `03-mockup-landing-v1.7.html` con su auditoría: metaetiquetas e imagen para compartir, saltar al contenido, accesibilidad, grano de papel, FAQ abierto y "Términos y condiciones" en el footer (que conserva sus tres columnas). Informe en `05-marketing/07-auditoria-redesign-skill.md`.
 - 2026-10-07: Aarón suma las cafeterías al piloto y lo amplía a 20 negocios. En la landing v1.7, "Estéticas" pasa a "Estéticas y salones de belleza" y la línea final de Para quién nombra cafeterías y gimnasios. Pendiente: actualizar los documentos que aún dicen 5 a 10 negocios y tres oficios.
 - 2026-10-07: Documentos actualizados a 20 negocios y cuatro oficios: `01-brand-strategy/audiencia-y-posicionamiento.md`, `docs/02-plan-de-trabajo.md` (umbrales del Gate 1 escalados a 20, pendientes de confirmar), `docs/03-propuesta.md`, nota en `docs/01-validacion-idea.md` y decisión D-003 en `docs/decisiones.md`. Se conservan como registro la bitácora y `01-estructura-landing.md` v1.1.
-- 2026-10-07: Aarón define el formato del piloto con `lealtab-analista-metricas` (D-004): él recluta en persona; un mes de prueba gratis por negocio como piloto; conversión a pago al terminar; altas hasta el 17 nov y Gate 1 el 23 dic con criterio único; reclutamiento durante la Fase 2. Actualizados `docs/02-plan-de-trabajo.md`, `docs/03-propuesta.md` y `docs/decisiones.md`.
+- 2026-10-07: Aarón define el formato del piloto con `lealtab-analista-metricas` (D-004): él recluta en persona; un mes de prueba gratis por negocio como piloto; conversión a pago al terminar; altas hasta el 17 nov y Gate 1 el 23 dic con criterio único *(fechas históricas; ya no rigen)*; reclutamiento durante la Fase 2. Actualizados `docs/02-plan-de-trabajo.md`, `docs/03-propuesta.md` y `docs/decisiones.md`.
 - 2026-10-07: Aarón aprobó el perfil de Instagram @getlealtab (`05-marketing/07-perfil-instagram.md`). Se agregaron los posts en 3:4 y se corrigió el aro de story-01.
 - 2026-10-08: Marketing y Lanzamiento preparó cuatro opciones (A a D) del acomodo del post 01 "Lema" en 3:4. Pendiente la elección de Aarón.
 - 2026-10-09: Se verificó que la landing está publicada en www.lealtab.com con el copy y los precios aprobados.
@@ -181,14 +196,26 @@ Los agentes de cada fase se crean cuando esa fase empieza; LealTab PM avisa a Aa
 - 2026-10-20: Se sincronizó la carpeta con el repo local de Aarón (lealtab/brand). La landing v1.2–v1.7 se hizo aparte y vive en Next.js en lealtab/web.
 
 - 2026-10-20: Aarón definió que la fuente de verdad de la landing es `lealtab/web/` (Next.js); los mockups v1.x de `05-marketing/` quedan como historial.
-- 2026-10-20: Aarón pausó la Fase 5 (pendientes del perfil de IG: WhatsApp Business, registro de @getlealtab, posts 8-9, historias Instalar y Preguntas) y arrancó la Fase 6 (Product Design) con Diseño de Producto, para llegar al MVP del 8 nov del plan de trabajo.
+- 2026-10-20: Aarón pausó la Fase 5 (pendientes del perfil de IG: WhatsApp Business, registro de @getlealtab, posts 8-9, historias Instalar y Preguntas) y arrancó la Fase 6 (Product Design) con Diseño de Producto, para llegar al MVP del 8 nov del plan de trabajo *(fecha histórica; ya no rige)*.
 - 2026-10-20: Aarón aprobó la pieza 1 de la Fase 6, el mapa de flujos del MVP (`06-product-design/01-mapa-de-flujos-mvp.md`). La visita se registra cuando el staff escanea el QR personal del cliente; si la cámara falla, se busca por WhatsApp. El QR del mostrador sirve solo para registrarse. El sello de bienvenida es un switch por negocio y lo confirma el staff. Un cliente queda «En riesgo» cuando no vuelve en más del doble de su intervalo habitual, con un mínimo de 30 días. En el MVP hay una sola cuenta compartida por negocio. La tarjeta se diseña con y sin «Hecho con LealTab» mientras se decide lo del plan Pro. Desde el día uno hay alta sin llamada de ventas, aviso de privacidad, exportación a CSV y Ayuda por WhatsApp. Lo siguiente son los wireframes C1 a C4 de la tarjeta.
 - 2026-10-20: Aarón aprobó tal cual la pieza 2 de la Fase 6, la tarjeta del cliente C1 a C4 (`06-product-design/02-tarjeta-cliente.md`). Incluye registro sin contraseña con el aviso de privacidad visible, la guía para instalar la tarjeta, la tarjeta con QR personal y aro de avance, y la recompensa con su canje. Hay dos versiones, con y sin «Hecho con LealTab». Lo siguiente es el panel del negocio: N5 Mostrador y N6 Quién regresa.
 - 2026-10-20: Aarón aprobó la pieza 3 de la Fase 6 (`06-product-design/03-panel-mostrador-y-quien-regresa.md`). N5 Mostrador tiene 3 estados (escanear, confirmar sello y canjear). N6 Quién regresa muestra Frecuente, En riesgo y Nuevo, con exportación a CSV y Ayuda por WhatsApp. Cambio de decisión: si el negocio prende el sello de bienvenida, se da en automático al crear la tarjeta y ya no lo confirma el staff. Además, el resumen semanal entra al MVP solo en el panel web, sin WhatsApp. Lo siguiente es N1 a N4.
 - 2026-10-20: Aarón aprobó tal cual la pieza 4 de la Fase 6, alta y configuración N1 a N4 (`06-product-design/04-alta-y-configuracion.md`): alta sin llamada de ventas ni tarjeta de crédito, entrada con código por correo, datos del negocio, tarjeta de 4 a 12 sellos con el switch del sello de bienvenida y cartel del QR del mostrador. Falta confirmar en lealtab/web que el precio diga "$299 al mes (+IVA)". El cartel lleva "Hecho con LealTab". También se decidió el ADR-001: habrá una sola app LealTab, con "Mis tarjetas" en el MVP.
 - 2026-10-20: Aarón aprobó tal cual la pieza 5 de la Fase 6 (`06-product-design/05-inicio-clientes-ajustes.md`) y la pantalla C0 Mis tarjetas. N0 Inicio abre con el resumen semanal y registra el evento `resumen_semanal_visto`. También quedaron N7 Clientes, con ficha e historial, y N8 Ajustes. Con esto, todas las pantallas del MVP (N0 a N8 y C0 a C4) ya están diseñadas y aprobadas.
-- 2026-10-20: Aarón decidió las reglas contra el abuso de sellos. El QR del cliente cambia. Se da 1 sello por día por defecto, y el negocio puede cambiarlo en Ajustes a "1 cada X horas" o "Sin límite". Siempre hay un bloqueo de 1 a 2 min contra escaneos dobles.
+- 2026-10-20: Aarón decidió las reglas contra el abuso de sellos. El QR del cliente cambia. Se da 1 sello por día por defecto, y el negocio puede cambiarlo en Ajustes a "1 cada X horas" o "Sin límite". Siempre hay un bloqueo de 1 a 2 min contra escaneos dobles *(fijado en 2 min el 2026-10-21)*.
 - 2026-10-20: Aarón aprobó la pieza 6 de la Fase 6 (`06-product-design/06-estados-error-y-vacio.md`), con los estados de error, de vacío y de cuenta en pausa. Decisiones nuevas en 01-mapa: la app trabaja sin conexión primero (cada sello y canje lleva un id único y la firma del dispositivo, se sincroniza en segundo plano y lo que el servidor rechaza va a Clientes → Por revisar). El QR del cliente cambia cada 60 s y el mostrador lo puede validar sin conexión con 10 min de margen. El canje sin conexión solo se permite si la tarjeta está completa y se sincronizó en las últimas 24 h, con un canje como máximo. En el MVP, «Activar mi plan» abre WhatsApp, donde se envía el link de pago. El código de acceso del dueño dura 10 min. Lo siguiente es la hoja de entrega para desarrollo.
 - 2026-10-20: Aarón decidió que "Hecho con LealTab" va en todos los planes, Pro incluido, tanto en la tarjeta como en el cartel. Se cierra el pendiente de la Fase 1.
 - 2026-10-20: Pendiente antes del piloto: las entrevistas con dueños sobre el ícono y la consulta legal de privacidad (LFPDPPP). Ya quedaron resueltos los 6 huecos de la revisión de docs.
-- 2026-10-20: Aarón aprobó la pieza 7, la hoja de entrega para desarrollo (`06-product-design/07-entrega-desarrollo.md` y `entrega/mapa-pantallas.png`), y con eso **cerró la Fase 6**. Quedan 4 preguntas que se resuelven durante el desarrollo: si el bloqueo contra doble escaneo dura 1 o 2 min (se propone 2), cuánto tiempo se guardan los datos junto con el texto legal final del aviso, la plantilla del mensaje de WhatsApp desde Clientes, y si los términos del límite de sellos se muestran en C3.
+- 2026-10-20: Aarón aprobó la pieza 7, la hoja de entrega para desarrollo (`06-product-design/07-entrega-desarrollo.md` y `entrega/mapa-pantallas.png`), y con eso **cerró la Fase 6**. Quedan 4 preguntas que se resuelven durante el desarrollo: si el bloqueo contra doble escaneo dura 1 o 2 min (se propone 2; *cerrada el 2026-10-21: 2 min*), cuánto tiempo se guardan los datos junto con el texto legal final del aviso, la plantilla del mensaje de WhatsApp desde Clientes, y si los términos del límite de sellos se muestran en C3.
+- 2026-10-21: Limpieza de contradicciones aprobada por Aarón: se quitan las fechas de calendario de `PLAN.md` y de la Fase 6 (quedan como historial), la Fase 6 queda cerrada (2026-10-20) en todos los documentos, se quita el pendiente de "Hecho con LealTab" en Pro (D-016), se unifican los nombres de eventos (`sello_registrado`, `canje_registrado`, `negocio_alta_completada` con `tanda`, más los eventos del ADR-001) en `07-entrega`, `docs/02-plan` y el PRD, la prueba se llama "30 días" en todos lados, se anota que C5 Mis datos está en alcance sin wireframe y N3 queda sin color de acento, como en la pieza 04. Decisión de Aarón: el bloqueo contra doble escaneo es fijo de 2 min (D-014). PRD del MVP en `07-desarrollo/PRD-lealtab-mvp.md`, borrador en revisión.
+- 2026-10-21: Aarón cambió el acceso del dueño: entra con correo + código **o** con contraseña (revierte la parte de "solo código" de D-005). Actualizados D-005, `01-mapa`, `docs/02-plan` y el PRD. Pendiente: Diseño de Producto ajusta N1 para la contraseña y su recuperación.
+- 2026-10-21: Aarón decidió que el cliente que cambia de teléfono recupera su tarjeta con un código por WhatsApp, enviado con la API de WhatsApp Business (de pago). Es un cambio parcial de D-011: el resumen semanal sigue solo en el panel. Actualizados D-011, ADR-001, el estado R1 y el PRD. Pendiente: costo y configuración de la API.
+- 2026-10-21: Aarón decidió que la analítica es propia y sin cookies (D-018). Antes del piloto hay que actualizar el aviso de privacidad para cubrir los eventos de uso. Actualizados `docs/decisiones.md`, `docs/fase-2/legal-notas.md` y el PRD.
+- 2026-10-21: Aarón decidió (D-019) que cada negocio guarda su propio nombre del cliente, como propone el ADR-001, con estado `activa`/`por_confirmar`; el teléfono es el único identificador global. Actualizados `docs/decisiones.md`, ADR-001, el modelo de datos de `07-entrega` y el PRD.
+- 2026-10-21: Aarón decidió (D-020) que durante el piloto no hay límite de clientes en el plan Inicio. Qué pasa al llegar a 200 después del piloto queda Por definir. Actualizados `docs/decisiones.md` y el PRD.
+- 2026-10-21: Aarón aclaró D-014: en "1 cada X horas" cada negocio elige X libremente; 2 h es solo una sugerencia, no un mínimo, y el piso es el bloqueo fijo de 2 min contra doble escaneo. Actualizados `docs/decisiones.md`, piezas 01 y 05, el modelo de datos de `07-entrega` y el PRD.
+- 2026-10-21: Aarón decidió que quién cuenta como negocio que paga en el Gate 1 se define cuando se fije el precio de piloto (queda pendiente), y que el MVP maneja una sola sucursal; varias, hasta 3, llegan después (D-021). Actualizados `docs/decisiones.md`, `audiencia-y-posicionamiento.md`, `docs/03-propuesta.md` y el PRD. Pendiente para Marketing: alinear `pricing.ts` y `roadmap.ts` en `web/`.
+- 2026-10-21: Aarón decidió (D-022) que el producto vive en lealtab.com, con `/c/` para la app del cliente y `/panel/` para el panel del negocio, no en app.lealtab.com. Actualizados `docs/decisiones.md`, `identidad-de-marca.md`, `legal-notas.md`, ADR-001 y el PRD. Con esto se cierran las contradicciones de criterio de la revisión del PRD; el PRD pasa a v1.2, borrador para aprobación de Aarón.
+- 2026-10-21: Aarón decidió el stack (D-023, ADR-002): TypeScript + Next.js (App Router) en el mismo proyecto que la landing (`web/`), con `/c/` y `/panel/`; Tailwind + shadcn/ui y pnpm; Supabase (Postgres, Auth con correo + código o contraseña, RLS por `negocio_id` y eventos de uso en una tabla propia, sin cookies ni PostHog); Vercel junto con la landing; código de recuperación por WhatsApp con el hook de teléfono/OTP de Supabase Auth (proveedor por definir); librería de QR en el navegador (por definir); cobro con link de Stripe o Mercado Pago, sin cambios. Actualizados `docs/decisiones.md`, `docs/fase-2/adr/002-stack.md` (nuevo), ADR-001, `legal-notas.md` y el PRD (v1.3: PQ-16 cerrada, PQ-13 reducida al proveedor y su costo, nuevas PQ-25 y sección 7.6). Pendiente: actualizar `.claude/agents/lealtab-desarrollador.md` (menciona PostHog).
+- 2026-10-21: Aarón agregó reglas al stack (D-023, ADR-002 §2.1). Frontend: React Server Components por defecto, Tailwind CSS y shadcn/ui como capa estándar de componentes base. Infraestructura: app lista para contenedores (Docker, Docker Compose, Dockerfile multi-stage); en local, Docker Compose levanta Supabase y la app web; en producción, Vercel compila `web/`, no el contenedor; todo cambio a la base es una migración de Supabase en `supabase/migrations` y corre en el build de Vercel. Actualizados `docs/decisiones.md`, ADR-002 (con una nota de riesgos de las migraciones en el build) y el PRD (RNF-STK-11 a 15; sigue en v1.3).
+- 2026-10-21: Aarón definió el ADR-002 como fuente de verdad del stack técnico; si difiere de la sección 7.6 del PRD, manda el ADR. El PRD pasa a `docs/prd/PRD-lealtab-mvp.md` en el repo (copia idéntica en `07-desarrollo/`), con enlaces relativos al ADR-002 y a D-023.

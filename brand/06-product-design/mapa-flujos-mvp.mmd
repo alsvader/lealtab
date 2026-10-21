@@ -1,0 +1,21 @@
+flowchart TD
+  subgraph F1[F1 · Alta del negocio]
+    A1[Crea cuenta<br/>sin llamada] --> A2[Datos del negocio] --> A3[Configura tarjeta] --> A4[Imprime QR de mostrador]
+  end
+  subgraph F2[F2 · Cliente se registra]
+    B1[Escanea QR de mostrador] --> B2[Nombre + WhatsApp<br/>acepta aviso de privacidad] --> B3[Instala tarjeta PWA]
+  end
+  subgraph F3[F3/F4 · Visita y canje]
+    C1[Cliente muestra su QR] --> C2[Staff escanea] --> C3{¿Tarjeta completa?}
+    C3 -- No --> C4[+1 sello]
+    C3 -- Sí --> C5[Canjear recompensa<br/>y reiniciar]
+  end
+  A4 --> B1
+  B3 --> C1
+  C4 --> D1[Panel: frecuentes / en riesgo / nuevos]
+  C5 --> D1
+  D1 --> D2[Exportar CSV]
+  classDef n fill:#FFFDF8,stroke:#0F2A22,color:#0F2A22,stroke-width:2px
+  classDef k fill:#0F4D3A,stroke:#0F2A22,color:#F3EFE6
+  class A1,A2,A3,A4,B1,B2,B3,C1,C2,C3,C4 n
+  class C5,D1,D2 k

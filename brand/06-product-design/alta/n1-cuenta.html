@@ -1,0 +1,32 @@
+<!doctype html><html lang="es"><meta charset="utf-8"><link rel="stylesheet" href="../../04-design-system/tokens.css"><style>
+*{box-sizing:border-box}body{margin:0;background:var(--color-lino);font-family:var(--font-body);color:var(--color-noche)}
+h1,h2{font-family:var(--font-display);font-weight:800;font-stretch:75%;margin:0;line-height:1}h1{font-size:44px}h2{font-size:28px}
+.m{color:var(--color-gris-noche);margin:0;font-size:14px;line-height:1.45}
+.panel{background:var(--color-blanco-lino);border:1.5px solid var(--color-noche);border-radius:16px;padding:20px}
+button{font:700 15px var(--font-body);padding:14px 18px;border-radius:12px;border:2px solid var(--color-noche);background:var(--color-bosque);color:var(--color-lino);box-shadow:3px 3px 0 var(--color-noche)}
+button.sec{background:var(--color-blanco-lino);color:var(--color-noche);box-shadow:none}button.wa{background:var(--color-blanco-lino);color:var(--color-bosque);box-shadow:none}
+label{display:flex;flex-direction:column;gap:6px;font-weight:600;font-size:14px}input,select{font:16px var(--font-body);padding:12px;border:2px solid var(--color-noche);border-radius:12px;background:var(--color-blanco-lino);width:100%}
+.hint{font-weight:400;font-size:12px;color:var(--color-gris-noche)}
+.frame{width:1280px;height:800px;display:flex;flex-direction:column}
+.bar{display:flex;justify-content:space-between;align-items:center;padding:18px 32px;border-bottom:1.5px solid var(--color-noche);background:var(--color-blanco-lino)}
+.lg{font:800 26px var(--font-display);font-stretch:75%;color:var(--color-bosque)}
+.steps{display:flex;gap:8px;font-size:13px;font-weight:600}.steps span{padding:6px 12px;border-radius:999px;border:1.5px solid var(--color-noche)}.steps .on{background:var(--color-noche);color:var(--color-lino)}.steps .ok{background:var(--color-menta);color:var(--color-bosque);border-color:var(--color-menta)}
+.body{flex:1;display:flex;gap:40px;padding:36px 48px}
+.form{flex:1;display:flex;flex-direction:column;gap:16px}
+.trust{display:flex;flex-direction:column;gap:10px;font-size:14px}.trust div::before{content:"✓ ";color:var(--color-bosque);font-weight:800}
+.tg{display:flex;justify-content:space-between;align-items:center;gap:16px}.sw{width:48px;height:28px;border-radius:999px;background:var(--color-bosque);border:2px solid var(--color-noche);position:relative;flex:none}.sw::after{content:"";position:absolute;right:2px;top:2px;width:20px;height:20px;border-radius:50%;background:var(--color-blanco-lino)}
+.step{display:flex;align-items:center;gap:10px}.step b{width:44px;text-align:center}.step span{width:40px;height:40px;border:2px solid var(--color-noche);border-radius:10px;display:grid;place-items:center;font-weight:800;background:var(--color-blanco-lino)}
+.prev{width:360px;flex:none;display:flex;flex-direction:column;gap:10px;align-items:center}
+.ph{width:320px;border:2px solid var(--color-noche);border-radius:26px;padding:18px;background:var(--color-lino);display:flex;flex-direction:column;gap:10px}
+.biz{display:flex;gap:10px;align-items:center}.biz span{display:block;font-size:12px;color:var(--color-gris-noche)}.logo{width:40px;height:40px;border-radius:10px;background:var(--color-noche);color:var(--color-lino);display:grid;place-items:center;font-weight:700}
+.ctr{display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px}
+.rn{font:800 40px var(--font-display);font-stretch:75%;fill:var(--color-noche)}.rl{font:500 13px var(--font-body);fill:var(--color-gris-noche)}
+.note{background:var(--color-menta);color:var(--color-bosque);border-radius:10px;padding:8px 10px;font-size:13px;font-weight:600}
+.drop{border:2px dashed var(--color-gris-noche);border-radius:12px;padding:16px;display:flex;gap:14px;align-items:center}
+.chips{display:flex;gap:8px;flex-wrap:wrap}.chips span{padding:10px 14px;border:1.5px solid var(--color-noche);border-radius:10px;font-weight:600;font-size:14px;background:var(--color-blanco-lino)}.chips .on{background:var(--color-noche);color:var(--color-lino)}
+.poster{width:300px;height:400px;background:var(--color-blanco-lino);border:2px solid var(--color-noche);border-radius:8px;padding:24px;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
+.foot{display:flex;justify-content:space-between;align-items:center}
+</style><body><div class="frame"><div class="bar"><div class="lg">LealTab</div><div class="steps"><span class="on">1. Cuenta</span><span class="">2. Tu negocio</span><span class="">3. Tu tarjeta</span><span class="">4. QR de mostrador</span></div><button class="wa">💬 Ayuda por WhatsApp</button></div><div class="body"><div class="form" style="max-width:520px"><h1>Empieza gratis hoy</h1><p class="m">Crea tu cuenta y tu tarjeta en minutos. Sin llamada de ventas y sin tarjeta de crédito.</p>
+<label>Tu nombre<input value="Ricardo Vélez"></label><label>Correo<input value="ricardo@barberiavelez.mx"></label><label>WhatsApp del negocio <span class="hint">Para soporte y avisos de tu cuenta</span><input value="993 410 2288"></label>
+<button>Crear cuenta</button><p class="m">Te enviamos un código a tu correo para entrar, sin contraseña. Al continuar aceptas los términos y el aviso de privacidad.</p></div>
+<div class="panel" style="width:420px;align-self:flex-start;display:flex;flex-direction:column;gap:14px"><h2>Tu mes de prueba incluye</h2><div class="trust"><div>Un mes completo gratis, sin tarjeta de crédito</div><div>Precios públicos: desde $299 al mes (+IVA)</div><div>Tus datos son tuyos: exporta tus clientes en CSV cuando quieras</div><div>Si no continúas, tu cuenta se pausa y conservas tu exportación</div><div>Soporte por WhatsApp con una persona real</div></div></div></div></div></body></html>

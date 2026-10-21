@@ -12,7 +12,7 @@ Base: `00-brief/resumen-inicial.md` y `01-brand-strategy/competidores.md`. Lo ma
 
 ### Segmento principal (decidido)
 
-PyMEs mexicanas de **visita recurrente**: cafeterías, estéticas, barberías, gimnasios y negocios parecidos (uñas, spas, panaderías, lavanderías). Normalmente de 1 a 3 sucursales, con el dueño o la dueña operando y decidiendo.
+PyMEs mexicanas de **visita recurrente**: cafeterías, estéticas, barberías, gimnasios y negocios parecidos (uñas, spas, panaderías, lavanderías). Normalmente de 1 a 3 sucursales, con el dueño o la dueña operando y decidiendo. *(Actualización 21 oct 2026, D-021: el MVP maneja una sola sucursal; varias, hasta 3, llegan después.)*
 
 - Viven de que el mismo cliente vuelva cada semana o cada mes.
 - Hoy usan tarjeta de cartón, los puntos de su punto de venta (como Loyverse) o nada.
