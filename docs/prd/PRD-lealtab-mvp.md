@@ -409,7 +409,7 @@ Diagrama: `06-product-design/mapa-flujos-mvp.png`. Pantallas: `06-product-design
 |---|---|---|
 | RNF-A11Y-01 | Todo estado va con palabra y color, nunca solo color o ícono | 07-entrega §7 |
 | RNF-A11Y-02 | Contraste AA, foco visible (`--focus-ring`), orden de tabulación lógico y objetivos táctiles de 44 px o más | 07-entrega §7 |
-| RNF-A11Y-03 | Inputs de 16 px; el campo de WhatsApp lleva `inputmode="tel"` y `autocomplete`; los errores se asocian con `aria-describedby` | 07-entrega §7 |
+| RNF-A11Y-03 | Inputs de 16 px; el campo de WhatsApp lleva `inputmode="tel"` y `autocomplete`; los errores se asocian con `aria-describedby`. **Alineado con el design system (2026-10-21):** input, select y textarea usan `font.size.input` = 16 px en todos los tamaños de pantalla (`04-design-system/tokens.css`) | 07-entrega §7; decisión de Aarón 2026-10-21 |
 | RNF-A11Y-04 | Aro con `role="img"` y `aria-label` (por ejemplo, «4 de 8 sellos»). El QR tiene como alternativa la búsqueda por WhatsApp. Se respeta `prefers-reduced-motion` | 07-entrega §7 |
 | RNF-DIS-01 | Se usan los tokens de `04-design-system/tokens.css` tal cual, sin inventar colores | 07-entrega |
 | RNF-DIS-02 | Español de México, de tú. Copy clave según 07-entrega §6. En producción va el logotipo aprobado (en los wireframes es texto provisional) | 07-entrega §6; piezas 03 y 04 |

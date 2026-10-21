@@ -80,7 +80,7 @@ Igual que cards: skeleton en menta/surface, no durazno ni bosque como fill de bl
 [ Actions bar ]
 ```
 
-Gap entre campos: `space.4`–`space.5`. Ancho máximo del stack ~480–560 px en desktop (no estirar un solo campo a todo el viewport).
+Gap entre campos: `space.4`–`space.5`. Los campos van en `font.size.input` (16 px) en todo layout y tamaño de pantalla, también en formularios densos dentro de un drawer (cambio 2026-10-21, ver pieza 2). Ancho máximo del stack ~480–560 px en desktop (no estirar un solo campo a todo el viewport).
 
 ### 2 columnas (desktop)
 
@@ -170,3 +170,7 @@ Si algo no te late (sobre todo selected con barra, o sticky), dímelo y lo cerra
 ---
 
 **Estado:** ✅ Aprobado por Aarón López Sosa · 6 de octubre de 2026.
+
+---
+
+> **Cambio 2026-10-21 (Aarón).** Los campos de texto de los formularios (input, select y textarea) usan 16 px (`font.size.input`) en todos los tamaños de pantalla. Las celdas de tabla siguen en `font.size.ui` (14 px); la densidad compacta reduce padding, no el tamaño de los campos. Detalle en `02-botones-y-campos.md`.

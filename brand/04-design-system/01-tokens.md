@@ -67,6 +67,7 @@ Propuesta para **cerrar** lo que en Fase 3 quedó provisional:
 | H4 | Archivo 800 | 24 | 1.05 | `size.h4` |
 | Lead | Manrope 500 | 20 | 1.5 | `size.lead` |
 | Texto | Manrope 400 | 16 | 1.55 | `size.body` |
+| Campo de texto | Manrope | 16 | — | `size.input` (input, select y textarea; ver cambio del 2026-10-21) |
 | Interfaz | Manrope 500 | 14 | 1.45 | `size.ui` |
 | Pie | Manrope 600 | 12 | 1.4 | `size.caption` |
 | Etiqueta | Manrope 700, mayúsculas, +0.12 em | 11 | 1.3 | `size.label` |
@@ -157,3 +158,5 @@ Si algo no te late (sobre todo el tostado de riesgo o el 2.5 px de producto), di
 ---
 
 **Estado:** ✅ Aprobado por Aarón López Sosa · 6 de octubre de 2026 (tarde, America/Mexico_City).
+
+> **Cambio 2026-10-21 (Aarón).** Nuevo token `font.size.input` / `--font-size-input` = 16 px para todos los campos de texto (input, select y textarea), en todos los tamaños de pantalla. Antes los campos usaban `font.size.ui` (14 px). Alinea el design system con RNF-A11Y-03 del PRD (inputs de 16 px).

@@ -51,7 +51,7 @@ Preview: [`preview-botones-campos.html`](./preview-botones-campos.html)
 
 ## 2. Campo (input)
 
-**Chrome:** fondo `color.surface` (blanco lino) · texto noche · placeholder / hint en gris noche · Manrope · `radius.control` 10 px · `border.product` 2 px noche · padding `space.3` · `font.size.ui`.
+**Chrome:** fondo `color.surface` (blanco lino) · texto noche · placeholder / hint en gris noche · Manrope · `radius.control` 10 px · `border.product` 2 px noche · padding `space.3` · `font.size.input` **16 px** en todos los tamaños de pantalla (cambio 2026-10-21; antes `font.size.ui`).
 
 ### Anatomía
 
@@ -74,7 +74,7 @@ Label siempre visible (no solo placeholder). Hint opcional en `color.text-muted`
 
 ### Textarea y select
 
-Misma cromática y radios que el input. Textarea: min-height ~`space.8` (64 px), resize vertical opcional. Select: flecha en noche (ícono de línea; set completo después); altura alineada a `md`.
+Misma cromática, radios y tamaño de letra que el input (`font.size.input` 16 px). Textarea: min-height ~`space.8` (64 px), resize vertical opcional. Select: flecha en noche (ícono de línea; set completo después); altura alineada a `md`. El select de tamaño `sm` (p. ej. filtros de toolbar) también va en 16 px: `sm` solo reduce el padding, no la letra.
 
 ---
 
@@ -122,3 +122,15 @@ Si algo no te late (sobre todo el halo menta o el destructive en rojo pleno), d�
 ---
 
 **Estado:** ✅ Aprobado por Aarón López Sosa · 6 de octubre de 2026.
+
+---
+
+## Cambio 2026-10-21
+
+**Decisión de Aarón López Sosa (21 oct 2026):** todos los campos de texto (input, select y textarea) usan **16 px** de tamaño de letra, en todos los tamaños de pantalla.
+
+- Token nuevo: `font.size.input` / `--font-size-input` = 16 px (`tokens.json`, `tokens.css`).
+- Antes: los campos usaban `font.size.ui` (14 px).
+- No cambia: label (Manrope 600, `size.ui` o caption), hint y error (caption), botones (`ui` en sm/md, `body` en lg), radios, bordes, padding ni colores.
+- Alinea el design system con el requisito RNF-A11Y-03 del PRD (inputs de 16 px).
+- Pendiente: las capturas y los HTML de preview (`preview-botones-campos.html`, `preview-tablas-formularios.html`, `preview-patrones.html`) todavía muestran los campos en 14 px.
