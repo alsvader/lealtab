@@ -4,7 +4,7 @@
 |---|---|
 | Producto | LealTab, plataforma SaaS de lealtad para negocios. Arranca con la tarjeta de lealtad digital (PWA instalable) |
 | Dueño del documento | Aarón López Sosa |
-| Versión | v1.3 |
+| Versión | v1.4 |
 | Fecha de redacción | 21 oct 2026 (solo registro; el plan no lleva calendario) |
 | Uso | Referencia de producto antes de arrancar la Fase 7 (Desarrollo) |
 | Estado | **Borrador para aprobación de Aarón**. La Fase 6 está cerrada (2026-10-20) |
@@ -25,6 +25,7 @@
 | v1.1 | Limpieza de contradicciones aprobada por Aarón: sin fechas de calendario, Fase 6 cerrada, nombres de eventos unificados, «30 días» de prueba, N3 sin color de acento. Decisiones del 21 oct: bloqueo fijo de 2 min (D-014), entrada del dueño con código o contraseña (D-005), código de recuperación por WhatsApp con la API de pago (D-011), analítica propia sin cookies (D-018) |
 | v1.2 | Decisiones del 21 oct: nombre del cliente por negocio y teléfono como único identificador global (D-019), sin límite de clientes en Inicio durante el piloto (D-020), una sola sucursal en el MVP (D-021), producto en lealtab.com con `/c/` y `/panel/` (D-022), X libre en «1 cada X horas» (D-014) y Gate 1 pendiente del precio de piloto (PQ-02). Revisión final: todas las decisiones D-001 a D-022 reflejadas (sección 13) y preguntas abiertas al día (sección 12) |
 | v1.3 | Stack decidido por Aarón ([D-023](../decisiones.md), [ADR-002](../adr/002-stack.md)): requisitos RNF-STK en 7.6, PQ-16 cerrada, PQ-13 reducida a la elección y el costo del proveedor del código por WhatsApp. Después, reglas del stack de Aarón (21 oct): React Server Components por defecto, Docker para local, migraciones de Supabase en el build de Vercel (RNF-STK-11 a 15) |
+| v1.4 | Aclaración de Aarón (21 oct): todo el código de la app vive en `web/`, incluido Supabase (`web/supabase/migrations`) y Docker (RNF-STK-12 y 15). Se quita la nota de 7.6 sobre PostHog en los agentes: estaba en `lealtab-arquitecto.md` y ya se corrigió |
 
 ---
 
@@ -431,12 +432,11 @@ Diagrama: `06-product-design/mapa-flujos-mvp.png`. Pantallas: `06-product-design
 | RNF-STK-09 | Cobro con link de pago de Stripe o Mercado Pago, sin cambios (RF-COB-04) | D-012; [D-023](../decisiones.md) |
 | RNF-STK-10 | Antes del piloto, comprobar que Vercel, Supabase y el proveedor de WhatsApp no pongan cookies ni carguen recursos de terceros, y confirmar en qué región guardan los datos (PQ-18) | [D-023](../decisiones.md); legal-notas §3 riesgo 6 |
 | RNF-STK-11 | **React Server Components por defecto**; Tailwind CSS; shadcn/ui como capa estándar de componentes base | [D-023](../decisiones.md) (reglas del 21 oct); [ADR-002](../adr/002-stack.md) §2.1 |
-| RNF-STK-12 | La app está **lista para contenedores**: Docker, Docker Compose y un **Dockerfile multi-stage** | [D-023](../decisiones.md); [ADR-002](../adr/002-stack.md) §2.1 |
+| RNF-STK-12 | La app está **lista para contenedores**: Docker, Docker Compose y un **Dockerfile multi-stage**. Todo el código de la app, incluidos Supabase y los archivos de Docker, vive dentro de `web/` | [D-023](../decisiones.md); [ADR-002](../adr/002-stack.md) §2.1 |
 | RNF-STK-13 | **Desarrollo local dockerizado:** Docker Compose levanta Supabase con sus contenedores y la app web | [D-023](../decisiones.md); [ADR-002](../adr/002-stack.md) §2.1 |
 | RNF-STK-14 | **Producción:** Vercel compila `web/`; el contenedor no se despliega en producción | [D-023](../decisiones.md); [ADR-002](../adr/002-stack.md) §2.1 |
-| RNF-STK-15 | **Todo cambio a la base es una migración de Supabase** en `supabase/migrations`, y las migraciones corren durante el build de Vercel. Riesgos a cuidar: que solo corran en builds de producción (no en vista previa), credenciales en variables de entorno de Vercel, y que una migración fallida haga fallar el build | [D-023](../decisiones.md); [ADR-002](../adr/002-stack.md) §2.1 y §4 |
+| RNF-STK-15 | **Todo cambio a la base es una migración de Supabase** en `web/supabase/migrations`, y las migraciones corren durante el build de Vercel. Riesgos a cuidar: que solo corran en builds de producción (no en vista previa), credenciales en variables de entorno de Vercel, y que una migración fallida haga fallar el build | [D-023](../decisiones.md); [ADR-002](../adr/002-stack.md) §2.1 y §4 |
 
-Nota: `.claude/agents/lealtab-desarrollador.md` en el repo todavía menciona PostHog. Hay que actualizarlo para que diga «tabla propia de eventos en Supabase» ([D-023](../decisiones.md)).
 
 ---
 

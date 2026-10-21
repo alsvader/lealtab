@@ -199,13 +199,14 @@ Formato: fecha · decisión · motivo · alternativas descartadas · quién deci
   - **Cobro:** link de pago de Stripe o Mercado Pago, sin cambios (D-012).
   - **Reglas de frontend (agregadas el 21 oct 2026):** React Server Components por defecto; Tailwind CSS; shadcn/ui como capa estándar de componentes base.
   - **Reglas de infraestructura (agregadas el 21 oct 2026):**
+    - Todo el código de la app vive dentro de `web/`, incluidos Supabase (`web/supabase/`) y los archivos de Docker. *(Aclarado 21 oct 2026, decisión de Aarón.)*
     - La app está lista para contenedores: Docker, Docker Compose y un Dockerfile multi-stage.
     - En local, Docker Compose levanta Supabase con sus contenedores y la app web.
     - En producción, Vercel compila `web/`; no despliega el contenedor.
-    - Todo cambio a la base de datos es una migración de Supabase en `supabase/migrations`. Las migraciones corren durante el build de Vercel.
+    - Todo cambio a la base de datos es una migración de Supabase en `web/supabase/migrations`. Las migraciones corren durante el build de Vercel.
 - **Motivo:** un solo proyecto y un solo despliegue para la landing y el producto, en el mismo origen que pide D-022. Detalle en `docs/adr/002-stack.md`.
 - **Consecuencias:**
-  - Sustituye la mención de PostHog en `.claude/agents/lealtab-desarrollador.md`. Ese archivo hay que actualizarlo en el repo; no se tocó aquí.
+  - Sustituye la mención de PostHog en `.claude/agents/lealtab-arquitecto.md` (antes se atribuía por error a `lealtab-desarrollador.md`). Ya se quitó el 21 oct 2026, cuando se actualizaron los agentes.
   - Confirma las opciones que el ADR-001 §6 y `01-validacion-idea.md` §7.2 dejaban abiertas («Supabase si usamos»).
   - Vercel, Supabase y el proveedor del código por WhatsApp tratan datos por cuenta de LealTab. La revisión de cookies, de si se nombran en el aviso y de si tratan datos fuera de México (`legal-notas.md` §3, riesgo 6) entra en la consulta legal (D-017) y en la actualización del aviso (D-018).
 - **Decidió:** fundador.

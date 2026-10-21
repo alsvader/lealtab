@@ -1,6 +1,6 @@
 # LealTab: Informe 02, Plan de trabajo
 
-> **Versión 3, 20 oct 2026.** Sin calendario: el plan se organiza por fases y cada fase cierra con su criterio de salida, no con una fecha. Junta en una sola secuencia las fases de marca y diseño de `PLAN.md` con las de validación de este documento. Incorpora D-001 a D-017 de `docs/decisiones.md`.
+> **Versión 3, 20 oct 2026.** Sin calendario: el plan se organiza por fases y cada fase cierra con su criterio de salida, no con una fecha. Junta en una sola secuencia las fases de marca y diseño de `PLAN.md` con las de validación de este documento. Incorpora D-001 a D-017 de `docs/decisiones.md`. *(Ajuste del 21 oct 2026: los entregables de cada fase van en `docs/fase-N/` con la numeración de este plan, el equipo de subagentes se actualizó en la sección 5 y la guía de instalación de iOS tiene 3 pasos, como en la pieza 02.)*
 > Base: `docs/01-validacion-idea.md` (veredicto: GO con condiciones).
 
 ## 1. Principios del plan
@@ -78,7 +78,7 @@ Fuente de detalle: `06-product-design/` (mapa de flujos y piezas 2 a 6, aprobada
 | Riesgo | Mitigación | Se mide en |
 |---|---|---|
 | El QR se abre en el navegador integrado de WhatsApp o Instagram, que no permite instalar | La tarjeta funciona igual; se ofrece "abrir en Safari/Chrome" solo para instalar | E6 |
-| En iOS no hay aviso de instalación | Guía visual de 2 pasos; instalar es opcional | E6 |
+| En iOS no hay aviso de instalación | Guía visual de 3 pasos (C2); instalar es opcional | E6 |
 | iOS borra los datos de sitios no instalados después de un tiempo sin uso | La identidad vive en el servidor; se recupera por WhatsApp | Tasa de recuperación |
 | Las notificaciones web en iOS requieren la PWA instalada | No dependas del push en el MVP | — |
 | Fraude con capturas de pantalla del QR | QR rotativo firmado y validación en el servidor | Registro de sellos |
@@ -117,13 +117,13 @@ Aprobado: mapa de flujos, tarjeta del cliente, mostrador y quién regresa, alta 
 
 | Tarea | Entregable |
 |---|---|
-| Playbook del piloto: ayuda de arranque, cartel y capacitación de 15 min al staff | `docs/fase-3/playbook-piloto.md` |
-| Guiones de WhatsApp: invitación, soporte y cobro | `docs/fase-3/mensajes-whatsapp.md` |
-| Prueba de humo: anuncios en Meta dirigidos a la landing (MXN 3,000–5,000) | `docs/fase-3/prueba-humo.md` |
-| Métricas semanales por piloto, incluida la apertura del resumen semanal | `docs/fase-3/metricas/` |
+| Playbook del piloto: ayuda de arranque, cartel y capacitación de 15 min al staff | `docs/fase-8/playbook-piloto.md` |
+| Guiones de WhatsApp: invitación, soporte y cobro | `docs/fase-8/mensajes-whatsapp.md` |
+| Prueba de humo: anuncios en Meta dirigidos a la landing (MXN 3,000–5,000) | `docs/fase-8/prueba-humo.md` |
+| Métricas semanales por piloto, incluida la apertura del resumen semanal | `docs/fase-8/metricas/` |
 | Construir el cobro automático | Registro en `docs/decisiones.md` |
 | Solo correcciones críticas, sin funciones nuevas | Registro en `docs/decisiones.md` si cambia el alcance |
-| Evaluación del Gate 1 | `docs/fase-3/gate-1.md` |
+| Evaluación del Gate 1 | `docs/fase-8/gate-1.md` |
 
 **Gate 1.** Se evalúa sobre **N = negocios de la primera tanda** (corte de altas: Por definir). Cada negocio se mide en sus propios días 1–30; la tarjeta sigue funcionando en los días 31–37 para medir retorno y cobrar. Se pasa con 3 de estos 4:
 - (a) **Activos:** ≥60 % de N. Activo = ≥30 inscritos, sellos en ≥3 de sus 4 semanas y (≥1 canje o ≥5 segundas visitas selladas). El "o" evita castigar a barberías y estéticas por su ciclo de visita.
@@ -168,25 +168,23 @@ Solo se construye lo que pidieron los datos de los pilotos. Candidatos:
 
 Gate 3: MRR ≥ MXN 30,000 con ≥60 clientes, y el módulo pedido por ≥3 clientes de pago. Candidatos: Avisos, Campañas, Reportes y Wallet (Apple y Google).
 
-## 5. Equipo de subagentes (histórico)
+## 5. Equipo de subagentes (`.claude/agents/`)
 
-> **Histórico.** Esta tabla describe el equipo planeado en `.claude/agents/` al 4 oct 2026 y su numeración de fases original. Ya no coincide con el equipo actual (Estrategia de Marca, Dirección Creativa e Identidad, Diseño de Producto, Marketing y Lanzamiento, y el PM que lleva `PLAN.md`).
+> Actualizado el 21 oct 2026 contra el PRD v1.4 y D-001 a D-023. Los entregables en documento van en `docs/fase-N/` con la numeración de este plan; el código de la app va en `web/`.
 
-| Agente | Fases (numeración original) | Rol |
+| Agente | Fases | Rol |
 |---|---|---|
-| `lealtab-coordinador` | Todas | Plan, gates, decisiones y control del alcance |
-| `lealtab-investigador` | 0, 6 | Competencia, DENUE, IMPI y mercado |
-| `lealtab-estratega-marca` | 1, 5 | Posicionamiento, voz y estrategia de marca |
-| `lealtab-copywriter` | 1–3, 5, 6 | Landing, WhatsApp, anuncios y textos de la app |
-| `lealtab-disenador-tarjeta` | 1, 2 | Tarjeta web del cliente, ícono y guía de instalación PWA, cartel QR, wordmark |
-| `lealtab-investigador-clientes` | 2, 3 | Entrevistas, síntesis y playbook del piloto |
-| `lealtab-analista-metricas` | 3, 4, 6 | Métricas de los pilotos, E6 y evaluación de gates |
-| `lealtab-product-designer` | 2, 4, 7 | Flujos, UX y wireframes |
-| `lealtab-arquitecto` | 2, 4, 7 | Arquitectura de la PWA, datos, antifraude, seguridad y ADRs |
-| `lealtab-design-system` | 2, 4, 5 | Tokens y componentes |
-| `lealtab-desarrollador` | 2–4, 7 | Implementación de la landing y la app |
-| `lealtab-director-creativo` | 5 | Creative Direction, identidad y brand book |
-| `lealtab-growth` | 6 | Canales, referidos y expansión |
+| `lealtab-coordinador` | Todas | Criterios de salida, gates, decisiones, preguntas abiertas del PRD y control del alcance |
+| `lealtab-arquitecto` | 7, 9, 11 | Arquitectura de implementación sobre el ADR-002, modelo de datos con RLS, PWA, sin conexión, antifraude, privacidad y ADRs |
+| `lealtab-desarrollador` | 7, 8, 9, 11 | Código del MVP en `web/` (incluido `web/supabase/`), correcciones y cobro automático en los pilotos |
+| `lealtab-product-designer` | 7, 9, 11 | Pantallas pendientes (C5, N1 con contraseña), dudas de diseño durante el desarrollo, cambios al design system y a la tarjeta |
+| `lealtab-copywriter` | 7, 8, 10 (y 5 al retomarla) | Microcopy pendiente, plantillas y guiones de WhatsApp, anuncios y mensaje de la Propuesta B |
+| `lealtab-analista-metricas` | 7 a 10 | Medición sobre la tabla de eventos, métricas de los pilotos y cálculo de gates |
+| `lealtab-investigador-clientes` | 7, 8 | Entrevistas (incluida la del ícono), seguimiento del reclutamiento y playbook del piloto |
+| `lealtab-investigador` | 0 (pendientes), 7, 10 | IMPI y WIPO, negocios objetivo, competencia, proveedores y expansión |
+| `lealtab-growth` | 10 | Canales, referidos, alianzas, expansión y paso a la Propuesta B |
+
+**Archivados** en `.claude/agents-archivo/` porque su trabajo ya se entregó: `lealtab-estratega-marca` (Fase 1), `lealtab-director-creativo` (Fases 2 y 3), `lealtab-design-system` (Fase 4) y `lealtab-disenador-tarjeta` (Fase 6).
 
 ## 6. Siguientes pasos (cierre de la Fase 6 y arranque de la Fase 7)
 

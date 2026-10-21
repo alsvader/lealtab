@@ -44,10 +44,11 @@ Hasta ahora el stack era una sugerencia: «TypeScript/Next.js, Postgres (Supabas
 - shadcn/ui como capa estándar de componentes base.
 
 **Infraestructura**
+- **Todo el código de la app vive dentro de `web/`:** Next.js, Supabase (`web/supabase/`, con su configuración y sus migraciones) y los archivos de Docker. *(Aclarado por Aarón el 2026-10-21.)*
 - **Lista para contenedores:** Docker, Docker Compose y un Dockerfile multi-stage.
 - **Local:** la app está dockerizada. Docker Compose levanta Supabase con sus contenedores y la app web.
 - **Producción:** Vercel compila `web/`. El contenedor no se despliega en producción.
-- **Base de datos:** todo cambio es una migración de Supabase en `supabase/migrations`. Las migraciones corren durante el build de Vercel.
+- **Base de datos:** todo cambio es una migración de Supabase en `web/supabase/migrations`. Las migraciones corren durante el build de Vercel.
 
 ## 3. Por definir
 
@@ -59,7 +60,7 @@ Hasta ahora el stack era una sugerencia: «TypeScript/Next.js, Postgres (Supabas
 ## 4. Consecuencias
 
 - **Un solo proyecto y un solo despliegue.** La landing (`/`), la app del cliente (`/c/`) y el panel (`/panel/`) comparten código y despliegue en Vercel. Cambiar el producto puede afectar a la landing, así que conviene separar bien las rutas y probar la landing en cada despliegue.
-- **Agente de desarrollo.** `.claude/agents/lealtab-desarrollador.md` menciona PostHog. Hay que actualizarlo en el repo de Aarón para que diga «tabla propia de eventos en Supabase, sin cookies». No se editó aquí.
+- **Agentes.** La mención de PostHog estaba en `.claude/agents/lealtab-arquitecto.md`, no en el del desarrollador. Se quitó el 2026-10-21 al actualizar los agentes; los dos dicen ahora «tabla propia de eventos en Supabase, sin cookies».
 - **Privacidad.**
   - Vercel, Supabase y el proveedor del código por WhatsApp tratan datos por cuenta de LealTab.
   - Antes del piloto hay que comprobar que no pongan cookies ni carguen recursos de terceros, decidir si se nombran en el aviso y confirmar dónde guardan los datos. Esto va con la consulta legal (D-017) y la actualización del aviso (D-018).
