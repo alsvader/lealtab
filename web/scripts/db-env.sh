@@ -1,7 +1,7 @@
 #!/bin/sh
 # Escribe las variables de Supabase local en .env.local desde `supabase status -o env`.
 # Conserva el resto del archivo. Depende de T3 (supabase/config.toml) y de `pnpm db:up`.
-# [SUPUESTO] los nombres PUBLISHABLE_KEY y SECRET_KEY de `status -o env` en CLI 2.121.0; se verifica en T3.
+# Nombres verificados en CLI 2.121.0 (T3): API_URL, PUBLISHABLE_KEY, SECRET_KEY, DB_URL.
 set -eu
 [ -f .env.local ] || cp .env.local.example .env.local
 estado=$(pnpm exec supabase status -o env)

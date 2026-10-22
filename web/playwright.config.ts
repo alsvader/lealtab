@@ -28,6 +28,21 @@ export default defineConfig({
     url: BASE_URL,
     reuseExistingServer: !process.env.CI,
     timeout: 300_000,
+    // Cadenas vacías: Next no pisa lo ya definido en process.env, así el e2e no depende de web/.env.local.
+    env: Object.fromEntries(
+      [
+        "SUPABASE_URL",
+        "SUPABASE_PUBLISHABLE_KEY",
+        "SUPABASE_SECRET_KEY",
+        "SUPABASE_DB_URL",
+        "SUPABASE_DB_URL_MIGRACIONES",
+        "SEND_SMS_HOOK_SECRET",
+        "SMSMASIVOS_API_KEY",
+        "RESEND_API_KEY",
+        "IP_HASH_PEPPER",
+        "CRON_SECRET",
+      ].map((k) => [k, ""]),
+    ),
     stdout: "ignore",
     stderr: "pipe",
   },

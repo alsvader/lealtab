@@ -20,7 +20,9 @@
     "test:unit": "vitest run",
     "test:rls": "vitest run --dir src/test/rls --passWithNoTests",
     "test:db": "supabase test db",
-    "check:cliente": "sh scripts/check-no-supabase-en-cliente.sh"
+    "check:cliente": "sh scripts/check-no-supabase-en-cliente.sh",
+    "stack:up": "supabase start && sh scripts/db-env.sh && docker compose --profile app up --build -d",
+    "stack:down": "docker compose --profile app --profile dev down && supabase stop"
   },
   "dependencies": {
     "@supabase/ssr": "0.12.7",

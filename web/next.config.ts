@@ -1,6 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Solo el Dockerfile lo activa (NEXT_OUTPUT=standalone); Vercel y el build normal no cambian.
+  ...(process.env.NEXT_OUTPUT === "standalone" ? { output: "standalone" as const } : {}),
   cacheComponents: true,
   partialPrefetching: true,
   turbopack: {

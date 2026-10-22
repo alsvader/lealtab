@@ -1,0 +1,68 @@
+name: lealtab
+# Solo la app (ADR-005 §2.1). Supabase local lo levanta la CLI: `pnpm db:up`.
+# Perfiles: `app` (imagen de producción) y `dev` (destino dev con recarga en caliente).
+#   docker compose --profile app up --build -d      (o `pnpm stack:up`)
+# El puerto del anfitrión es APP_PORT (3300 por defecto; el 3000 suele estar ocupado).
+
+x-app: &app
+  env_file:
+    - .env.local # secretos: nunca por build.args
+  environment:
+    # Dentro de la red del CLI la app llega a Supabase por el gateway (anula SUPABASE_URL de .env.local).
+    SUPABASE_URL: http://supabase_kong_lealtab:8000
+    LT_ENV: local
+    # Se sirve por HTTP en local: las cookies Secure no aplican.
+    LT_COOKIE_SECURE: "0"
+  ports:
+    - "${APP_PORT:-3300}:3000"
+  networks:
+    - supabase
+  security_opt:
+    - no-new-privileges:true
+  cap_drop:
+    - ALL
+  healthcheck:
+    test:
+      - CMD
+      - node
+      - -e
+      - "fetch('http://127.0.0.1:3000/api/salud').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"
+    interval: 15s
+    timeout: 3s
+    start_period: 10s
+    retries: 3
+
+services:
+  app:
+    <<: *app
+    profiles: ["app"]
+    image: lealtab-web:local
+    build:
+      context: .
+      target: runner
+    user: "10001:10001"
+    read_only: true
+    tmpfs:
+      - /tmp
+      - /app/.next/cache
+    restart: unless-stopped
+
+  app-dev:
+    <<: *app
+    profiles: ["dev"]
+    image: lealtab-web:dev
+    build:
+      context: .
+      target: dev
+    user: "node"
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+    tmpfs:
+      - /tmp
+
+networks:
+  supabase:
+    external: true
+    name: supabase_network_lealtab
