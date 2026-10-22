@@ -25,7 +25,7 @@ Vista general: `entrega/mapa-pantallas.png`. Decisiones completas: `01-mapa-de-f
 | Botón primary / secondary / ghost / destructive | `--color-bosque`/`--color-blanco-lino`/transparente/`--color-rojo`; borde `--border-product` noche; `--radius-control`; `--shadow-button`; foco `--focus-ring` |
 | Campo | `--border-product` noche, error `--color-rojo`; `--radius-control`; `--font-size-input` (16 en todo tamaño de pantalla, evita zoom en iOS) |
 | Card / panel | `--color-blanco-lino`, `--border-hair`/`--border-product`, `--radius-card`; dashboard plano (sin sombra) |
-| Chip de estado | Frecuente `--color-menta`/`--color-bosque` · En riesgo `--color-durazno-claro`/`--color-tostado` · Error `--color-rosa-claro`/`--color-rojo`; `--radius-sticker`; siempre con palabra |
+| Chip de estado | Frecuente `--color-menta`/`--color-bosque` · En riesgo `--color-durazno-claro`/`--color-tostado` · Nuevo y Al día (neutros, mismo estilo) `--color-blanco-lino`/`--color-noche` con borde · Error `--color-rosa-claro`/`--color-rojo`; `--radius-sticker`; siempre con palabra |
 | Tabla | `th` Manrope 700 `--font-size-label` mayúsculas; filas `--border-hair`; seleccionada menta |
 | Aro de progreso | carril `--color-menta`, avance `--color-bosque`, `--color-durazno` solo completo; siempre sobre blanco lino, nunca sobre bosque ni avance en lino |
 | Indicador de sincronización | píldora `--radius-full`: en línea menta/bosque · sin conexión durazno claro/tostado |
@@ -47,7 +47,7 @@ Vista general: `entrega/mapa-pantallas.png`. Decisiones completas: `01-mapa-de-f
 ## 4. Reglas de negocio
 - **Límite de sellos**: por defecto 1 por cliente por día, reinicio a medianoche en la zona del negocio; opcional 1 cada X horas (X libre; se sugiere 2 h) o sin límite (con advertencia). Bloqueo fijo de 2 min contra doble escaneo (D-014, 2026-10-21).
 - **Sello de bienvenida**: si está activo, automático al crear la tarjeta (C1), sin staff.
-- **En riesgo**: sin volver en más del doble de su intervalo habitual, mínimo 30 días. Frecuente: 2+ visitas en 30 días. Nuevo: primera visita en 30 días.
+- **En riesgo**: sin volver en más del doble de su intervalo habitual, mínimo 30 días. Frecuente: 2+ visitas en 30 días. Nuevo: primera visita en 30 días. Al día: quien no cumple las otras tres. **Un solo chip por cliente** en N6 y N7, con precedencia **En riesgo > Frecuente > Nuevo > Al día** (aclaración de D-028, 22 oct 2026); los conteos y filtros de N6 usan ese chip y suman el total.
 - **QR rotativo**: `card_id + paso + HMAC-SHA256(llave_tarjeta, card_id|business_id|paso)`, pasos de 60 s; en línea ±2 pasos; sin conexión gracia de 10 min.
 - **Offline-first**: cola IndexedDB en mostrador, Background Sync, el servidor revalida (firma, QR, límite, duplicados) y es la fuente de verdad; rechazos a Por revisar. La PWA del cliente muestra caché y "Puede haber sellos pendientes".
 - **Canje**: en línea siempre que la tarjeta esté completa; sin conexión solo si la caché se sincronizó en las últimas 24 h y máximo 1 canje por tarjeta en modo sin conexión.

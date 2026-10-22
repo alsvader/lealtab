@@ -103,6 +103,8 @@ Respaldo: buscar al cliente por WhatsApp en N5 si la cámara falla.
 - **Frecuentes**: 2+ visitas en los últimos 30 días.
 - **En riesgo**: sin volver en más del doble de su intervalo habitual (mínimo 30 días).
 - **Nuevos**: primera visita en los últimos 30 días.
+- **Al día**: chip neutro de quien no cumple las otras tres.
+- **Un solo chip por cliente** (aclaración de D-028, 22 oct 2026), con precedencia **En riesgo > Frecuente > Nuevo > Al día**: cada cliente cae en una sola categoría y los conteos suman el total.
 - Cifras clave: clientes que regresan, recompensas canjeadas. Cada grupo abre la lista en N7.
 
 **F6. Exportar datos**: N7 → "Exportar CSV" (nombre, WhatsApp, visitas, sellos, última visita). Disponible también con la cuenta en pausa.
@@ -119,7 +121,7 @@ Respaldo: buscar al cliente por WhatsApp en N5 si la cámara falla.
 ## 6. Decisiones aprobadas (2026-10-20)
 1. **Registro de visitas**: opción A, el negocio escanea el QR del cliente; búsqueda por WhatsApp como respaldo.
 2. **Sello de bienvenida**: interruptor en N3 Configurar tarjeta (el negocio lo activa o desactiva). Si está activo, se otorga **automáticamente al registrarse en C1; reemplaza la confirmación del staff** (cambio de Aarón, 2026-10-20).
-3. **En riesgo**: sin volver en más del doble de su intervalo habitual, mínimo 30 días.
+3. **En riesgo**: sin volver en más del doble de su intervalo habitual, mínimo 30 días. Un solo chip por cliente, con precedencia En riesgo > Frecuente > Nuevo > Al día (D-028, 22 oct 2026).
 4. **Staff**: una sola cuenta compartida por negocio en el MVP.
 5. **"Hecho con LealTab" siempre visible** (Aarón, 2026-10-20): en todos los planes, Pro incluido, en la tarjeta del cliente y en el cartel de mostrador. Resuelve la decisión abierta; se elimina la variante sin leyenda.
 6. **Resumen semanal** (Aarón vía PM, 2026-10-20): entra al MVP, solo dentro del panel web (no por WhatsApp), y es lo primero que ve el dueño al entrar (pantalla Inicio, N0). El piloto mide cuántos dueños lo abren cada semana con el evento `resumen_semanal_visto`.

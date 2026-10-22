@@ -391,6 +391,8 @@ Tus 23 clientes con avance ganan: 4 quedan con la recompensa lista y a los demá
 | Barbería, cada 28 días, última hace 57 días | 4 | 28, 28, 28 | cada 4 semanas | 56 | En riesgo |
 | María Pérez de la pieza 05: visitas 5 jul, 20 jul, 12 ago y 2 sep; hoy 20 oct | 4 | 15, 23, 21 | cada 3 semanas | 42 | En riesgo (48 días): **coincide con el ejemplo aprobado** |
 
+> **Superado por la decisión del 22 oct 2026 (aclaración de D-028):** un solo chip por cliente con precedencia **En riesgo > Frecuente > Nuevo > Al día** (se agrega «Al día», el chip neutro). El texto de este bloque y de CA-20.9 y RF-QR-01 queda como historial; manda RF-QR-01 v2.0 del PRD.
+
 **Una regla de precedencia, hallazgo adyacente.** En N6 un cliente puede ser a la vez Frecuente y Nuevo (primera visita hace 10 días y dos visitas en 30). La tabla tiene un solo chip. Propongo **En riesgo > Frecuente > Nuevo**, mutuamente excluyentes. Los números del ejemplo de N6 (22 + 9 + 14 = 45 contra 38 «regresaron») también muestran que el ejemplo no los trata como exclusivos; no es normativo. `[SUPUESTO]`
 
 ### Criterios de aceptación (verificables)
@@ -403,14 +405,14 @@ Tus 23 clientes con avance ganan: 4 quedan con la recompensa lista y a los demá
 - **CA-20.6** La ficha de N7 muestra «Aún no tenemos su ritmo (solo 1 visita)» con una visita y «cada N semanas» o «cada N días» con dos o más.
 - **CA-20.7** El sello de bienvenida y las correcciones no crean visitas ni intervalos.
 - **CA-20.8** Dos sellos el mismo día cuentan como una visita para el intervalo y para Frecuente.
-- **CA-20.9** Un cliente cae en un solo estado según En riesgo > Frecuente > Nuevo.
+- **CA-20.9** Un cliente cae en un solo estado según En riesgo > Frecuente > Nuevo. *(Superado por D-028, 22 oct 2026: En riesgo > Frecuente > Nuevo > Al día.)*
 
 ### Cambios al PRD con texto propuesto
 
 - **RF-INI-06** (reemplaza): «**Semana** = los 7 días completos anteriores a hoy, en la zona horaria del negocio. La semana anterior son los 7 días previos. Con menos de 8 días de alta, la ventana empieza en el día del alta y no hay comparación.»
 - **RF-INI-05** (agrega): «`semana` es la semana ISO (lunes a domingo, zona del negocio) de la fecha de apertura, `AAAA-Www`.»
 - **RF-QR-05** (reemplaza): «**Visita** = día (zona del negocio) con al menos un sello o canje aceptado de origen mostrador. **Intervalo habitual** = mediana de los últimos 5 intervalos entre visitas; con una sola visita no existe y el umbral de En riesgo es solo el mínimo de 30 días. En riesgo = más de `max(30, 2 × intervalo)` días desde la última visita. El sello de bienvenida y las correcciones no son visitas.»
-- **RF-QR-01** (agrega): «Un cliente tiene un solo estado, con la precedencia En riesgo > Frecuente > Nuevo.» `[SUPUESTO]`
+- **RF-QR-01** (agrega): «Un cliente tiene un solo estado, con la precedencia En riesgo > Frecuente > Nuevo.» `[SUPUESTO]` *(Superado por D-028, 22 oct 2026: se agrega «Al día» al final de la precedencia.)*
 - **07-entrega** §4 («En riesgo») se alinea con RF-QR-05. Pieza 05: el ejemplo de N0 deja de ser normativo en fechas. Se cierra PQ-20.
 
 ### ¿Decisión nueva?

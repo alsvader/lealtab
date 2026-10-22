@@ -563,6 +563,28 @@ Todas parten de **N = los negocios de `:'tanda'`**. El corte de la primera tanda
 
 - **Regla de lectura común.** Cada consulta devuelve `n_total` (todo N), `n_evaluables`, `n_no_evaluables`, el numerador y el denominador **solo sobre evaluables**, y la razón. Los no evaluables **se listan en el informe, no cuentan como «no cumple» y no entran al denominador**. Sin evaluables, la razón es `null` = «sin dato», nunca 0 %. Mientras haya no evaluables, el informe lo dice junto a la cifra (por ejemplo, «2 de 4 negocios aún no cumplen su ventana»).
 - La **ventana cerrada** se cuenta en la zona horaria de cada negocio (`now() at time zone n.zona_horaria`), no en una zona fija.
+- **Mínimo de 8 evaluables (aprobado por Aarón el 22 oct 2026).** El Gate 1 solo se declara (pasa o se corta) cuando el criterio medido tiene al menos 8 negocios evaluables. Con menos, el informe muestra las cifras junto a `n_evaluables` y el veredicto de ese criterio es **«sin veredicto»**: ni «pasa» ni «se corta». El corte (≤ 20 % activos, ≤ 10 % conversión, mediana de inscripción < 10 %) se evalúa solo sobre evaluables y solo con muestra suficiente. El 8 es el parámetro `min_evaluables` (valor por defecto 8); si Aarón decide otro, se cambia en la línea `\set` de abajo y en ningún otro lado.
+- **Unidad del mínimo.** G1-a, G1-b y G1-c: negocios evaluables. G1-d: **negocios con al menos un inscrito evaluable** (`negocios_evaluables`), porque la unidad de cálculo es el inscrito pero el mínimo habla de negocios.
+- **Cobertura de G1-c (aprobado por Aarón el 22 oct 2026).** El ≥ 70 % de negocios con denominador se mide sobre los **evaluables de G1-c** (los que ya pasaron el día 14). La cobertura sobre N se reporta también, solo como dato.
+
+Parámetro y función de apoyo (se corren una vez por sesión de `psql`; `:'min_evaluables'` se convierte a entero donde se usa):
+
+```sql
+\set min_evaluables 8
+
+-- Estado de un criterio. Devuelve: 'sin veredicto' | 'corte' | 'cumple' | 'no cumple'.
+--   corte_incluye_igual: true para ≤ (G1-a, G1-b); false para < (G1-c). Sin corte definido (G1-d): corte = null.
+create or replace function g1_estado(valor numeric, n_eval bigint, min_eval int,
+                                     umbral numeric, corte numeric, corte_incluye_igual boolean)
+returns text language sql immutable as $$
+  select case
+    when n_eval < min_eval or valor is null then 'sin veredicto'
+    when corte is not null and (case when corte_incluye_igual then valor <= corte else valor < corte end) then 'corte'
+    when valor >= umbral then 'cumple'
+    else 'no cumple'
+  end
+$$;
+```
 
 ### 7.1 G1-a: activos
 
@@ -612,19 +634,31 @@ from t;
 ```
 
 ```sql
--- Detalle por negocio (los no evaluables salen en el informe con activo = null).
-select * from v_g1a_negocio where tanda = :'tanda' order by oficio, negocio_id;
-
--- Cifra G1-a.
-select count(*)                                  as n_total,
+-- Cifra G1-a por tanda (sin veredicto; el veredicto se calcula abajo y en el resumen 7.5).
+create or replace view v_g1a_cifra as
+select tanda,
+       count(*)                                  as n_total,
        count(*) filter (where evaluable)         as n_evaluables,
        count(*) filter (where not evaluable)     as n_no_evaluables,
        count(*) filter (where activo)            as activos,
        count(*) filter (where activo)::numeric
          / nullif(count(*) filter (where evaluable), 0) as g1_a   -- null = «sin dato»
 from v_g1a_negocio
-where tanda = :'tanda';
--- Umbral ≥ 60 % de los evaluables. Corte: ≤ 20 %. Con n_evaluables = 0 no hay cifra y no se decide nada con G1-a.
+group by tanda;
+```
+
+```sql
+-- Detalle por negocio (los no evaluables salen en el informe con activo = null).
+select * from v_g1a_negocio where tanda = :'tanda' order by oficio, negocio_id;
+
+-- Cifra y veredicto G1-a.
+select c.*,
+       (c.n_evaluables >= :'min_evaluables'::int) as suficiente_muestra,
+       g1_estado(c.g1_a, c.n_evaluables, :'min_evaluables'::int, 0.60, 0.20, true) as veredicto
+from v_g1a_cifra c
+where c.tanda = :'tanda';
+-- Umbral ≥ 60 % de los evaluables. Corte: ≤ 20 %. Con n_evaluables < min_evaluables el veredicto es «sin veredicto»
+-- (se muestran las cifras, pero ni pasa ni se corta). Con n_evaluables = 0 tampoco hay cifra (g1_a null).
 ```
 
 ```sql
@@ -655,7 +689,9 @@ group by n.negocio_id, n.oficio, n.tanda, n.dia1, n.zona_horaria;
 ```
 
 ```sql
-select count(*)                                  as n_total,
+create or replace view v_g1b_cifra as
+select tanda,
+       count(*)                                  as n_total,
        count(*) filter (where evaluable)         as n_evaluables,
        count(*) filter (where not evaluable)     as n_no_evaluables,
        count(*) filter (where evaluable and recibido_a_dia_37 >= 299) as pagan,
@@ -664,15 +700,22 @@ select count(*)                                  as n_total,
        count(*) filter (where evaluable and recibido_a_dia_37 >= 299)::numeric
          / nullif(count(*) filter (where evaluable), 0) as g1_b    -- null = «sin dato»
 from v_g1b_negocio
-where tanda = :'tanda';
--- Umbral ≥ 40 % de los evaluables. Corte: ≤ 10 %.
+group by tanda;
+
+select c.*,
+       (c.n_evaluables >= :'min_evaluables'::int) as suficiente_muestra,
+       g1_estado(c.g1_b, c.n_evaluables, :'min_evaluables'::int, 0.40, 0.10, true) as veredicto
+from v_g1b_cifra c
+where c.tanda = :'tanda';
+-- Umbral ≥ 40 % de los evaluables. Corte: ≤ 10 %. «sin veredicto» con n_evaluables < min_evaluables.
+-- El veredicto de G1-b es provisional mientras PQ-01 y PQ-02 sigan Por definir (qué suma y qué precio cuenta).
 -- Detalle (incluye los no evaluables, que se muestran sin contar):
 --   select * from v_g1b_negocio where tanda = :'tanda' order by oficio, negocio_id;
 ```
 
 ### 7.3 G1-c: inscripción
 
-Mediana por negocio de (inscritos en días 1-14 / clientes que visitaron en días 1-14, de `ext_visitas_dia`). Un negocio entra a la mediana solo si es evaluable (terminó su día 14) **y** tiene denominador. Para decidir G1-c, **≥70 % de los evaluables** deben tener denominador; si no, «sin dato». `[SUPUESTO]` qué cuenta como «tener denominador» (los 14 días con dato, un día sin visitas se registra con 0, total > 0) y sobre qué base se mide el 70 % (aquí, los evaluables; `cobertura_sobre_n` se devuelve aparte para comparar): **Por definir, depende de PQ-41** (captura del denominador, RF-EVT-04). No se resuelve en este documento.
+Mediana por negocio de (inscritos en días 1-14 / clientes que visitaron en días 1-14, de `ext_visitas_dia`). Un negocio entra a la mediana solo si es evaluable (terminó su día 14) **y** tiene denominador. Para decidir G1-c, **≥70 % de los evaluables** deben tener denominador (base **aprobada por Aarón el 22 oct 2026**: los evaluables de G1-c, es decir, los que ya pasaron el día 14); si no, «sin dato» y el veredicto es «sin veredicto». `cobertura_sobre_n` se devuelve aparte, solo como dato. Además aplica el mínimo de `min_evaluables` evaluables. `[SUPUESTO]` qué cuenta como «tener denominador» (los 14 días con dato, un día sin visitas se registra con 0, total > 0): **Por definir, depende de PQ-41** (captura del denominador, RF-EVT-04). No se resuelve en este documento.
 
 ```sql
 create or replace view v_g1c_negocio as
@@ -692,24 +735,34 @@ from n left join ins using (negocio_id) left join den using (negocio_id);
 ```
 
 ```sql
-with b as (select * from v_g1c_negocio where tanda = :'tanda'),
-c as (
-  select count(*)                                                   as n_total,
+create or replace view v_g1c_cifra as
+with c as (
+  select tanda,
+         count(*)                                                   as n_total,
          count(*) filter (where evaluable)                          as n_evaluables,
          count(*) filter (where not evaluable)                      as n_no_evaluables,
          count(*) filter (where evaluable and tiene_denominador)    as n_con_denominador,
          count(*) filter (where tiene_denominador)::numeric / nullif(count(*), 0) as cobertura_sobre_n,
          count(*) filter (where evaluable and tiene_denominador)::numeric
            / nullif(count(*) filter (where evaluable), 0)           as cobertura_sobre_evaluables
-  from b
+  from v_g1c_negocio
+  group by tanda
 )
 select c.*,
        case when c.cobertura_sobre_evaluables >= 0.7
-            then (select percentile_cont(0.5) within group (order by inscritos::numeric / visitaron)
-                  from b where evaluable and tiene_denominador)
-            end as g1_c_mediana     -- null = «sin dato» (sin evaluables, o cobertura < 70 %)
+            then (select percentile_cont(0.5) within group (order by b.inscritos::numeric / b.visitaron)
+                  from v_g1c_negocio b
+                  where b.tanda = c.tanda and b.evaluable and b.tiene_denominador)
+            end as g1_c_mediana     -- null = «sin dato» (sin evaluables, o cobertura sobre evaluables < 70 %)
 from c;
--- Umbral ≥ 30 %. Corte: mediana < 10 %. Una razón > 1 indica un conteo de visitas incompleto: se marca en el informe.
+
+select c.*,
+       (c.n_evaluables >= :'min_evaluables'::int) as suficiente_muestra,
+       g1_estado(c.g1_c_mediana, c.n_evaluables, :'min_evaluables'::int, 0.30, 0.10, false) as veredicto
+from v_g1c_cifra c
+where c.tanda = :'tanda';
+-- Umbral ≥ 30 %. Corte: mediana < 10 % (estricto). «sin veredicto» si n_evaluables < min_evaluables o si la cobertura
+-- sobre evaluables es < 70 %. Una razón > 1 indica un conteo de visitas incompleto: se marca en el informe.
 -- Los negocios no evaluables o sin denominador se listan con select * from v_g1c_negocio, sin contar como «no cumple».
 ```
 
@@ -737,19 +790,29 @@ from insc i;
 
 ```sql
 -- Cifra global y lectura complementaria por oficio y por semana de alta.
+-- El veredicto solo se calcula en la fila 'global'; las demás filas son lectura complementaria (veredicto null).
 select case grouping(oficio, semana_alta) when 3 then 'global' when 1 then 'oficio' else 'semana_alta' end as corte,
        oficio, semana_alta,
        (select count(*) from v_negocio_g1 where tanda = :'tanda') as n_negocios_total,
+       count(distinct negocio_id) filter (where evaluable) as negocios_evaluables,
        count(*)                                          as inscritos_total,
        count(*) filter (where evaluable)                 as inscritos_evaluables,
        count(*) filter (where not evaluable)             as inscritos_no_evaluables,
        count(*) filter (where evaluable and regreso)     as regresaron,
        count(*) filter (where evaluable and regreso)::numeric
-         / nullif(count(*) filter (where evaluable), 0)  as g1_d      -- null = «sin dato»
+         / nullif(count(*) filter (where evaluable), 0)  as g1_d,     -- null = «sin dato»
+       (grouping(oficio, semana_alta) = 3
+          and count(distinct negocio_id) filter (where evaluable) >= :'min_evaluables'::int) as suficiente_muestra,
+       case when grouping(oficio, semana_alta) = 3
+            then g1_estado(count(*) filter (where evaluable and regreso)::numeric
+                             / nullif(count(*) filter (where evaluable), 0),
+                           count(distinct negocio_id) filter (where evaluable),
+                           :'min_evaluables'::int, 0.25, null, true)
+            end as veredicto
 from v_g1d_inscrito
 where tanda = :'tanda'
 group by grouping sets ((), (oficio), (semana_alta));   -- () = cifra global; la semana 3 solo cubre los días 15 y 16
--- Umbral ≥ 25 % (fila 'global'). Corte: no definido para G1-d en el PRD.
+-- Umbral ≥ 25 % (fila 'global'). Corte: no definido para G1-d en el PRD, así que el veredicto es cumple, no cumple o sin veredicto.
 
 -- Lectura complementaria: mediana por negocio (solo negocios con inscritos evaluables).
 select percentile_cont(0.5) within group (order by tasa) as mediana_por_negocio, count(*) as negocios_con_evaluables
@@ -759,11 +822,70 @@ from (select negocio_id,
       group by negocio_id) x;
 ```
 
+#### Vista para el resumen de G1-d
+
+```sql
+create or replace view v_g1d_cifra as
+select tanda,
+       count(distinct negocio_id) filter (where evaluable) as n_evaluables,   -- negocios con ≥1 inscrito evaluable
+       count(*) filter (where evaluable)                   as inscritos_evaluables,
+       count(*) filter (where evaluable and regreso)::numeric
+         / nullif(count(*) filter (where evaluable), 0)    as g1_d
+from v_g1d_inscrito
+group by tanda;
+```
+
 Advertencia fija para el informe: las bajas de D-026 reducen numerador y denominador del dominio (7.1); con ~200 clientes por negocio y 10 a 14 negocios es dirección, no significancia.
 
-### 7.5 Revisión a mano con un caso de prueba
+### 7.5 Resumen del Gate 1 (cuatro criterios, veredicto)
 
-No hay base de datos para correr las consultas. Se revisaron a mano con cuatro negocios de una misma tanda y la fecha de hoy fijada en **1 dic 2026** (zona `America/Mexico_City`; para reproducirlo en un entorno de pruebas se sustituye `now()` por `'2026-12-01 12:00-06'::timestamptz`). Cuando exista la base, esta tabla es la prueba de aceptación de la sección 7.
+Junta los cuatro criterios, cuenta cuántos cumplen y devuelve el veredicto global. Muestra `n_evaluables` por criterio para que nadie lea una cifra sin su muestra.
+
+Reglas del veredicto (**aprobadas por Aarón el 22 oct 2026**). Cada criterio se calcula sobre sus propios negocios evaluables y solo da veredicto con `n_evaluables` ≥ `min_evaluables`:
+
+1. **«pasa»**: 3 criterios con veredicto cumplen su umbral, aunque el cuarto esté «sin veredicto».
+2. **«se corta»**: cualquier criterio con veredicto llega a su corte (G1-a ≤ 20 %, G1-b ≤ 10 %, G1-c mediana < 10 %), aunque los demás estén «sin veredicto». Un corte nunca se declara con `n_evaluables` < `min_evaluables`.
+3. **«sin veredicto»**: cualquier otro caso (por ejemplo, 2 cumplen y 2 sin veredicto, o los cuatro con veredicto y menos de 3 cumplen sin corte).
+
+Si hubiera a la vez 3 criterios que cumplen y 1 en corte, la consulta da «se corta» porque evalúa el corte primero. Ver Dudas.
+
+```sql
+with a as (select 'G1-a' as criterio, 1 as orden, n_evaluables, g1_a as valor,
+                  g1_estado(g1_a, n_evaluables, :'min_evaluables'::int, 0.60, 0.20, true)  as estado
+           from v_g1a_cifra where tanda = :'tanda'),
+     b as (select 'G1-b', 2, n_evaluables, g1_b,
+                  g1_estado(g1_b, n_evaluables, :'min_evaluables'::int, 0.40, 0.10, true)
+           from v_g1b_cifra where tanda = :'tanda'),
+     c as (select 'G1-c', 3, n_evaluables, g1_c_mediana,
+                  g1_estado(g1_c_mediana, n_evaluables, :'min_evaluables'::int, 0.30, 0.10, false)
+           from v_g1c_cifra where tanda = :'tanda'),
+     d as (select 'G1-d', 4, n_evaluables, g1_d,
+                  g1_estado(g1_d, n_evaluables, :'min_evaluables'::int, 0.25, null, true)
+           from v_g1d_cifra where tanda = :'tanda'),
+     u as (select * from a union all select * from b union all select * from c union all select * from d),
+     r as (select count(*) filter (where estado = 'cumple')        as cumplen,
+                  count(*) filter (where estado = 'corte')         as en_corte,
+                  count(*) filter (where estado = 'sin veredicto') as sin_veredicto
+           from u)
+-- Una fila por criterio, con su muestra y su estado; el veredicto global se repite en cada fila.
+select u.criterio, u.n_evaluables, (u.n_evaluables >= :'min_evaluables'::int) as suficiente_muestra,
+       u.valor, u.estado,
+       r.cumplen, r.en_corte, r.sin_veredicto,
+       case when r.en_corte > 0 then 'se corta'
+            when r.cumplen >= 3 then 'pasa'
+            else 'sin veredicto'
+       end as veredicto_gate_1
+from u cross join r
+order by u.orden;
+```
+
+Nota de uso: es una sola consulta (se puede guardar como vista `v_g1_resumen` por `tanda` cuando exista la base). Un criterio con corte y otro sin muestra da «se corta»; uno con pase de 3 criterios y otro sin muestra da «pasa». G1-b y el denominador de G1-c (PQ-41) siguen **Por definir**: mientras no se cierren PQ-01, PQ-02 y PQ-41, el veredicto global es **provisional** y así se rotula en `docs/fase-8/gate-1.md`.
+
+### 7.6 Revisión a mano con casos de prueba
+
+#### Escenario 1: cuatro negocios (menos de 8 evaluables, debe dar «sin veredicto»)
+
+No hay base de datos para correr las consultas. Se revisaron a mano con cuatro negocios de una misma tanda (escenario 1) y la fecha de hoy fijada en **1 dic 2026** (zona `America/Mexico_City`; para reproducirlo en un entorno de pruebas se sustituye `now()` por `'2026-12-01 12:00-06'::timestamptz`). Cuando exista la base, estas tablas son la prueba de aceptación de la sección 7. Todos los escenarios usan `min_evaluables` = 8.
 
 | Negocio | Oficio | `dia1` | Hoy es el día | Evaluable a-b-c |
 |---|---|---|---|---|
@@ -791,7 +913,49 @@ No hay base de datos para correr las consultas. Se revisaron a mano con cuatro n
 | G1-d inscritos evaluables | 10 (el último alta el día 16: 16 oct + 22 = 7 nov ≤ 1 dic) | 10 | 0 (altas del 20 al 25 nov: +22 cae después de hoy) | 0 (10 nov + 22 = 2 dic > 1 dic) | `inscritos_total` 29, `inscritos_evaluables` 20, `inscritos_no_evaluables` 9, `regresaron` 5, **g1_d = 25 %** (global); `mediana_por_negocio` = 25 % (mediana de 40 % y 10 %), `negocios_con_evaluables` 2 |
 | Sin evaluables | si `tanda` solo tuviera C y D: G1-a y G1-b dan `n_evaluables` 0 y la razón `null` («sin dato»), G1-d `null`; G1-c solo cuenta D (1 evaluable) | | | | Ninguna razón sale 0 % por falta de evaluables |
 
-Notas de la revisión: (1) `count(distinct (dia_local - dia1) / 7)` usa división entera de enteros (días 0 a 6 = semana 0); (2) `group by` de `v_g1b_negocio` incluye `zona_horaria` porque se usa en `evaluable`; (3) en G1-d la columna `corte` usa `grouping(oficio, semana_alta)`: 3 = global, 1 = por oficio, 2 = por semana; (4) en G1-c, G1-a y G1-b el umbral y el corte se aplican a la cifra sobre evaluables, no sobre N.
+Notas de la revisión: (1) `count(distinct (dia_local - dia1) / 7)` usa división entera de enteros (días 0 a 6 = semana 0); (2) `group by` de `v_g1b_negocio` incluye `zona_horaria` porque se usa en `evaluable`; (3) en G1-d la columna `corte` usa `grouping(oficio, semana_alta)`: 3 = global, 1 = por oficio, 2 = por semana; (4) en G1-c, G1-a y G1-b el umbral y el corte se aplican a la cifra sobre evaluables, no sobre N, y solo con `n_evaluables` ≥ `min_evaluables`.
+
+**Veredictos del escenario 1 (`min_evaluables` = 8).** Evaluables por criterio: G1-a 2, G1-b 2, G1-c 3, G1-d 2 negocios (A y B). Los cuatro quedan por debajo de 8, así que:
+
+| Criterio | `n_evaluables` | `suficiente_muestra` | Cifra | `estado` |
+|---|---|---|---|---|
+| G1-a | 2 | `false` | 50 % | sin veredicto |
+| G1-b | 2 | `false` | 50 % | sin veredicto |
+| G1-c | 3 | `false` | 25 % | sin veredicto |
+| G1-d | 2 | `false` | 25 % | sin veredicto |
+
+Resumen: `cumplen` 0, `en_corte` 0, `sin_veredicto` 4 → **`veredicto_gate_1` = «sin veredicto»**. Aunque G1-a y G1-b muestran 50 %, no se declara que pasan; y si un criterio mostrara 10 % con 2 evaluables, tampoco se declararía corte.
+
+#### Escenario 2: 10 negocios, todos evaluables en los cuatro criterios (hoy 1 dic 2026, todos con `dia1` entre el 1 y el 20 oct)
+
+Cada negocio tiene 10 inscritos en los días 1 a 16 y denominador completo de G1-c. Cifras de entrada y resultado:
+
+| Variante | G1-a | G1-b | G1-c | G1-d | Cumplen | `veredicto_gate_1` |
+|---|---|---|---|---|---|---|
+| 2a (3 de 4 no; ningún corte) | 6 activos de 10 = 60 % → cumple (el umbral es ≥) | 4 pagan de 10 = 40 % → cumple | mediana 28 % → no cumple (≥ 10 y < 30) | 20 regresan de 100 = 20 % → no cumple | 2 | **sin veredicto** (los cuatro con veredicto, <3 cumplen, sin corte) |
+| 2b (pasa) | igual: cumple | igual: cumple | mediana 32 % → cumple | 20 % → no cumple | 3 | **pasa** |
+| 2c (corte) | 2 activos de 10 = 20 % → **corte** (≤ 20 %) | igual: cumple | mediana 32 % → cumple | 30 de 100 = 30 % → cumple | 3 | **se corta** (el corte se evalúa primero; ver Dudas) |
+| 2d (corte en G1-c) | 6 de 10 = 60 % → cumple | 4 de 10 = 40 % → cumple | mediana 9 % → **corte** (< 10 %, estricto) | 30 % → cumple | 3 | **se corta** |
+
+#### Escenario 2e a 2g: combinaciones con criterios «sin veredicto» (regla aprobada el 22 oct 2026)
+
+Misma tanda de 10 negocios, pero con criterios que no llegan a 8 evaluables (por ejemplo, G1-b y G1-d con 5 evaluables porque la mitad de los negocios es reciente):
+
+| Caso | G1-a | G1-b | G1-c | G1-d | `cumplen` / `en_corte` / `sin_veredicto` | `veredicto_gate_1` |
+|---|---|---|---|---|---|---|
+| 2e (3 cumplen + 1 sin veredicto) | 70 % con 10 evaluables → cumple | 50 % con 10 → cumple | mediana 35 % con 10 → cumple | 30 % con 5 evaluables → sin veredicto | 3 / 0 / 1 | **pasa** |
+| 2f (1 corte + otros sin veredicto) | 15 % con 10 evaluables → **corte** | 60 % con 5 → sin veredicto | cobertura 60 % → sin veredicto | 5 evaluables → sin veredicto | 0 / 1 / 3 | **se corta** |
+| 2g (2 cumplen + 2 sin veredicto) | 70 % con 10 → cumple | 50 % con 10 → cumple | cobertura 60 % → sin veredicto | 5 evaluables → sin veredicto | 2 / 0 / 2 | **sin veredicto** |
+
+#### Escenario 3: bordes del mínimo y de la cobertura
+
+| Caso | Datos | Resultado esperado |
+|---|---|---|
+| 3a: 7 evaluables en G1-a | 9 negocios, 2 con `dia1` reciente; 7 evaluables, 1 activo (14 %) | `n_evaluables` 7, `suficiente_muestra` `false`, **sin veredicto** (aunque 14 % ≤ 20 %, no se corta) |
+| 3b: 8 evaluables en G1-a | igual con 8 evaluables, 1 activo (12.5 %) | `suficiente_muestra` `true`, `estado` **corte** |
+| 3c: cobertura de G1-c justo en 70 % | 10 evaluables, 7 con denominador (más 2 no evaluables sin denominador) | `cobertura_sobre_evaluables` 70 %, `cobertura_sobre_n` 7/12 = 58 %, hay mediana; el veredicto depende de la mediana |
+| 3d: cobertura de G1-c bajo 70 % | 10 evaluables, 6 con denominador | `cobertura_sobre_evaluables` 60 %, `g1_c_mediana` `null`, **sin veredicto** (aun con 10 evaluables) |
+| 3e: G1-d con pocos negocios | 100 inscritos evaluables, pero solo 6 negocios con inscritos evaluables | `negocios_evaluables` 6 < 8, **sin veredicto** aunque haya 100 inscritos |
 
 ---
 
@@ -973,7 +1137,8 @@ Tablas de carga propuestas: `ext_visitas_dia`, `ext_pago`, `ext_horas_fundador`,
 | PQ-34 | **¿El borrado de cuenta limpia también `envio_codigo` y `codigo_intento` del teléfono?** Cierra el hilo `flujo_id` a teléfono (3.3), a costa de reiniciar los límites de envío de ese número | Arquitecto y abogado |
 | PQ-35 | **Lista cerrada de motivos de corrección** (`sellos_corregidos.motivo`): el texto de la lista de N7 y sus códigos | Diseño de producto |
 | ~~PQ-E~~ (aprobada por Aarón el 22 oct 2026) | **¿Se aprueban los atributos y el evento marcados «propuesto»?** Sin `registro_iniciado` MET-03 no tiene denominador; sin `duracion_s` y `duracion_ms`, MET-01 y MET-02 quedan «sin dato» | Coordinador |
-| PQ-41 | **Captura del denominador de G1-c** (`ext_visitas_dia`, RF-EVT-04): cómo captura el dueño los clientes que visitan por día (pantalla o ajuste de N0/N8, o conteo externo), con qué frecuencia y qué pasa si falta el dato. Ver PRD §12 | Aarón, con el product designer; puede esperar a la Fase 8. También fija qué cuenta como «tener denominador» y sobre qué base se mide el 70 % de cobertura de G1-c (7.3, hoy `[SUPUESTO]`) |
+| PQ-41 | **Captura del denominador de G1-c** (`ext_visitas_dia`, RF-EVT-04): cómo captura el dueño los clientes que visitan por día (pantalla o ajuste de N0/N8, o conteo externo), con qué frecuencia y qué pasa si falta el dato. Ver PRD §12 | Aarón, con el product designer; puede esperar a la Fase 8. También fija qué cuenta como «tener denominador» (7.3, hoy `[SUPUESTO]`). La base del 70 % ya está resuelta: evaluables de G1-c (aprobado por Aarón el 22 oct 2026) |
+| PQ-42 (propuesta) | **Dos puntos que la regla del veredicto de Gate 1 (7.5, aprobada el 22 oct 2026) no precisa**: si hay 3 que cumplen y 1 en corte a la vez, la consulta da «se corta» porque evalúa el corte primero; y el mínimo de 8 de G1-c se mide en evaluables (como está) o en evaluables con denominador | Aarón y coordinador |
 
 **Decisiones del fundador pendientes que afectan la medición:** precio especial de piloto y quién cuenta como pagador (PQ-01 y PQ-02, G1-b); captura del denominador de G1-c (PQ-41); costo del WhatsApp (PQ-30, costo por cliente nuevo); mecanismo del `install_token` (PQ-31, MET-06); umbrales de MET-10 y MET-11.
 

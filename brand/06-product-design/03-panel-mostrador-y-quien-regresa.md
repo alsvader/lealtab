@@ -16,10 +16,10 @@ Antiabuso (2026-10-20): QR del cliente rotativo, bloqueo fijo de 2 min contra do
 El sello de bienvenida ya no pasa por mostrador: se otorga automático en el registro del cliente (C1) cuando el interruptor está activo (cambio de Aarón, 2026-10-20).
 
 ## N6 Quién regresa (escritorio)
-- Cifras: regresaron, Frecuente (2+ visitas en 30 días), En riesgo (más del doble de su ritmo, mínimo 30 días), Nuevo (primera visita en 30 días).
-- Filtros por grupo, búsqueda y tabla: cliente, WhatsApp, estado, visitas, sellos, última visita, Ver.
+- Cifras: regresaron, Frecuente (2+ visitas en 30 días), En riesgo (más del doble de su ritmo, mínimo 30 días), Nuevo (primera visita en 30 días), Al día (quien no cumple las otras tres). Cada cliente tiene un solo chip, con precedencia En riesgo > Frecuente > Nuevo > Al día (D-028, 22 oct 2026); las cifras por grupo suman el total de clientes.
+- Filtros por grupo (Todos, Frecuentes, En riesgo, Nuevos, Al día; suman el total sin duplicar), búsqueda y tabla: cliente, WhatsApp, estado, visitas, sellos, última visita, Ver.
 - "Exportar CSV" arriba a la derecha junto a "Registrar visita"; "Ayuda por WhatsApp" en el menú lateral; aviso de privacidad en el pie.
-- Chips planos con palabra (Frecuente menta/bosque, En riesgo durazno claro/tostado, Nuevo neutro), como en el sistema de diseño.
+- Chips planos con palabra (Frecuente menta/bosque, En riesgo durazno claro/tostado, Nuevo y Al día neutros, con el mismo estilo), como en el sistema de diseño.
 
 ## Notas
 - El logo del menú lateral es texto provisional: en producción va el logotipo aprobado.
