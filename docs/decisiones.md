@@ -179,7 +179,7 @@ Formato: fecha · decisión · motivo · alternativas descartadas · quién deci
 
 - **Decisión:** se adopta el modelo de identidad del ADR-001 §6. La `identidad` de plataforma solo guarda el teléfono (WhatsApp en E.164), que es el **único identificador global**, y sus sesiones. Cada negocio tiene su propio `cliente_negocio` con el nombre que el cliente dio en ese negocio, su consentimiento, su fecha de alta y su estado (`activa` o `por_confirmar`). La tarjeta y los eventos cuelgan del `cliente_negocio` y siempre llevan `negocio_id`.
 - **Motivo:** mantiene separados los datos de cada negocio (un negocio nunca ve el nombre que el cliente dio en otro) y sostiene la propuesta de que LealTab actúe como encargado, pendiente de la consulta legal (D-017).
-- **Consecuencias:** sustituye la entidad `cliente` con nombre global de `06-product-design/07-entrega-desarrollo.md` §3. Una tarjeta nueva ligada a un teléfono sin sesión nace `por_confirmar` y no aparece en Mis tarjetas hasta que el cliente la acepta en la app o el cajero la verifica al dar el primer sello (ADR-001 §5.2, punto 6).
+- **Consecuencias:** sustituye la entidad `cliente` con nombre global de `06-product-design/07-entrega-desarrollo.md` §3. Una tarjeta nueva ligada a un teléfono sin sesión nace `por_confirmar` y no aparece en Mis tarjetas hasta que el cliente la acepta en la app o el cajero la verifica al dar el primer sello (ADR-001 §5.2, punto 6). *(Aclaración del 22 oct 2026, D-031: el estado `por_confirmar` desaparece; sin sesión, el segundo negocio pide WhatsApp y código. La `identidad` ahora se liga a `auth.users` con `auth_user_id`.)*
 - **Decidió:** fundador.
 
 ## D-020 · 21 oct 2026 · Sin límite de clientes en el plan Inicio durante el piloto
@@ -216,7 +216,7 @@ Formato: fecha · decisión · motivo · alternativas descartadas · quién deci
   - **Detalles aprobados el 21 oct 2026 (aclaraciones, no cambian el stack):**
     - Exportación CSV en dos archivos, `clientes.csv` y `visitas.csv`, con las fórmulas neutralizadas (PQ-22 c).
     - Se aprueban las metas de rendimiento y disponibilidad de RNF-REN-02 y RNF-REN-04. El plan de hosting y los respaldos quedan atados a la PQ-29 (PQ-24).
-    - La sesión del cliente es propia y Supabase Auth solo es el motor del código de recuperación (D-025).
+    - La sesión del cliente es propia y Supabase Auth solo es el motor del código de recuperación (D-025). *(Sustituido el 22 oct 2026 por D-031: el cliente usa Supabase Auth con teléfono verificado por OTP desde el registro.)*
   - **Cobro:** link de pago de Stripe o Mercado Pago, sin cambios (D-012).
   - **Reglas de frontend (agregadas el 21 oct 2026):** React Server Components por defecto; Tailwind CSS; shadcn/ui como capa estándar de componentes base.
   - **Reglas de infraestructura (agregadas el 21 oct 2026):**
@@ -249,10 +249,13 @@ Formato: fecha · decisión · motivo · alternativas descartadas · quién deci
   - Solo se aceptan números de México de 10 dígitos.
   - Si el 5 % o más de las recuperaciones del piloto fallan en los dos canales, o el proveedor se cae más de un día, se reabre el respaldo con una decisión nueva.
   - Cierra PQ-13, PQ-22 (e, f), PQ-23 y PQ-28.
+  - **Aclaración del 22 oct 2026 (D-031):** el código ya no es solo de recuperación. Cada registro del cliente en C1 y cada recuperación consumen un código por WhatsApp o SMS, y Supabase Auth es el sistema de autenticación del cliente, no solo el motor del código. Los límites por teléfono de arriba (60 s, 3 por hora, 10 al día, bloqueo de 15 min) ahora también cubren registros y **se mantienen**. **Aprobado por Aarón el 22 oct 2026** (recalculado en `docs/adr/003-sesion-cliente-y-codigo.md` §2.8): por IP, 10 por hora en nuestro servidor; tope global de **400 envíos al día** (antes 200), con aviso por correo a Aarón a los 200; alerta de saldo de SMS Masivos en **300 mensajes** (antes 100); y el límite de SMS por hora de Supabase sube de 30 a 100. El hook de SMS es el paso obligado de los límites por teléfono y global. Los 5 intentos por código y el límite por IP solo se imponen en nuestro servidor (no cubren a quien llame a Supabase directo): riesgo aceptado, que pasa a `security-review`. La caída del proveedor bloquea registros nuevos (R-18).
 - **Alternativa(s) descartada(s):** WhatsApp directo con Meta; Twilio Verify; 360dialog; verificación por el cajero en N5 como respaldo; el endpoint `/whatsapp/send` de SMS Masivos (conexión por QR, no oficial).
 - **Decidió:** fundador.
 
 ## D-025 · 21 oct 2026 · La identidad y la sesión del cliente son propias, y el segundo negocio sin sesión queda «por confirmar»
+
+> **Sustituida por D-031 (22 oct 2026).** El texto de abajo se conserva como historial: ya no hay sesión propia del cliente, ni cookie `Path=/c/`, ni estado «por confirmar».
 
 - **Decisión:**
   - La `identidad` y la sesión del cliente son propias: la sesión es una cookie `HttpOnly` con `Path=/c/`. Supabase Auth solo es el motor del código de recuperación; la sesión de Supabase que ese flujo crea se descarta.
@@ -273,7 +276,7 @@ Formato: fecha · decisión · motivo · alternativas descartadas · quién deci
 
 - **Decisión:**
   - C5 «Mis datos» vive en `/c/cuenta` y se entra desde «Mis datos ›» en C0, que sustituye el nombre global del encabezado (D-019).
-  - «Borrar mi cuenta» borra la cuenta de LealTab completa (la `identidad` y todos sus `cliente_negocio`). Pide una casilla de confirmación, no pide código y su efecto es inmediato: se cierran sus sesiones, se limpia el almacenamiento local, deja de aparecer en Mis tarjetas y en N0, N6, N7 y el CSV de cada negocio, y no recibe sellos. No se puede borrar sin conexión. El mismo teléfono puede registrarse otra vez como una cuenta nueva.
+  - «Borrar mi cuenta» borra la cuenta de LealTab completa (la `identidad` y todos sus `cliente_negocio`). Pide una casilla de confirmación, no pide código y su efecto es inmediato: se cierran sus sesiones (y, desde D-031, se borra también su usuario de Supabase Auth), se limpia el almacenamiento local, deja de aparecer en Mis tarjetas y en N0, N6, N7 y el CSV de cada negocio, y no recibe sellos. No se puede borrar sin conexión. El mismo teléfono puede registrarse otra vez como una cuenta nueva.
 - **Por definir (PQ-04):** el plazo de eliminación definitiva, lo que se conserva por obligación legal y si los eventos de cada negocio se conservan sin datos personales para sus conteos.
 - **Motivo:** RF-APP-14 y RNF-PRI-09 piden que el cliente pueda borrar su cuenta; con D-019 es una sola acción sobre la identidad. Pedir un código por WhatsApp costaría por mensaje y dependería del proveedor.
 - **Consecuencias:**
@@ -328,4 +331,32 @@ Formato: fecha · decisión · motivo · alternativas descartadas · quién deci
 - **Motivo:** cubre los dos usos del flujo F5 (recuperar y avisar de la recompensa) con el mínimo de variantes y sin configuración nueva; no depende de la API (D-011).
 - **Consecuencias:** textos y reglas en `docs/fase-7/propuestas/pq-copy.md`. Las plantillas editables, los envíos masivos y las campañas siguen fuera del alcance. Si el abogado pide una línea de baja, se agrega al final de las tres (PQ-04). Cierra PQ-05.
 - **Alternativa(s) descartada(s):** una sola plantilla genérica; plantillas editables por negocio; más de tres plantillas.
+- **Decidió:** fundador.
+
+## D-031 · 22 oct 2026 · El cliente usa Supabase Auth con teléfono verificado por OTP desde el registro
+
+- **Decisión:**
+  - El cliente se autentica con **Supabase Auth, con su teléfono verificado por un código (OTP) desde el registro en C1**. El código sale por WhatsApp (principal) o SMS (respaldo) con SMS Masivos y el hook de Supabase (D-024). **Sustituye a D-025:** ya no hay sesión propia del cliente ni cookie `Path=/c/`.
+  - **Registro y recuperación son el mismo flujo.** Con sesión en el navegador, un segundo negocio **no pide código**: pide el nombre para ese negocio (D-019) y el consentimiento. Sin sesión, pide WhatsApp y código, y recupera todas las tarjetas del cliente.
+  - **Desaparece el estado «por confirmar»** (RF-APP-05 y MET-08).
+  - El `install_token` de iOS sigue y se canjea por la sesión de Supabase.
+  - Borrar la cuenta (D-026) también borra el usuario de Supabase.
+  - Dueño y cliente comparten `auth.users`, y se distinguen por el rol en `app_metadata`.
+- **Motivo (de Aarón):** un solo sistema de autenticación.
+- **Consecuencias:**
+  - Costos aceptados:
+    - un mensaje por cada registro (MXN 0.77 a 0.90 con SMS, antes de IVA, D-024);
+    - un paso más en C1, por lo que MET-03 puede bajar;
+    - el registro depende del proveedor: R-18 pasa a bloquear el registro de clientes nuevos.
+  - Sustituye a D-025. Aclara D-019 (sin `por_confirmar`), D-023 (la sesión del cliente es de Supabase Auth), D-024 (los límites de envío por teléfono cubren registros) y D-026 (borra también el usuario de Supabase).
+  - Hay que reescribir o alinear `docs/adr/003-sesion-cliente-y-codigo.md` y `docs/adr/004-proveedor-codigo.md` (el arquitecto lo hace en paralelo; no se editan desde esta decisión).
+  - Sin estado «por confirmar» se cae el diseño pendiente de C0 con «Aceptar» y «No soy yo»; R1 y C1 se rediseñan con el paso del código.
+  - Quedan **Por definir**, con pruebas: el canje del `install_token` de iOS por la sesión de Supabase y el hook sin proveedor nativo (PQ-30, PQ-31), y las demás pruebas del ADR-003 §3. Los límites de envío ya están aprobados (aclaración del 22 oct 2026 más abajo).
+  - El PRD pasa a v1.6; hay que alinear `brand/06-product-design/` (C1, R1, C0) cuando se retome el diseño.
+  - **Aclaración del 22 oct 2026 (aprobación de Aarón del ADR-003 reescrito):** se aprueban los límites y el costo del ADR-003 §2.8 y §4 (ver la aclaración de D-024): por teléfono 3 por hora y 10 al día, por IP 10 por hora, tope global de 400 al día con aviso a los 200, alerta de saldo de 300 mensajes y límite de SMS por hora de Supabase de 30 a 100. **Costo variable del piloto:** unos MXN 2,000 a 3,300 antes de IVA, una sola vez, con SMS como peor caso (alrededor de MXN 1.00 a 1.20 por cliente nuevo; el WhatsApp depende de la cotización, PQ-30). El rol vive en `app_metadata.rol` (`dueno` o `cliente`), que escribe solo el servidor; si se sustituye por un *custom access token hook* queda **Por definir** hasta el *spike*. Queda **Por definir** también el mecanismo del `install_token` de iOS (PQ-31) y la vigencia de 10 min del código en Supabase. El costo del hosting de pago sigue en PQ-29, pendiente de Aarón.
+- **Alternativa(s) descartada(s):**
+  - Inicio de sesión anónimo de Supabase (límite de 30 por hora por IP; con el wifi del local se agotaría).
+  - Social login para el cliente: no elimina el OTP, choca con la privacidad (D-018, RNF-PRI-01) y el OAuth dentro de la PWA de iOS es frágil.
+  - Mantener la sesión propia (D-025).
+  - Nota: el social login para el **dueño** queda como candidato de la v1, sin decidir.
 - **Decidió:** fundador.
