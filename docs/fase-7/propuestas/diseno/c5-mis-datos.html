@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>C5 Mis datos · borrador de propuesta (PQ-12)</title>
+<link rel="stylesheet" href="../../../../brand/04-design-system/tokens.css">
+<style>
+/* Borrador de propuesta (PQ-12). Solo tokens de tokens.css; sin colores nuevos. 390 px, voz de LealTab (no del negocio). */
+*{box-sizing:border-box}
+body{margin:0;background:var(--color-lino);font-family:var(--font-body);color:var(--color-noche)}
+h1,h2{font-family:var(--font-display);font-weight:800;font-stretch:75%;margin:0;line-height:1}
+h1{font-size:36px}h2{font-size:24px}
+.m{color:var(--color-gris-noche);margin:0;font-size:15px;line-height:1.45}
+.s{font-size:13px}
+.panel{background:var(--color-blanco-lino);border:var(--border-hair) solid var(--color-noche);border-radius:18px;padding:16px}
+.lbl{font:700 11px var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--color-gris-noche);margin:0 0 8px}
+
+button{font:700 16px var(--font-body);min-height:48px;padding:12px 16px;border-radius:14px;border:2px solid var(--color-noche);background:var(--color-bosque);color:var(--color-lino);box-shadow:4px 4px 0 var(--color-noche);cursor:pointer}
+button.sec{background:var(--color-blanco-lino);color:var(--color-noche);box-shadow:none}
+button.ghost{background:transparent;color:var(--color-noche);box-shadow:none;border-color:transparent}
+button.link{background:transparent;color:var(--color-bosque);box-shadow:none;border-color:transparent;text-decoration:underline;min-height:44px;padding:8px 4px;font-size:14px;text-align:left}
+button.trig{background:var(--color-blanco-lino);color:var(--color-rojo);border-color:var(--color-rojo);box-shadow:none}
+button.danger{background:var(--color-rojo);color:var(--color-lino);border-color:var(--color-noche)}
+button:disabled{background:var(--color-menta);color:var(--color-gris-noche);border-color:var(--color-gris-noche);box-shadow:none;cursor:default}
+button:focus-visible,summary:focus-visible,input:focus-visible,a:focus-visible{outline:none;box-shadow:var(--focus-ring)}
+button.danger:not(:disabled):focus-visible{box-shadow:4px 4px 0 var(--color-noche),var(--focus-ring)}
+input[type=checkbox]{width:24px;height:24px;flex:none;accent-color:var(--color-bosque)}
+.chk{display:flex;gap:12px;align-items:flex-start;min-height:44px;font-weight:600;font-size:14px;line-height:1.4}
+
+.e{display:inline-block;font:700 11px var(--font-body);padding:3px 8px;border-radius:6px;border:1px solid var(--color-noche);letter-spacing:.02em}
+.err{background:var(--color-rosa-claro);color:var(--color-rojo);border-color:var(--color-rojo)}
+.warn{background:var(--color-durazno-claro);color:var(--color-tostado);border-color:var(--color-tostado)}
+.info{background:var(--color-menta);color:var(--color-bosque);border-color:var(--color-bosque)}
+.box{border-radius:14px;padding:14px;font-size:14px;line-height:1.45;border:1.5px solid}
+.box.err{border-color:var(--color-rojo)}.box.warn{border-color:var(--color-tostado)}.box.info{border-color:var(--color-bosque)}
+.box p{margin:6px 0 0;color:var(--color-noche)}
+.ex{display:inline-block;background:var(--color-durazno-claro);color:var(--color-tostado);border:1px solid var(--color-tostado);font:700 11px var(--font-body);padding:3px 8px;border-radius:6px;letter-spacing:.06em;text-transform:uppercase}
+.pill{display:inline-flex;align-self:flex-start;align-items:center;gap:6px;font:700 12px var(--font-body);padding:6px 10px;border-radius:999px;border:1px solid var(--color-tostado);color:var(--color-tostado);background:var(--color-durazno-claro)}
+
+.legend{padding:24px 32px 0;display:flex;flex-direction:column;gap:8px;max-width:1200px}
+.wrap{display:flex;gap:28px;padding:28px 32px;flex-wrap:wrap;width:1780px}
+.col{width:390px}.col h3{font:600 13px var(--font-body);color:var(--color-gris-noche);margin:0 0 8px;min-height:34px}
+.ph{width:390px;min-height:780px;border:2px solid var(--color-noche);border-radius:28px;padding:22px 20px;display:flex;flex-direction:column;gap:14px;background:var(--color-lino);position:relative}
+.top{display:flex;justify-content:space-between;align-items:center}
+.brand{font:800 22px var(--font-display);font-stretch:75%;color:var(--color-bosque)}
+.logo{width:40px;height:40px;border-radius:10px;background:var(--color-noche);color:var(--color-lino);display:grid;place-items:center;font-weight:700;flex:none}
+.rowl{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--color-menta);font-size:14px}
+.rowl:last-child{border-bottom:0}
+.neg summary{display:flex;gap:12px;align-items:center;min-height:56px;cursor:pointer;list-style:none}
+.neg summary::-webkit-details-marker{display:none}
+.neg summary b{display:block}.neg summary span.m{font-size:13px}
+.neg .in{border-top:1px solid var(--color-menta);padding-top:6px;margin-top:6px}
+.sk{height:16px;border-radius:8px;background:var(--color-menta);border:1px solid var(--color-gris-noche)}
+.veil{position:absolute;inset:0;border-radius:26px;background:var(--color-noche);opacity:.4}
+.dlg{position:absolute;left:16px;right:16px;top:96px;background:var(--color-blanco-lino);border:2px solid var(--color-noche);border-radius:14px;box-shadow:var(--shadow-card);padding:20px;display:flex;flex-direction:column;gap:12px}
+.dlg ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px;font-size:14px}
+.dlg li{display:flex;justify-content:space-between;gap:8px;align-items:center;border-bottom:1px solid var(--color-menta);padding-bottom:6px}
+.acts{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}
+.sp{margin-top:auto}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<section class="legend">
+  <span class="ex">Borrador de propuesta · no aprobado · PQ-12</span>
+  <h1 style="font-size:40px">C5 Mis datos: ver y borrar la cuenta</h1>
+  <p class="m">Ruta <code>/c/cuenta</code> (RNF-PWA-03). Se entra desde el encabezado de C0 (C0·hdr). Habla con la voz de LealTab, no con la del negocio, porque es la cuenta del cliente (D-013, D-019). Diseñado para no depender del plazo de retención: la pantalla dice «se cierra ahora» y deja el plazo de eliminación definitiva como texto <b>Por definir (PQ-04)</b>. Copy en borrador para <code>lealtab-copywriter</code>.</p>
+  <p class="m">Accesibilidad: botones de 48 px, casilla con área de 44 px, el diálogo es <code>role="alertdialog"</code> con foco atrapado y Esc para cancelar, resultados en <code>aria-live="polite"</code>, estados con palabra y color, sin animaciones.</p>
+</section>
+
+<div class="wrap">
+
+  <!-- C0·hdr -->
+  <div class="col"><h3>C0·hdr · Cambio propuesto al encabezado de C0 (entrada a C5). Sustituye el nombre, que con D-019 ya no es global.</h3>
+    <div class="ph" style="min-height:300px">
+      <div class="top"><span class="brand">LealTab</span><button class="link" type="button">Mis datos ›</button></div>
+      <h1>Mis tarjetas</h1>
+      <div class="panel" style="display:flex;gap:14px;align-items:center;padding:12px 14px"><div class="logo">BV</div><div style="flex:1"><b>Barbería Vélez</b><p class="m s">Corte gratis · faltan 4</p></div><span style="font-size:20px;color:var(--color-gris-noche)">›</span></div>
+      <p class="m s" style="text-align:center">(El resto de C0 queda como en la pieza 05.)</p>
+    </div>
+  </div>
+
+  <!-- C5·1 -->
+  <div class="col"><h3>C5·1 · Mis datos (con tarjetas). Estado normal</h3>
+    <div class="ph">
+      <div class="top"><button class="link" type="button">‹ Mis tarjetas</button><span class="brand">LealTab</span></div>
+      <h1>Mis datos</h1>
+      <p class="m">Esto es lo que guardamos de ti. Es tu cuenta de LealTab y tus tarjetas en cada negocio.</p>
+      <div class="panel">
+        <p class="lbl">Tu cuenta</p>
+        <div class="rowl"><span>WhatsApp</span><b>993 123 4567</b></div>
+        <div class="rowl"><span>Número</span><span class="e info">Verificado</span></div>
+        <div class="rowl"><span>Tarjetas</span><b>3 negocios</b></div>
+      </div>
+      <div class="panel">
+        <p class="lbl">Lo que guarda cada negocio</p>
+        <details class="neg" open><summary><div class="logo">BV</div><div style="flex:1"><b>Barbería Vélez</b><span class="m">4 de 8 sellos</span></div><span aria-hidden="true">▾</span></summary>
+          <div class="in">
+            <div class="rowl"><span>Tu nombre aquí</span><b>Ana López</b></div>
+            <div class="rowl"><span>Te registraste</span><b>8 may 2026</b></div>
+            <div class="rowl"><span>Aceptaste su aviso</span><b>8 may 2026, 10:02</b></div>
+            <div class="rowl"><span>Última visita</span><b>12 oct</b></div>
+            <button class="link" type="button">Aviso de privacidad de Barbería Vélez</button>
+          </div></details>
+        <details class="neg"><summary><div class="logo">TM</div><div style="flex:1"><b>Tapioca Mía</b><span class="m">6 de 6 sellos</span></div><span aria-hidden="true">▸</span></summary></details>
+        <details class="neg"><summary><div class="logo">EL</div><div style="flex:1"><b>Estética Luna</b><span class="m">1 de 10 sellos</span></div><span aria-hidden="true">▸</span></summary></details>
+      </div>
+      <div class="panel">
+        <p class="lbl">Uso de la app</p>
+        <p class="m s">Registramos cuándo abres LealTab y si la instalaste, para mejorarla. Sin cookies. <span class="ex">Texto final: Por definir (PQ-18)</span></p>
+        <button class="link" type="button">Aviso de privacidad de LealTab</button>
+        <button class="link" type="button">¿Quieres corregir un dato o pedir otra cosa? Tus derechos ARCO</button>
+      </div>
+      <div class="panel">
+        <p class="lbl">Borrar mi cuenta</p>
+        <p class="m s">Se van tu número, tu nombre y tus sellos en todos tus negocios. No se puede deshacer.</p>
+        <button class="trig" type="button" style="width:100%;margin-top:10px">Borrar mi cuenta</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- C5·2 -->
+  <div class="col"><h3>C5·2 · Sin tarjetas (cuenta sin negocios activos). Borrar sigue disponible</h3>
+    <div class="ph">
+      <div class="top"><button class="link" type="button">‹ Mis tarjetas</button><span class="brand">LealTab</span></div>
+      <h1>Mis datos</h1>
+      <div class="panel">
+        <p class="lbl">Tu cuenta</p>
+        <div class="rowl"><span>WhatsApp</span><b>993 123 4567</b></div>
+        <div class="rowl"><span>Número</span><span class="e info">Verificado</span></div>
+        <div class="rowl"><span>Tarjetas</span><b>Ninguna</b></div>
+      </div>
+      <div class="panel" style="text-align:center"><h2>Aún no hay tarjetas en tu cuenta</h2><p class="m" style="margin-top:8px">Cuando te registres en un negocio con LealTab, aquí verás qué guarda de ti.</p></div>
+      <div class="panel">
+        <p class="lbl">Borrar mi cuenta</p>
+        <p class="m s">Se borra tu número de LealTab. No se puede deshacer.</p>
+        <button class="trig" type="button" style="width:100%;margin-top:10px">Borrar mi cuenta</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- C5·3 -->
+  <div class="col"><h3>C5·3 · Cargando</h3>
+    <div class="ph" aria-busy="true">
+      <div class="top"><button class="link" type="button">‹ Mis tarjetas</button><span class="brand">LealTab</span></div>
+      <h1>Mis datos</h1>
+      <p class="m" aria-live="polite">Cargando tus datos…</p>
+      <div class="panel" style="display:flex;flex-direction:column;gap:10px"><div class="sk" style="width:40%"></div><div class="sk"></div><div class="sk" style="width:70%"></div></div>
+      <div class="panel" style="display:flex;flex-direction:column;gap:10px"><div class="sk" style="width:55%"></div><div class="sk"></div><div class="sk"></div><div class="sk" style="width:60%"></div></div>
+    </div>
+  </div>
+
+  <!-- C5·4 -->
+  <div class="col"><h3>C5·4 · Error al cargar</h3>
+    <div class="ph">
+      <div class="top"><button class="link" type="button">‹ Mis tarjetas</button><span class="brand">LealTab</span></div>
+      <h1>Mis datos</h1>
+      <div class="box err" aria-live="polite"><span class="e err">Error</span><p>No pudimos cargar tus datos. No se cambió nada. Inténtalo de nuevo.</p></div>
+      <button type="button">Reintentar</button>
+    </div>
+  </div>
+
+  <!-- C5·5 -->
+  <div class="col"><h3>C5·5 · Sin conexión (se ve lo guardado; borrar queda desactivado)</h3>
+    <div class="ph">
+      <div class="top"><button class="link" type="button">‹ Mis tarjetas</button><span class="brand">LealTab</span></div>
+      <div class="pill" aria-live="polite">● Sin conexión</div>
+      <h1>Mis datos</h1>
+      <p class="m s">Actualizado: hoy 10:42</p>
+      <div class="panel">
+        <p class="lbl">Tu cuenta</p>
+        <div class="rowl"><span>WhatsApp</span><b>993 123 4567</b></div>
+        <div class="rowl"><span>Tarjetas</span><b>3 negocios</b></div>
+      </div>
+      <div class="panel">
+        <p class="lbl">Borrar mi cuenta</p>
+        <div class="box warn"><span class="e warn">Necesitas internet</span><p>Para borrar tu cuenta hace falta conexión. Inténtalo cuando vuelva el internet.</p></div>
+        <button type="button" disabled style="width:100%;margin-top:10px">Borrar mi cuenta</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- C5·6 -->
+  <div class="col"><h3>C5·6 · Confirmación (diálogo destructivo; botón desactivado hasta marcar la casilla)</h3>
+    <div class="ph" style="overflow:hidden">
+      <div class="top"><button class="link" type="button" tabindex="-1">‹ Mis tarjetas</button><span class="brand">LealTab</span></div>
+      <h1>Mis datos</h1>
+      <div class="panel"><p class="lbl">Tu cuenta</p><div class="rowl"><span>WhatsApp</span><b>993 123 4567</b></div></div>
+      <div class="veil" aria-hidden="true"></div>
+      <div class="dlg" role="alertdialog" aria-modal="true" aria-labelledby="d6t" aria-describedby="d6d">
+        <h2 id="d6t">¿Borrar tu cuenta de LealTab?</h2>
+        <p id="d6d" class="m" style="font-size:14px">Se borran tu número, tu nombre y tus sellos en estos 3 negocios. Esto no se puede deshacer.</p>
+        <ul>
+          <li><span>Barbería Vélez</span><b>4/8</b></li>
+          <li><span>Tapioca Mía</span><span class="e warn">Recompensa lista: se pierde</span></li>
+          <li><span>Estética Luna</span><b>1/10</b></li>
+        </ul>
+        <label class="chk"><input type="checkbox"> <span>Entiendo que pierdo mis sellos y mis recompensas.</span></label>
+        <div class="acts"><button class="ghost" type="button">Cancelar</button><button class="danger" type="button" disabled>Borrar mi cuenta</button></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- C5·6b -->
+  <div class="col"><h3>C5·6b · Confirmación con la casilla marcada (botón activo, rojo)</h3>
+    <div class="ph" style="overflow:hidden">
+      <div class="top"><button class="link" type="button" tabindex="-1">‹ Mis tarjetas</button><span class="brand">LealTab</span></div>
+      <h1>Mis datos</h1>
+      <div class="veil" aria-hidden="true"></div>
+      <div class="dlg" role="alertdialog" aria-modal="true" aria-labelledby="d6bt" aria-describedby="d6bd">
+        <h2 id="d6bt">¿Borrar tu cuenta de LealTab?</h2>
+        <p id="d6bd" class="m" style="font-size:14px">Se borran tu número, tu nombre y tus sellos en estos 3 negocios. Esto no se puede deshacer.</p>
+        <label class="chk"><input type="checkbox" checked> <span>Entiendo que pierdo mis sellos y mis recompensas.</span></label>
+        <div class="acts"><button class="ghost" type="button">Cancelar</button><button class="danger" type="button">Borrar mi cuenta</button></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- C5·7 -->
+  <div class="col"><h3>C5·7 · Borrando (el diálogo no se puede cerrar mientras trabaja)</h3>
+    <div class="ph" style="overflow:hidden" aria-busy="true">
+      <div class="top"><button class="link" type="button" tabindex="-1">‹ Mis tarjetas</button><span class="brand">LealTab</span></div>
+      <h1>Mis datos</h1>
+      <div class="veil" aria-hidden="true"></div>
+      <div class="dlg" role="alertdialog" aria-modal="true" aria-labelledby="d7t">
+        <h2 id="d7t">Borrando tu cuenta…</h2>
+        <p class="m" style="font-size:14px" aria-live="polite">Estamos cerrando tu cuenta. No cierres esta pantalla.</p>
+        <div class="acts"><button class="ghost" type="button" disabled>Cancelar</button><button class="danger" type="button" disabled aria-busy="true">Borrando…</button></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- C5·8 -->
+  <div class="col"><h3>C5·8 · Error al borrar (no se borró nada)</h3>
+    <div class="ph" style="overflow:hidden">
+      <div class="top"><button class="link" type="button" tabindex="-1">‹ Mis tarjetas</button><span class="brand">LealTab</span></div>
+      <h1>Mis datos</h1>
+      <div class="veil" aria-hidden="true"></div>
+      <div class="dlg" role="alertdialog" aria-modal="true" aria-labelledby="d8t">
+        <h2 id="d8t">¿Borrar tu cuenta de LealTab?</h2>
+        <div class="box err" aria-live="polite"><span class="e err">Error</span><p>No pudimos borrar tu cuenta. No se borró nada y tus tarjetas siguen igual. Inténtalo de nuevo.</p></div>
+        <div class="acts"><button class="ghost" type="button">Cancelar</button><button class="danger" type="button">Reintentar</button></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- C5·9 -->
+  <div class="col"><h3>C5·9 · Éxito: cuenta cerrada (ya sin sesión, sin tarjetas ni datos en el teléfono)</h3>
+    <div class="ph">
+      <div class="top"><span class="brand">LealTab</span></div>
+      <div class="box info" aria-live="polite"><span class="e info">Cuenta cerrada</span><p>Listo: cerramos tu cuenta. Ya no apareces con tu nombre ni tu número en ninguno de tus negocios.</p></div>
+      <h1>Hasta pronto</h1>
+      <p class="m">Si algún día vuelves a un negocio con LealTab, empiezas de cero.</p>
+      <div class="panel"><p class="lbl">Y tus datos</p><p class="m s">Se eliminan de forma definitiva <b>{plazo y excepciones: Por definir (PQ-04)}</b>, según el aviso de privacidad. Mientras tanto no se usan para nada.</p><button class="link" type="button">Aviso de privacidad</button></div>
+      <button type="button" class="sp">Entendido</button>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

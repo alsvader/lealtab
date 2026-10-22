@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>N1 Cuenta con contraseña opcional · borrador de propuesta (PQ-10)</title>
+<link rel="stylesheet" href="../../../../brand/04-design-system/tokens.css">
+<style>
+/* Borrador de propuesta (PQ-10). Solo tokens de tokens.css; sin colores nuevos. */
+*{box-sizing:border-box}
+body{margin:0;background:var(--color-lino);font-family:var(--font-body);color:var(--color-noche)}
+h1,h2{font-family:var(--font-display);font-weight:800;font-stretch:75%;margin:0;line-height:1}
+h1{font-size:40px}h2{font-size:28px}
+.m{color:var(--color-gris-noche);margin:0;font-size:14px;line-height:1.45}
+.s{font-size:13px}
+.panel{background:var(--color-blanco-lino);border:var(--border-hair) solid var(--color-noche);border-radius:16px;padding:20px}
+
+/* Botones: 44 px mínimo, foco visible */
+button{font:700 15px var(--font-body);min-height:44px;padding:12px 18px;border-radius:12px;border:2px solid var(--color-noche);background:var(--color-bosque);color:var(--color-lino);box-shadow:3px 3px 0 var(--color-noche);cursor:pointer}
+button.sec{background:var(--color-blanco-lino);color:var(--color-noche);box-shadow:none}
+button.wa{background:var(--color-blanco-lino);color:var(--color-bosque);box-shadow:none}
+button.ghost{background:transparent;color:var(--color-bosque);box-shadow:none;border-color:transparent;text-decoration:underline}
+button:disabled,button.dis{background:var(--color-menta);color:var(--color-gris-noche);box-shadow:none;cursor:default}
+button.ghost:disabled{background:transparent;text-decoration:none}
+button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:none;box-shadow:var(--focus-ring)}
+button:not(.sec):not(.ghost):not(.wa):not(:disabled):focus-visible{box-shadow:3px 3px 0 var(--color-noche),var(--focus-ring)}
+
+/* Campos: 16 px (--font-size-input), label visible */
+label{display:flex;flex-direction:column;gap:6px;font-weight:600;font-size:14px}
+input,select{font:var(--font-size-input) var(--font-body);min-height:48px;padding:12px;border:2px solid var(--color-noche);border-radius:12px;background:var(--color-blanco-lino);width:100%;color:var(--color-noche)}
+input.bad{border-color:var(--color-rojo)}
+input.foc{border-width:2.5px;box-shadow:var(--focus-ring)}
+input:disabled{background:var(--color-menta);color:var(--color-gris-noche)}
+input[type=checkbox]{width:24px;min-height:24px;height:24px;padding:0;flex:none;accent-color:var(--color-bosque)}
+.chk{flex-direction:row;align-items:flex-start;gap:12px;min-height:44px;font-weight:600;font-size:14px}
+.hint{font-weight:400;font-size:12px;color:var(--color-gris-noche)}
+.err-t{color:var(--color-rojo);font-size:13px;font-weight:700;margin:0}
+.pw{display:flex;gap:8px;align-items:stretch}.pw input{flex:1}.pw button{flex:none}
+
+/* Estados: siempre palabra + color */
+.e{display:inline-block;font:700 11px var(--font-body);padding:3px 8px;border-radius:6px;border:1px solid var(--color-noche);letter-spacing:.02em}
+.err{background:var(--color-rosa-claro);color:var(--color-rojo);border-color:var(--color-rojo)}
+.warn{background:var(--color-durazno-claro);color:var(--color-tostado);border-color:var(--color-tostado)}
+.info{background:var(--color-menta);color:var(--color-bosque);border-color:var(--color-bosque)}
+.box{border-radius:14px;padding:14px;font-size:14px;line-height:1.45;border:1.5px solid}
+.box.err{border-color:var(--color-rojo)}.box.warn{border-color:var(--color-tostado)}.box.info{border-color:var(--color-bosque)}
+.box p{margin:6px 0 0;color:var(--color-noche)}
+.ex{display:inline-block;background:var(--color-durazno-claro);color:var(--color-tostado);border:1px solid var(--color-tostado);font:700 11px var(--font-body);padding:3px 8px;border-radius:6px;letter-spacing:.06em;text-transform:uppercase}
+
+/* Pestañas Con código / Con contraseña */
+.seg{display:flex;background:var(--color-menta);border-radius:12px;padding:4px;gap:4px}
+.seg button{flex:1;box-shadow:none;border:0;background:transparent;color:var(--color-noche);font-weight:600;border-radius:9px}
+.seg button[aria-selected=true]{background:var(--color-blanco-lino);border:var(--border-hair) solid var(--color-noche)}
+
+/* Tablero */
+.legend{padding:24px 28px 0;display:flex;flex-direction:column;gap:8px;max-width:1280px}
+.wrap{display:flex;flex-wrap:wrap;gap:28px;padding:28px;width:1432px}
+.col{width:440px}.col h3{font:600 13px var(--font-body);color:var(--color-gris-noche);margin:0 0 8px}
+.card{background:var(--color-blanco-lino);border:2px solid var(--color-noche);border-radius:20px;padding:22px;display:flex;flex-direction:column;gap:14px;min-height:430px}
+.hd{display:flex;justify-content:space-between;align-items:center}
+.lg{font:800 24px var(--font-display);font-stretch:75%;color:var(--color-bosque)}
+.sp{margin-top:auto}
+.links{display:flex;flex-direction:column;align-items:flex-start}
+
+/* Marco 1280 de N1·1 (misma estructura que alta/n1-cuenta.html) */
+.frame{width:1280px;height:820px;display:flex;flex-direction:column;border:2px solid var(--color-noche);border-radius:14px;overflow:hidden;background:var(--color-lino)}
+.bar{display:flex;justify-content:space-between;align-items:center;padding:14px 32px;border-bottom:1.5px solid var(--color-noche);background:var(--color-blanco-lino)}
+.bar .lg{font-size:26px}
+.bar .r{display:flex;gap:10px}
+.steps{display:flex;gap:8px;font-size:13px;font-weight:600}.steps span{padding:6px 12px;border-radius:999px;border:1.5px solid var(--color-noche)}.steps .on{background:var(--color-noche);color:var(--color-lino)}
+.body{flex:1;display:flex;gap:40px;padding:32px 48px}
+.form{flex:1;display:flex;flex-direction:column;gap:14px;max-width:520px}
+.trust{display:flex;flex-direction:column;gap:10px;font-size:14px}.trust div::before{content:"✓ ";color:var(--color-bosque);font-weight:800}
+details.pwd{border:var(--border-hair) solid var(--color-noche);border-radius:12px;background:var(--color-blanco-lino);padding:0 14px}
+details.pwd summary{min-height:44px;display:flex;align-items:center;font-weight:700;font-size:14px;cursor:pointer}
+details.pwd[open] summary{border-bottom:1px solid var(--color-menta)}
+details.pwd .in{display:flex;flex-direction:column;gap:10px;padding:12px 0 14px}
+.row2{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--color-menta);font-size:14px}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<section class="legend">
+  <span class="ex">Borrador de propuesta · no aprobado · PQ-10</span>
+  <h1>N1 Cuenta: entrar con código o con contraseña, y restablecerla</h1>
+  <p class="m">Extiende el N1 aprobado (<code>brand/06-product-design/alta/n1-cuenta.html</code>) sin cambiarlo: el alta sigue igual y la contraseña es opcional y va plegada. Copy en borrador para que <code>lealtab-copywriter</code> lo afine. Números marcados [SUPUESTO] por confirmar con Aarón y el arquitecto: contraseña de 8 a 72 caracteres, código de 6 dígitos con vigencia de 10 minutos (D-005), reenvío cada 60 s, pausa de 15 min tras 5 intentos fallidos de contraseña.</p>
+  <p class="m">Accesibilidad: objetivos de 44 px, campos de 16 px (<code>--font-size-input</code>), cada estado con palabra y color, errores ligados con <code>aria-describedby</code>, mensajes de estado en <code>aria-live="polite"</code>, sin animaciones (respeta <code>prefers-reduced-motion</code>).</p>
+</section>
+
+<div class="wrap">
+
+  <!-- N1·1 marco completo -->
+  <div style="width:100%">
+    <h3 style="font:600 13px var(--font-body);color:var(--color-gris-noche);margin:0 0 8px">N1·1 · Crear cuenta (estado normal, con la contraseña plegada). Cambios sobre el aprobado: botón «Entrar» en la barra, sección plegada de contraseña y el texto bajo el botón.</h3>
+    <div class="frame">
+      <div class="bar"><div class="lg">LealTab</div>
+        <div class="steps"><span class="on">1. Cuenta</span><span>2. Tu negocio</span><span>3. Tu tarjeta</span><span>4. QR de mostrador</span></div>
+        <div class="r"><button class="sec" type="button">¿Ya tienes cuenta? Entrar</button><button class="wa" type="button">Ayuda por WhatsApp</button></div>
+      </div>
+      <div class="body">
+        <div class="form">
+          <h1 style="font-size:44px">Empieza gratis hoy</h1>
+          <p class="m">Crea tu cuenta y tu tarjeta en minutos. Sin llamada de ventas y sin tarjeta de crédito.</p>
+          <label>Tu nombre<input autocomplete="name" value="Ricardo Vélez"></label>
+          <label>Correo<input type="email" inputmode="email" autocomplete="email" value="ricardo@barberiavelez.mx"></label>
+          <label>WhatsApp del negocio <span class="hint">Para soporte y avisos de tu cuenta</span><input type="tel" inputmode="tel" autocomplete="tel" value="993 410 2288"></label>
+          <details class="pwd"><summary>Crear también una contraseña (opcional)</summary><div class="in"><p class="m s">Sin contraseña, entras siempre con un código por correo.</p></div></details>
+          <button type="button">Crear cuenta</button>
+          <p class="m">Te enviamos un código a tu correo para confirmarlo y entrar. Al continuar aceptas los términos y el aviso de privacidad.</p>
+        </div>
+        <div class="panel" style="width:420px;align-self:flex-start;display:flex;flex-direction:column;gap:14px"><h2>Tu mes de prueba incluye</h2><div class="trust"><div>Un mes completo gratis, sin tarjeta de crédito</div><div>Precios públicos: desde $299 al mes (+IVA)</div><div>Tus datos son tuyos: exporta tus clientes en CSV cuando quieras</div><div>Si no continúas, tu cuenta se pausa y conservas tu exportación</div><div>Soporte por WhatsApp con una persona real</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- N1·1b -->
+  <div class="col"><h3>N1·1b · Contraseña opcional desplegada, con error de longitud</h3>
+    <div class="card">
+      <div class="hd"><span class="lg">LealTab</span><span class="m s">Paso 1 de 4 · Cuenta</span></div>
+      <label>Correo<input type="email" inputmode="email" autocomplete="email" value="ricardo@barberiavelez.mx"></label>
+      <details class="pwd" open><summary>Crear también una contraseña (opcional)</summary>
+        <div class="in">
+          <label for="p1b">Contraseña <span class="hint">Mínimo 8 caracteres. Una frase larga que recuerdes funciona mejor.</span></label>
+          <div class="pw"><input id="p1b" class="bad" type="password" autocomplete="new-password" aria-describedby="p1b-e" value="corta12"><button type="button" class="sec" aria-pressed="false" aria-label="Mostrar contraseña">Mostrar</button></div>
+          <p id="p1b-e" class="err-t">Error: usa al menos 8 caracteres (llevas 7).</p>
+        </div>
+      </details>
+      <button type="button" class="sp">Crear cuenta</button>
+      <p class="m s">Con 8 o más caracteres, el campo muestra «Listo: contraseña válida» en bosque sobre menta. Dejarla vacía es válido.</p>
+    </div>
+  </div>
+
+  <!-- N1·2 -->
+  <div class="col"><h3>N1·2 · Entrar con código (vacío)</h3>
+    <div class="card">
+      <div class="hd"><span class="lg">LealTab</span><button class="wa" type="button">Ayuda por WhatsApp</button></div>
+      <h2>Entra a tu panel</h2>
+      <div class="seg" role="tablist" aria-label="Cómo quieres entrar"><button type="button" role="tab" aria-selected="true">Con código</button><button type="button" role="tab" aria-selected="false">Con contraseña</button></div>
+      <label for="c2">Correo<input id="c2" type="email" inputmode="email" autocomplete="email" placeholder="tu@correo.com"></label>
+      <button type="button">Enviar código</button>
+      <p class="m s">Te mandamos un código de 6 dígitos que dura 10 minutos.</p>
+      <div class="links sp"><button class="ghost" type="button">¿No tienes cuenta? Empieza gratis</button></div>
+    </div>
+  </div>
+
+  <!-- N1·3 -->
+  <div class="col"><h3>N1·3 · Escribe el código (código enviado)</h3>
+    <div class="card">
+      <div class="hd"><span class="lg">LealTab</span></div>
+      <h2>Revisa tu correo</h2>
+      <p class="m">Si ese correo tiene cuenta, te enviamos un código de 6 dígitos a <b>ricardo@barberiavelez.mx</b>. Dura 10 minutos.</p>
+      <label for="c3">Código de 6 dígitos<input id="c3" inputmode="numeric" autocomplete="one-time-code" maxlength="7" placeholder="000 000"></label>
+      <button type="button">Entrar</button>
+      <button class="ghost" type="button" disabled aria-live="polite">Pedir otro código en 0:42</button>
+      <button class="ghost" type="button">Cambiar correo</button>
+      <p class="m s sp">¿No llega? Revisa tu carpeta de spam o escríbenos por WhatsApp.</p>
+    </div>
+  </div>
+
+  <!-- N1·4 -->
+  <div class="col"><h3>N1·4 · Código incorrecto (el vencido es el L1 aprobado)</h3>
+    <div class="card">
+      <div class="hd"><span class="lg">LealTab</span></div>
+      <h2>Revisa tu correo</h2>
+      <label for="c4">Código de 6 dígitos<input id="c4" class="bad" inputmode="numeric" autocomplete="one-time-code" aria-describedby="c4-e" value="482 913"></label>
+      <div id="c4-e" class="box err" aria-live="polite"><span class="e err">Código incorrecto</span><p>Ese código no coincide. Revisa los 6 dígitos o pide uno nuevo. Después de 5 intentos fallidos, el código deja de servir.</p></div>
+      <button type="button">Entrar</button>
+      <button class="ghost" type="button">Pedir otro código</button>
+    </div>
+  </div>
+
+  <!-- N1·5 -->
+  <div class="col"><h3>N1·5 · Entrar con contraseña (con foco en el campo)</h3>
+    <div class="card">
+      <div class="hd"><span class="lg">LealTab</span><button class="wa" type="button">Ayuda por WhatsApp</button></div>
+      <h2>Entra a tu panel</h2>
+      <div class="seg" role="tablist" aria-label="Cómo quieres entrar"><button type="button" role="tab" aria-selected="false">Con código</button><button type="button" role="tab" aria-selected="true">Con contraseña</button></div>
+      <label for="c5e">Correo<input id="c5e" type="email" inputmode="email" autocomplete="username" value="ricardo@barberiavelez.mx"></label>
+      <label for="c5p">Contraseña</label>
+      <div class="pw" style="margin-top:-8px"><input id="c5p" class="foc" type="password" autocomplete="current-password" value="••••••••••"><button type="button" class="sec" aria-pressed="false" aria-label="Mostrar contraseña">Mostrar</button></div>
+      <button type="button">Entrar</button>
+      <div class="links sp"><button class="ghost" type="button">¿Olvidaste tu contraseña?</button><button class="ghost" type="button">Mejor entro con un código</button></div>
+    </div>
+  </div>
+
+  <!-- N1·6 -->
+  <div class="col"><h3>N1·6 · Error de correo o contraseña (mensaje genérico)</h3>
+    <div class="card">
+      <div class="hd"><span class="lg">LealTab</span></div>
+      <h2>Entra a tu panel</h2>
+      <div class="seg" role="tablist" aria-label="Cómo quieres entrar"><button type="button" role="tab" aria-selected="false">Con código</button><button type="button" role="tab" aria-selected="true">Con contraseña</button></div>
+      <label for="c6e">Correo<input id="c6e" class="bad" type="email" autocomplete="username" aria-describedby="c6-e" value="ricardo@barberiavelez.mx"></label>
+      <label for="c6p">Contraseña</label>
+      <div class="pw" style="margin-top:-8px"><input id="c6p" class="bad" type="password" autocomplete="current-password" aria-describedby="c6-e" value="••••••••"><button type="button" class="sec" aria-pressed="false" aria-label="Mostrar contraseña">Mostrar</button></div>
+      <div id="c6-e" class="box err" aria-live="polite"><span class="e err">Error</span><p>Correo o contraseña incorrectos. Revísalos o entra con un código. <b>Te quedan 2 intentos</b> antes de pausar la contraseña 15 minutos.</p></div>
+      <button type="button">Entrar</button>
+      <div class="links"><button class="ghost" type="button">¿Olvidaste tu contraseña?</button></div>
+      <p class="m s">El aviso de intentos restantes aparece desde el 3.er error. Antes solo dice «Correo o contraseña incorrectos».</p>
+    </div>
+  </div>
+
+  <!-- N1·7 -->
+  <div class="col"><h3>N1·7 · Contraseña en pausa por intentos fallidos</h3>
+    <div class="card">
+      <div class="hd"><span class="lg">LealTab</span></div>
+      <h2>Entra a tu panel</h2>
+      <div id="c7-e" class="box warn" aria-live="polite"><span class="e warn">Contraseña en pausa</span><p>Fallaste 5 veces. Puedes volver a intentarla a las <b>18:20</b>. Mientras tanto, entra con un código: llega a tu correo en segundos.</p></div>
+      <label for="c7e">Correo<input id="c7e" type="email" value="ricardo@barberiavelez.mx" disabled></label>
+      <label for="c7p">Contraseña</label>
+      <div class="pw" style="margin-top:-8px"><input id="c7p" type="password" disabled value="••••••••"><button type="button" class="sec" disabled>Mostrar</button></div>
+      <button type="button">Entrar con un código</button>
+      <button class="wa sp" type="button">Ayuda por WhatsApp</button>
+      <p class="m s">La pausa solo afecta a la contraseña: el código sigue disponible y las sesiones abiertas (como el mostrador) no se cierran.</p>
+    </div>
+  </div>
+
+  <!-- N1·8 -->
+  <div class="col"><h3>N1·8 · Cargando (entrando)</h3>
+    <div class="card" aria-busy="true">
+      <div class="hd"><span class="lg">LealTab</span></div>
+      <h2>Entra a tu panel</h2>
+      <div class="seg" role="tablist" aria-label="Cómo quieres entrar"><button type="button" role="tab" aria-selected="false" disabled>Con código</button><button type="button" role="tab" aria-selected="true" disabled>Con contraseña</button></div>
+      <label for="c8e">Correo<input id="c8e" type="email" value="ricardo@barberiavelez.mx" disabled></label>
+      <label for="c8p">Contraseña</label>
+      <div class="pw" style="margin-top:-8px"><input id="c8p" type="password" disabled value="••••••••••"><button type="button" class="sec" disabled>Mostrar</button></div>
+      <button type="button" disabled aria-busy="true">Entrando…</button>
+      <p class="m s" aria-live="polite">Entrando a tu panel…</p>
+      <p class="m s sp">Mismo patrón para «Enviando código…» y «Guardando contraseña…». Sin animaciones: el estado se dice con palabras.</p>
+    </div>
+  </div>
+
+  <!-- N1·9 -->
+  <div class="col"><h3>N1·9 · Olvidé mi contraseña (paso 1: correo)</h3>
+    <div class="card">
+      <div class="hd"><span class="lg">LealTab</span></div>
+      <h2>Crea una contraseña nueva</h2>
+      <p class="m">Te mandamos un código de 6 dígitos al correo de tu cuenta. Sirve también si todavía no tienes contraseña.</p>
+      <label for="c9">Correo<input id="c9" type="email" inputmode="email" autocomplete="username" value="ricardo@barberiavelez.mx"></label>
+      <button type="button">Enviar código</button>
+      <button class="ghost" type="button">Volver a entrar</button>
+      <p class="m s sp">Pasa igual si el correo no tiene cuenta: la pantalla siguiente dice «Si ese correo tiene cuenta…», para no revelar quién está registrado.</p>
+    </div>
+  </div>
+
+  <!-- N1·10 -->
+  <div class="col"><h3>N1·10 · Código y contraseña nueva (paso 2)</h3>
+    <div class="card">
+      <div class="hd"><span class="lg">LealTab</span></div>
+      <h2>Revisa tu correo</h2>
+      <p class="m">Si ese correo tiene cuenta, te enviamos un código a <b>ricardo@barberiavelez.mx</b>. Dura 10 minutos.</p>
+      <label for="c10c">Código de 6 dígitos<input id="c10c" inputmode="numeric" autocomplete="one-time-code" value="305 771"></label>
+      <label for="c10p">Contraseña nueva <span class="hint">Mínimo 8 caracteres.</span></label>
+      <div class="pw" style="margin-top:-8px"><input id="c10p" type="password" autocomplete="new-password" value="mi barberia 2026"><button type="button" class="sec" aria-pressed="false" aria-label="Mostrar contraseña">Mostrar</button></div>
+      <label class="chk"><input type="checkbox"> <span>Cerrar sesión en mis otros dispositivos <span class="hint" style="display:block">Si no la marcas, el mostrador sigue abierto.</span></span></label>
+      <button type="button">Guardar contraseña</button>
+      <button class="ghost" type="button" disabled>Pedir otro código en 0:51</button>
+    </div>
+  </div>
+
+  <!-- N1·11a -->
+  <div class="col"><h3>N1·11a · Contraseña muy corta (error en línea)</h3>
+    <div class="card">
+      <div class="hd"><span class="lg">LealTab</span></div>
+      <h2>Revisa tu correo</h2>
+      <label for="c11c">Código de 6 dígitos<input id="c11c" inputmode="numeric" autocomplete="one-time-code" value="305 771"></label>
+      <label for="c11p">Contraseña nueva</label>
+      <div class="pw" style="margin-top:-8px"><input id="c11p" class="bad" type="password" autocomplete="new-password" aria-describedby="c11-e" value="barber"><button type="button" class="sec" aria-pressed="false" aria-label="Mostrar contraseña">Mostrar</button></div>
+      <p id="c11-e" class="err-t">Error: usa al menos 8 caracteres (llevas 6).</p>
+      <button type="button">Guardar contraseña</button>
+      <p class="m s sp">Sin reglas de mayúsculas, números o símbolos. Solo largo mínimo. Se puede pegar desde un gestor de contraseñas.</p>
+    </div>
+  </div>
+
+  <!-- N1·11b -->
+  <div class="col"><h3>N1·11b · Código vencido al restablecer (mismo patrón que L1)</h3>
+    <div class="card">
+      <div class="hd"><span class="lg">LealTab</span></div>
+      <h2>Revisa tu correo</h2>
+      <label for="c11bc">Código de 6 dígitos<input id="c11bc" class="bad" inputmode="numeric" autocomplete="one-time-code" aria-describedby="c11b-e" value="482 913"></label>
+      <div id="c11b-e" class="box err" aria-live="polite"><span class="e err">Código vencido</span><p>Este código ya expiró (duran 10 minutos). Te mandamos uno nuevo a ricardo@barberiavelez.mx.</p></div>
+      <button type="button">Enviar código nuevo</button>
+      <button class="wa sp" type="button">Ayuda por WhatsApp</button>
+    </div>
+  </div>
+
+  <!-- N1·12 -->
+  <div class="col"><h3>N1·12 · Éxito: contraseña guardada y sesión iniciada</h3>
+    <div class="card">
+      <div class="hd"><span class="lg">LealTab</span></div>
+      <div class="box info" aria-live="polite"><span class="e info">Contraseña guardada</span><p>Listo, ya entraste. La próxima vez puedes entrar con tu contraseña o con un código.</p></div>
+      <h2>Bienvenido de nuevo, Ricardo</h2>
+      <button type="button">Ir a mi panel</button>
+      <p class="m s sp">Lleva a N0 Inicio. Si el alta quedó a medias, lleva al paso pendiente (N2, N3 o N4). El mismo cierre aplica al entrar con código o con contraseña.</p>
+    </div>
+  </div>
+
+  <!-- N1·13 -->
+  <div class="col"><h3>N1·13 · Sin conexión al entrar</h3>
+    <div class="card">
+      <div class="hd"><span class="lg">LealTab</span></div>
+      <h2>Entra a tu panel</h2>
+      <div class="box warn" aria-live="polite"><span class="e warn">Sin conexión</span><p>Para entrar necesitas internet. Revisa tu conexión y vuelve a intentar. Si el mostrador ya tenía la sesión abierta, sigue registrando sellos sin conexión.</p></div>
+      <button type="button">Reintentar</button>
+      <button class="wa sp" type="button">Ayuda por WhatsApp</button>
+    </div>
+  </div>
+
+  <!-- N8 · Acceso -->
+  <div class="col" style="width:620px"><h3>N8 · Tus datos → Acceso (propuesta de fila nueva; crear o cambiar la contraseña con el mismo flujo de código)</h3>
+    <div class="card" style="min-height:0">
+      <p class="m" style="font:700 11px var(--font-body);letter-spacing:.12em;text-transform:uppercase">Acceso a tu panel</p>
+      <div class="row2"><span>Correo</span><b>ricardo@barberiavelez.mx</b></div>
+      <div class="row2"><span>Contraseña<br><span class="hint">Aún no tienes: entras con código.</span></span><button class="sec" type="button">Crear contraseña</button></div>
+      <p class="m s">Con contraseña creada:</p>
+      <div class="row2"><span>Contraseña<br><span class="hint"><span class="e info">Activa</span> creada el 21 oct 2026</span></span><button class="sec" type="button">Cambiar contraseña</button></div>
+      <p class="m s">Ambos botones envían un código al correo y abren el paso 2 (N1·10), así no hace falta pedir la contraseña actual. No hay «Quitar contraseña» en el MVP.</p>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
