@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>R1 segundo negocio y recuperación (D-031) · propuesta</title>
+<link rel="stylesheet" href="../../04-design-system/tokens.css">
+<style>
+/* Propuesta D-031. Solo tokens de tokens.css; sin colores nuevos. 390 px. Copy en borrador para lealtab-copywriter. */
+*{box-sizing:border-box}
+body{margin:0;background:var(--color-lino);font-family:var(--font-body);color:var(--color-noche)}
+h1,h2{font-family:var(--font-display);font-weight:800;font-stretch:75%;margin:0;line-height:1}
+h1{font-size:34px;margin-top:4px}h2{font-size:24px}
+.m{color:var(--color-gris-noche);margin:0;font-size:15px;line-height:1.45}.s{font-size:13px}
+.panel{background:var(--color-blanco-lino);border:var(--border-hair) solid var(--color-noche);border-radius:18px;padding:16px}
+.legend{padding:24px 32px 0;display:flex;flex-direction:column;gap:8px;max-width:1300px}
+.wrap{display:flex;gap:28px;padding:28px 32px;flex-wrap:wrap;width:1708px}
+.sech{flex-basis:100%;margin:10px 0 -6px;font:700 12px var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--color-gris-noche);border-bottom:var(--border-hair) solid var(--color-noche);padding-bottom:6px}
+.col{width:390px}.col h3{font:600 13px var(--font-body);color:var(--color-gris-noche);margin:0 0 8px;min-height:52px}
+.col h3 .ca{display:block;font-weight:700;color:var(--color-bosque);font-size:12px;margin-top:2px}
+.ph{width:390px;min-height:780px;background:var(--color-lino);border:2px solid var(--color-noche);border-radius:28px;padding:22px 20px;display:flex;flex-direction:column;gap:14px}
+.biz{display:flex;gap:12px;align-items:center}.biz span{display:block;font-size:12px;color:var(--color-gris-noche)}
+.logo{width:44px;height:44px;border-radius:12px;background:var(--color-noche);color:var(--color-lino);display:grid;place-items:center;font-weight:700;flex:none}
+.brand{font:800 22px var(--font-display);font-stretch:75%;color:var(--color-bosque)}
+label{display:flex;flex-direction:column;gap:6px;font-weight:600;font-size:14px}
+input{font-size:var(--font-size-input);font-family:var(--font-body);min-height:48px;padding:12px 14px;border:var(--border-product) solid var(--color-noche);border-radius:12px;background:var(--color-blanco-lino);color:var(--color-noche);width:100%}
+input:disabled,input[readonly]{background:var(--color-lino);color:var(--color-gris-noche)}
+input.code{text-align:center;letter-spacing:.35em;font-weight:700;font-variant-numeric:tabular-nums}
+.tel{display:flex;gap:8px}.tel input{flex:1;width:auto}.tel .pre{display:grid;place-items:center;min-width:64px;border:var(--border-product) solid var(--color-noche);border-radius:12px;background:var(--color-menta);font-weight:700;color:var(--color-bosque)}
+.priv{background:var(--color-blanco-lino);border:var(--border-hair) solid var(--color-gris-noche);border-radius:12px;padding:12px;font-size:13px;line-height:1.45}.priv a{color:var(--color-bosque);font-weight:700;text-decoration:underline;display:block;margin-top:4px;min-height:24px}
+.chk{flex-direction:row;align-items:flex-start;gap:12px;min-height:44px;font-size:14px;line-height:1.4}
+input[type=checkbox]{width:24px;height:24px;min-height:24px;padding:0;flex:none;accent-color:var(--color-bosque)}
+button{font:700 16px var(--font-body);min-height:48px;padding:12px 16px;border-radius:14px;border:2px solid var(--color-noche);background:var(--color-bosque);color:var(--color-lino);box-shadow:4px 4px 0 var(--color-noche);cursor:pointer}
+button.sec{background:var(--color-blanco-lino);color:var(--color-noche);box-shadow:none}
+button.wa{background:var(--color-blanco-lino);color:var(--color-bosque);box-shadow:none}
+button.link{background:transparent;color:var(--color-bosque);box-shadow:none;border-color:transparent;text-decoration:underline;min-height:44px;padding:8px 4px;font-size:14px;text-align:left}
+button:disabled{background:var(--color-menta);color:var(--color-gris-noche);border-color:var(--color-gris-noche);box-shadow:none;cursor:default}
+button.link:disabled{background:transparent;border-color:transparent}
+button:focus-visible,input:focus-visible,a:focus-visible{outline:none;box-shadow:var(--focus-ring)}
+.e{display:inline-block;font:700 11px var(--font-body);padding:3px 8px;border-radius:6px;border:1px solid var(--color-noche);letter-spacing:.02em}
+.err{background:var(--color-rosa-claro);color:var(--color-rojo);border-color:var(--color-rojo)}
+.warn{background:var(--color-durazno-claro);color:var(--color-tostado);border-color:var(--color-tostado)}
+.info{background:var(--color-menta);color:var(--color-bosque);border-color:var(--color-bosque)}
+.box{border-radius:14px;padding:14px;font-size:14px;line-height:1.45;border:1.5px solid}
+.box.err{border-color:var(--color-rojo)}.box.warn{border-color:var(--color-tostado)}.box.info{border-color:var(--color-bosque)}
+.box p{margin:6px 0 0;color:var(--color-noche)}
+.ex{display:inline-block;background:var(--color-durazno-claro);color:var(--color-tostado);border:1px solid var(--color-tostado);font:700 11px var(--font-body);padding:3px 8px;border-radius:6px;letter-spacing:.06em;text-transform:uppercase}
+.pill{display:inline-flex;align-self:flex-start;align-items:center;gap:6px;font:700 12px var(--font-body);padding:6px 10px;border-radius:999px;border:1px solid var(--color-tostado);color:var(--color-tostado);background:var(--color-durazno-claro)}
+.tmr{display:inline-flex;align-self:flex-start;font:700 13px var(--font-body);padding:6px 12px;border-radius:999px;border:1px solid var(--color-gris-noche);background:var(--color-blanco-lino);color:var(--color-noche)}
+.stp{display:flex;align-items:center;gap:12px;font-size:13px}.stp .bars{display:flex;gap:6px;flex:1}.stp i{flex:1;height:6px;border-radius:3px;background:var(--color-menta)}.stp i.on{background:var(--color-bosque)}
+.top{display:flex;justify-content:space-between;align-items:center}
+.ok{background:var(--color-menta);color:var(--color-bosque);font-weight:700;padding:10px 14px;border-radius:999px;align-self:flex-start}
+.note{background:var(--color-menta);border-radius:12px;padding:10px 12px;font-size:13px}
+.row3{display:flex;gap:14px;align-items:center;padding:12px 14px}
+.hecho{margin-top:auto;text-align:center;font-size:12px;color:var(--color-gris-noche);padding-top:8px}
+.rs{display:flex;flex-direction:column;gap:2px;align-items:flex-start}
+.ro{display:flex;justify-content:space-between;align-items:center;gap:10px;min-height:48px;padding:10px 14px;border:2px solid var(--color-noche);border-radius:12px;background:var(--color-lino);color:var(--color-gris-noche)}
+ol.fl{margin:0;padding-left:20px;line-height:1.7;font-size:14px}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<section class="legend">
+  <span class="ex">Propuesta D-031 · decisiones de Aarón del 22 oct aplicadas · copy alineado con microcopy.md §10</span>
+  <h1 style="font-size:40px">R1 segundo negocio y recuperación (<code>/c/recuperar</code>)</h1>
+  <p class="m"><b>Con sesión</b> en el navegador, el segundo negocio no pide código: pide el nombre para ese negocio (D-019) y el consentimiento de su aviso. <b>Sin sesión</b> (otro navegador, otro teléfono, PWA sin sesión) es el mismo C1 en dos pasos y, al verificar, recupera todas las tarjetas de ese teléfono. <b>Recuperar</b> es el mismo flujo sin negocio. Ya no existe «tarjeta por confirmar» ni los botones «Aceptar» y «No soy yo» en C0: <b>C0 solo tiene los estados «con tarjetas» y «sin tarjetas»</b> (<code>c0-mis-tarjetas</code>, sin cambios; el encabezado «Mis datos ›» es el de C5, D-026).</p>
+  <p class="m">Los criterios <b>CA-R1.n</b>, <b>CA-REC.n</b> y <b>CA-C0.n</b> están en <code>08-registro-con-codigo.md</code>. Los estados del código (incorrecto, vencido, bloqueo, sin conexión, error del proveedor) son los de <code>c1-registro-con-codigo</code> y no se repiten aquí.</p>
+</section>
+
+<div class="wrap">
+
+<div class="sech">R1 · segundo negocio con sesión en este navegador (sin código)</div>
+
+<!-- R1·1 -->
+<div class="col"><h3>R1·1 · Con sesión, normal: nombre para este negocio y su aviso <span class="ca">CA-R1.1, CA-R1.2</span></h3>
+<div class="ph">
+  <div class="biz"><div class="logo">TM</div><div><b>Tapioca Mía</b><span>Villahermosa</span></div></div>
+  <h1>Agrega tu tarjeta de Tapioca Mía</h1>
+  <p class="m">Ya tienes tu cuenta de LealTab. Solo confirma tu nombre para este negocio.</p>
+  <div class="ro" aria-label="WhatsApp ya verificado"><span>+52 993 ••• 4567</span><span class="e info">Verificado</span></div>
+  <button type="button" class="link">¿No eres tú? Usar otro número</button>
+  <label for="r-n">Tu nombre en Tapioca Mía<input id="r-n" autocomplete="name" aria-describedby="r-h" value="Ana López"></label>
+  <p class="s m" id="r-h">Usamos el último nombre que diste. Puedes cambiarlo: cada negocio guarda el que le das aquí y ningún otro negocio lo ve.</p>
+  <div class="priv"><b>Tus datos, claros.</b> Tapioca Mía usará tu nombre y WhatsApp solo para tu tarjeta de lealtad. No los vendemos ni los compartimos. <a href="#">Lee el aviso de privacidad</a></div>
+  <label class="chk" for="r-c"><input type="checkbox" id="r-c" checked> <span>Acepto el aviso de privacidad de Tapioca Mía</span></label>
+  <button type="button">Agregar mi tarjeta</button>
+  <p class="hecho">Hecho con <b>LealTab</b></p>
+</div></div>
+
+<!-- R1·2 -->
+<div class="col"><h3>R1·2 · Con sesión, agregando <span class="ca">CA-R1.3</span></h3>
+<div class="ph" aria-busy="true">
+  <div class="biz"><div class="logo">TM</div><div><b>Tapioca Mía</b><span>Villahermosa</span></div></div>
+  <h1>Junta sellos y gana tu tapioca</h1>
+  <div class="ro"><span>+52 993 ••• 4567</span><span class="e info">Verificado</span></div>
+  <label>Tu nombre en Tapioca Mía<input readonly value="Ana López"></label>
+  <label class="chk"><input type="checkbox" checked disabled> <span>Acepto el aviso de privacidad de Tapioca Mía</span></label>
+  <p class="s m" aria-live="polite"><span class="e info">Agregando</span> Agregando tu tarjeta…</p>
+  <button type="button" disabled aria-busy="true">Agregando…</button>
+  <p class="hecho">Hecho con <b>LealTab</b></p>
+</div></div>
+
+<!-- R1·3 -->
+<div class="col"><h3>R1·3 · Con sesión, éxito: la tarjeta queda activa y se abre C3 <span class="ca">CA-R1.3</span></h3>
+<div class="ph">
+  <div class="biz"><div class="logo">TM</div><div><b>Tapioca Mía</b><span>Villahermosa</span></div></div>
+  <div class="ok" aria-live="polite">✓ Tarjeta agregada</div>
+  <div class="panel" style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px">
+    <svg width="160" height="160" viewBox="0 0 200 200" role="img" aria-label="1 de 6 sellos"><circle cx="100" cy="100" r="80" fill="none" stroke="var(--color-menta)" stroke-width="16"/><circle cx="100" cy="100" r="80" fill="none" stroke="var(--color-bosque)" stroke-width="16" stroke-linecap="round" stroke-dasharray="502.7" stroke-dashoffset="418.9" transform="rotate(-90 100 100)"/><text x="100" y="108" text-anchor="middle" style="font:800 44px var(--font-display);font-stretch:75%;fill:var(--color-noche)">1/6</text></svg>
+    <p class="m"><b>Listo. Tu sello de bienvenida ya está aquí.</b></p>
+  </div>
+  <div class="note">Listo, agregamos tu tarjeta de Tapioca Mía a Mis tarjetas.</div>
+  <button type="button">Ver mi código</button>
+  <button type="button" class="sec">Ver mis tarjetas</button>
+  <p class="s m" style="text-align:center">(C2 no se vuelve a mostrar si la app ya está instalada o ya dijiste «Ahora no».)</p>
+  <p class="hecho">Hecho con <b>LealTab</b></p>
+</div></div>
+
+<!-- R1·4 -->
+<div class="col"><h3>R1·4 · Con sesión, ya tenía la tarjeta de este negocio: no hay formulario <span class="ca">CA-R1.4</span></h3>
+<div class="ph">
+  <div class="biz"><div class="logo">TM</div><div><b>Tapioca Mía</b><span>Villahermosa</span></div></div>
+  <div class="box info" aria-live="polite"><span class="e info">Ya la tienes</span><p>Ya tienes tu tarjeta de Tapioca Mía.</p></div>
+  <div class="panel row3"><div class="logo">TM</div><div style="flex:1"><b>Tapioca Mía</b><p class="m s">Tapioca gratis · faltan 3</p></div>
+    <svg width="64" height="64" viewBox="0 0 100 100" role="img" aria-label="3 de 6 sellos"><circle cx="50" cy="50" r="40" fill="none" stroke="var(--color-menta)" stroke-width="10"/><circle cx="50" cy="50" r="40" fill="none" stroke="var(--color-bosque)" stroke-width="10" stroke-linecap="round" stroke-dasharray="251.3" stroke-dashoffset="125.7" transform="rotate(-90 50 50)"/><text x="50" y="57" text-anchor="middle" style="font:800 22px var(--font-display);font-stretch:75%;fill:var(--color-noche)">3/6</text></svg></div>
+  <button type="button">Ver mi código</button>
+  <p class="hecho">Hecho con <b>LealTab</b></p>
+</div></div>
+
+<!-- R1·5 -->
+<div class="col"><h3>R1·5 · Con sesión, sin conexión <span class="ca">CA-R1.5</span></h3>
+<div class="ph">
+  <div class="biz"><div class="logo">TM</div><div><b>Tapioca Mía</b><span>Villahermosa</span></div></div>
+  <div class="pill" aria-live="polite">● Sin conexión</div>
+  <h1>Junta sellos y gana tu tapioca</h1>
+  <div class="ro"><span>+52 993 ••• 4567</span><span class="e info">Verificado</span></div>
+  <label>Tu nombre en Tapioca Mía<input value="Ana López"></label>
+  <div class="box warn" aria-live="polite"><span class="e warn">Sin conexión</span><p>Para agregar tu tarjeta hace falta internet. Inténtalo cuando vuelva la señal.</p></div>
+  <button type="button" disabled>Agregar mi tarjeta</button>
+  <p class="hecho">Hecho con <b>LealTab</b></p>
+</div></div>
+
+<!-- R1·6 -->
+<div class="col"><h3>R1·6 · Tarjetas cerradas en este teléfono (la sesión se cerró: entraste desde otro teléfono, borraste tu cuenta o venció) <span class="ca">CA-R1.6, CA-REC.5</span></h3>
+<div class="ph">
+  <div class="top"><span class="brand">LealTab</span></div>
+  <div class="box warn" role="alert"><span class="e warn">Más seguro</span><p>Cerramos tus tarjetas en este teléfono porque entraste desde otro lugar. Pide un código y las vuelves a ver.</p></div>
+  <h1>Confirma tu número otra vez</h1>
+  <button type="button">Recibir código</button>
+</div></div>
+
+<div class="sech">R1 · segundo negocio sin sesión (otro navegador, otro teléfono, PWA sin sesión)</div>
+
+<!-- R1·7 -->
+<div class="col"><h3>R1·7 · Sin sesión: es el mismo C1 en dos pasos; no hay pantalla propia <span class="ca">CA-R1.7, CA-R1.8</span></h3>
+<div class="ph">
+  <div class="biz"><div class="logo">TM</div><div><b>Tapioca Mía</b><span>Villahermosa</span></div></div>
+  <h2>Lo que ve quien llega sin sesión</h2>
+  <div class="panel">
+    <ol class="fl">
+      <li>C1 paso 1 de Tapioca Mía: nombre, WhatsApp y aviso. <b>Igual</b> para un teléfono nuevo y para uno que ya usa LealTab (<code>c1-registro-con-codigo</code>, C1·1a).</li>
+      <li>Paso 2: código de 6 dígitos (C1·2a). <b>Mismo texto y mismas esperas</b> en los dos casos.</li>
+      <li>Éxito: si el teléfono ya tenía tarjetas, se ven <b>solo después de verificar</b> (C1·2k): «Listo, aquí están tus tarjetas.»</li>
+    </ol>
+  </div>
+  <div class="note">Nunca aparece «Ya tienes cuenta» antes del código. El negocio tampoco puede saber si ese teléfono ya usaba LealTab.</div>
+  <p class="s m">Sustituye el R1 «WhatsApp ya registrado» de <code>estados/b-cliente-y-acceso</code> (queda como historial).</p>
+</div></div>
+
+<div class="sech">Recuperación · <code>/c/recuperar</code> (mismo flujo, sin negocio, voz de LealTab)</div>
+
+<!-- REC·1 -->
+<div class="col"><h3>REC·1 · Paso 1: solo WhatsApp (se llega desde C0 sin sesión, R3, C2 e I5) <span class="ca">CA-REC.1, CA-REC.2</span></h3>
+<div class="ph">
+  <div class="top"><span class="brand">LealTab</span></div>
+  <div class="stp"><b>Paso 1 de 2</b><div class="bars" aria-hidden="true"><i class="on"></i><i></i></div></div>
+  <h1>Recupera tus tarjetas</h1>
+  <p class="m">Escribe tu WhatsApp. Te mandamos un código para entrar a todas tus tarjetas.</p>
+  <label for="q-w">Tu WhatsApp<div class="tel"><span class="pre" aria-hidden="true">+52</span><input id="q-w" inputmode="tel" autocomplete="tel-national" aria-describedby="q-h" value="993 123 4567"></div></label>
+  <p class="s m" id="q-h">10 dígitos. Si cambiaste de teléfono, escribe tu número de antes.</p>
+  <div class="priv">LealTab usará tu WhatsApp para enviarte el código y reconocer tus tarjetas. <span class="ex">Texto final: Por definir (PQ-18)</span> <a href="#">Lee el aviso de privacidad de LealTab</a></div>
+  <label class="chk" for="q-c"><input type="checkbox" id="q-c" checked> <span>Acepto el aviso de privacidad de LealTab</span></label>
+  <button type="button">Enviarme el código</button>
+  <button type="button" class="link">¿Ya no tienes ese número?</button>
+</div></div>
+
+<!-- REC·2 -->
+<div class="col"><h3>REC·2 · Paso 2: el mismo campo de código; el botón dice «Entrar» <span class="ca">CA-REC.2, CA-REC.7</span></h3>
+<div class="ph">
+  <div class="top"><span class="brand">LealTab</span><button type="button" class="link">‹ Cambiar número</button></div>
+  <div class="stp"><b>Paso 2 de 2</b><div class="bars" aria-hidden="true"><i class="on"></i><i class="on"></i></div></div>
+  <h1>Escribe tu código</h1>
+  <div><span class="e info">Enviado por WhatsApp</span></div>
+  <p class="m">Te lo mandamos por WhatsApp al +52 993 123 4567. Dura 10 minutos.</p>
+  <label for="q2">Código de 6 dígitos<input id="q2" class="code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="[0-9]*" value=""></label>
+  <button type="button">Entrar</button>
+  <div class="rs">
+    <button type="button" class="link" disabled aria-disabled="true" role="timer" aria-live="off">Reenviar código en 42 s</button>
+    <button type="button" class="link" disabled aria-disabled="true">Recibir por SMS</button>
+    <p class="s m">¿No te llega? Pasa a veces. Pregunta en el mostrador de un negocio donde tengas tu tarjeta: ahí te ayudan.</p></div>
+  <p class="s m">Los estados de error son los de C1 (incorrecto, vencido, intentos, sin conexión, no podemos enviar).</p>
+</div></div>
+
+<!-- REC·3 -->
+<div class="col"><h3>REC·3 · Éxito con tarjetas: C0 con el aviso de lo recuperado <span class="ca">CA-REC.3, CA-REC.4</span></h3>
+<div class="ph" style="min-height:700px">
+  <div class="top"><span class="brand">LealTab</span><button type="button" class="link">Mis datos ›</button></div>
+  <div class="box info" aria-live="polite"><span class="e info">Número verificado</span><p>Listo, aquí están tus tarjetas.</p></div>
+  <div class="box info"><span class="e info">Más seguro</span><p>Por tu seguridad, cerramos tus tarjetas en otros teléfonos y navegadores. Si las necesitas ahí, entra de nuevo con un código.</p><button type="button" class="link">Entendido</button></div>
+  <h1 style="font-size:32px">Mis tarjetas</h1>
+  <div class="panel row3"><div class="logo">BV</div><div style="flex:1"><b>Barbería Vélez</b><p class="m s">Corte gratis · faltan 4</p></div>
+    <svg width="64" height="64" viewBox="0 0 100 100" role="img" aria-label="4 de 8 sellos"><circle cx="50" cy="50" r="40" fill="none" stroke="var(--color-menta)" stroke-width="10"/><circle cx="50" cy="50" r="40" fill="none" stroke="var(--color-bosque)" stroke-width="10" stroke-linecap="round" stroke-dasharray="251.3" stroke-dashoffset="125.7" transform="rotate(-90 50 50)"/><text x="50" y="57" text-anchor="middle" style="font:800 22px var(--font-display);font-stretch:75%;fill:var(--color-noche)">4/8</text></svg><span style="font-size:20px;color:var(--color-gris-noche)">›</span></div>
+  <div class="panel row3"><div class="logo">TM</div><div style="flex:1"><b>Tapioca Mía</b><p class="m s">Tapioca gratis · faltan 3</p></div>
+    <svg width="64" height="64" viewBox="0 0 100 100" role="img" aria-label="3 de 6 sellos"><circle cx="50" cy="50" r="40" fill="none" stroke="var(--color-menta)" stroke-width="10"/><circle cx="50" cy="50" r="40" fill="none" stroke="var(--color-bosque)" stroke-width="10" stroke-linecap="round" stroke-dasharray="251.3" stroke-dashoffset="125.7" transform="rotate(-90 50 50)"/><text x="50" y="57" text-anchor="middle" style="font:800 22px var(--font-display);font-stretch:75%;fill:var(--color-noche)">3/6</text></svg><span style="font-size:20px;color:var(--color-gris-noche)">›</span></div>
+</div></div>
+
+<!-- REC·4 -->
+<div class="col"><h3>REC·4 · Éxito sin tarjetas (el teléfono no tenía ninguna): C0 vacío <span class="ca">CA-REC.3</span></h3>
+<div class="ph" style="min-height:700px">
+  <div class="top"><span class="brand">LealTab</span><button type="button" class="link">Mis datos ›</button></div>
+  <div class="box info" aria-live="polite"><span class="e info">Número verificado</span><p>Entraste con el +52 993 123 4567. Todavía no hay tarjetas en este número.</p></div>
+  <h1 style="font-size:32px">Mis tarjetas</h1>
+  <div class="panel" style="text-align:center;display:flex;flex-direction:column;gap:10px;align-items:center;padding:28px 18px"><svg width="64" height="64" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="40" fill="none" stroke="var(--color-menta)" stroke-width="10"/></svg><h2>Aún no tienes tarjetas</h2><p class="m">Cuando visites un negocio con LealTab, escanea el QR de su mostrador con tu cámara y tu tarjeta aparecerá aquí.</p></div>
+  <p class="s m">Este es el estado vacío aprobado de C0, sin cambios. Se muestra solo después de verificar el número.</p>
+</div></div>
+
+<!-- REC·5 -->
+<div class="col"><h3>REC·5 · «¿Ya no tienes ese número?»: empezar de nuevo, sin promesas <span class="ca">CA-REC.6</span></h3>
+<div class="ph">
+  <div class="top"><button type="button" class="link">‹ Volver</button><span class="brand">LealTab</span></div>
+  <h1>Si ya no tienes ese número</h1>
+  <div class="box warn"><span class="e warn">Sin ese número</span><p>No podemos pasar tus sellos a un número nuevo. Puedes empezar de cero con tu número de ahora: escanea el QR de tu negocio y regístrate.</p></div>
+  <button type="button">Entendido</button>
+  <div class="note">Pregunta en el mostrador de un negocio donde tengas tu tarjeta: ahí te ayudan.</div>
+</div></div>
+
+</div>
+</body>
+</html>

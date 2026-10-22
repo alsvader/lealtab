@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>C2 · Instalar en iPhone con install_token (D-031, PQ-31) · propuesta</title>
+<link rel="stylesheet" href="../../04-design-system/tokens.css">
+<style>
+/* Propuesta D-031 / PQ-31. Solo tokens de tokens.css; sin colores nuevos. 390 px. Copy en borrador para lealtab-copywriter. */
+*{box-sizing:border-box}
+body{margin:0;background:var(--color-lino);font-family:var(--font-body);color:var(--color-noche)}
+h1,h2{font-family:var(--font-display);font-weight:800;font-stretch:75%;margin:0;line-height:1}
+h1{font-size:34px;margin-top:4px}h2{font-size:24px}
+.m{color:var(--color-gris-noche);margin:0;font-size:15px;line-height:1.45}.s{font-size:13px}
+.panel{background:var(--color-blanco-lino);border:var(--border-hair) solid var(--color-noche);border-radius:18px;padding:16px}
+.legend{padding:24px 32px 0;display:flex;flex-direction:column;gap:8px;max-width:1300px}
+.wrap{display:flex;gap:28px;padding:28px 32px;flex-wrap:wrap;width:1708px}
+.sech{flex-basis:100%;margin:10px 0 -6px;font:700 12px var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--color-gris-noche);border-bottom:var(--border-hair) solid var(--color-noche);padding-bottom:6px}
+.col{width:390px}.col h3{font:600 13px var(--font-body);color:var(--color-gris-noche);margin:0 0 8px;min-height:52px}
+.col h3 .ca{display:block;font-weight:700;color:var(--color-bosque);font-size:12px;margin-top:2px}
+.ph{width:390px;min-height:760px;background:var(--color-lino);border:2px solid var(--color-noche);border-radius:28px;padding:22px 20px;display:flex;flex-direction:column;gap:14px}
+.ph.splash{background:var(--color-bosque);color:var(--color-lino);align-items:center;justify-content:center;text-align:center}
+.biz{display:flex;gap:12px;align-items:center}.biz span{display:block;font-size:12px;color:var(--color-gris-noche)}
+.logo{width:44px;height:44px;border-radius:12px;background:var(--color-noche);color:var(--color-lino);display:grid;place-items:center;font-weight:700;flex:none}
+.brand{font:800 22px var(--font-display);font-stretch:75%;color:var(--color-bosque)}
+button{font:700 16px var(--font-body);min-height:48px;padding:12px 16px;border-radius:14px;border:2px solid var(--color-noche);background:var(--color-bosque);color:var(--color-lino);box-shadow:4px 4px 0 var(--color-noche);cursor:pointer}
+button.sec{background:var(--color-blanco-lino);color:var(--color-noche);box-shadow:none}
+button.wa{background:var(--color-blanco-lino);color:var(--color-bosque);box-shadow:none}
+button.link{background:transparent;color:var(--color-bosque);box-shadow:none;border-color:transparent;text-decoration:underline;min-height:44px;padding:8px 4px;font-size:14px;text-align:left}
+button:disabled{background:var(--color-menta);color:var(--color-gris-noche);border-color:var(--color-gris-noche);box-shadow:none;cursor:default}
+button:focus-visible,a:focus-visible{outline:none;box-shadow:var(--focus-ring)}
+.e{display:inline-block;font:700 11px var(--font-body);padding:3px 8px;border-radius:6px;border:1px solid var(--color-noche);letter-spacing:.02em}
+.err{background:var(--color-rosa-claro);color:var(--color-rojo);border-color:var(--color-rojo)}
+.warn{background:var(--color-durazno-claro);color:var(--color-tostado);border-color:var(--color-tostado)}
+.info{background:var(--color-menta);color:var(--color-bosque);border-color:var(--color-bosque)}
+.box{border-radius:14px;padding:14px;font-size:14px;line-height:1.45;border:1.5px solid}
+.box.err{border-color:var(--color-rojo)}.box.warn{border-color:var(--color-tostado)}.box.info{border-color:var(--color-bosque)}
+.box p{margin:6px 0 0;color:var(--color-noche)}
+.ex{display:inline-block;background:var(--color-durazno-claro);color:var(--color-tostado);border:1px solid var(--color-tostado);font:700 11px var(--font-body);padding:3px 8px;border-radius:6px;letter-spacing:.06em;text-transform:uppercase}
+.pill{display:inline-flex;align-self:flex-start;align-items:center;gap:6px;font:700 12px var(--font-body);padding:6px 10px;border-radius:999px;border:1px solid var(--color-tostado);color:var(--color-tostado);background:var(--color-durazno-claro)}
+.top{display:flex;justify-content:space-between;align-items:center}
+.ok{background:var(--color-menta);color:var(--color-bosque);font-weight:700;padding:10px 14px;border-radius:999px;align-self:flex-start}
+.note{background:var(--color-menta);border-radius:12px;padding:10px 12px;font-size:13px}
+.seg{display:flex;background:var(--color-menta);border-radius:12px;padding:4px}.seg span{flex:1;text-align:center;padding:10px;font-weight:600;min-height:44px}.seg .on{background:var(--color-blanco-lino);border-radius:9px}
+ol{margin:0;padding-left:20px;line-height:2}.ic{display:inline-grid;place-items:center;width:22px;height:22px;border:1.5px solid var(--color-noche);border-radius:6px;font-size:12px}
+.row3{display:flex;gap:14px;align-items:center;padding:12px 14px}
+.hecho{margin-top:auto;text-align:center;font-size:12px;color:var(--color-gris-noche);padding-top:8px}
+.big{font:800 56px var(--font-display);font-stretch:75%;color:var(--color-lino);line-height:1}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<section class="legend">
+  <span class="ex">Propuesta D-031 · PQ-31 por probar · copy alineado con microcopy.md §10</span>
+  <h1 style="font-size:40px">C2 · Instalar en iPhone con <code>install_token</code></h1>
+  <p class="m">En iPhone, la PWA instalada nace sin las cookies de Safari (ADR-003 §2.3). El <code>install_token</code> (un solo uso, 24 h) va en el <code>start_url</code> del manifest y la primera apertura intenta entrar sin pedir nada. <b>Mecanismo A</b> (candidato, por probar): el servidor canjea el token por una sesión propia de la PWA. <b>Mecanismo B</b> (respaldo): la PWA pide un código nuevo; el token solo dice a qué número enviarlo. La guía de 3 pasos no cambia: el token es invisible para el cliente.</p>
+  <p class="m">Android/Chrome: la PWA comparte las cookies con Chrome, no hay token ni pantallas nuevas (<code>[SUPUESTO]</code>, prueba de RNF-PWA-07). Criterios <b>CA-IOS.n</b> en <code>08-registro-con-codigo.md</code>.</p>
+</section>
+
+<div class="wrap">
+
+<div class="sech">En Safari · guía</div>
+
+<!-- I1 -->
+<div class="col"><h3>I1 · Guía de iPhone (C2 aprobado) con una línea nueva <span class="ca">CA-IOS.1</span></h3>
+<div class="ph">
+  <div class="biz"><div class="logo">BV</div><div><b>Barbería Vélez</b><span>Villahermosa</span></div></div>
+  <div class="ok">✓ Tu tarjeta está lista</div>
+  <h1>Tenla siempre a un toque</h1>
+  <p class="m">Guarda tus tarjetas en tu inicio. Sin descargar nada.</p>
+  <div class="seg" role="tablist"><span class="on" role="tab" aria-selected="true">iPhone</span><span role="tab" aria-selected="false">Android</span></div>
+  <ol><li>Toca <b>Compartir</b> (el cuadro con una flecha) <span class="ic">⬆</span> abajo en Safari.</li><li>Elige <b>Agregar a inicio</b>.</li><li>Toca <b>Agregar</b>. ¡Listo!</li></ol>
+  <p class="s m">Después, ábrela desde el ícono de LealTab en tu inicio.</p>
+  <button type="button">Ya la agregué</button>
+  <button type="button" class="link">Ahora no</button>
+  <p class="s m">Si la pierdes, recupérala con tu WhatsApp.</p>
+  <p class="hecho">Hecho con <b>LealTab</b></p>
+</div></div>
+
+<div class="sech">Primera apertura desde el ícono · mecanismo A (canje automático)</div>
+
+<!-- I2 -->
+<div class="col"><h3>I2 · Abriendo (el canje corre en el servidor; el token se quita de la URL) <span class="ca">CA-IOS.2</span></h3>
+<div class="ph splash" aria-busy="true">
+  <span class="big">LealTab</span>
+  <p style="margin:0;font-size:16px;color:var(--color-menta)" aria-live="polite">Abriendo tu tarjeta…</p>
+</div></div>
+
+<!-- I3 -->
+<div class="col"><h3>I3 · Listo: ya dentro, sin escribir nada <span class="ca">CA-IOS.3</span></h3>
+<div class="ph" style="min-height:700px">
+  <div class="top"><span class="brand">LealTab</span><button type="button" class="link">Mis datos ›</button></div>
+  <div class="box info" aria-live="polite"><span class="e info">Listo</span><p>Listo. Tu tarjeta ya está en tu inicio. <button type="button" class="link" style="display:inline;min-height:44px">Cerrar aviso</button></p></div>
+  <h1 style="font-size:32px">Mis tarjetas</h1>
+  <div class="panel row3"><div class="logo">BV</div><div style="flex:1"><b>Barbería Vélez</b><p class="m s">Corte gratis · faltan 4</p></div>
+    <svg width="64" height="64" viewBox="0 0 100 100" role="img" aria-label="4 de 8 sellos"><circle cx="50" cy="50" r="40" fill="none" stroke="var(--color-menta)" stroke-width="10"/><circle cx="50" cy="50" r="40" fill="none" stroke="var(--color-bosque)" stroke-width="10" stroke-linecap="round" stroke-dasharray="251.3" stroke-dashoffset="125.7" transform="rotate(-90 50 50)"/><text x="50" y="57" text-anchor="middle" style="font:800 22px var(--font-display);font-stretch:75%;fill:var(--color-noche)">4/8</text></svg><span style="font-size:20px;color:var(--color-gris-noche)">›</span></div>
+</div></div>
+
+<div class="sech">Si el canje falla</div>
+
+<!-- I5 -->
+<div class="col"><h3>I5 · El acceso ya se usó o venció (más de 24 h, o abierto dos veces) → pide un código nuevo <span class="ca">CA-IOS.4</span></h3>
+<div class="ph">
+  <div class="top"><span class="brand">LealTab</span></div>
+  <h1>Confirma tu número</h1>
+  <p class="m" role="alert">No pudimos abrir tus tarjetas desde este ícono. Escribe tu WhatsApp, te mandamos un código y entras en segundos.</p>
+  <label style="display:flex;flex-direction:column;gap:6px;font-weight:600;font-size:14px">Tu WhatsApp<div style="display:flex;gap:8px"><span style="display:grid;place-items:center;min-width:64px;border:2px solid var(--color-noche);border-radius:12px;background:var(--color-menta);font-weight:700;color:var(--color-bosque)" aria-hidden="true">+52</span><input style="flex:1;font-size:var(--font-size-input);font-family:var(--font-body);min-height:48px;padding:12px 14px;border:2px solid var(--color-noche);border-radius:12px;background:var(--color-blanco-lino);color:var(--color-noche);width:100%" inputmode="tel" autocomplete="tel-national" value=""></div></label>
+  <button type="button">Recibir código</button>
+  <p class="s m">Tu tarjeta no se perdió: sigue guardada con tu número.</p>
+  <p class="s m">Después sigue el paso del código de C1 (botón «Entrar»). Es la misma pantalla de <code>/c/recuperar</code>; no muestra ningún dato del cliente.</p>
+</div></div>
+
+<!-- I6 -->
+<div class="col"><h3>I6 · Primera apertura sin conexión: el acceso no se gasta <span class="ca">CA-IOS.5</span></h3>
+<div class="ph">
+  <div class="top"><span class="brand">LealTab</span></div>
+  <div class="pill" aria-live="polite">● Sin conexión</div>
+  <div class="box warn"><span class="e warn">Sin conexión</span><p>La primera vez que abres tu tarjeta desde el ícono hace falta conexión. Conéctate y vuelve a intentarlo.</p></div>
+  <button type="button">Reintentar</button>
+  <p class="s m">Puedes intentarlo de nuevo durante 24 horas después de guardar tu tarjeta. <span class="ex">Copy propio del designer: falta en microcopy.md</span></p>
+</div></div>
+
+<div class="sech">Mecanismo B (respaldo si la prueba de PQ-31 falla) · el token solo identifica a quién enviar el código</div>
+
+<!-- I4 -->
+<div class="col"><h3>I4 · Variante B1 (el token identifica al cliente): número enmascarado; el envío es a petición, no automático <span class="ca">CA-IOS.6, CA-IOS.7</span> <span class="ex">Variante: se decide con PQ-31</span></h3>
+<div class="ph">
+  <div class="top"><span class="brand">LealTab</span></div>
+  <h1>Confirma tu número</h1>
+  <p class="m">Te mandamos un código al número que termina en 4567.</p>
+  <button type="button">Enviarme el código</button>
+  <button type="button" class="link">No es mi número</button>
+  <div class="note">Después se muestra el paso del código de C1 (C1·2a), con el botón «Entrar» y los mismos estados y límites.</div>
+  <p class="s m">Cada iPhone que instala usa un mensaje más (MXN 0.77 a 0.90 con SMS, ADR-003 §4). El texto de B1 es una propuesta del designer a partir de microcopy.md §10.</p>
+</div></div>
+
+<div class="col"><h3>I4b · Variante B2 (el token no deja saber el número): se teclea el WhatsApp. Es la pantalla de I5 <span class="ca">CA-IOS.6</span> <span class="ex">Variante: se decide con PQ-31</span></h3>
+<div class="ph" style="min-height:300px">
+  <div class="top"><span class="brand">LealTab</span></div>
+  <div class="note">Si el token vencido o ya usado no permite saber a qué número enviar, B2 usa exactamente la pantalla I5 («Confirma tu número», campo «Tu WhatsApp», «Recibir código»). Lo decide el arquitecto con la prueba de PQ-31.</div>
+</div></div>
+
+<!-- Android -->
+<div class="col"><h3>Android / Chrome · sin pantallas nuevas <span class="ca">CA-IOS.8</span></h3>
+<div class="ph" style="min-height:300px">
+  <div class="top"><span class="brand">LealTab</span></div>
+  <div class="box info"><span class="e info">Sin cambios</span><p>La PWA instalada comparte las cookies con Chrome y abre con tus tarjetas ya guardadas. No hay token ni pasos extra.</p></div>
+  <p class="s m"><code>[SUPUESTO]</code> Se confirma en la prueba de RNF-PWA-07. Si falla, se usa I5.</p>
+</div></div>
+
+</div>
+</body>
+</html>

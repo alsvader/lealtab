@@ -80,8 +80,8 @@ flowchart TD
 
 **F2. Cliente se registra e instala la tarjeta**
 1. Escanea el QR del mostrador con la cámara → abre la tarjeta web del negocio.
-2. C1: nombre + WhatsApp, lee el aviso corto y acepta → crea su tarjeta. Si el negocio activó el sello de bienvenida, se le otorga **automáticamente** al registrarse (queda en 1/N), sin confirmación del staff.
-3. Si el cliente ya tiene la app LealTab o una cuenta con su WhatsApp, la nueva tarjeta se agrega a **Mis tarjetas** (C0) y no repite instalación. Si no, C2: invitación a instalarla; si no la instala, se puede recuperar con su WhatsApp.
+2. C1 en dos pasos (D-031): paso 1, nombre + WhatsApp, lee el aviso corto y acepta → «Enviarme el código»; paso 2, escribe el código de 6 dígitos (WhatsApp, o SMS de respaldo) → «Crear mi tarjeta». Si el negocio activó el sello de bienvenida, se le otorga **automáticamente** al crearla (queda en 1/N), sin confirmación del staff.
+3. Con sesión en el navegador, un segundo negocio no pide código: pide el nombre para ese negocio y su aviso, y la tarjeta queda activa en **Mis tarjetas** (C0). Sin sesión, repite C1 con código y, si el WhatsApp ya tenía tarjetas, las recupera todas; la pantalla no dice antes del código si el número ya existe. Si no, C2: invitación a instalarla; si no la instala, se puede recuperar con su WhatsApp y un código. Diseño: pieza 08.
 
 **F3. Registrar visita en mostrador** — ver recomendación abajo
 1. Cliente muestra **su QR** (C3).

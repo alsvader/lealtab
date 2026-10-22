@@ -2,7 +2,7 @@
 
 <!-- impeccable:product-schema 1 -->
 
-> **Qué es este archivo.** Verdad de producto de LealTab para agentes de diseño y desarrollo. Resume documentos aprobados; no los reemplaza. La referencia completa del MVP es [`docs/prd/PRD-lealtab-mvp.md`](docs/prd/PRD-lealtab-mvp.md) (v1.4, borrador para aprobación de Aarón). La parte visual vive en [`DESIGN.md`](DESIGN.md) y su fuente de verdad, `brand/04-design-system/`. Estrategia de marca: `brand/01-brand-strategy/identidad-de-marca.md` y `brand/01-brand-strategy/audiencia-y-posicionamiento.md`. Lo que las fuentes no resuelven dice **Por definir**; las personas marcadas **[H]** son hipótesis sin entrevistas. Los encabezados `##` van en inglés porque son los nombres canónicos que lee la herramienta.
+> **Qué es este archivo.** Verdad de producto de LealTab para agentes de diseño y desarrollo. Resume documentos aprobados; no los reemplaza. La referencia completa del MVP es [`docs/prd/PRD-lealtab-mvp.md`](docs/prd/PRD-lealtab-mvp.md) (v1.6, borrador para aprobación de Aarón). La parte visual vive en [`DESIGN.md`](DESIGN.md) y su fuente de verdad, `brand/04-design-system/`. Estrategia de marca: `brand/01-brand-strategy/identidad-de-marca.md` y `brand/01-brand-strategy/audiencia-y-posicionamiento.md`. Lo que las fuentes no resuelven dice **Por definir**; las personas marcadas **[H]** son hipótesis sin entrevistas. Los encabezados `##` van en inglés porque son los nombres canónicos que lee la herramienta.
 
 ## Platform
 
@@ -23,7 +23,7 @@ web
 **Actores del MVP.**
 - **Dueño del negocio:** da de alta su negocio, configura la tarjeta, ve el resumen semanal y quién regresa, administra clientes y exporta datos.
 - **Staff de mostrador:** registra visitas y canjes en Mostrador. En el MVP usa la misma cuenta del dueño; los usuarios de staff con permisos llegan después.
-- **Cliente final:** escanea el QR del mostrador, deja su nombre y su WhatsApp, junta sellos y canjea su recompensa. Instalar la app es opcional.
+- **Cliente final:** escanea el QR del mostrador, deja su nombre y su WhatsApp, lo verifica con un código, junta sellos y canjea su recompensa. Instalar la app es opcional.
 
 **Personas [H]** (hipótesis de Fase 1, sin entrevistas):
 - **Mariana**, dueña de una estética (1 sucursal, 4 estilistas). Agenda por WhatsApp y maneja todo desde el celular. Le duelen las clientas que dejan de venir sin avisar y las tarjetas de cartón que se pierden. Objeción: «mis clientas no van a descargar otra app».
@@ -46,7 +46,7 @@ Fuera por ahora: abarrotes, cadenas grandes, e-commerce, gimnasios y farmacias.
 
 **Qué ofrece el MVP.**
 - **Regreso medible:** resumen semanal como primera pantalla del panel y la vista «Quién regresa» (frecuentes, en riesgo y nuevos).
-- **Sin descargar nada, en cualquier celular:** escanea el QR, deja su nombre y su WhatsApp y ya tiene su tarjeta.
+- **Sin descargar nada, en cualquier celular:** escanea el QR, deja su nombre y su WhatsApp, escribe el código que le llega y ya tiene su tarjeta (D-031).
 - **Alta sola en menos de 5 minutos:** sin llamada de ventas ni tarjeta de crédito, con la tarjeta y el cartel QR listos.
 
 **Éxito.** Que los negocios del piloto usen la tarjeta en el mostrador, que sus clientes se inscriban y regresen, que paguen al terminar sus 30 días de prueba y que el dueño consulte el resumen semanal sin que se le envíe. Los criterios exactos del Gate 1 están en la sección 2 del PRD; quién cuenta como negocio que paga sigue **Por definir** (PQ-02).
@@ -62,12 +62,12 @@ Fuera por ahora: abarrotes, cadenas grandes, e-commerce, gimnasios y farmacias.
 
 Todo vive en `lealtab.com` (D-022): la landing en `/`, la app del cliente en `/c/` y el panel del negocio en `/panel/`. No se usa `app.lealtab.com`.
 
-**`/c/` App del cliente.** Una sola PWA LealTab con las tarjetas de todos los negocios del cliente. Su cuenta se identifica por su WhatsApp. El ícono, el nombre de la app y el splash son de LealTab; en cada tarjeta, la marca protagonista es la del negocio, y LealTab aparece discreta como «Hecho con LealTab».
+**`/c/` App del cliente.** Una sola PWA LealTab con las tarjetas de todos los negocios del cliente. Su cuenta es un usuario de Supabase Auth identificado por su WhatsApp, verificado con un código por WhatsApp o SMS desde el registro (D-031, D-024). El ícono, el nombre de la app y el splash son de LealTab; en cada tarjeta, la marca protagonista es la del negocio, y LealTab aparece discreta como «Hecho con LealTab».
 - **C0 Mis tarjetas:** lista de tarjetas por negocio con mini aro y la etiqueta «Recompensa lista». Es mínima: sin descubrimiento de negocios, sin recomendaciones y sin datos de un negocio visibles para otro.
-- **C1 Registro** (nombre y WhatsApp, aviso de privacidad corto antes del botón) · **C2 Instalar** (guía de 3 pasos para iPhone y Android; «Ahora no» no bloquea nada) · **C3 Mi tarjeta** (aro de progreso, QR personal grande y última visita) · **C4 Recompensa** (aro completo en durazno y QR para canjear) · **C5 Mis datos** (ver y borrar la cuenta; diseño **Por definir**, PQ-12).
+- **C1 Registro** (nombre y WhatsApp, aviso de privacidad corto antes del botón y, desde D-031, el paso del código; el rediseño de C1 y R1 está pendiente. Con sesión en el navegador, un segundo negocio no pide código) · **C2 Instalar** (guía de 3 pasos para iPhone y Android; «Ahora no» no bloquea nada) · **C3 Mi tarjeta** (aro de progreso, QR personal grande y última visita) · **C4 Recompensa** (aro completo en durazno y QR para canjear) · **C5 Mis datos** (en `/c/cuenta`; ver y borrar la cuenta con efecto inmediato, D-026. El plazo legal de eliminación sigue **Por definir**, PQ-04).
 - Funciona sin instalarse y sin internet (muestra la tarjeta guardada y «Puede haber sellos pendientes»).
 
-**`/panel/` Panel del negocio** (web responsiva). **Abre en N0 Inicio, el resumen semanal:** visitas de la semana frente a la anterior, clientes que regresaron, en riesgo, recompensas canjeadas y **una** acción sugerida. El resumen solo vive en el panel; no se envía por WhatsApp ni por correo. Navegación lateral: Inicio, Quién regresa, Mostrador, Clientes, Tarjeta y Ajustes. Alta en 4 pasos (N1 Cuenta, N2 Tu negocio, N3 Tu tarjeta, N4 QR de mostrador), N6 Quién regresa, N7 Clientes (ficha, historial, Por revisar y exportar CSV) y N8 Ajustes.
+**`/panel/` Panel del negocio** (web responsiva). **Abre en N0 Inicio, el resumen semanal:** visitas de la semana frente a la anterior, clientes que regresaron, en riesgo, recompensas canjeadas y **una** acción sugerida. El resumen solo vive en el panel; no se envía por WhatsApp ni por correo. Navegación lateral: Inicio, Quién regresa, Mostrador, Clientes, Tarjeta y Ajustes. Alta en 4 pasos (N1 Cuenta, N2 Tu negocio, N3 Tu tarjeta, N4 QR de mostrador), N6 Quién regresa, N7 Clientes (ficha, historial, «Escribir por WhatsApp» con tres plantillas fijas (D-030), Por revisar y exportar CSV) y N8 Ajustes.
 
 **Mostrador (N5, dentro del panel).** El staff escanea el QR personal del cliente y confirma «+1 sello» o el canje. Meta: un sello en menos de 5 segundos. Respaldo: buscar por WhatsApp o nombre si falla la cámara. Funciona sin conexión y sincroniza después. El QR impreso del mostrador solo sirve para registrarse; no suma sellos.
 
@@ -77,13 +77,13 @@ Todo vive en `lealtab.com` (D-022): la landing en `/`, la app del cliente en `/c
 
 - **Módulos al lanzar:** Tarjeta y Clientes, con nombres funcionales en español. Avisos, Campañas y Reportes llegan después; Wallet es una función posterior, no un módulo.
 - **Tarjeta:** una por negocio en el MVP, de 4 a 12 sellos, sello de bienvenida opcional. Límite por defecto de 1 sello por cliente por día, configurable, con bloqueo fijo de 2 minutos contra el doble escaneo. QR personal rotativo.
-- **Estados de cliente:** Frecuente (2 o más visitas en 30 días), En riesgo (sin volver en más del doble de su intervalo habitual, con mínimo de 30 días) y Nuevo (primera visita en 30 días).
+- **Estados de cliente:** Frecuente (2 o más visitas en 30 días), En riesgo (sin volver en más del doble de su intervalo habitual, con mínimo de 30 días) y Nuevo (primera visita en 30 días); el resto recibe el chip neutro «Al día». El intervalo habitual es la mediana de los últimos 5 intervalos y el sello de bienvenida no cuenta como visita (D-028).
 - **Datos mínimos del cliente:** nombre, WhatsApp y consentimiento. Un negocio nunca ve si su cliente está inscrito en otro.
-- **Confianza desde el día uno:** alta sin llamada de ventas, precios públicos, exportar CSV (también con la cuenta en pausa), aviso de privacidad y «Ayuda por WhatsApp». Analítica propia sin cookies.
+- **Confianza desde el día uno:** alta sin llamada de ventas, precios públicos, exportar CSV (también con la cuenta en pausa), aviso de privacidad y «Ayuda por WhatsApp». Analítica propia, sin cookies de analítica ni de terceros (D-018); la sesión usa cookies necesarias de primera parte (ADR-003 §2.4).
 - **Precios públicos:** 30 días de prueba gratis; plan Inicio $299 MXN/mes + IVA; Negocio ~$449 + IVA; Pro «Próximamente». Precio especial de piloto: **Por definir** (PQ-01).
 - **Fuera del MVP:** Apple/Google Wallet, app nativa, staff con permisos, varias tarjetas y sucursales, avisos y campañas, pago dentro del producto (CFDI, OXXO/SPEI), notificaciones push, integración con punto de venta, IA y API pública.
 - **Stack:** definido en `docs/adr/002-stack.md` (Next.js en `web/`, Tailwind + shadcn/ui, Supabase y Vercel). Si difiere del PRD, manda el ADR-002.
-- **Por definir (principales):** diseño de C5 Mis datos; N1 con contraseña y recuperación; retención y borrado de datos; plantilla del mensaje «Escribir por WhatsApp»; definición de «semana» del resumen; qué pasa con el avance si cambia el número de sellos; objetivos numéricos de rendimiento. Lista completa en la sección 12 del PRD.
+- **Por definir (principales):** diseño de N1 con contraseña y recuperación; rediseño de C1, R1 y C0 con el paso del código (D-031); retención y borrado de datos y aviso de privacidad actualizado (PQ-04, PQ-18); precio de piloto (PQ-01); confirmaciones y pruebas del proveedor del código y de la sesión del cliente (PQ-30, PQ-31); costo del hosting (PQ-29). Lista completa en la sección 12 del PRD.
 
 ## Brand Commitments
 

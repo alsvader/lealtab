@@ -14,4 +14,5 @@ Fase 6, iniciada el 20 oct 2026. **✅ Aprobada y cerrada (2026-10-20).** Sigue 
 | 05 Inicio (resumen semanal), Clientes, Ajustes + C0 Mis tarjetas | `05-inicio-clientes-ajustes.md`, `inicio/`, `tarjeta-cliente/c0-mis-tarjetas.*` | ✅ Aprobado 2026-10-20 |
 | 06 Estados de error, vacío y borde | `06-estados-error-y-vacio.md`, `estados/` | ✅ Aprobado 2026-10-20 |
 | — | Decisión 2026-10-20: "Hecho con LealTab" siempre visible (todos los planes); se eliminó `tarjeta-sin-leyenda` | — |
-| 07 Entrega a desarrollo | `07-entrega-desarrollo.md`, `entrega/mapa-pantallas.png` | ✅ Aprobado 2026-10-20 |
+| 07 Entrega a desarrollo | `07-entrega-desarrollo.md`, `entrega/mapa-pantallas.png` | ✅ Aprobado 2026-10-20 (§3, §7 y §8 alineados con D-031 el 2026-10-22) |
+| 08 Registro con código: C1 en dos pasos, R1, recuperación e instalación en iPhone (D-031) | `08-registro-con-codigo.md`, `tarjeta-cliente/c1-registro-con-codigo.html`, `tarjeta-cliente/c1-segundo-negocio-y-recuperar.html`, `tarjeta-cliente/c2-instalar-ios-install-token.html` | Propuesta 2026-10-22, pendiente de aprobación de Aarón; PNG pendientes |

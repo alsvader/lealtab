@@ -18,8 +18,8 @@ Tableros en `estados/` (`.html` + `.png`):
 **B. Cliente y acceso** — `b-cliente-y-acceso.png` (móvil 390)
 | # | Estado | Salida |
 |---|---|---|
-| R1 | WhatsApp ya registrado | Código por WhatsApp para recuperar sus tarjetas y agregar esta a Mis tarjetas. El código se envía con la API de WhatsApp Business, de pago (D-011, cambio parcial del 2026-10-21); también es el camino cuando el cliente cambia de teléfono |
-| R2 | Número no válido | Error en línea: 10 dígitos con ejemplo |
+| ~~R1~~ | ~~WhatsApp ya registrado~~ **Retirado (D-031, 2026-10-22):** decía «Ya tienes cuenta» antes del código y la respuesta debe ser la misma para un teléfono nuevo y uno existente. **R1 pasa a ser «segundo negocio»:** con sesión no pide código; sin sesión es el mismo C1 en dos pasos y recupera todas las tarjetas. Ya no existe «tarjeta por confirmar». Diseño en `tarjeta-cliente/c1-segundo-negocio-y-recuperar` y `08-registro-con-codigo.md`; el wireframe viejo queda como historial |
+| R2 | Número no válido | Error en línea: 10 dígitos con ejemplo. Con D-031 se suma el rechazo de números que no son móviles de México (`c1-registro-con-codigo`, C1·1c y C1·1d) |
 | R3 | Navegador sin instalación PWA | Abrir en Safari/Chrome, copiar enlace o seguir sin instalar |
 | R4 | Tarjeta sin internet | Tarjeta guardada, QR generado localmente, hora de actualización y "Puede haber sellos pendientes" |
 | L1 | Código de acceso vencido (dueño) | Se envía uno nuevo al correo; Ayuda por WhatsApp |

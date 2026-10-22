@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>C1 · Registro en dos pasos con código (D-031) · propuesta</title>
+<link rel="stylesheet" href="../../04-design-system/tokens.css">
+<style>
+/* Propuesta D-031. Solo tokens de tokens.css; sin colores nuevos. 390 px. El copy sigue docs/fase-7/microcopy.md (§10): lo final es del copywriter. */
+*{box-sizing:border-box}
+body{margin:0;background:var(--color-lino);font-family:var(--font-body);color:var(--color-noche)}
+h1,h2{font-family:var(--font-display);font-weight:800;font-stretch:75%;margin:0;line-height:1}
+h1{font-size:34px;margin-top:4px}h2{font-size:24px}
+.m{color:var(--color-gris-noche);margin:0;font-size:15px;line-height:1.45}.s{font-size:13px}
+.panel{background:var(--color-blanco-lino);border:var(--border-hair) solid var(--color-noche);border-radius:18px;padding:16px}
+.legend{padding:24px 32px 0;display:flex;flex-direction:column;gap:8px;max-width:1300px}
+.wrap{display:flex;gap:28px;padding:28px 32px;flex-wrap:wrap;width:1708px}
+.sech{flex-basis:100%;margin:10px 0 -6px;font:700 12px var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--color-gris-noche);border-bottom:var(--border-hair) solid var(--color-noche);padding-bottom:6px}
+.col{width:390px}.col h3{font:600 13px var(--font-body);color:var(--color-gris-noche);margin:0 0 8px;min-height:52px}
+.col h3 .ca{display:block;font-weight:700;color:var(--color-bosque);font-size:12px;margin-top:2px}
+.ph{width:390px;min-height:780px;background:var(--color-lino);border:2px solid var(--color-noche);border-radius:28px;padding:22px 20px;display:flex;flex-direction:column;gap:14px}
+.biz{display:flex;gap:12px;align-items:center}.biz span{display:block;font-size:12px;color:var(--color-gris-noche)}
+.logo{width:44px;height:44px;border-radius:12px;background:var(--color-noche);color:var(--color-lino);display:grid;place-items:center;font-weight:700;flex:none}
+label{display:flex;flex-direction:column;gap:6px;font-weight:600;font-size:14px}
+input{font-size:var(--font-size-input);font-family:var(--font-body);min-height:48px;padding:12px 14px;border:var(--border-product) solid var(--color-noche);border-radius:12px;background:var(--color-blanco-lino);color:var(--color-noche);width:100%}
+input:disabled,input[readonly]{background:var(--color-lino);color:var(--color-gris-noche)}
+input.bad{border-color:var(--color-rojo)}
+input.code{text-align:center;letter-spacing:.35em;font-weight:700;font-variant-numeric:tabular-nums}
+.tel{display:flex;gap:8px}.tel input{flex:1;width:auto}.tel .pre{display:grid;place-items:center;min-width:64px;border:var(--border-product) solid var(--color-noche);border-radius:12px;background:var(--color-menta);font-weight:700;color:var(--color-bosque)}
+.et{color:var(--color-rojo);font-size:13px;font-weight:600;margin:0}
+.priv{background:var(--color-blanco-lino);border:var(--border-hair) solid var(--color-gris-noche);border-radius:12px;padding:12px;font-size:13px;line-height:1.45}.priv a{color:var(--color-bosque);font-weight:700;text-decoration:underline;display:block;margin-top:4px;min-height:24px}
+.chk{flex-direction:row;align-items:flex-start;gap:12px;min-height:44px;font-size:14px;line-height:1.4}
+input[type=checkbox]{width:24px;height:24px;min-height:24px;padding:0;flex:none;accent-color:var(--color-bosque)}
+.chk.bad{color:var(--color-rojo)}.chk.bad input{outline:2px solid var(--color-rojo);outline-offset:2px}
+button{font:700 16px var(--font-body);min-height:48px;padding:12px 16px;border-radius:14px;border:2px solid var(--color-noche);background:var(--color-bosque);color:var(--color-lino);box-shadow:4px 4px 0 var(--color-noche);cursor:pointer}
+button.sec{background:var(--color-blanco-lino);color:var(--color-noche);box-shadow:none}
+button.link{background:transparent;color:var(--color-bosque);box-shadow:none;border-color:transparent;text-decoration:underline;min-height:44px;padding:8px 4px;font-size:14px;text-align:left}
+button:disabled{background:var(--color-menta);color:var(--color-gris-noche);border-color:var(--color-gris-noche);box-shadow:none;cursor:default}
+button.link:disabled{background:transparent;border-color:transparent}
+button:focus-visible,input:focus-visible,a:focus-visible{outline:none;box-shadow:var(--focus-ring)}
+.e{display:inline-block;font:700 11px var(--font-body);padding:3px 8px;border-radius:6px;border:1px solid var(--color-noche);letter-spacing:.02em}
+.err{background:var(--color-rosa-claro);color:var(--color-rojo);border-color:var(--color-rojo)}
+.warn{background:var(--color-durazno-claro);color:var(--color-tostado);border-color:var(--color-tostado)}
+.info{background:var(--color-menta);color:var(--color-bosque);border-color:var(--color-bosque)}
+.box{border-radius:14px;padding:14px;font-size:14px;line-height:1.45;border:1.5px solid}
+.box.err{border-color:var(--color-rojo)}.box.warn{border-color:var(--color-tostado)}.box.info{border-color:var(--color-bosque)}
+.box p{margin:6px 0 0;color:var(--color-noche)}
+.ex{display:inline-block;background:var(--color-durazno-claro);color:var(--color-tostado);border:1px solid var(--color-tostado);font:700 11px var(--font-body);padding:3px 8px;border-radius:6px;letter-spacing:.06em;text-transform:uppercase}
+.pill{display:inline-flex;align-self:flex-start;align-items:center;gap:6px;font:700 12px var(--font-body);padding:6px 10px;border-radius:999px;border:1px solid var(--color-tostado);color:var(--color-tostado);background:var(--color-durazno-claro)}
+.stp{display:flex;align-items:center;gap:12px;font-size:13px}.stp .bars{display:flex;gap:6px;flex:1}.stp i{flex:1;height:6px;border-radius:3px;background:var(--color-menta)}.stp i.on{background:var(--color-bosque)}
+.top{display:flex;justify-content:space-between;align-items:center}
+.ok{background:var(--color-menta);color:var(--color-bosque);font-weight:700;padding:10px 14px;border-radius:999px;align-self:flex-start}
+.note{background:var(--color-menta);border-radius:12px;padding:10px 12px;font-size:13px}
+.row3{display:flex;gap:14px;align-items:center;padding:12px 14px}
+.hecho{margin-top:auto;text-align:center;font-size:12px;color:var(--color-gris-noche);padding-top:8px}
+.rs{display:flex;flex-direction:column;gap:2px;align-items:flex-start}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<section class="legend">
+  <span class="ex">Propuesta D-031 · decisiones de Aarón del 22 oct aplicadas · copy alineado con microcopy.md §10</span>
+  <h1 style="font-size:40px">C1 · Registro en dos pasos con código</h1>
+  <p class="m">Paso 1: nombre, WhatsApp y aviso del negocio. Paso 2: código de 6 dígitos (WhatsApp principal, SMS de respaldo). La respuesta es la misma para un teléfono nuevo y para uno que ya usa LealTab: ninguna pantalla dice «ya tienes cuenta». Sustituye el R1 «WhatsApp ya registrado» de <code>estados/b-cliente-y-acceso</code>. El copy final es del copywriter (<code>docs/fase-7/microcopy.md</code>); la ayuda al cliente es «pregunta en el mostrador», sin canal nuevo de LealTab.</p>
+  <p class="m">Accesibilidad (RNF-A11Y-01 a 04): objetivos de 44 px o más, campos con <code>--font-size-input</code> (16 px), el código es un solo campo con <code>inputmode="numeric"</code> y <code>autocomplete="one-time-code"</code>, estados con palabra y color, resultados en <code>aria-live="polite"</code>, sin animaciones. Los criterios <b>CA-C1.n</b> están en <code>08-registro-con-codigo.md</code>.</p>
+</section>
+
+<div class="wrap">
+
+<div class="sech">Paso 1 · nombre, WhatsApp y aviso</div>
+
+<!-- 1a -->
+<div class="col"><h3>C1·1a · Paso 1, normal <span class="ca">CA-C1.1 a CA-C1.4</span></h3>
+<div class="ph">
+  <div class="biz"><div class="logo">BV</div><div><b>Barbería Vélez</b><span>Villahermosa</span></div></div>
+  <div class="stp"><b>Paso 1 de 2</b><div class="bars" aria-hidden="true"><i class="on"></i><i></i></div></div>
+  <h1>Junta sellos y gana tu corte</h1>
+  <p class="m">Tu tarjeta digital siempre a un toque.</p>
+  <label for="a-n">Tu nombre<input id="a-n" autocomplete="name" value="Ana López"></label>
+  <label for="a-w">Tu WhatsApp<div class="tel"><span class="pre" aria-hidden="true">+52</span><input id="a-w" inputmode="tel" autocomplete="tel-national" aria-describedby="a-h" value="993 123 4567"></div></label>
+  <p class="s m" id="a-h">10 dígitos. Si ya usas LealTab en otro negocio, escribe el mismo número y ahí tendrás todas tus tarjetas.</p>
+  <div class="priv"><b>Tus datos, claros.</b> Barbería Vélez usará tu nombre y WhatsApp solo para tu tarjeta de lealtad. No los vendemos ni los compartimos. <span class="ex">Frase del código: Por definir (PQ-18)</span> <a href="#">Lee el aviso de privacidad</a></div>
+  <label class="chk" for="a-c"><input type="checkbox" id="a-c" checked> <span>Acepto el aviso de privacidad</span></label>
+  <button type="button">Enviarme el código</button>
+  <p class="s m" style="text-align:center">Te mandamos un código por WhatsApp para confirmar que el número es tuyo.</p>
+  <p class="hecho">Hecho con <b>LealTab</b></p>
+</div></div>
+
+<!-- 1b -->
+<div class="col"><h3>C1·1b · Paso 1, enviando <span class="ca">CA-C1.5, CA-C1.6</span></h3>
+<div class="ph" aria-busy="true">
+  <div class="biz"><div class="logo">BV</div><div><b>Barbería Vélez</b><span>Villahermosa</span></div></div>
+  <div class="stp"><b>Paso 1 de 2</b><div class="bars" aria-hidden="true"><i class="on"></i><i></i></div></div>
+  <h1>Junta sellos y gana tu corte</h1>
+  <p class="m">Tu tarjeta digital siempre a un toque.</p>
+  <label>Tu nombre<input readonly value="Ana López"></label>
+  <label>Tu WhatsApp<div class="tel"><span class="pre" aria-hidden="true">+52</span><input readonly value="993 123 4567"></div></label>
+  <label class="chk"><input type="checkbox" checked disabled> <span>Acepto el aviso de privacidad</span></label>
+  <p class="s m" aria-live="polite"><span class="e info">Enviando</span> Enviando tu código.</p>
+  <button type="button" disabled aria-busy="true">Enviando código…</button>
+  <p class="hecho">Hecho con <b>LealTab</b></p>
+</div></div>
+
+<!-- 1c -->
+<div class="col"><h3>C1·1c · Número no válido (R2 aprobado) <span class="ca">CA-C1.7</span></h3>
+<div class="ph">
+  <div class="biz"><div class="logo">BV</div><div><b>Barbería Vélez</b><span>Villahermosa</span></div></div>
+  <div class="stp"><b>Paso 1 de 2</b><div class="bars" aria-hidden="true"><i class="on"></i><i></i></div></div>
+  <h1>Junta sellos y gana tu corte</h1>
+  <label>Tu nombre<input value="Ana López"></label>
+  <label for="c-w">Tu WhatsApp<div class="tel"><span class="pre" aria-hidden="true">+52</span><input id="c-w" class="bad" inputmode="tel" aria-invalid="true" aria-describedby="c-e" value="99312"></div></label>
+  <p class="et" id="c-e" role="alert">Error: escribe tus 10 dígitos, por ejemplo 993 123 4567.</p>
+  <label class="chk"><input type="checkbox" checked> <span>Acepto el aviso de privacidad</span></label>
+  <button type="button">Enviarme el código</button>
+  <p class="hecho">Hecho con <b>LealTab</b></p>
+</div></div>
+
+<!-- 1d -->
+<div class="col"><h3>C1·1d · Prefijo o país no aceptado (solo celulares de México de 10 dígitos) <span class="ca">CA-C1.8</span></h3>
+<div class="ph">
+  <div class="biz"><div class="logo">BV</div><div><b>Barbería Vélez</b><span>Villahermosa</span></div></div>
+  <div class="stp"><b>Paso 1 de 2</b><div class="bars" aria-hidden="true"><i class="on"></i><i></i></div></div>
+  <h1>Junta sellos y gana tu corte</h1>
+  <label>Tu nombre<input value="Ana López"></label>
+  <label for="d-w">Tu WhatsApp<div class="tel"><span class="pre" aria-hidden="true">+52</span><input id="d-w" class="bad" inputmode="tel" aria-invalid="true" aria-describedby="d-e" value="800 123 4567"></div></label>
+  <p class="et" id="d-e" role="alert">Error: por ahora solo aceptamos celulares de México, de 10 dígitos. Por ejemplo, 993 123 4567.</p>
+  <label class="chk"><input type="checkbox" checked> <span>Acepto el aviso de privacidad</span></label>
+  <button type="button">Enviarme el código</button>
+  <p class="hecho">Hecho con <b>LealTab</b></p>
+</div></div>
+
+<!-- 1e -->
+<div class="col"><h3>C1·1e · Falta aceptar el aviso <span class="ca">CA-C1.3</span></h3>
+<div class="ph">
+  <div class="biz"><div class="logo">BV</div><div><b>Barbería Vélez</b><span>Villahermosa</span></div></div>
+  <div class="stp"><b>Paso 1 de 2</b><div class="bars" aria-hidden="true"><i class="on"></i><i></i></div></div>
+  <h1>Junta sellos y gana tu corte</h1>
+  <label>Tu nombre<input value="Ana López"></label>
+  <label>Tu WhatsApp<div class="tel"><span class="pre" aria-hidden="true">+52</span><input inputmode="tel" value="993 123 4567"></div></label>
+  <div class="priv"><b>Tus datos, claros.</b> Barbería Vélez usará tu nombre y WhatsApp solo para tu tarjeta de lealtad. No los vendemos ni los compartimos. <a href="#">Lee el aviso de privacidad</a></div>
+  <label class="chk bad" for="e-c"><input type="checkbox" id="e-c" aria-invalid="true" aria-describedby="e-e"> <span>Acepto el aviso de privacidad</span></label>
+  <p class="et" id="e-e" role="alert">Error: para continuar, acepta el aviso de privacidad.</p>
+  <button type="button">Enviarme el código</button>
+  <p class="hecho">Hecho con <b>LealTab</b></p>
+</div></div>
+
+<!-- 1f -->
+<div class="col"><h3>C1·1f · Paso 1, sin conexión <span class="ca">CA-C1.9</span></h3>
+<div class="ph">
+  <div class="biz"><div class="logo">BV</div><div><b>Barbería Vélez</b><span>Villahermosa</span></div></div>
+  <div class="pill" aria-live="polite">● Sin conexión</div>
+  <div class="stp"><b>Paso 1 de 2</b><div class="bars" aria-hidden="true"><i class="on"></i><i></i></div></div>
+  <h1>Junta sellos y gana tu corte</h1>
+  <label>Tu nombre<input value="Ana López"></label>
+  <label>Tu WhatsApp<div class="tel"><span class="pre" aria-hidden="true">+52</span><input inputmode="tel" value="993 123 4567"></div></label>
+  <div class="box warn" aria-live="polite"><span class="e warn">Sin conexión</span><p>Para crear tu tarjeta hace falta internet. Lo que escribiste se queda aquí; inténtalo cuando vuelva la señal.</p></div>
+  <button type="button">Intentar de nuevo</button>
+  <p class="hecho">Hecho con <b>LealTab</b></p>
+</div></div>
+
+<!-- 1g -->
+<div class="col"><h3>C1·1g · No podemos registrarte ahora, variante «proveedor caído» (R-18) <span class="ca">CA-C1.10, CA-C1.29</span></h3>
+<div class="ph">
+  <div class="biz"><div class="logo">BV</div><div><b>Barbería Vélez</b><span>Villahermosa</span></div></div>
+  <h1>Junta sellos y gana tu corte</h1>
+  <div class="box err" role="alert"><span class="e err">No podemos registrarte ahora</span><p>Por ahora no podemos mandar códigos. No es tu número ni tu negocio: es un problema de nuestro lado. Inténtalo más tarde. Pregunta en el mostrador de Barbería Vélez: ahí te ayudan. Si ya tenías tu tarjeta, tus sellos siguen igual.</p></div>
+  <button type="button">Intentar de nuevo</button>
+  <p class="hecho">Hecho con <b>LealTab</b></p>
+</div></div>
+
+<!-- 1g-b -->
+<div class="col"><h3>C1·1g-b · No podemos registrarte ahora, variante «error del envío» (un reintento puede funcionar) <span class="ca">CA-C1.10</span></h3>
+<div class="ph">
+  <div class="biz"><div class="logo">BV</div><div><b>Barbería Vélez</b><span>Villahermosa</span></div></div>
+  <h1>Junta sellos y gana tu corte</h1>
+  <div class="box err" role="alert"><span class="e err">No podemos registrarte ahora</span><p>Tuvimos un problema para enviarte el código. No hiciste nada mal. Inténtalo de nuevo en unos minutos. Pregunta en el mostrador de Barbería Vélez: ahí te ayudan.</p></div>
+  <button type="button">Intentar de nuevo</button>
+  <p class="hecho">Hecho con <b>LealTab</b></p>
+</div></div>
+
+<div class="sech">Paso 2 · escribe tu código</div>
+
+<!-- 2a -->
+<div class="col"><h3>C1·2a · Paso 2, normal, esperando 60 s para reenviar <span class="ca">CA-C1.12 a CA-C1.14, CA-C1.18</span></h3>
+<div class="ph">
+  <div class="top"><div class="biz"><div class="logo">BV</div><div><b>Barbería Vélez</b></div></div><button type="button" class="link">‹ Cambiar número</button></div>
+  <div class="stp"><b>Paso 2 de 2</b><div class="bars" aria-hidden="true"><i class="on"></i><i class="on"></i></div></div>
+  <h1>Escribe tu código</h1>
+  <div><span class="e info">Enviado por WhatsApp</span></div>
+  <p class="m">Te lo mandamos por WhatsApp al +52 993 123 4567. Dura 10 minutos.</p>
+  <label for="f-c">Código de 6 dígitos<input id="f-c" class="code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="[0-9]*" value=""></label>
+  <button type="button">Crear mi tarjeta</button>
+  <div class="rs">
+    <button type="button" class="link" disabled aria-disabled="true" role="timer" aria-live="off">Reenviar código en 42 s</button>
+    <button type="button" class="link" disabled aria-disabled="true">Recibir por SMS</button>
+    <p class="s m">¿No te llega? Pasa a veces. Pregunta en el mostrador de Barbería Vélez: ahí te ayudan.</p></div>
+  <p class="hecho">Hecho con <b>LealTab</b></p>
+</div></div>
+
+<!-- 2b -->
+<div class="col"><h3>C1·2b · Paso 2, reenvío disponible (pasaron 60 s) <span class="ca">CA-C1.18, CA-C1.19</span></h3>
+<div class="ph">
+  <div class="top"><div class="biz"><div class="logo">BV</div><div><b>Barbería Vélez</b></div></div><button type="button" class="link">‹ Cambiar número</button></div>
+  <div class="stp"><b>Paso 2 de 2</b><div class="bars" aria-hidden="true"><i class="on"></i><i class="on"></i></div></div>
+  <h1>Escribe tu código</h1>
+  <div><span class="e info">Enviado por WhatsApp</span></div>
+  <p class="m">Te lo mandamos por WhatsApp al +52 993 123 4567. Dura 10 minutos.</p>
+  <label>Código de 6 dígitos<input class="code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="[0-9]*" value=""></label>
+  <button type="button">Crear mi tarjeta</button>
+  <div class="rs">
+    <button type="button" class="link">Reenviar código</button>
+    <button type="button" class="link">Recibir por SMS</button>
+    <p class="s m">¿No te llega? Pasa a veces. Pregunta en el mostrador de Barbería Vélez: ahí te ayudan.</p></div>
+  <p class="hecho">Hecho con <b>LealTab</b></p>
+</div></div>
+
+<!-- 2c -->
+<div class="col"><h3>C1·2c · Se envió por SMS (automático porque WhatsApp falló; el cuerpo cambia a «por SMS» también si lo pidió el cliente) <span class="ca">CA-C1.19, CA-C1.20</span></h3>
+<div class="ph">
+  <div class="top"><div class="biz"><div class="logo">BV</div><div><b>Barbería Vélez</b></div></div><button type="button" class="link">‹ Cambiar número</button></div>
+  <div class="stp"><b>Paso 2 de 2</b><div class="bars" aria-hidden="true"><i class="on"></i><i class="on"></i></div></div>
+  <h1>Escribe tu código</h1>
+  <div class="box warn" aria-live="polite"><span class="e warn">Enviado por SMS</span><p>No pudimos usar WhatsApp, así que te lo mandamos por SMS al +52 993 123 4567.</p></div>
+  <label>Código de 6 dígitos<input class="code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="[0-9]*" value=""></label>
+  <button type="button">Crear mi tarjeta</button>
+  <div class="rs">
+    <button type="button" class="link" disabled aria-disabled="true" role="timer" aria-live="off">Reenviar código en 58 s</button></div>
+  <p class="hecho">Hecho con <b>LealTab</b></p>
+</div></div>
+
+<!-- 2d -->
+<div class="col"><h3>C1·2d · Verificando <span class="ca">CA-C1.15</span></h3>
+<div class="ph" aria-busy="true">
+  <div class="top"><div class="biz"><div class="logo">BV</div><div><b>Barbería Vélez</b></div></div><button type="button" class="link" disabled>‹ Cambiar número</button></div>
+  <div class="stp"><b>Paso 2 de 2</b><div class="bars" aria-hidden="true"><i class="on"></i><i class="on"></i></div></div>
+  <h1>Escribe tu código</h1>
+  <label>Código de 6 dígitos<input class="code" readonly value="482913"></label>
+  <p class="s m" aria-live="polite"><span class="e info">Verificando</span> Verificando tu código.</p>
+  <button type="button" disabled aria-busy="true">Verificando…</button>
+  <p class="hecho">Hecho con <b>LealTab</b></p>
+</div></div>
+
+<!-- 2e -->
+<div class="col"><h3>C1·2e · Código incorrecto (quedan 3 intentos) <span class="ca">CA-C1.16</span></h3>
+<div class="ph">
+  <div class="top"><div class="biz"><div class="logo">BV</div><div><b>Barbería Vélez</b></div></div><button type="button" class="link">‹ Cambiar número</button></div>
+  <div class="stp"><b>Paso 2 de 2</b><div class="bars" aria-hidden="true"><i class="on"></i><i class="on"></i></div></div>
+  <h1>Escribe tu código</h1>
+  <label for="g-c">Código de 6 dígitos<input id="g-c" class="code bad" inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="[0-9]*" aria-invalid="true" aria-describedby="g-e" value="482190"></label>
+  <div class="box err" id="g-e" role="alert"><span class="e err">Error: código incorrecto</span><p>Ese código no es el correcto. Revisa los 6 dígitos. Te quedan 3 intentos.</p></div>
+  <button type="button">Crear mi tarjeta</button>
+  <div class="rs">
+    <button type="button" class="link" disabled aria-disabled="true" role="timer" aria-live="off">Reenviar código en 20 s</button>
+    <button type="button" class="link" disabled aria-disabled="true">Recibir por SMS</button></div>
+  <p class="hecho">Hecho con <b>LealTab</b></p>
+</div></div>
+
+<!-- 2f -->
+<div class="col"><h3>C1·2f · Código vencido (10 min) <span class="ca">CA-C1.17</span></h3>
+<div class="ph">
+  <div class="top"><div class="biz"><div class="logo">BV</div><div><b>Barbería Vélez</b></div></div><button type="button" class="link">‹ Cambiar número</button></div>
+  <div class="stp"><b>Paso 2 de 2</b><div class="bars" aria-hidden="true"><i class="on"></i><i class="on"></i></div></div>
+  <h1>Escribe tu código</h1>
+  <label for="h-c">Código de 6 dígitos<input id="h-c" class="code bad" inputmode="numeric" autocomplete="one-time-code" maxlength="6" aria-invalid="true" aria-describedby="h-e" value="482913"></label>
+  <div class="box err" id="h-e" role="alert"><span class="e err">Código vencido</span><p>Este código ya venció: dura 10 minutos. Pide uno nuevo.</p></div>
+  <button type="button">Pedir otro código</button>
+  <button type="button" class="sec">Recibir por SMS</button>
+  <p class="hecho">Hecho con <b>LealTab</b></p>
+</div></div>
+
+<!-- 2g -->
+<div class="col"><h3>C1·2g · Número en pausa: 5 intentos, el código se cancela y el número descansa 15 min <span class="ca">CA-C1.26</span></h3>
+<div class="ph">
+  <div class="top"><div class="biz"><div class="logo">BV</div><div><b>Barbería Vélez</b></div></div></div>
+  <div class="stp"><b>Paso 2 de 2</b><div class="bars" aria-hidden="true"><i class="on"></i><i class="on"></i></div></div>
+  <h1>Escribe tu código</h1>
+  <label>Código de 6 dígitos<input class="code bad" disabled value="482190"></label>
+  <div class="box err" role="alert"><span class="e err">Número en pausa</span><p>Hubo 5 intentos con este código, así que lo cancelamos. Por seguridad, este número descansa hasta las 11:27. Después podrás pedir otro código. Pregunta en el mostrador de Barbería Vélez: ahí te ayudan.</p></div>
+  <button type="button" class="sec">Cambiar número</button>
+  <button type="button">Entendido</button>
+  <p class="hecho">Hecho con <b>LealTab</b></p>
+</div></div>
+
+<!-- 2h -->
+<div class="col"><h3>C1·2h · Paso 2, sin conexión <span class="ca">CA-C1.21</span></h3>
+<div class="ph">
+  <div class="top"><div class="biz"><div class="logo">BV</div><div><b>Barbería Vélez</b></div></div><button type="button" class="link">‹ Cambiar número</button></div>
+  <div class="pill" aria-live="polite">● Sin conexión</div>
+  <div class="stp"><b>Paso 2 de 2</b><div class="bars" aria-hidden="true"><i class="on"></i><i class="on"></i></div></div>
+  <h1>Escribe tu código</h1>
+  <label>Código de 6 dígitos<input class="code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" value="482913"></label>
+  <div class="box warn" aria-live="polite"><span class="e warn">Sin conexión</span><p>Para crear tu tarjeta hace falta internet. Lo que escribiste se queda aquí; inténtalo cuando vuelva la señal.</p></div>
+  <button type="button">Intentar de nuevo</button>
+  <p class="hecho">Hecho con <b>LealTab</b></p>
+</div></div>
+
+<!-- 2i -->
+<div class="col"><h3>C1·2i · Número verificado, pero falló la creación de la tarjeta (copy: lo propone el designer; falta en microcopy.md) <span class="ca">CA-C1.23</span></h3>
+<div class="ph">
+  <div class="top"><div class="biz"><div class="logo">BV</div><div><b>Barbería Vélez</b></div></div></div>
+  <div class="stp"><b>Paso 2 de 2</b><div class="bars" aria-hidden="true"><i class="on"></i><i class="on"></i></div></div>
+  <div><span class="e info">Número verificado</span></div>
+  <h1>Ya casi está</h1>
+  <div class="box err" role="alert"><span class="e err">No se creó tu tarjeta</span><p>Tu número ya está verificado, pero no pudimos crear tu tarjeta. No necesitas otro código. Inténtalo de nuevo.</p></div>
+  <button type="button">Reintentar</button>
+  <div class="note">Si sigue fallando, pregunta en el mostrador de Barbería Vélez: ahí te ayudan.</div>
+  <p class="hecho">Hecho con <b>LealTab</b></p>
+</div></div>
+
+<!-- 2m -->
+<div class="col"><h3>C1·2m · Demasiados códigos (3 por hora, 10 al día o 10 por hora por IP) <span class="ca">CA-C1.11</span></h3>
+<div class="ph">
+  <div class="top"><div class="biz"><div class="logo">BV</div><div><b>Barbería Vélez</b></div></div><button type="button" class="link">‹ Cambiar número</button></div>
+  <div class="stp"><b>Paso 2 de 2</b><div class="bars" aria-hidden="true"><i class="on"></i><i class="on"></i></div></div>
+  <h1>Escribe tu código</h1>
+  <label>Código de 6 dígitos<input class="code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" value=""></label>
+  <div class="box warn" role="alert"><span class="e warn">Espera un momento</span><p>Ya mandamos varios códigos a este número. Si tienes uno reciente, escríbelo arriba: dura 10 minutos. Si no, inténtalo más tarde. Pregunta en el mostrador de Barbería Vélez: ahí te ayudan.</p></div>
+  <button type="button">Entendido</button>
+  <p class="s m">Si el límite salta en el paso 1 (sin campo de código arriba), la frase «escríbelo arriba» no aplica: texto por definir con el copywriter.</p>
+  <p class="hecho">Hecho con <b>LealTab</b></p>
+</div></div>
+
+<div class="sech">Éxito · después de verificar (se muestra C2; C3 si la app ya está instalada o si ya tenía la tarjeta)</div>
+
+<!-- 2j -->
+<div class="col"><h3>C1·2j · Éxito, cliente nuevo (con sello de bienvenida) <span class="ca">CA-C1.22</span></h3>
+<div class="ph">
+  <div class="biz"><div class="logo">BV</div><div><b>Barbería Vélez</b><span>Villahermosa</span></div></div>
+  <div class="ok" aria-live="polite">✓ Tu tarjeta está lista</div>
+  <p class="m">Número verificado. Tu tarjeta de Barbería Vélez ya está en tu celular.</p>
+  <div class="note"><b>Tu sello de bienvenida ya está aquí.</b> Llevas 1/8.</div>
+  <h1>Tenla siempre a un toque</h1>
+  <p class="m">Guarda tus tarjetas en tu inicio. Sin descargar nada.</p>
+  <p class="s m">(Sigue la guía de 3 pasos de C2 con pestañas iPhone y Android. Ver <code>c2-instalar-ios-install-token</code> para iPhone.)</p>
+  <button type="button">Ya la agregué</button>
+  <button type="button" class="link">Ahora no</button>
+  <p class="hecho">Hecho con <b>LealTab</b></p>
+</div></div>
+
+<!-- 2k -->
+<div class="col"><h3>C1·2k · Éxito, el teléfono ya tenía tarjetas (solo se nota después de verificar) <span class="ca">CA-C1.24</span></h3>
+<div class="ph">
+  <div class="biz"><div class="logo">BV</div><div><b>Barbería Vélez</b><span>Villahermosa</span></div></div>
+  <div class="ok" aria-live="polite">✓ Tu tarjeta está lista</div>
+  <div class="box info"><span class="e info">Número verificado</span><p>Listo, aquí están tus tarjetas.</p></div>
+  <div class="box info"><span class="e info">Más seguro</span><p>Por tu seguridad, cerramos tus tarjetas en otros teléfonos y navegadores. Si las necesitas ahí, entra de nuevo con un código.</p><button type="button" class="link">Entendido</button></div>
+  <div class="note"><b>Tu sello de bienvenida ya está aquí.</b> Llevas 1/8.</div>
+  <button type="button">Ver mi tarjeta</button>
+  <button type="button" class="sec">Ver mis tarjetas</button>
+  <p class="hecho">Hecho con <b>LealTab</b></p>
+</div></div>
+
+<!-- 2l -->
+<div class="col"><h3>C1·2l · Éxito, ya tenía tarjeta en este negocio (otro navegador o teléfono) <span class="ca">CA-C1.25</span></h3>
+<div class="ph">
+  <div class="biz"><div class="logo">BV</div><div><b>Barbería Vélez</b><span>Villahermosa</span></div></div>
+  <div class="box info" aria-live="polite"><span class="e info">Número verificado</span><p>Ya tienes tu tarjeta de Barbería Vélez.</p></div>
+  <div class="panel row3"><div class="logo">BV</div><div style="flex:1"><b>Barbería Vélez</b><p class="m s">Corte gratis · faltan 4</p></div>
+    <svg width="64" height="64" viewBox="0 0 100 100" role="img" aria-label="4 de 8 sellos"><circle cx="50" cy="50" r="40" fill="none" stroke="var(--color-menta)" stroke-width="10"/><circle cx="50" cy="50" r="40" fill="none" stroke="var(--color-bosque)" stroke-width="10" stroke-linecap="round" stroke-dasharray="251.3" stroke-dashoffset="125.7" transform="rotate(-90 50 50)"/><text x="50" y="57" text-anchor="middle" style="font:800 22px var(--font-display);font-stretch:75%;fill:var(--color-noche)">4/8</text></svg></div>
+  <button type="button">Ver mi tarjeta</button>
+  <p class="hecho">Hecho con <b>LealTab</b></p>
+</div></div>
+
+</div>
+</body>
+</html>

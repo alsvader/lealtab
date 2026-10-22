@@ -17,7 +17,7 @@ Instrucciones para cualquier agente de IA que trabaje en este repositorio. Las r
 - un local real usa el flujo completo una semana sin errores bloqueantes;
 - al menos 10 pilotos confirmados por escrito, de 3 oficios o más;
 - entrevistas del ícono y consulta legal LFPDPPP hechas (D-017);
-- antes del piloto, también: aviso de privacidad actualizado para la analítica (D-018) y API de WhatsApp Business configurada (D-011).
+- antes del piloto, también: aviso de privacidad actualizado para la analítica (D-018) y proveedor del código (SMS Masivos) configurado y probado (D-024).
 
 Gates:
 - **Gate 1:** 3 de 4 criterios, G1-a a G1-d (PRD §2.2).
@@ -28,9 +28,9 @@ Gates:
 
 Si dos fuentes chocan, manda la que va primero:
 
-1. `docs/decisiones.md`: decisiones vigentes D-001 a D-023.
+1. `docs/decisiones.md`: decisiones vigentes D-001 a D-031.
 2. `brand/06-product-design/`: pantallas, estados y reglas aprobadas. La hoja de entrega es `07-entrega-desarrollo.md`.
-3. `docs/prd/PRD-lealtab-mvp.md` (v1.4): requisitos RF-, RNF-, MET-, G1-, riesgos R- y preguntas abiertas PQ-.
+3. `docs/prd/PRD-lealtab-mvp.md` (v1.6): requisitos RF-, RNF-, MET-, G1-, riesgos R- y preguntas abiertas PQ-.
 4. `docs/adr/001-modelo-pwa.md` y `docs/adr/002-stack.md`.
 5. `docs/02-plan-de-trabajo.md` (plan v3) y `brand/PLAN.md` (estado y bitácora de marca y diseño).
 6. `PRODUCT.md`, `DESIGN.md` y `brand/04-design-system/` (`tokens.css`, `tokens.json`).
@@ -60,7 +60,7 @@ Si dos fuentes chocan, manda la que va primero:
 **Stack (ADR-002, D-023, RNF-STK-01 a 15)**
 - TypeScript y Next.js (App Router), con React Server Components por defecto. Componentes de cliente solo donde hacen falta: escáner, cola sin conexión, QR rotativo.
 - Tailwind y shadcn/ui, con los tokens de `tokens.css` tal cual, sin inventar colores (RNF-DIS-01). pnpm.
-- Supabase: Postgres con **RLS por `negocio_id`** en todas las tablas de negocio, y Auth del dueño (correo con código de 10 min o contraseña).
+- Supabase: Postgres con **RLS por `negocio_id`** en todas las tablas de negocio, y Auth: el dueño entra con correo y código de 10 min o contraseña; el cliente, con su teléfono verificado por un código (D-031).
 - Vercel. Pagos solo con links de Stripe o Mercado Pago.
 - **Todo el código de la app vive en `web/`**: Next.js, `web/supabase/` (config y `migrations/`), Dockerfile multi-stage y Docker Compose (Supabase y app en local). Nada de código en la raíz ni en `docs/`.
 - Todo cambio de base es una migración en `web/supabase/migrations`. Corre en el build de producción de Vercel y, si falla, el build falla.
@@ -72,7 +72,7 @@ Si dos fuentes chocan, manda la que va primero:
 
 **Analítica (D-018)**
 - Tabla propia de eventos en Supabase, con los nombres exactos de `07-entrega` §5.
-- Sin cookies, sin PostHog y sin scripts de terceros.
+- Sin cookies de analítica, sin PostHog y sin scripts de terceros. «Sin cookies» se refiere a la analítica y a los terceros: las cookies de sesión de Supabase Auth, de primera parte y necesarias, sí existen (ADR-003 §2.4, D-031).
 - Los nombres viejos están prohibidos (RF-EVT-03).
 
 **Privacidad (LFPDPPP)**
