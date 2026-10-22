@@ -51,13 +51,15 @@ No existe `docs/gates.md`: los gates están en el PRD §2.2 (Gate 1) y en el pla
   - D-001: la tarjeta es web (PWA), sin Apple Wallet ni Google Wallet. Instalarla es opcional.
   - D-002: plataforma propia, sin motores ni marcas blancas de terceros.
   - D-010: la visita se registra en **N5 Mostrador, dentro del panel**, escaneando el QR personal del cliente, con **una cuenta compartida por negocio** (sin PIN ni usuarios de staff). El QR del mostrador solo sirve para registrarse.
-  - D-011: el resumen semanal vive **solo en el panel** (N0). La API de WhatsApp Business se usa solo para el código de recuperación del cliente.
+  - D-011: el resumen semanal vive **solo en el panel** (N0). El código del cliente (registro y recuperación) sale por WhatsApp o SMS con SMS Masivos y el hook de Supabase (D-024, D-031); no hay API de WhatsApp Business propia.
   - D-013 y D-019: una sola app LealTab con «Mis tarjetas». El teléfono es el único identificador global (`identidad`) y cada negocio guarda su propio `cliente_negocio`.
   - D-014: QR rotativo de 60 s, 1 sello por día por defecto, bloqueo fijo de 2 min contra el doble escaneo.
   - D-015: sin conexión primero; el servidor es la fuente de verdad y lo rechazado va a Clientes → Por revisar.
-  - D-018: analítica propia, sin cookies y sin herramientas de terceros.
+  - D-018: analítica propia, sin cookies de analítica y sin herramientas de terceros. La sesión de Supabase Auth usa cookies necesarias de primera parte (ADR-003 §2.4).
   - D-021 y D-022: una sola sucursal en el MVP; el producto vive en `lealtab.com/c/` (cliente) y `lealtab.com/panel/` (negocio).
   - D-023: stack decidido en el ADR-002.
+  - D-024: el código del cliente se envía con SMS Masivos y el hook de SMS de Supabase; el correo del dueño sale por Resend.
+  - D-031: el cliente usa Supabase Auth con su teléfono verificado por un código desde el registro; sin «por confirmar»; dueño y cliente comparten `auth.users` y se distinguen por `app_metadata.rol`.
 - Lo que las fuentes no resuelven es **Por definir**. No lo inventes: cita la PQ del PRD que lo cubre o propón una nueva.
 - Marca como `[SUPUESTO]` todo dato no verificado y cita la fuente (URL) de cada dato externo.
 - Guarda tus entregables en `docs/fase-N/`, con N según la numeración del plan v3 (`docs/fase-7/`, `docs/fase-8/`…). `docs/fase-2/` es historial. El código de la app no va en `docs/`: todo va en `web/`.

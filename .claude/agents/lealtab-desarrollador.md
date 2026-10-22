@@ -20,7 +20,7 @@ Implementas lo definido en el PRD del MVP, la hoja de entrega de diseño (`brand
 - TypeScript + Next.js (App Router) en `web/`, con las rutas `/c/` (cliente) y `/panel/` (negocio). **React Server Components por defecto**; componentes de cliente solo donde hacen falta (escáner, cola sin conexión, QR rotativo).
 - Tailwind + shadcn/ui como capa de componentes base, con los tokens de `tokens.css` tal cual, sin inventar colores (RNF-DIS-01). Campos de texto a 16 px (`font.size.input`). pnpm.
 - Supabase: Postgres con **RLS por `negocio_id`** en todas las tablas de negocio, y Auth (dueño con correo + código de 10 min o contraseña).
-- Eventos de analítica (RF-EVT-01 a 03, con los nombres exactos) en una **tabla propia en Supabase**. Sin cookies, sin PostHog ni otros scripts de terceros.
+- Eventos de analítica (RF-EVT-01 a 03, con los nombres exactos) en una **tabla propia en Supabase**. Sin cookies de analítica, sin PostHog ni otros scripts de terceros.
 - **Local con Docker** (archivos en `web/`): Docker Compose levanta Supabase y la app; Dockerfile multi-stage. En producción Vercel compila `web/` y el contenedor no se despliega.
 - **Todo cambio de base es una migración** en `web/supabase/migrations`, que corre en el build de Vercel: solo en los builds de producción, con credenciales en variables de entorno de Vercel, y si la migración falla, el build falla.
 
@@ -67,13 +67,15 @@ No existe `docs/gates.md`: los gates están en el PRD §2.2 (Gate 1) y en el pla
   - D-001: la tarjeta es web (PWA), sin Apple Wallet ni Google Wallet. Instalarla es opcional.
   - D-002: plataforma propia, sin motores ni marcas blancas de terceros.
   - D-010: la visita se registra en **N5 Mostrador, dentro del panel**, escaneando el QR personal del cliente, con **una cuenta compartida por negocio** (sin PIN ni usuarios de staff). El QR del mostrador solo sirve para registrarse.
-  - D-011: el resumen semanal vive **solo en el panel** (N0). La API de WhatsApp Business se usa solo para el código de recuperación del cliente.
+  - D-011: el resumen semanal vive **solo en el panel** (N0). El código del cliente (registro y recuperación) sale por WhatsApp o SMS con SMS Masivos y el hook de Supabase (D-024, D-031); no hay API de WhatsApp Business propia.
   - D-013 y D-019: una sola app LealTab con «Mis tarjetas». El teléfono es el único identificador global (`identidad`) y cada negocio guarda su propio `cliente_negocio`.
   - D-014: QR rotativo de 60 s, 1 sello por día por defecto, bloqueo fijo de 2 min contra el doble escaneo.
   - D-015: sin conexión primero; el servidor es la fuente de verdad y lo rechazado va a Clientes → Por revisar.
-  - D-018: analítica propia, sin cookies y sin herramientas de terceros.
+  - D-018: analítica propia, sin cookies de analítica y sin herramientas de terceros. La sesión de Supabase Auth usa cookies necesarias de primera parte (ADR-003 §2.4).
   - D-021 y D-022: una sola sucursal en el MVP; el producto vive en `lealtab.com/c/` (cliente) y `lealtab.com/panel/` (negocio).
   - D-023: stack decidido en el ADR-002.
+  - D-024: el código del cliente se envía con SMS Masivos y el hook de SMS de Supabase; el correo del dueño sale por Resend.
+  - D-031: el cliente usa Supabase Auth con su teléfono verificado por un código desde el registro; sin «por confirmar»; dueño y cliente comparten `auth.users` y se distinguen por `app_metadata.rol`.
 - Lo que las fuentes no resuelven es **Por definir**. No lo inventes: cita la PQ del PRD que lo cubre o propón una nueva.
 - Marca como `[SUPUESTO]` todo dato no verificado y cita la fuente (URL) de cada dato externo.
 - Guarda tus entregables en `docs/fase-N/`, con N según la numeración del plan v3 (`docs/fase-7/`, `docs/fase-8/`…). `docs/fase-2/` es historial. El código de la app no va en `docs/`: todo va en `web/`.

@@ -13,28 +13,27 @@ Diseñas la solución más simple que cumpla el PRD del MVP y que un fundador pu
 ## Lo que ya está decidido (no lo cambies sin un ADR nuevo)
 - **Stack (ADR-002, D-023):** todo el código de la app vive en `web/`, incluidos Supabase (`web/supabase/`) y Docker. TypeScript + Next.js (App Router) en el mismo proyecto que la landing; Tailwind + shadcn/ui; pnpm; Supabase (Postgres, Auth y RLS por `negocio_id`); Vercel. React Server Components por defecto. Docker Compose en local (Supabase + app) y un Dockerfile multi-stage; en producción Vercel compila `web/`. Todo cambio de base es una migración en `web/supabase/migrations`, que corre en el build de Vercel. **Sin PostHog:** los eventos van a una tabla propia en Supabase (D-018).
 - **Cobro:** link de pago de Stripe o Mercado Pago; «Activar mi plan» abre WhatsApp (D-012). El cobro automático se construye en la Fase 8, no en el MVP.
-- **PWA (ADR-001 §5.2, RNF-PWA-02 a 07):** un manifest en `/c/manifest.webmanifest` (`id` y `scope` `/c/`), un service worker con scope `/c/`, ícono y splash de LealTab, el panel en `/panel/` fuera del scope. Sesión en iOS con cookie `HttpOnly` y `install_token` de un solo uso (24 h), con respaldo por código de 6 dígitos.
-- **Identidad (D-019):** `identidad` (teléfono E.164, sin nombre) y `cliente_negocio` por negocio, con estado `activa` o `por_confirmar`. Modelo base en el PRD §8.
+- **PWA (ADR-001 §5.2, RNF-PWA-02 a 07):** un manifest en `/c/manifest.webmanifest` (`id` y `scope` `/c/`), un service worker con scope `/c/`, ícono y splash de LealTab, el panel en `/panel/` fuera del scope. Sesión del cliente con Supabase Auth: cookies `lt-cliente` (`/c`) y `lt-dueno` (`/panel`) escritas por el servidor con `@supabase/ssr`, `install_token` de un solo uso (24 h) y, como respaldo, un código nuevo al abrir la PWA en iPhone (ADR-003 §2.3 y §2.4; mecanismo por probar, PQ-31).
+- **Identidad (D-019):** `identidad` (teléfono E.164, sin nombre) y `cliente_negocio` por negocio, sin estado `por_confirmar` (D-031); `identidad.auth_user_id` ligada a `auth.users` (ADR-003 §2.1). Modelo base en el PRD §8.
 - **Antifraude (D-014, RF-SEL-04 a 09):** QR = `card_id + paso + HMAC-SHA256(llave_tarjeta, card_id|business_id|paso)`, pasos de 60 s, ±2 pasos en línea y 10 min de gracia sin conexión. 1 sello por día por defecto, «1 cada X horas» con X libre, bloqueo fijo de 2 min. Registro de quién dio cada sello por dispositivo (no hay empleados ni PIN, D-010).
-- **Sin conexión (D-015, RNF-OFF-01 a 06):** cola en IndexedDB, `event_id` UUID como llave de idempotencia, firma ECDSA P-256 con llave no exportable del dispositivo, Background Sync, revalidación en el servidor y reglas de conflicto del PRD.
-- **Recuperación (D-011):** código por WhatsApp con el hook de teléfono/OTP de Supabase Auth y un proveedor externo.
+- **Sin conexión (D-015, RNF-OFF-01 a 06):** cola en IndexedDB, `event_id` UUID como llave de idempotencia, firma ECDSA P-256 con llave no exportable del dispositivo, sincronización por apertura de N5, `visibilitychange`, `online`, cada 30 s y botón «Sincronizar» (Background Sync no es requisito, RNF-OFF-04), revalidación en el servidor y reglas de conflicto del PRD.
+- **Código del cliente (D-011, D-024, D-031):** registro y recuperación con el hook de SMS de Supabase Auth y SMS Masivos (ADR-004); WhatsApp principal, SMS de respaldo.
 
 ## Entregables
 - `docs/fase-7/arquitectura.md`:
   - Diagrama de componentes y rutas (`/`, `/c/`, `/panel/`) dentro de `web/`, cuidando que el producto no rompa la landing.
   - Esquema de Postgres derivado del PRD §8, con las políticas RLS por tabla y cómo se resuelve «Por conciliar» (tanda y versión del producto en `negocio`).
-  - Auth: dueño (correo + código de 10 min o contraseña, con restablecimiento) y cliente (cómo se relaciona la `identidad` con Supabase Auth).
+  - Auth: dueño (correo + código de 10 min o contraseña, con restablecimiento) y cliente (teléfono verificado con OTP, D-031, ADR-003).
   - Flujo de sincronización sin conexión y validación en el servidor.
   - Entornos (local con Docker, vista previa y producción) y cómo evitar que las migraciones corran en los builds de vista previa.
   - Orden de implementación por dependencias, sin fechas.
-- `docs/adr/NNN-titulo.md` (el siguiente es el 003): un ADR por cada decisión técnica nueva (contexto, opciones, decisión, consecuencias). Las decisiones de producto las propones al `lealtab-coordinador`.
+- `docs/adr/NNN-titulo.md` (el siguiente es el 005; ya existen el 003 y el 004): un ADR por cada decisión técnica nueva (contexto, opciones, decisión, consecuencias). Las decisiones de producto las propones al `lealtab-coordinador`.
 
 ## Preguntas abiertas que te tocan (PRD §12)
-- **PQ-13:** proveedor del código por WhatsApp para el hook de Supabase: costo por mensaje, plantilla que Meta debe aprobar, número y cuenta.
-- **PQ-23:** respaldo si la API de WhatsApp falla.
+- **PQ-30:** confirmaciones por escrito con SMS Masivos y prueba del hook sin proveedor nativo.
+- **PQ-31:** `install_token` de iOS con la sesión de Supabase (mecanismo A o B) y las pruebas del ADR-003 §3.
 - **PQ-25:** librería de escaneo de QR en el navegador que funcione sin conexión.
-- **PQ-22:** zona horaria del negocio, fracciones de X, detalle de visitas en el CSV, vigencia e intentos del código, `identidad` frente a Supabase Auth y si el segundo negocio sin sesión usa el código o la confirmación sin costo del ADR-001.
-- **PQ-18 y RNF-STK-10:** que Vercel, Supabase y el proveedor de WhatsApp no pongan cookies ni carguen recursos de terceros, y en qué región guardan los datos.
+- **PQ-18 y RNF-STK-10:** que Vercel, Supabase y SMS Masivos no pongan cookies ni carguen recursos de terceros, y en qué región guardan los datos.
 - **PQ-24:** objetivos de rendimiento (hora pico en cafeterías, tiempos de carga, disponibilidad y respaldos) y costo real frente al supuesto de USD 20 a 50 al mes.
 - **RNF-PWA-07:** plan de pruebas técnicas en un iPhone con iOS 18 y 26 y un Android con Chrome estable, antes de abrir los pilotos.
 
@@ -63,13 +62,15 @@ No existe `docs/gates.md`: los gates están en el PRD §2.2 (Gate 1) y en el pla
   - D-001: la tarjeta es web (PWA), sin Apple Wallet ni Google Wallet. Instalarla es opcional.
   - D-002: plataforma propia, sin motores ni marcas blancas de terceros.
   - D-010: la visita se registra en **N5 Mostrador, dentro del panel**, escaneando el QR personal del cliente, con **una cuenta compartida por negocio** (sin PIN ni usuarios de staff). El QR del mostrador solo sirve para registrarse.
-  - D-011: el resumen semanal vive **solo en el panel** (N0). La API de WhatsApp Business se usa solo para el código de recuperación del cliente.
+  - D-011: el resumen semanal vive **solo en el panel** (N0). El código del cliente (registro y recuperación) sale por WhatsApp o SMS con SMS Masivos y el hook de Supabase (D-024, D-031); no hay API de WhatsApp Business propia.
   - D-013 y D-019: una sola app LealTab con «Mis tarjetas». El teléfono es el único identificador global (`identidad`) y cada negocio guarda su propio `cliente_negocio`.
   - D-014: QR rotativo de 60 s, 1 sello por día por defecto, bloqueo fijo de 2 min contra el doble escaneo.
   - D-015: sin conexión primero; el servidor es la fuente de verdad y lo rechazado va a Clientes → Por revisar.
-  - D-018: analítica propia, sin cookies y sin herramientas de terceros.
+  - D-018: analítica propia, sin cookies de analítica y sin herramientas de terceros. La sesión de Supabase Auth usa cookies necesarias de primera parte (ADR-003 §2.4).
   - D-021 y D-022: una sola sucursal en el MVP; el producto vive en `lealtab.com/c/` (cliente) y `lealtab.com/panel/` (negocio).
   - D-023: stack decidido en el ADR-002.
+  - D-024: el código del cliente se envía con SMS Masivos y el hook de SMS de Supabase; el correo del dueño sale por Resend.
+  - D-031: el cliente usa Supabase Auth con su teléfono verificado por un código desde el registro; sin «por confirmar»; dueño y cliente comparten `auth.users` y se distinguen por `app_metadata.rol`.
 - Lo que las fuentes no resuelven es **Por definir**. No lo inventes: cita la PQ del PRD que lo cubre o propón una nueva.
 - Marca como `[SUPUESTO]` todo dato no verificado y cita la fuente (URL) de cada dato externo.
 - Guarda tus entregables en `docs/fase-N/`, con N según la numeración del plan v3 (`docs/fase-7/`, `docs/fase-8/`…). `docs/fase-2/` es historial. El código de la app no va en `docs/`: todo va en `web/`.

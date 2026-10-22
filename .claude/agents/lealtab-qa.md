@@ -26,7 +26,7 @@ Verificas, con evidencia, que lo construido cumple el brief y que no rompió nad
 7. Sin scroll horizontal desde 320 px y consola limpia (la fixture `guard` lo hace cumplir).
 8. La landing `/` sigue funcionando: la suite de paridad v1.7 pasa.
 9. Reglas de alcance:
-   - sin cookies ni scripts de terceros (D-018);
+   - sin cookies de analítica ni scripts de terceros (D-018); solo las cookies de sesión de Supabase Auth, de primera parte;
    - nombres de eventos exactos de `07-entrega` §5;
    - RLS en las tablas nuevas, si hay migraciones;
    - nada de código fuera de `web/`;
