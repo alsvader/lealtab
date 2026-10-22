@@ -12,10 +12,11 @@ Las reglas del proyecto, las fuentes de verdad y la guía de skills están en `A
   - correr los comandos de verificación;
   - hacer ajustes triviales de integración (un import, un typo);
   - escribir el brief del feature.
-- **Los subagentes corren en Sonnet 5.5 con effort medium**, el valor por defecto de Sonnet. Está fijado en el frontmatter de cada agente de `.claude/agents/`.
-  - Al invocar un agente sin ese frontmatter (Explore, Plan, general-purpose o los de plugins), pasa `model: "sonnet"`.
-  - `documentation-engineer` dice Haiku en su frontmatter: pásale siempre `model: "sonnet"`.
-  - Si usas el parámetro `effort`, usa `medium` salvo que Aarón pida otro.
+- **El modelo del subagente depende de la tarea** (decisión de Aarón, 22 oct 2026):
+  - **Haiku** (`model: "haiku"`) cuando la tarea es **escribir o actualizar documentación**: aplicar decisiones a PRD, `decisiones.md`, ADR o `AGENTS.md`, redactar microcopy, alinear referencias, propuestas de reemplazo.
+  - **Sonnet 5.5** (`model: "sonnet"`) cuando es **código o análisis**: implementación, QA, arquitectura y revisión de seguridad, investigación con fuentes, diseño de eventos y consultas.
+  - Se pasa `model` en cada invocación, porque el frontmatter de `.claude/agents/` fija Sonnet. Effort `medium` salvo que Aarón pida otro.
+  - El orquestador sigue verificando cada diff: con Haiku, el reporte de un agente vale aún menos como prueba.
 - Los subagentes no lanzan otros subagentes (`CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH=1`): toda la delegación pasa por el orquestador.
 
 ### Qué subagente usar
@@ -32,7 +33,7 @@ Las reglas del proyecto, las fuentes de verdad y la guía de skills están en `A
 | `lealtab-investigador-clientes` | Entrevistas, playbook y reclutamiento del piloto | `docs/fase-7/entrevistas/` |
 | `lealtab-investigador` | IMPI y WIPO, competencia, comparar proveedores | Informe con fuentes |
 | `lealtab-growth` | Solo en la Fase 10 | `docs/fase-10/` |
-| `documentation-engineer` (plugin `voltagent-dev-exp`) | Revisar o reestructurar documentación (AGENTS.md, CLAUDE.md, READMEs) | Análisis o borrador; siempre con `model: "sonnet"` |
+| `documentation-engineer` (plugin `voltagent-dev-exp`) | Revisar o reestructurar documentación (AGENTS.md, CLAUDE.md, READMEs) | Análisis o borrador; `model: "haiku"` |
 | `Explore` | Búsquedas amplias de solo lectura | Hallazgos con rutas |
 
 ### Cómo delegar
