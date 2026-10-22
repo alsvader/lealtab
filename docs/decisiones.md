@@ -325,6 +325,9 @@ Formato: fecha · decisión · motivo · alternativas descartadas · quién deci
   - El umbral se revisa con datos del piloto (Fase 9).
   - Cierra PQ-20 y PQ-27.
 - **Alternativa(s) descartada(s):** semana calendario lunes a domingo (en curso o la última completa); últimos 7 días contando hoy; el ritmo mediano del negocio para quien tiene una sola visita.
+- **Aclaración (22 oct 2026, decisión de Aarón): precedencia de los chips de estado.** Cuando un cliente cumple más de una definición, N6 y N7 muestran **un solo chip**, con esta precedencia: **En riesgo > Frecuente > Nuevo > Al día**. La alerta gana al elogio, porque al dueño le sirve más saber a quién recuperar. «Al día» es el chip neutro de quien no cumple ninguna de las otras tres. El conteo de N6 («Quién regresa») y las listas usan el mismo chip único por cliente, así que cada cliente aparece en una sola categoría.
+  - Ejemplo 1: un cliente Nuevo que ya superó el doble de su intervalo habitual y los 30 días sin volver se muestra **En riesgo**.
+  - Ejemplo 2: un cliente Frecuente que cumple En riesgo se muestra **En riesgo**.
 - **Decidió:** fundador.
 
 ## D-029 · 21 oct 2026 · Los sellos y la recompensa no caducan en el MVP
