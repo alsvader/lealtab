@@ -1,4 +1,9 @@
 {
+  "model": "claude-opus-5-5",
+  "effortLevel": "high",
+  "env": {
+    "CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH": "1"
+  },
   "extraKnownMarketplaces": {
     "voltagent-subagents": {
       "source": {
@@ -8,6 +13,7 @@
     }
   },
   "enabledPlugins": {
-    "voltagent-research@voltagent-subagents": true
+    "voltagent-research@voltagent-subagents": true,
+    "voltagent-dev-exp@voltagent-subagents": true
   }
 }
