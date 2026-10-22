@@ -1,4 +1,5 @@
-// Marcador de T1. T2 lo conecta a env.ts (503 «Producto no configurado» si faltan variables).
-export default function ClientePage() {
-  return <main className="p-space-5 font-body text-body">Producto no configurado</main>;
+import { EstadoProducto } from "../estado-producto";
+
+export default function Page() {
+  return <EstadoProducto />;
 }

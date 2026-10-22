@@ -12,6 +12,12 @@ pnpm lint
 pnpm typecheck
 ```
 
+## Entorno del producto
+
+Copia `.env.local.example` a `.env.local` (o corre `pnpm db:env` con Supabase local arriba). `src/lib/env.ts` lee las variables de forma perezosa: `pnpm build` y `pnpm lint` no las exigen. Sin las de Supabase, `/c` y `/panel` muestran «Producto no configurado».
+
+Scripts que ya funcionan: `pnpm test:unit` (Vitest). Scripts definidos que dependen de tareas siguientes: `db:up`, `db:down`, `db:status`, `db:new`, `db:reset`, `db:lint`, `db:env`, `test:db` (T3, `supabase/config.toml`), `db:types` (T4, carpeta `src/lib/supabase/`), `test:rls` (T4) y `check:cliente` (T6, `scripts/check-no-supabase-en-cliente.sh`).
+
 ## Pruebas e2e (Playwright)
 
 La suite vive en `e2e/` y corre contra el build de producción en el puerto 3120 (`playwright.config.ts` hace `pnpm build` + `next start`; en local reutiliza un servidor que ya esté en ese puerto, y `E2E_PORT` lo cambia).

@@ -8,9 +8,23 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "next typegen && tsc --noEmit",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "db:up": "supabase start",
+    "db:down": "supabase stop",
+    "db:status": "supabase status",
+    "db:new": "supabase migration new",
+    "db:reset": "supabase db reset",
+    "db:lint": "supabase db lint --level warning --fail-on error",
+    "db:types": "supabase gen types typescript --local > src/lib/supabase/database.types.ts",
+    "db:env": "sh scripts/db-env.sh",
+    "test:unit": "vitest run",
+    "test:rls": "vitest run --dir src/test/rls --passWithNoTests",
+    "test:db": "supabase test db",
+    "check:cliente": "sh scripts/check-no-supabase-en-cliente.sh"
   },
   "dependencies": {
+    "@supabase/ssr": "0.12.7",
+    "@supabase/supabase-js": "2.118.0",
     "next": "16.4.0",
     "react": "19.3.0",
     "react-dom": "19.3.0"
@@ -19,14 +33,19 @@
     "@axe-core/playwright": "^4.13.0",
     "@playwright/test": "1.61.1",
     "@tailwindcss/turbopack": "^4",
-    "@types/node": "^20",
+    "@types/node": "^24.19.2",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.4.0",
     "playwright-core": "1.61.1",
+    "supabase": "2.121.0",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "5.0.5"
   },
-  "packageManager": "pnpm@10.28.2"
+  "packageManager": "pnpm@10.28.2",
+  "engines": {
+    "node": ">=22"
+  }
 }
