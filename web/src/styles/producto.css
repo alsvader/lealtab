@@ -1,0 +1,112 @@
+/*
+ * LealTab · CSS del producto (/c/ y /panel/). ADR-007 §2.2.
+ * Tailwind + @theme inline que mapea tokens.css. No importa globals.css (CSS de la landing).
+ * El @theme está repetido a propósito respecto a globals.css; sincronizar a mano.
+ * Sin colores nuevos (RNF-DIS-01).
+ */
+@import "tailwindcss";
+@import "./tokens.css";
+
+@theme inline {
+  /* Color: primitivos y semánticos */
+  --color-lino: var(--color-lino);
+  --color-blanco-lino: var(--color-blanco-lino);
+  --color-noche: var(--color-noche);
+  --color-bosque: var(--color-bosque);
+  --color-menta: var(--color-menta);
+  --color-durazno: var(--color-durazno);
+  --color-gris-noche: var(--color-gris-noche);
+  --color-tostado: var(--color-tostado);
+  --color-durazno-claro: var(--color-durazno-claro);
+  --color-rojo: var(--color-rojo);
+  --color-rosa-claro: var(--color-rosa-claro);
+  --color-bg: var(--color-bg);
+  --color-surface: var(--color-surface);
+  --color-text: var(--color-text);
+  --color-text-muted: var(--color-text-muted);
+  --color-border: var(--color-border);
+  --color-brand: var(--color-brand);
+  --color-accent: var(--color-accent);
+  --color-support: var(--color-support);
+  --color-success: var(--color-success);
+  --color-success-bg: var(--color-success-bg);
+  --color-risk: var(--color-risk);
+  --color-risk-bg: var(--color-risk-bg);
+  --color-error: var(--color-error);
+  --color-error-bg: var(--color-error-bg);
+
+  /* Tipografía: familias (font-display, font-body; font-sans = cuerpo) */
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-sans: var(--font-body);
+
+  /* Tipografía: tamaños con su interlineado (text-h2, text-body...) */
+  --text-display: var(--font-size-display);
+  --text-display--line-height: var(--font-line-display);
+  --text-h1: var(--font-size-h1);
+  --text-h1--line-height: var(--font-line-h1);
+  --text-h2: var(--font-size-h2);
+  --text-h2--line-height: var(--font-line-h2);
+  --text-h3: var(--font-size-h3);
+  --text-h3--line-height: var(--font-line-h3);
+  --text-h4: var(--font-size-h4);
+  --text-h4--line-height: var(--font-line-h4);
+  --text-lead: var(--font-size-lead);
+  --text-lead--line-height: var(--font-line-lead);
+  --text-body: var(--font-size-body);
+  --text-body--line-height: var(--font-line-body);
+  --text-ui: var(--font-size-ui);
+  --text-ui--line-height: var(--font-line-ui);
+  --text-caption: var(--font-size-caption);
+  --text-caption--line-height: var(--font-line-caption);
+  --text-label: var(--font-size-label);
+  --text-label--line-height: var(--font-line-label);
+  --text-stat: var(--font-size-stat);
+  --text-stat--line-height: var(--font-line-stat);
+  --tracking-label: var(--font-tracking-label);
+  --tracking-stat: var(--font-tracking-stat);
+  --tracking-sticker: var(--font-tracking-sticker);
+
+  /* Espaciado (base 4): p-space-4, gap-space-5... Tailwind sigue teniendo su escala --spacing */
+  --spacing-space-1: var(--space-1);
+  --spacing-space-2: var(--space-2);
+  --spacing-space-3: var(--space-3);
+  --spacing-space-4: var(--space-4);
+  --spacing-space-5: var(--space-5);
+  --spacing-space-6: var(--space-6);
+  --spacing-space-7: var(--space-7);
+  --spacing-space-8: var(--space-8);
+
+  /* Radios y sombras duras */
+  --radius-sticker: var(--radius-sticker);
+  --radius-control: var(--radius-control);
+  --radius-card: var(--radius-card);
+  --radius-container: var(--radius-container);
+  --radius-full: var(--radius-full);
+  --shadow-sticker: var(--shadow-sticker);
+  --shadow-button: var(--shadow-button);
+  --shadow-card: var(--shadow-card);
+  --shadow-social: var(--shadow-social);
+  --shadow-storefront: var(--shadow-storefront);
+
+  /* Movimiento */
+  --ease-standard: var(--easing-standard);
+}
+
+/* Base mínima del producto (usa solo tokens) */
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: var(--font-size-body);
+  line-height: var(--font-line-body);
+  -webkit-font-smoothing: antialiased;
+}
+:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+input, select, textarea {
+  font-size: var(--font-size-input);
+}

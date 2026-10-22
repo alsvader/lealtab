@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { archivo, manrope } from "./fonts";
+import { archivo, manrope } from "../fonts";
 import { OG_BASE, SITE_URL } from "@/lib/site";
 import "@/styles/globals.css";
 
