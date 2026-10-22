@@ -546,13 +546,13 @@ group by h.canal_origen;
 
 ## 7. Consultas de Gate 1 (G1-a a G1-d)
 
-Todas parten de **N = los negocios de `:'tanda'`**. El corte de la primera tanda está **Por definir** (PRD §2.2). Convenciones `[SUPUESTO]` que el PRD no fija y que quedan como PQ propuesta (sección 11):
+Todas parten de **N = los negocios de `:'tanda'`**. El corte de la primera tanda está **Por definir** (PRD §2.2). Convenciones que el PRD no fijaba, **aprobadas por Aarón el 22 oct 2026 (PQ-32)** y aclaradas en [D-004](../decisiones.md):
 
 - **Día 1** = fecha local del alta (`negocio.alta_ts` en la zona del negocio). Días 1 a 30 = `dia1` a `dia1 + 29`; día 37 = `dia1 + 36`.
 - **Las 4 semanas** de G1-a = días 1-7, 8-14, 15-21 y 22-28 (los días 29 y 30 no cuentan para «sellos en ≥3 de 4 semanas»).
-- **Visita** = sello o canje aceptado en el mostrador (`v_visita`: sin bienvenida ni correcciones, D-028 y D-027). **«Segunda visita sellada»** = un cliente con visitas en ≥2 días locales distintos dentro de los días 1 a 30.
+- **Visita** = sello o canje aceptado en el mostrador (`v_visita`: sin bienvenida ni correcciones, D-028 y D-027). **«Segunda visita sellada»** = un cliente con visitas en ≥2 días locales distintos dentro de los días 1 a 30 (aprobado por Aarón el 22 oct 2026). Por eso «≥5 segundas visitas» de G1-a son **5 clientes**, no 5 visitas sueltas.
 - **«Regresa»** (G1-d) = una visita en un día local posterior al de su alta y hasta 21 días después.
-- Un negocio es **evaluable** cuando ya pasó la ventana de su criterio; los no evaluables se muestran, no se cuentan como «no cumple».
+- Un negocio es **evaluable** cuando ya pasó la ventana de su criterio; los no evaluables se muestran, no se cuentan como «no cumple» (aprobado por Aarón el 22 oct 2026).
 
 ### 7.1 G1-a: activos
 
@@ -657,7 +657,7 @@ from b;
 
 ### 7.4 G1-d: retorno
 
-Inscritos en días 1 a 16 que regresan en ≤21 días. **Cifra principal: global por cliente** (todos los inscritos de N juntos); el PRD no dice si es global o mediana por negocio, así que se reporta también la mediana por negocio `[SUPUESTO]`. Solo entran inscritos con su ventana de 21 días ya cerrada.
+Inscritos en días 1 a 16 que regresan en ≤21 días. **Cifra principal: global por cliente** (todos los inscritos de N juntos) (aprobado por Aarón el 22 oct 2026, PQ-32). La mediana por negocio, el desglose por oficio y por semana de alta se reportan aparte como lectura complementaria. Solo entran inscritos con su ventana de 21 días ya cerrada.
 
 ```sql
 with n as (select * from v_negocio_g1 where tanda = :'tanda'),
@@ -859,13 +859,14 @@ Tablas de carga propuestas: `ext_visitas_dia`, `ext_pago`, `ext_horas_fundador`,
 
 | ID provisional | Pregunta | Quién |
 |---|---|---|
-| PQ-32 | **Convenciones de G1 que el PRD no fija:** día 1 (¿fecha del alta, o del primer sello?), las 4 semanas (¿días 1-28 o con 29-30?), «segunda visita sellada» (¿días distintos?), «regresa» (¿día posterior al alta?) y si G1-d es global por cliente o mediana por negocio. Propongo lo de la sección 7 | Aarón |
+| ~~PQ-32~~ | ~~**Convenciones de G1 que el PRD no fija**: día 1, las 4 semanas, «segunda visita sellada», «regresa» y si G1-d es global o mediana por negocio~~ **Cerrada (Aarón, 2026-10-22):** se aprueba la sección 7 con las convenciones de la aclaración de D-004 (PRD §2.2). G1-b y G1-c siguen Por definir | Aarón |
 | PQ-33 | **Conservación de `evento_uso`** y del borrado: ¿se anonimizan (propuesta) o se borran los eventos con identidad? ¿Por cuánto tiempo se conservan? El aviso debe decirlo. Propuesta `[SUPUESTO]`: 13 meses, para cubrir Gate 2 y cohortes. Relacionada con PQ-04 y PQ-18 | Aarón y abogado |
 | PQ-34 | **¿El borrado de cuenta limpia también `envio_codigo` y `codigo_intento` del teléfono?** Cierra el hilo `flujo_id` a teléfono (3.3), a costa de reiniciar los límites de envío de ese número | Arquitecto y abogado |
 | PQ-35 | **Lista cerrada de motivos de corrección** (`sellos_corregidos.motivo`): el texto de la lista de N7 y sus códigos | Diseño de producto |
 | ~~PQ-E~~ (aprobada por Aarón el 22 oct 2026) | **¿Se aprueban los atributos y el evento marcados «propuesto»?** Sin `registro_iniciado` MET-03 no tiene denominador; sin `duracion_s` y `duracion_ms`, MET-01 y MET-02 quedan «sin dato» | Coordinador |
+| PQ-41 | **Captura del denominador de G1-c** (`ext_visitas_dia`, RF-EVT-04): cómo captura el dueño los clientes que visitan por día (pantalla o ajuste de N0/N8, o conteo externo), con qué frecuencia y qué pasa si falta el dato. Ver PRD §12 | Aarón, con el product designer; puede esperar a la Fase 8 |
 
-**Decisiones del fundador pendientes que afectan la medición:** precio especial de piloto y quién cuenta como pagador (PQ-01 y PQ-02, G1-b); costo del WhatsApp (PQ-30, costo por cliente nuevo); mecanismo del `install_token` (PQ-31, MET-06); umbrales de MET-10 y MET-11.
+**Decisiones del fundador pendientes que afectan la medición:** precio especial de piloto y quién cuenta como pagador (PQ-01 y PQ-02, G1-b); captura del denominador de G1-c (PQ-41); costo del WhatsApp (PQ-30, costo por cliente nuevo); mecanismo del `install_token` (PQ-31, MET-06); umbrales de MET-10 y MET-11.
 
 **Revisión con el desarrollador:** la lista de 8.1 y 8.3 está lista. No he podido verificar que existan eventos en `web/` (no era parte del brief y `web/` no se toca). La verificación real de llegada ocurre cuando exista la migración.
 

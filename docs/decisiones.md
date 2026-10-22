@@ -55,6 +55,16 @@ Formato: fecha · decisión · motivo · alternativas descartadas · quién deci
   - El pago se mide como conversión al terminar la prueba, no durante el piloto.
   - La fase de producto v1 arranca después del Gate 1; mientras tanto, solo correcciones.
   - Hay que registrar fecha de alta y versión del producto por negocio. *(Aclarado 21 oct 2026, decisión de Aarón: `alta_ts`, `tanda` y `version_producto` van como columnas de `negocio`; las escribe el servidor y el dueño no las edita.)*
+  - **Aclaración del 22 oct 2026 (decisión de Aarón, PQ-32; convenciones de Gate 1):**
+    - **Día 1** de cada negocio = fecha de su alta (`negocio.alta_ts` en la zona horaria del negocio). Días 1 a 30 = día 1 a día 1 + 29. El día 37 de cobro = día 1 + 36.
+    - **Las 4 semanas de G1-a** son los días 1-7, 8-14, 15-21 y 22-28. Los días 29 y 30 no cuentan para «sellos en ≥3 de sus 4 semanas», pero sí para inscritos, canjes y segundas visitas.
+    - **Visita** = sello o canje aceptado en el mostrador, sin el sello de bienvenida (D-028) ni las correcciones (D-027).
+    - **«Segunda visita sellada»** (G1-a) = un cliente con visitas en 2 o más días locales distintos dentro de los días 1 a 30.
+    - **«Regresa»** (G1-d) = una visita en un día local posterior al de su alta y hasta 21 días después. El mismo día del alta no cuenta, aunque lleve sello. Solo entran los inscritos cuya ventana de 21 días ya cerró.
+    - **G1-d** = cifra **global por cliente** (todos los inscritos de los negocios de la tanda juntos). La mediana por negocio, el desglose por oficio y por semana de alta se reportan aparte como lectura complementaria y no deciden el gate.
+    - **«≥5 segundas visitas selladas»** (G1-a) significa **5 clientes** distintos que tienen visitas en 2 o más días locales distintos dentro de los días 1 a 30 (no 5 visitas sueltas).
+    - **Negocio evaluable:** un negocio entra al cálculo de un criterio solo cuando ya pasó la ventana de ese criterio. Los no evaluables se muestran en el informe, pero no se cuentan como «no cumple».
+    - **Siguen Por definir:** G1-b (si se suman los pagos o es un pago único ≥ MXN 299, ligado a PQ-01 y PQ-02) y G1-c (el denominador de visitas depende de que el dueño lo capture; **PQ-41**).
 - **Alternativas descartadas:** evaluar a los 20 aunque entren tarde; criterios distintos por ciclo de visita; esperar a tener los 20; altas en olas fijas.
 - **Sustituido en parte (20 oct 2026):** las fechas originales (corte de altas, Gate 1, segunda tanda) se quitaron por la regla de planear sin calendario. El cobro al terminar la prueba se detalla en D-012.
 - **Decidió:** fundador.
