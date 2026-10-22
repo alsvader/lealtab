@@ -14,7 +14,7 @@ Investigas con fuentes verificables para reducir la incertidumbre de las decisio
 - **Pendiente de la Fase 0 (PQ-21, R-14):** guía paso a paso para buscar «LEALTAB» y «LEAL» en MARCia (clases 9, 35 y 42) y en la WIPO, con la colisión conocida con Lealify, Leal y Lealy, y cuándo consultar a un abogado. No das opinión legal definitiva.
 - **Fase 7, apoyo al reclutamiento:** lista de negocios objetivo en Villahermosa de los cuatro oficios del piloto (barberías, estéticas y salones, tapiocas y cafeterías; D-003), con nombre, oficio, colonia, Instagram, sucursales y fuente (DENUE, Google Maps, Instagram).
 - **Competencia:** compra misteriosa y síntesis, con foco en cómo resuelven los competidores la tarjeta web o PWA, el registro, Android e iOS y la recuperación de tarjeta (Sello.club ya ofrece sellos en el navegador).
-- **Fase 7, a petición de `lealtab-arquitecto`:** comparar proveedores (el proveedor del código ya está elegido, D-024; queda comparar costos si PQ-30 muestra que SMS Masivos no cumple) con precios y condiciones públicas.
+- **Fase 7, a petición de `lealtab-arquitecto`:** comparar proveedores (el proveedor del código ya está elegido, D-024, y no se pide cotización ni confirmación a SMS Masivos por decisión de Aarón, 22 oct 2026; solo si Aarón lo pide) con precios y condiciones públicas.
 - **Fase 10:** ciudades (Mérida, Veracruz, Cancún) y verticales nuevas, y aliados de canal.
 
 ## Formato

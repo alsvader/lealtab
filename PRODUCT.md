@@ -2,7 +2,7 @@
 
 <!-- impeccable:product-schema 1 -->
 
-> **Qué es este archivo.** Verdad de producto de LealTab para agentes de diseño y desarrollo. Resume documentos aprobados; no los reemplaza. La referencia completa del MVP es [`docs/prd/PRD-lealtab-mvp.md`](docs/prd/PRD-lealtab-mvp.md) (v1.6, borrador para aprobación de Aarón). La parte visual vive en [`DESIGN.md`](DESIGN.md) y su fuente de verdad, `brand/04-design-system/`. Estrategia de marca: `brand/01-brand-strategy/identidad-de-marca.md` y `brand/01-brand-strategy/audiencia-y-posicionamiento.md`. Lo que las fuentes no resuelven dice **Por definir**; las personas marcadas **[H]** son hipótesis sin entrevistas. Los encabezados `##` van en inglés porque son los nombres canónicos que lee la herramienta.
+> **Qué es este archivo.** Verdad de producto de LealTab para agentes de diseño y desarrollo. Resume documentos aprobados; no los reemplaza. La referencia completa del MVP es [`docs/prd/PRD-lealtab-mvp.md`](docs/prd/PRD-lealtab-mvp.md) (v2.5, borrador para aprobación de Aarón). La parte visual vive en [`DESIGN.md`](DESIGN.md) y su fuente de verdad, `brand/04-design-system/`. Estrategia de marca: `brand/01-brand-strategy/identidad-de-marca.md` y `brand/01-brand-strategy/audiencia-y-posicionamiento.md`. Lo que las fuentes no resuelven dice **Por definir**; las personas marcadas **[H]** son hipótesis sin entrevistas. Los encabezados `##` van en inglés porque son los nombres canónicos que lee la herramienta.
 
 ## Platform
 
@@ -83,7 +83,7 @@ Todo vive en `lealtab.com` (D-022): la landing en `/`, la app del cliente en `/c
 - **Precios públicos:** 30 días de prueba gratis; plan Inicio $299 MXN/mes + IVA; Negocio ~$449 + IVA; Pro «Próximamente». Precio especial de piloto: **Por definir** (PQ-01).
 - **Fuera del MVP:** Apple/Google Wallet, app nativa, staff con permisos, varias tarjetas y sucursales, avisos y campañas, pago dentro del producto (CFDI, OXXO/SPEI), notificaciones push, integración con punto de venta, IA y API pública.
 - **Stack:** definido en `docs/adr/002-stack.md` (Next.js en `web/`, Tailwind + shadcn/ui, Supabase y Vercel). Si difiere del PRD, manda el ADR-002.
-- **Por definir (principales):** diseño de N1 con contraseña y recuperación; rediseño de C1, R1 y C0 con el paso del código (D-031); retención y borrado de datos y aviso de privacidad actualizado (PQ-04, PQ-18); precio de piloto (PQ-01); confirmaciones y pruebas del proveedor del código y de la sesión del cliente (PQ-30, PQ-31); costo del hosting (PQ-29). Lista completa en la sección 12 del PRD.
+- **Por definir (principales):** diseño de N1 con contraseña y recuperación; rediseño de C1, R1 y C0 con el paso del código (D-031); retención y borrado de datos y aviso de privacidad actualizado (PQ-04, PQ-18); precio de piloto (PQ-01); prueba técnica del hook de SMS sin proveedor nativo (spike, PQ-30) y pruebas de la sesión del cliente (PQ-31). No se piden más confirmaciones a SMS Masivos (decisión del 22 oct 2026). Lista completa en la sección 12 del PRD.
 
 ## Brand Commitments
 

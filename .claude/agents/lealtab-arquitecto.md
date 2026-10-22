@@ -30,7 +30,7 @@ Diseñas la solución más simple que cumpla el PRD del MVP y que un fundador pu
 - `docs/adr/NNN-titulo.md` (el siguiente es el 005; ya existen el 003 y el 004): un ADR por cada decisión técnica nueva (contexto, opciones, decisión, consecuencias). Las decisiones de producto las propones al `lealtab-coordinador`.
 
 ## Preguntas abiertas que te tocan (PRD §12)
-- **PQ-30:** confirmaciones por escrito con SMS Masivos y prueba del hook sin proveedor nativo.
+- **PQ-30:** solo el spike técnico del hook de Supabase sin proveedor nativo. Las confirmaciones con SMS Masivos no se piden (decisión de Aarón, 22 oct 2026).
 - **PQ-31:** `install_token` de iOS con la sesión de Supabase (mecanismo A o B) y las pruebas del ADR-003 §3.
 - **PQ-25:** librería de escaneo de QR en el navegador que funcione sin conexión.
 - **PQ-18 y RNF-STK-10:** que Vercel, Supabase y SMS Masivos no pongan cookies ni carguen recursos de terceros, y en qué región guardan los datos.

@@ -1,6 +1,6 @@
 # 08 · Registro con código: C1 en dos pasos, R1, recuperación e instalación en iPhone (v1)
 
-Estado: **Propuesta (2026-10-22), con las decisiones de Aarón del mismo día aplicadas:** el botón del paso 1 es «Enviarme el código», el nombre de R1 con sesión se prellena (editable) y la ayuda al cliente es «pregunta en el mostrador», sin canal nuevo de LealTab. Pendiente de aprobación final. Fecha: 22 oct 2026. Base: `../04-design-system/tokens.css`, 390 px móvil, sin colores nuevos. Origen: **D-031** (el cliente usa Supabase Auth con su teléfono verificado por OTP desde el registro, sustituye a D-025), `docs/adr/003-sesion-cliente-y-codigo.md` §2.2, §2.3 y §2.8, y PRD v1.6 (RF-APP-01 a 04, 14 y 15, MET-03, R-18).
+Estado: **Propuesta (2026-10-22), con las decisiones de Aarón del mismo día aplicadas:** el botón del paso 1 es «Enviarme el código», el nombre de R1 con sesión se prellena (editable) y la ayuda al cliente es «pregunta en el mostrador», sin canal nuevo de LealTab. Pendiente de aprobación final. Fecha: 22 oct 2026. Base: `../04-design-system/tokens.css`, 390 px móvil, sin colores nuevos. Origen: **D-031** (el cliente usa Supabase Auth con su teléfono verificado por OTP desde el registro, sustituye a D-025), `docs/adr/003-sesion-cliente-y-codigo.md` §2.2, §2.3 y §2.8, y PRD v2.5 (RF-APP-01 a 04, 14 y 15, MET-03, R-18).
 Archivos (`.html`; **los `.png` están pendientes**: el agente no tuvo un navegador, ver «Generar los PNG» al final):
 
 | Archivo | Contenido |

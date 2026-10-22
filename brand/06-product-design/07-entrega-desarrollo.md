@@ -87,6 +87,6 @@ Reemplazan los nombres anteriores del plan: `negocio_alta` → `negocio_alta_com
 2. Retención y borrado de datos cuando un cliente elimina su cuenta (C5) y el texto final del aviso de privacidad (legal). Siguen abiertos: PQ-04 y PQ-18.
 3. ~~Plantilla del mensaje de "Escribir por WhatsApp" desde N7~~ **Cerrada (D-030, 2026-10-21):** tres plantillas fijas.
 4. ~~¿Se muestran los términos del límite de sellos en C3 o solo en el aviso de la tarjeta?~~ **Cerrada (PQ-06, 2026-10-21):** una línea bajo el QR de C3 y una hoja «Términos de la tarjeta» dentro de C3.
-5. **D-031 (2026-10-22):** el diseño de C1 en dos pasos, R1 y la recuperación (pieza 08) está **propuesto, pendiente de aprobación**. Siguen por probar el canje del `install_token` de iOS (PQ-31, respaldo diseñado), el hook de SMS sin proveedor nativo (PQ-30) y el costo y la API oficial del WhatsApp (PQ-30).
+5. **D-031 (2026-10-22):** el diseño de C1 en dos pasos, R1 y la recuperación (pieza 08) está **propuesto, pendiente de aprobación**. Siguen por probar el canje del `install_token` de iOS (PQ-31, respaldo diseñado) y el hook de SMS sin proveedor nativo (PQ-30, spike). No se piden más confirmaciones a SMS Masivos (plantilla, remitente, cotización ni avisos de entrega; decisión del 22 oct 2026): el costo real del WhatsApp se conocerá al usar la API.
 ## Pregunta para ti
 ¿Apruebas esta entrega para que pase a la Fase 7 (Desarrollo)?

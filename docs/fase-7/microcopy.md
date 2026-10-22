@@ -8,7 +8,7 @@ Esta versión cubre **solo lo que cambió con D-031**: el cliente verifica su te
 
 Pendientes de este archivo, que van en versiones siguientes (no son de este brief): C5 Mis datos, N1 con contraseña opcional y «¿Olvidaste tu contraseña?», texto de «Escribir por WhatsApp» (ya está en `docs/fase-7/propuestas/pq-copy.md`, D-030), términos del límite de sellos en C3 y el párrafo del aviso de privacidad sobre la analítica sin cookies. Los borradores del designer de C5 y N1 están en `docs/fase-7/propuestas/diseno/`.
 
-Fuentes: `AGENTS.md` §4, `PRODUCT.md` (Brand Commitments), `identidad-de-marca.md` §4, `07-entrega-desarrollo.md` §6 y §8, pieza 06 (R1 a R4), `tarjeta-con-leyenda.html` (C1 y C2 aprobados), D-019, D-024, D-026, D-031, ADR-003 §2.2, §2.3 y §2.8, ADR-004 §2, PRD v1.6 RF-APP-01 a 04, 14 y 15.
+Fuentes: `AGENTS.md` §4, `PRODUCT.md` (Brand Commitments), `identidad-de-marca.md` §4, `07-entrega-desarrollo.md` §6 y §8, pieza 06 (R1 a R4), `tarjeta-con-leyenda.html` (C1 y C2 aprobados), D-019, D-024, D-026, D-031, ADR-003 §2.2, §2.3 y §2.8, ADR-004 §2, PRD v2.5 RF-APP-01 a 04, 14 y 15.
 
 ### Reglas que seguí
 
@@ -321,25 +321,15 @@ El código lo manda **LealTab**, no el negocio, y el hook de Supabase no conoce 
 
 ### 5.1 WhatsApp: plantilla fija del proveedor
 
-La plantilla es del proveedor y **no la controlamos** (D-024, ADR-004 §1). Lo que sigue es lo que **hay que pedirle por escrito** (parte de PQ-30, puntos 1 y 2) y lo que propongo como texto ideal. No lo des por hecho hasta que lo entreguen.
+La plantilla es del proveedor y **no la controlamos** (D-024, ADR-004 §1). **Ya no se pide nada por escrito a SMS Masivos** (decisión de Aarón, 22 oct 2026: ya tiene cuenta y solo se usa su API; PQ-30 queda como spike del hook). El texto de la plantilla de WhatsApp, su remitente y su costo los fija el proveedor al usar su API; el costo real se conocerá con la factura. Si el texto que entregue el proveedor no dice «LealTab», lleva enlaces o no es de autenticación, lo revisamos contra las reglas de este §5.
 
-**Qué pedirle a SMS Masivos:**
-
-1. El **texto exacto en español de México** de la plantilla de WhatsApp, tal como lo verá el cliente, con una captura de pantalla.
-2. **Nombre y número del remitente** que verá el cliente (no es un número de LealTab, ADR-004 §3) y si se puede mostrar el nombre «LealTab» y su logo.
-3. Que el texto **diga «LealTab»** (con `company: "LealTab"`) y no el nombre de SMS Masivos ni de otra marca. El cliente no debe dudar de quién es el mensaje.
-4. Que **diga la vigencia** (10 minutos) o, si no la dice, que no prometa otra.
-5. Que **no lleve enlaces ni botones**, salvo uno de «Copiar código». El código tiene que poder copiarse.
-6. Que la plantilla sea de **autenticación** (código de un solo uso), en español, y no marketing.
-7. Qué pasa con el **idioma** si el teléfono del cliente no está en español.
-8. Si se puede **cambiar el texto** y cuánto tarda la aprobación de Meta si cambiamos algo.
-9. La confirmación de que es la **API oficial de Meta** (PQ-30, punto 1).
+Lo que sigue es solo **referencia**, no se controla:
 
 **Texto ideal (propuesta, no controlada):**
 
 > **{{code}}** es tu código de verificación de LealTab. Vence en 10 minutos. Por tu seguridad, no lo compartas con nadie.
 
-`[SUPUESTO]` Sigue la forma que Meta usa en sus plantillas de autenticación (código, vigencia, aviso de seguridad). No lo verifiqué contra la documentación de Meta; verifícalo en https://developers.facebook.com/docs/whatsapp/ antes de pedírselo al proveedor. Si el proveedor entrega un texto distinto, lo reviso contra estas reglas: dice «LealTab», no culpa, no pide dar el código a nadie, y no tiene enlaces.
+`[SUPUESTO]` Sigue la forma que Meta usa en sus plantillas de autenticación (código, vigencia, aviso de seguridad). No lo verifiqué contra la documentación de Meta; verifícalo en https://developers.facebook.com/docs/whatsapp/ antes de compararlo con el texto que entregue el proveedor al usar su API. Si el texto es distinto, se revisa contra estas reglas: dice «LealTab», no culpa, no pide dar el código a nadie, y no tiene enlaces.
 
 ### 5.2 SMS: texto en GSM-7
 
@@ -545,7 +535,7 @@ Nombres en inglés, textos en español. Siguen el patrón de la landing (constan
 | `SMS_TEMPLATE` | `{{company}}: tu codigo es {{code}}. Vence en 10 min. No lo compartas con nadie. Si no lo pediste, ignora este mensaje.` |
 | `SMS_COMPANY` | `LealTab` |
 | `SMS_MAX_LENGTH` | `160` |
-| `WHATSAPP_TEMPLATE_REFERENCE` | Texto ideal del §5.1, solo como referencia: la plantilla real es del proveedor (PQ-30) |
+| `WHATSAPP_TEMPLATE_REFERENCE` | Texto ideal del §5.1, solo como referencia: la plantilla real la fija el proveedor al usar su API (D-024; PQ-30 ya no la pide) |
 
 **Archivo `consent.ts`**
 
@@ -563,7 +553,7 @@ Prueba sugerida para esos archivos: un test unitario que revise que `SMS_TEMPLAT
 
 | # | Tema | Quién decide |
 |---|---|---|
-| PQ-30 | Texto de la plantilla de WhatsApp, remitente, cotización y webhooks (lista del §5.1) | Aarón con el proveedor, antes de construir C1 |
+| PQ-30 | Solo el spike técnico del hook de Supabase sin proveedor nativo. Las confirmaciones con SMS Masivos (plantilla, remitente, cotización, webhooks) no se piden (decisión de Aarón, 22 oct 2026) | Arquitecto (spike), antes de construir C1 |
 | PQ-31 | Si el acceso del ícono de iPhone se canjea sin código (mecanismo A) o se pide un código al abrir (mecanismo B). Define la línea opcional del §4.1 y el uso de §4.3 | Arquitecto y desarrollo |
 | PQ-18 | Texto legal del renglón del §6, si basta la casilla actual, si se nombra a SMS Masivos y el país, y cómo se declara la cookie de sesión | Aarón con el abogado |
 | Vigencia | Si «10 minutos» es alcanzable en Supabase; si no, cambian el SMS y los cuerpos de C1 | Arquitecto (prueba 3 del ADR-003) |
