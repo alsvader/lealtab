@@ -150,6 +150,8 @@ El ejemplo es ilustrativo; la migración lo define y lo revisa `security-review`
 - **Prueba obligatoria:** con un JWT de cliente no se lee ni una fila de otro cliente, ni de `identidad` ajena, ni nada de `negocio` fuera de `negocio_publico`; con un JWT de dueño no se lee `identidad` ni `tarjeta_llave`, ni nada de otro negocio; con un JWT de un usuario creado a mano (correo o teléfono) sin filas, no se lee nada. Todas con llamadas directas a la API REST de Supabase, no solo desde la app.
 - La RLS por filas vuelve inocuo un access token viejo: tras borrar la cuenta o desplazar a una sesión, el usuario ya no tiene fila de la que colgar.
 
+> **Nota del 22 oct 2026 (aprobada por Aarón; ADR-006 §2.1).** «Esquema no expuesto» se lee así: el esquema `servidor` (funciones de escritura) queda visible para la API REST de Supabase, porque `supabase-js` en el **servidor** de Next.js las llama por RPC. Solo `service_role` las ejecuta (`REVOKE` a `anon` y `authenticated`; pruebas P-03, R-03 y R-27). El navegador nunca llama a Supabase (ADR-007). El efecto de seguridad es el mismo que el de «no expuesto». Alternativa descartada: conexión directa a Postgres desde Vercel con `pg`.
+
 ### 2.7 Borrar la cuenta (C5, D-026)
 
 1. Función `SECURITY DEFINER`: borra la `identidad` (con `ON DELETE CASCADE`, sus `cliente_negocio` y `tarjeta_cliente`). Qué pasa con los eventos de sellos sigue en PQ-04.
