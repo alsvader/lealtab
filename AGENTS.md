@@ -50,7 +50,6 @@ Si dos fuentes chocan, manda la que va primero:
 | Legal | `docs/fase-2/legal-notas.md` y `web/src/content/legal/` |
 
 **Históricos o espejos (no se toman como fuente):**
-- `brand/07-desarrollo/PRD-lealtab-mvp.md`: copia del PRD; manda `docs/prd/`.
 - Los `lealtab-*.md` de la raíz y `grok/`: material inicial de marca.
 - `docs/fase-2/`: numeración vieja de fases.
 - `brand/05-marketing/03-mockup-landing-v1.*.html`: historial. La v1.7 es la referencia de paridad de la landing.

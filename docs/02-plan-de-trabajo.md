@@ -22,7 +22,7 @@
 | 3 | Identidad visual | ✅ | Logo, paleta y brand book aprobados |
 | 4 | Design System | ✅ | 5 piezas aprobadas |
 | 5 | Marketing de lanzamiento | ⏸️ En pausa | Landing en `web/` publicada ✅, perfil de IG confirmado, posts 8-9 e historias decididos |
-| 6 | Diseño de producto del MVP | ✅ Cerrada (2026-10-20) | Flujos ✅, pantallas N0-N8 y C0-C4 aprobadas ✅ (C5 en alcance, sin wireframe todavía), ADR-001 cerrado ✅, eventos definidos ✅ (`07-entrega` §5). **PRD del MVP: borrador en revisión** (`lealtab/07-desarrollo/PRD-lealtab-mvp.md`) |
+| 6 | Diseño de producto del MVP | ✅ Cerrada (2026-10-20) | Flujos ✅, pantallas N0-N8 y C0-C4 aprobadas ✅ (C5 en alcance, sin wireframe todavía), ADR-001 cerrado ✅, eventos definidos ✅ (`07-entrega` §5). **PRD del MVP: borrador en revisión** (`docs/prd/PRD-lealtab-mvp.md`) |
 | 7 | Desarrollo del MVP + piloto 0 | Pendiente | Un local real usa el flujo completo una semana sin errores bloqueantes; al menos 10 pilotos confirmados por escrito, de 3 oficios o más; entrevistas sobre el ícono y consulta legal LFPDPPP hechas (D-017) |
 | 8 | Pilotos y Gate 1 | Pendiente | Gate 1 según D-004 (sección 4) |
 | 9 | Producto v1 y Gate 2 | Pendiente | Lo piden los datos. Gate 2: ≥15 clientes de pago, MRR ≥ MXN 7,500, churn ≤8 % y un canal de ≤6 h por cliente |
@@ -102,7 +102,7 @@ Landing publicada en `web/`. Se retoma después de la Fase 6; lo pendiente está
 
 Aprobado: mapa de flujos, tarjeta del cliente, mostrador y quién regresa, alta y configuración, inicio/clientes/ajustes y estados de error y vacío, y la hoja de entrega para desarrollo (`07-entrega-desarrollo.md`, con eventos y modelo de datos). C5 Mis datos queda en alcance sin wireframe.
 
-**PRD del MVP:** borrador en revisión en `lealtab/07-desarrollo/PRD-lealtab-mvp.md` (métricas del producto, requisitos no funcionales y preguntas abiertas).
+**PRD del MVP:** borrador en revisión en `docs/prd/PRD-lealtab-mvp.md` (métricas del producto, requisitos no funcionales y preguntas abiertas).
 
 ### Fase 7: Desarrollo del MVP + piloto 0
 
@@ -177,6 +177,7 @@ Gate 3: MRR ≥ MXN 30,000 con ≥60 clientes, y el módulo pedido por ≥3 clie
 | `lealtab-coordinador` | Todas | Criterios de salida, gates, decisiones, preguntas abiertas del PRD y control del alcance |
 | `lealtab-arquitecto` | 7, 9, 11 | Arquitectura de implementación sobre el ADR-002, modelo de datos con RLS, PWA, sin conexión, antifraude, privacidad y ADRs |
 | `lealtab-desarrollador` | 7, 8, 9, 11 | Código del MVP en `web/` (incluido `web/supabase/`), correcciones y cobro automático en los pilotos |
+| `lealtab-qa` | 7, 8, 9, 11 | Verificación con evidencia de cada tarea o feature antes del cierre (lint, typecheck, build, e2e, axe); no corrige código |
 | `lealtab-product-designer` | 7, 9, 11 | Pantallas pendientes (C5, N1 con contraseña), dudas de diseño durante el desarrollo, cambios al design system y a la tarjeta |
 | `lealtab-copywriter` | 7, 8, 10 (y 5 al retomarla) | Microcopy pendiente, plantillas y guiones de WhatsApp, anuncios y mensaje de la Propuesta B |
 | `lealtab-analista-metricas` | 7 a 10 | Medición sobre la tabla de eventos, métricas de los pilotos y cálculo de gates |
@@ -184,13 +185,15 @@ Gate 3: MRR ≥ MXN 30,000 con ≥60 clientes, y el módulo pedido por ≥3 clie
 | `lealtab-investigador` | 0 (pendientes), 7, 10 | IMPI y WIPO, negocios objetivo, competencia, proveedores y expansión |
 | `lealtab-growth` | 10 | Canales, referidos, alianzas, expansión y paso a la Propuesta B |
 
+Cada feature nuevo sigue el flujo `/feature` (`.agents/skills/feature/SKILL.md`): la sesión principal orquesta (Opus) y los subagentes (Sonnet) hacen el trabajo, con aprobación de Aarón en el brief y en el cierre. Las reglas del repo están en `AGENTS.md` y `CLAUDE.md`.
+
 **Archivados** en `.claude/agents-archivo/` porque su trabajo ya se entregó: `lealtab-estratega-marca` (Fase 1), `lealtab-director-creativo` (Fases 2 y 3), `lealtab-design-system` (Fase 4) y `lealtab-disenador-tarjeta` (Fase 6).
 
 ## 6. Siguientes pasos (cierre de la Fase 6 y arranque de la Fase 7)
 
 1. ~~Hoja de entrega para desarrollo.~~ ✅ Aprobada (2026-10-20).
 2. ~~Lista final de eventos.~~ ✅ En `07-entrega` §5 (nombres unificados el 2026-10-21).
-3. Revisar y aprobar el PRD del MVP (borrador en `lealtab/07-desarrollo/PRD-lealtab-mvp.md`, con métricas del producto y requisitos no funcionales).
+3. Revisar y aprobar el PRD del MVP (borrador en `docs/prd/PRD-lealtab-mvp.md`, con métricas del producto y requisitos no funcionales).
 4. Definir el precio especial de piloto y su duración.
 5. Diseñar C5 Mis datos.
 

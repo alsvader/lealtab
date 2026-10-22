@@ -2,7 +2,7 @@
 
 <!-- impeccable:product-schema 1 -->
 
-> **Qué es este archivo.** Verdad de producto de LealTab para agentes de diseño y desarrollo. Resume documentos aprobados; no los reemplaza. La referencia completa del MVP es [`docs/prd/PRD-lealtab-mvp.md`](docs/prd/PRD-lealtab-mvp.md) (v1.3, borrador para aprobación de Aarón). La parte visual vive en [`DESIGN.md`](DESIGN.md) y su fuente de verdad, `brand/04-design-system/`. Estrategia de marca: `brand/01-brand-strategy/identidad-de-marca.md` y `brand/01-brand-strategy/audiencia-y-posicionamiento.md`. Lo que las fuentes no resuelven dice **Por definir**; las personas marcadas **[H]** son hipótesis sin entrevistas. Los encabezados `##` van en inglés porque son los nombres canónicos que lee la herramienta.
+> **Qué es este archivo.** Verdad de producto de LealTab para agentes de diseño y desarrollo. Resume documentos aprobados; no los reemplaza. La referencia completa del MVP es [`docs/prd/PRD-lealtab-mvp.md`](docs/prd/PRD-lealtab-mvp.md) (v1.4, borrador para aprobación de Aarón). La parte visual vive en [`DESIGN.md`](DESIGN.md) y su fuente de verdad, `brand/04-design-system/`. Estrategia de marca: `brand/01-brand-strategy/identidad-de-marca.md` y `brand/01-brand-strategy/audiencia-y-posicionamiento.md`. Lo que las fuentes no resuelven dice **Por definir**; las personas marcadas **[H]** son hipótesis sin entrevistas. Los encabezados `##` van en inglés porque son los nombres canónicos que lee la herramienta.
 
 ## Platform
 

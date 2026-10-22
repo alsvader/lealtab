@@ -23,7 +23,7 @@ Vista general: `entrega/mapa-pantallas.png`. Decisiones completas: `01-mapa-de-f
 | Componente | Tokens |
 |---|---|
 | Botón primary / secondary / ghost / destructive | `--color-bosque`/`--color-blanco-lino`/transparente/`--color-rojo`; borde `--border-product` noche; `--radius-control`; `--shadow-button`; foco `--focus-ring` |
-| Campo | `--border-product` noche, error `--color-rojo`; `--radius-control`; `--font-size-body` (16, evita zoom en iOS) |
+| Campo | `--border-product` noche, error `--color-rojo`; `--radius-control`; `--font-size-input` (16 en todo tamaño de pantalla, evita zoom en iOS) |
 | Card / panel | `--color-blanco-lino`, `--border-hair`/`--border-product`, `--radius-card`; dashboard plano (sin sombra) |
 | Chip de estado | Frecuente `--color-menta`/`--color-bosque` · En riesgo `--color-durazno-claro`/`--color-tostado` · Error `--color-rosa-claro`/`--color-rojo`; `--radius-sticker`; siempre con palabra |
 | Tabla | `th` Manrope 700 `--font-size-label` mayúsculas; filas `--border-hair`; seleccionada menta |
