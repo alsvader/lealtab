@@ -552,12 +552,25 @@ Todas parten de **N = los negocios de `:'tanda'`**. El corte de la primera tanda
 - **Las 4 semanas** de G1-a = días 1-7, 8-14, 15-21 y 22-28 (los días 29 y 30 no cuentan para «sellos en ≥3 de 4 semanas»).
 - **Visita** = sello o canje aceptado en el mostrador (`v_visita`: sin bienvenida ni correcciones, D-028 y D-027). **«Segunda visita sellada»** = un cliente con visitas en ≥2 días locales distintos dentro de los días 1 a 30 (aprobado por Aarón el 22 oct 2026). Por eso «≥5 segundas visitas» de G1-a son **5 clientes**, no 5 visitas sueltas.
 - **«Regresa»** (G1-d) = una visita en un día local posterior al de su alta y hasta 21 días después.
-- Un negocio es **evaluable** cuando ya pasó la ventana de su criterio; los no evaluables se muestran, no se cuentan como «no cumple» (aprobado por Aarón el 22 oct 2026).
+- Un negocio es **evaluable** para un criterio solo cuando ya pasó la ventana de ese criterio (aprobado por Aarón el 22 oct 2026, PQ-32; PRD §2.2 v1.9). Cada criterio calcula su propia bandera `evaluable`, en la fecha local del negocio:
+
+| Criterio | Evaluable cuando | Unidad que se evalúa |
+|---|---|---|
+| G1-a | hoy ≥ `dia1 + 30` (ya terminó el día 30) | negocio |
+| G1-b | hoy ≥ `dia1 + 37` (ya terminó el día 37) | negocio |
+| G1-c | hoy ≥ `dia1 + 14` (ya terminó el día 14) y, además, tiene denominador | negocio |
+| G1-d | `dia_alta + 22 ≤ hoy` (ya terminaron los 21 días de ese inscrito) | **inscrito** (el filtro ya va por inscrito) |
+
+- **Regla de lectura común.** Cada consulta devuelve `n_total` (todo N), `n_evaluables`, `n_no_evaluables`, el numerador y el denominador **solo sobre evaluables**, y la razón. Los no evaluables **se listan en el informe, no cuentan como «no cumple» y no entran al denominador**. Sin evaluables, la razón es `null` = «sin dato», nunca 0 %. Mientras haya no evaluables, el informe lo dice junto a la cifra (por ejemplo, «2 de 4 negocios aún no cumplen su ventana»).
+- La **ventana cerrada** se cuenta en la zona horaria de cada negocio (`now() at time zone n.zona_horaria`), no en una zona fija.
 
 ### 7.1 G1-a: activos
 
+Vista por negocio (sobre todas las tandas; se filtra `tanda` al consultar). `activo` es `null` cuando el negocio no es evaluable.
+
 ```sql
-with n as (select * from v_negocio_g1 where tanda = :'tanda'),
+create or replace view v_g1a_negocio as
+with n as (select * from v_negocio_g1),
 ins as (
   select cn.negocio_id, count(*) as inscritos
   from cliente_negocio cn join n using (negocio_id)
@@ -582,7 +595,7 @@ ins as (
         having count(distinct v.dia_local) >= 2) x
   group by negocio_id
 ), t as (
-  select n.negocio_id, n.oficio,
+  select n.negocio_id, n.oficio, n.tanda, n.dia1,
          coalesce(ins.inscritos, 0)          as inscritos,
          coalesce(sem.semanas_con_sellos, 0) as semanas_con_sellos,
          coalesce(canj.canjes, 0)            as canjes,
@@ -592,9 +605,26 @@ ins as (
          left join canj using (negocio_id) left join seg using (negocio_id)
 )
 select t.*,
-       (inscritos >= 30 and semanas_con_sellos >= 3 and (canjes >= 1 or segundas_visitas >= 5)) as activo
-from t order by oficio, negocio_id;
--- G1-a = count(*) filter (where activo) / count(*) sobre N. Corte: ≤ 20 %. Se reporta también n evaluables.
+       case when evaluable
+            then (inscritos >= 30 and semanas_con_sellos >= 3 and (canjes >= 1 or segundas_visitas >= 5))
+            end as activo                      -- null = no evaluable todavía
+from t;
+```
+
+```sql
+-- Detalle por negocio (los no evaluables salen en el informe con activo = null).
+select * from v_g1a_negocio where tanda = :'tanda' order by oficio, negocio_id;
+
+-- Cifra G1-a.
+select count(*)                                  as n_total,
+       count(*) filter (where evaluable)         as n_evaluables,
+       count(*) filter (where not evaluable)     as n_no_evaluables,
+       count(*) filter (where activo)            as activos,
+       count(*) filter (where activo)::numeric
+         / nullif(count(*) filter (where evaluable), 0) as g1_a   -- null = «sin dato»
+from v_g1a_negocio
+where tanda = :'tanda';
+-- Umbral ≥ 60 % de los evaluables. Corte: ≤ 20 %. Con n_evaluables = 0 no hay cifra y no se decide nada con G1-a.
 ```
 
 ```sql
@@ -612,77 +642,156 @@ where n.tanda = :'tanda';
 
 ### 7.2 G1-b: conversión
 
-Solo cuenta dinero recibido (`ext_pago`, RF-COB-06). Pagó = suma de lo recibido hasta su día 37 ≥ MXN 299 sin IVA `[SUPUESTO: se suma; el PRD dice «primer mes o prepago»]`. Los pagos menores se reportan aparte y **no** suman al criterio hasta que se resuelva PQ-02.
+Solo cuenta dinero recibido (`ext_pago`, RF-COB-06). Pagó = suma de lo recibido hasta su día 37 ≥ MXN 299 sin IVA `[SUPUESTO: se suma; el PRD dice «primer mes o prepago»]` (Por definir; PQ-01 y PQ-02). Los pagos menores se reportan aparte y **no** suman al criterio hasta que se resuelva PQ-02. Un pago recibido por un negocio aún no evaluable no lo cuenta como pagador todavía: se muestra, pero el negocio sigue fuera del cálculo hasta que termine su día 37.
 
 ```sql
-with n as (select * from v_negocio_g1 where tanda = :'tanda'),
-p as (
-  select n.negocio_id, n.oficio,
-         coalesce(sum(x.monto_sin_iva_mxn) filter (where x.fecha_pago <= n.dia1 + 36), 0) as recibido_a_dia_37
-  from n left join ext_pago x on x.negocio_id = n.negocio_id
-  group by n.negocio_id, n.oficio
-)
-select count(*) as n_total,
-       count(*) filter (where recibido_a_dia_37 >= 299)                          as pagan,
-       count(*) filter (where recibido_a_dia_37 > 0 and recibido_a_dia_37 < 299) as pagan_precio_menor_de_piloto,
-       count(*) filter (where recibido_a_dia_37 >= 299)::numeric / nullif(count(*), 0) as g1_b
-from p;
--- Umbral ≥ 40 %. Corte: ≤ 10 %.
+create or replace view v_g1b_negocio as
+select n.negocio_id, n.oficio, n.tanda, n.dia1,
+       ((now() at time zone n.zona_horaria)::date >= n.dia1 + 37) as evaluable,
+       coalesce(sum(x.monto_sin_iva_mxn) filter (where x.fecha_pago <= n.dia1 + 36), 0) as recibido_a_dia_37
+from v_negocio_g1 n
+left join ext_pago x on x.negocio_id = n.negocio_id
+group by n.negocio_id, n.oficio, n.tanda, n.dia1, n.zona_horaria;
+```
+
+```sql
+select count(*)                                  as n_total,
+       count(*) filter (where evaluable)         as n_evaluables,
+       count(*) filter (where not evaluable)     as n_no_evaluables,
+       count(*) filter (where evaluable and recibido_a_dia_37 >= 299) as pagan,
+       count(*) filter (where evaluable and recibido_a_dia_37 > 0 and recibido_a_dia_37 < 299)
+                                                 as pagan_precio_menor_de_piloto,
+       count(*) filter (where evaluable and recibido_a_dia_37 >= 299)::numeric
+         / nullif(count(*) filter (where evaluable), 0) as g1_b    -- null = «sin dato»
+from v_g1b_negocio
+where tanda = :'tanda';
+-- Umbral ≥ 40 % de los evaluables. Corte: ≤ 10 %.
+-- Detalle (incluye los no evaluables, que se muestran sin contar):
+--   select * from v_g1b_negocio where tanda = :'tanda' order by oficio, negocio_id;
 ```
 
 ### 7.3 G1-c: inscripción
 
-Mediana por negocio de (inscritos en días 1-14 / clientes que visitaron en días 1-14, de `ext_visitas_dia`). Solo se evalúa si ≥70 % de N tiene denominador, `[SUPUESTO]` entendido como los 14 días con dato (un día sin visitas se registra con 0) y total > 0.
+Mediana por negocio de (inscritos en días 1-14 / clientes que visitaron en días 1-14, de `ext_visitas_dia`). Un negocio entra a la mediana solo si es evaluable (terminó su día 14) **y** tiene denominador. Para decidir G1-c, **≥70 % de los evaluables** deben tener denominador; si no, «sin dato». `[SUPUESTO]` qué cuenta como «tener denominador» (los 14 días con dato, un día sin visitas se registra con 0, total > 0) y sobre qué base se mide el 70 % (aquí, los evaluables; `cobertura_sobre_n` se devuelve aparte para comparar): **Por definir, depende de PQ-41** (captura del denominador, RF-EVT-04). No se resuelve en este documento.
 
 ```sql
-with n as (select * from v_negocio_g1 where tanda = :'tanda'),
+create or replace view v_g1c_negocio as
+with n as (select * from v_negocio_g1),
 ins as (select cn.negocio_id, count(*) as inscritos
         from cliente_negocio cn join n using (negocio_id)
         where (cn.alta_ts at time zone n.zona_horaria)::date between n.dia1 and n.dia1 + 13
         group by cn.negocio_id),
 den as (select n.negocio_id, sum(v.clientes_visitaron) as visitaron, count(distinct v.fecha) as dias_con_dato
         from n join ext_visitas_dia v on v.negocio_id = n.negocio_id and v.fecha between n.dia1 and n.dia1 + 13
-        group by n.negocio_id),
-b as (select n.negocio_id, coalesce(ins.inscritos, 0) as inscritos, den.visitaron,
-             coalesce(den.dias_con_dato = 14 and den.visitaron > 0, false) as tiene_denominador
-      from n left join ins using (negocio_id) left join den using (negocio_id))
-select count(*) filter (where tiene_denominador)::numeric / nullif(count(*), 0) as cobertura_denominador,
-       case when count(*) filter (where tiene_denominador)::numeric / nullif(count(*), 0) >= 0.7
-            then percentile_cont(0.5) within group (order by inscritos::numeric / visitaron)
-                 filter (where tiene_denominador)
-            end as g1_c_mediana     -- null = «sin dato»
-from b;
+        group by n.negocio_id)
+select n.negocio_id, n.oficio, n.tanda, n.dia1,
+       ((now() at time zone n.zona_horaria)::date >= n.dia1 + 14) as evaluable,
+       coalesce(ins.inscritos, 0) as inscritos, den.visitaron, den.dias_con_dato,
+       coalesce(den.dias_con_dato = 14 and den.visitaron > 0, false) as tiene_denominador   -- [SUPUESTO] PQ-41
+from n left join ins using (negocio_id) left join den using (negocio_id);
+```
+
+```sql
+with b as (select * from v_g1c_negocio where tanda = :'tanda'),
+c as (
+  select count(*)                                                   as n_total,
+         count(*) filter (where evaluable)                          as n_evaluables,
+         count(*) filter (where not evaluable)                      as n_no_evaluables,
+         count(*) filter (where evaluable and tiene_denominador)    as n_con_denominador,
+         count(*) filter (where tiene_denominador)::numeric / nullif(count(*), 0) as cobertura_sobre_n,
+         count(*) filter (where evaluable and tiene_denominador)::numeric
+           / nullif(count(*) filter (where evaluable), 0)           as cobertura_sobre_evaluables
+  from b
+)
+select c.*,
+       case when c.cobertura_sobre_evaluables >= 0.7
+            then (select percentile_cont(0.5) within group (order by inscritos::numeric / visitaron)
+                  from b where evaluable and tiene_denominador)
+            end as g1_c_mediana     -- null = «sin dato» (sin evaluables, o cobertura < 70 %)
+from c;
 -- Umbral ≥ 30 %. Corte: mediana < 10 %. Una razón > 1 indica un conteo de visitas incompleto: se marca en el informe.
+-- Los negocios no evaluables o sin denominador se listan con select * from v_g1c_negocio, sin contar como «no cumple».
 ```
 
 ### 7.4 G1-d: retorno
 
-Inscritos en días 1 a 16 que regresan en ≤21 días. **Cifra principal: global por cliente** (todos los inscritos de N juntos) (aprobado por Aarón el 22 oct 2026, PQ-32). La mediana por negocio, el desglose por oficio y por semana de alta se reportan aparte como lectura complementaria. Solo entran inscritos con su ventana de 21 días ya cerrada.
+Inscritos en días 1 a 16 que regresan en ≤21 días. **Cifra principal: global por cliente** (todos los inscritos evaluables de N juntos) (aprobado por Aarón el 22 oct 2026, PQ-32). La mediana por negocio, el desglose por oficio y por semana de alta se reportan aparte como lectura complementaria. Aquí la unidad evaluable es el **inscrito**: entra solo si su ventana de 21 días ya terminó (`dia_alta + 22 ≤ hoy`, en la zona del negocio). Los inscritos con ventana abierta se cuentan en `inscritos_no_evaluables` y no entran al denominador ni cuentan como «no regresó». Un negocio sin inscritos evaluables no pesa en la cifra.
 
 ```sql
-with n as (select * from v_negocio_g1 where tanda = :'tanda'),
+create or replace view v_g1d_inscrito as
+with n as (select * from v_negocio_g1),
 insc as (
-  select cn.id as cliente_negocio_id, cn.negocio_id, n.oficio, n.dia1,
+  select cn.id as cliente_negocio_id, cn.negocio_id, n.oficio, n.tanda, n.dia1, n.zona_horaria,
          (cn.alta_ts at time zone n.zona_horaria)::date as dia_alta
-  from cliente_negocio cn join n using (negocio_id)
+  from cliente_negocio cn join n on n.negocio_id = cn.negocio_id
   where (cn.alta_ts at time zone n.zona_horaria)::date between n.dia1 and n.dia1 + 15
-), reg as (
-  select i.*, ((i.dia_alta - i.dia1) / 7) + 1 as semana_alta,
-         exists (select 1 from v_visita v
-                 where v.cliente_negocio_id = i.cliente_negocio_id
-                   and v.dia_local > i.dia_alta and v.dia_local <= i.dia_alta + 21) as regreso
-  from insc i
-  where i.dia_alta + 21 <= (now() at time zone 'America/Mexico_City')::date     -- ventana cerrada
 )
-select oficio, semana_alta, count(*) as inscritos,
-       count(*) filter (where regreso) as regresaron,
-       count(*) filter (where regreso)::numeric / nullif(count(*), 0) as g1_d
-from reg
+select i.cliente_negocio_id, i.negocio_id, i.oficio, i.tanda, i.dia_alta,
+       ((i.dia_alta - i.dia1) / 7) + 1 as semana_alta,
+       (i.dia_alta + 22 <= (now() at time zone i.zona_horaria)::date) as evaluable,
+       exists (select 1 from v_visita v
+               where v.cliente_negocio_id = i.cliente_negocio_id
+                 and v.dia_local > i.dia_alta and v.dia_local <= i.dia_alta + 21) as regreso
+from insc i;
+```
+
+```sql
+-- Cifra global y lectura complementaria por oficio y por semana de alta.
+select case grouping(oficio, semana_alta) when 3 then 'global' when 1 then 'oficio' else 'semana_alta' end as corte,
+       oficio, semana_alta,
+       (select count(*) from v_negocio_g1 where tanda = :'tanda') as n_negocios_total,
+       count(*)                                          as inscritos_total,
+       count(*) filter (where evaluable)                 as inscritos_evaluables,
+       count(*) filter (where not evaluable)             as inscritos_no_evaluables,
+       count(*) filter (where evaluable and regreso)     as regresaron,
+       count(*) filter (where evaluable and regreso)::numeric
+         / nullif(count(*) filter (where evaluable), 0)  as g1_d      -- null = «sin dato»
+from v_g1d_inscrito
+where tanda = :'tanda'
 group by grouping sets ((), (oficio), (semana_alta));   -- () = cifra global; la semana 3 solo cubre los días 15 y 16
--- Umbral ≥ 25 %.
+-- Umbral ≥ 25 % (fila 'global'). Corte: no definido para G1-d en el PRD.
+
+-- Lectura complementaria: mediana por negocio (solo negocios con inscritos evaluables).
+select percentile_cont(0.5) within group (order by tasa) as mediana_por_negocio, count(*) as negocios_con_evaluables
+from (select negocio_id,
+             count(*) filter (where regreso)::numeric / count(*) as tasa
+      from v_g1d_inscrito where tanda = :'tanda' and evaluable
+      group by negocio_id) x;
 ```
 
 Advertencia fija para el informe: las bajas de D-026 reducen numerador y denominador del dominio (7.1); con ~200 clientes por negocio y 10 a 14 negocios es dirección, no significancia.
+
+### 7.5 Revisión a mano con un caso de prueba
+
+No hay base de datos para correr las consultas. Se revisaron a mano con cuatro negocios de una misma tanda y la fecha de hoy fijada en **1 dic 2026** (zona `America/Mexico_City`; para reproducirlo en un entorno de pruebas se sustituye `now()` por `'2026-12-01 12:00-06'::timestamptz`). Cuando exista la base, esta tabla es la prueba de aceptación de la sección 7.
+
+| Negocio | Oficio | `dia1` | Hoy es el día | Evaluable a-b-c |
+|---|---|---|---|---|
+| A | barbería | 1 oct | 62 | sí, sí, sí |
+| B | estética | 5 oct | 58 | sí, sí, sí |
+| C | tapiocas | 20 nov | 12 | no, no, no |
+| D | cafetería | 10 nov | 22 | no, no, sí |
+
+**Datos de entrada**
+
+| Negocio | G1-a (días 1-30) | G1-b (`ext_pago`) | G1-c (días 1-14) | G1-d (inscritos días 1-16) |
+|---|---|---|---|---|
+| A | 32 inscritos; sellos en las 4 semanas; 1 canje | 299 el 5 nov (día 36) | 20 inscritos; 50 visitaron; 14 días con dato | 10 inscritos; 4 regresan |
+| B | 25 inscritos; sellos en 2 semanas; 0 canjes; 3 clientes con ≥2 días | 150 el 8 nov | 6 inscritos; 40 visitaron; 14 días con dato | 10 inscritos; 1 regresa |
+| C | 10 inscritos; sellos en 1 semana | 299 el 25 nov (día 6) | 4 inscritos; sin captura de visitas | 4 inscritos (altas del 20 al 25 nov) |
+| D | 8 inscritos; sellos en 1 semana | sin pagos | 6 inscritos; 24 visitaron; 14 días con dato | 5 inscritos el 10 nov (altas el día 1) |
+
+**Resultados esperados**
+
+| Criterio | A | B | C | D | Cifra esperada |
+|---|---|---|---|---|---|
+| G1-a `activo` | `true` (32 ≥ 30, 4 semanas, 1 canje) | `false` (25 < 30, 2 semanas, 3 < 5 segundas) | `null` (no evaluable) | `null` (no evaluable) | `n_total` 4, `n_evaluables` 2, `n_no_evaluables` 2, `activos` 1, **g1_a = 50 %** (con el conteo viejo habría salido 1 de 4 = 25 %) |
+| G1-b `recibido_a_dia_37` | 299 → paga | 150 → precio menor | 299 pero no evaluable → no cuenta | 0, no evaluable | `n_total` 4, `n_evaluables` 2, `pagan` 1, `pagan_precio_menor_de_piloto` 1, **g1_b = 50 %** |
+| G1-c razón | 20/50 = 40 % | 6/40 = 15 % | no evaluable, sin denominador | 6/24 = 25 % | `n_evaluables` 3, `n_con_denominador` 3, `cobertura_sobre_evaluables` 100 %, `cobertura_sobre_n` 75 %, **g1_c_mediana = 25 %** (mediana de 40, 15 y 25) |
+| G1-d inscritos evaluables | 10 (el último alta el día 16: 16 oct + 22 = 7 nov ≤ 1 dic) | 10 | 0 (altas del 20 al 25 nov: +22 cae después de hoy) | 0 (10 nov + 22 = 2 dic > 1 dic) | `inscritos_total` 29, `inscritos_evaluables` 20, `inscritos_no_evaluables` 9, `regresaron` 5, **g1_d = 25 %** (global); `mediana_por_negocio` = 25 % (mediana de 40 % y 10 %), `negocios_con_evaluables` 2 |
+| Sin evaluables | si `tanda` solo tuviera C y D: G1-a y G1-b dan `n_evaluables` 0 y la razón `null` («sin dato»), G1-d `null`; G1-c solo cuenta D (1 evaluable) | | | | Ninguna razón sale 0 % por falta de evaluables |
+
+Notas de la revisión: (1) `count(distinct (dia_local - dia1) / 7)` usa división entera de enteros (días 0 a 6 = semana 0); (2) `group by` de `v_g1b_negocio` incluye `zona_horaria` porque se usa en `evaluable`; (3) en G1-d la columna `corte` usa `grouping(oficio, semana_alta)`: 3 = global, 1 = por oficio, 2 = por semana; (4) en G1-c, G1-a y G1-b el umbral y el corte se aplican a la cifra sobre evaluables, no sobre N.
 
 ---
 
@@ -864,7 +973,7 @@ Tablas de carga propuestas: `ext_visitas_dia`, `ext_pago`, `ext_horas_fundador`,
 | PQ-34 | **¿El borrado de cuenta limpia también `envio_codigo` y `codigo_intento` del teléfono?** Cierra el hilo `flujo_id` a teléfono (3.3), a costa de reiniciar los límites de envío de ese número | Arquitecto y abogado |
 | PQ-35 | **Lista cerrada de motivos de corrección** (`sellos_corregidos.motivo`): el texto de la lista de N7 y sus códigos | Diseño de producto |
 | ~~PQ-E~~ (aprobada por Aarón el 22 oct 2026) | **¿Se aprueban los atributos y el evento marcados «propuesto»?** Sin `registro_iniciado` MET-03 no tiene denominador; sin `duracion_s` y `duracion_ms`, MET-01 y MET-02 quedan «sin dato» | Coordinador |
-| PQ-41 | **Captura del denominador de G1-c** (`ext_visitas_dia`, RF-EVT-04): cómo captura el dueño los clientes que visitan por día (pantalla o ajuste de N0/N8, o conteo externo), con qué frecuencia y qué pasa si falta el dato. Ver PRD §12 | Aarón, con el product designer; puede esperar a la Fase 8 |
+| PQ-41 | **Captura del denominador de G1-c** (`ext_visitas_dia`, RF-EVT-04): cómo captura el dueño los clientes que visitan por día (pantalla o ajuste de N0/N8, o conteo externo), con qué frecuencia y qué pasa si falta el dato. Ver PRD §12 | Aarón, con el product designer; puede esperar a la Fase 8. También fija qué cuenta como «tener denominador» y sobre qué base se mide el 70 % de cobertura de G1-c (7.3, hoy `[SUPUESTO]`) |
 
 **Decisiones del fundador pendientes que afectan la medición:** precio especial de piloto y quién cuenta como pagador (PQ-01 y PQ-02, G1-b); captura del denominador de G1-c (PQ-41); costo del WhatsApp (PQ-30, costo por cliente nuevo); mecanismo del `install_token` (PQ-31, MET-06); umbrales de MET-10 y MET-11.
 
