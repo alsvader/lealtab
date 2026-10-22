@@ -4,7 +4,7 @@
 |---|---|
 | Producto | LealTab, plataforma SaaS de lealtad para negocios. Arranca con la tarjeta de lealtad digital (PWA instalable) |
 | Dueño del documento | Aarón López Sosa |
-| Versión | v2.0 |
+| Versión | v2.2 |
 | Fecha de redacción | 21 oct 2026 (solo registro; el plan no lleva calendario) |
 | Uso | Referencia de producto antes de arrancar la Fase 7 (Desarrollo) |
 | Estado | **Borrador para aprobación de Aarón**. La Fase 6 está cerrada (2026-10-20) |
@@ -32,6 +32,8 @@
 | v1.8 | Decisión de Aarón del 22 oct (PQ-32, aclaración de [D-004](../decisiones.md)): convenciones de Gate 1 en §2.2 (día 1 = fecha del alta del negocio; días 1 a 30; las 4 semanas de G1-a en los días 1-28; visita sin bienvenida ni correcciones; «segunda visita sellada» y «regresa»; G1-d como cifra global por cliente, con la mediana por negocio como lectura aparte). PQ-32 cerrada. Siguen **Por definir** G1-b (PQ-01 y PQ-02) y el denominador de G1-c |
 | v1.9 | Aclaraciones de Aarón del 22 oct (aclaración de [D-004](../decisiones.md), convenciones de Gate 1 en §2.2): «≥5 segundas visitas selladas» de G1-a significa **5 clientes** distintos con visitas en 2 o más días locales distintos dentro de los días 1 a 30, no 5 visitas sueltas; **negocio evaluable** solo cuando ya pasó la ventana de su criterio (los no evaluables se muestran en el informe, pero no cuentan como «no cumple»). Nace **PQ-41** (abierta): captura del denominador de G1-c (`ext_visitas_dia`, RF-EVT-04), que puede esperar a la Fase 8. La nota de G1-c en §2.2 cita PQ-41 en lugar de «sin PQ propia» |
 | v2.0 | Decisión de Aarón del 22 oct (aclaración de [D-028](../decisiones.md)): precedencia de los chips de estado de cliente en N6 y N7. Un cliente tiene **un solo chip**, con la precedencia **En riesgo > Frecuente > Nuevo > Al día**. Se cierra el «Por definir» de RF-QR-01 (la propuesta de diseño sin aprobar ya no aplica), y RF-CLI-01 remite a la misma regla. No había PQ abierta sobre la precedencia, así que §12 no cambia |
+| v2.1 | Aclaraciones de Aarón del 22 oct (aclaración de [D-004](../decisiones.md), §2.2): **mínimo de 8 negocios evaluables** para dar veredicto (con menos, «sin veredicto»; el corte también se evalúa solo sobre evaluables), y la cobertura de G1-c («≥70 % de N con denominador») se mide sobre los negocios evaluables de G1-c, con la cobertura sobre N como dato. G1-c y PQ-41 citan esa base. No nace ni se cierra ninguna PQ; PQ-41 sigue abierta por la captura del denominador |
+| v2.2 | Respuestas de Aarón del 22 oct a dos dudas de la v2.1 (aclaración de [D-004](../decisiones.md), §2.2, sin D- nuevas): (1) **veredicto del Gate 1:** pasa si 3 criterios con veredicto cumplen su umbral, aunque el cuarto esté «sin veredicto»; se corta si cualquier criterio con veredicto llega a su corte; en otro caso, «sin veredicto». Cada criterio da veredicto solo con ≥8 negocios evaluables, también G1-c. (2) **Denominador:** G1-a, G1-b, G1-c y G1-d se calculan sobre sus propios negocios evaluables; los umbrales de G1-a, G1-b y G1-d dejan de decir «de N». Quedan abiertas la precedencia si 3 criterios pasan y otro llega a corte, y el corte de G1-d (que no tiene) |
 
 ---
 
@@ -73,16 +75,16 @@ LealTab ayuda a barberías, estéticas y salones de belleza, negocios de tapioca
 
 ### 2.2 Gate 1 del piloto (criterios del negocio)
 
-Se evalúa sobre **N = los negocios de la primera tanda**. El corte de altas de la primera tanda está **Por definir** (sin calendario). Cada negocio se mide en sus propios días 1 a 30. La tarjeta sigue funcionando en los días 31 a 37 para medir el retorno y cobrar. **Se pasa con 3 de estos 4** [D-004; 02-plan §4, Fase 8]:
+Se evalúa sobre **N = los negocios de la primera tanda**; cada criterio se calcula sobre sus **negocios evaluables** (aclaración 5). El corte de altas de la primera tanda está **Por definir** (sin calendario). Cada negocio se mide en sus propios días 1 a 30. La tarjeta sigue funcionando en los días 31 a 37 para medir el retorno y cobrar. **Veredicto del Gate 1:** pasa con 3 criterios con veredicto que cumplen su umbral; ver la regla completa en la aclaración 6 [D-004; 02-plan §4, Fase 8]:
 
 | ID | Criterio | Umbral |
 |---|---|---|
-| G1-a | **Activos.** Activo = ≥30 inscritos, sellos en ≥3 de sus 4 semanas y (≥1 canje o ≥5 segundas visitas selladas) | ≥60 % de N |
-| G1-b | **Conversión.** Pagan ≥ MXN 299 sin IVA (primer mes o prepago) a más tardar su día 37. Solo cuenta el dinero recibido, no las promesas. Los precios especiales de piloto menores a $299 se reportan aparte. Recordatorio por WhatsApp el día 25 | ≥40 % de N |
-| G1-c | **Inscripción.** Mediana por negocio de los clientes que visitan, en sus días 1 a 14. Solo se evalúa si hay denominador (tickets o conteo) para ≥70 % de N; si no, queda «sin dato» | ≥30 % |
-| G1-d | **Retorno.** Inscritos en sus días 1 a 16 que regresan en ≤21 días. Se reporta también por oficio y por semana de alta | ≥25 % |
+| G1-a | **Activos.** Activo = ≥30 inscritos, sellos en ≥3 de sus 4 semanas y (≥1 canje o ≥5 segundas visitas selladas) | ≥60 % de los negocios evaluables |
+| G1-b | **Conversión.** Pagan ≥ MXN 299 sin IVA (primer mes o prepago) a más tardar su día 37. Solo cuenta el dinero recibido, no las promesas. Los precios especiales de piloto menores a $299 se reportan aparte. Recordatorio por WhatsApp el día 25 | ≥40 % de los negocios evaluables |
+| G1-c | **Inscripción.** Mediana por negocio de los clientes que visitan, en sus días 1 a 14. Solo se evalúa si hay denominador (tickets o conteo) para ≥70 % de los **negocios evaluables** de G1-c (los que ya pasaron el día 14); si no, queda «sin dato» | ≥30 % |
+| G1-d | **Retorno.** Inscritos en sus días 1 a 16 que regresan en ≤21 días. Se reporta también por oficio y por semana de alta | ≥25 % de los inscritos de los negocios evaluables de G1-d |
 
-**Se corta** con ≤20 % de N activos, ≤10 % de conversión o una mediana de inscripción menor a 10 %. En ese caso se revisan los pivotes de la sección 9 del informe 01 [D-004].
+**Cortes por criterio:** G1-a con ≤20 % de activos sobre sus evaluables, G1-b con ≤10 % de conversión y G1-c con una mediana de inscripción menor a 10 %. G1-d no tiene corte definido. Si un criterio llega a su corte, se revisan los pivotes de la sección 9 del informe 01 [D-004]. La regla de veredicto está en la aclaración 6.
 
 **Convenciones de medición** (PQ-32, decididas por Aarón el 22 oct 2026; aclaración de [D-004](../decisiones.md)):
 
@@ -93,12 +95,16 @@ Se evalúa sobre **N = los negocios de la primera tanda**. El corte de altas de 
 | Visita | Sello o canje aceptado en el mostrador, sin el sello de bienvenida [D-028] ni las correcciones [D-027] |
 | Segunda visita sellada (G1-a) | Un cliente con visitas en 2 o más días locales distintos dentro de los días 1 a 30 |
 | Regresa (G1-d) | Una visita en un día local posterior al de su alta y hasta 21 días después. El mismo día del alta no cuenta, aunque lleve sello. Solo entran los inscritos cuya ventana de 21 días ya cerró |
-| G1-d, cifra del gate | Global por cliente: todos los inscritos de los negocios de la tanda juntos. La mediana por negocio, el desglose por oficio y por semana de alta se reportan aparte como lectura complementaria y no deciden el gate |
+| G1-d, cifra del gate | Global por cliente: todos los inscritos de los **negocios evaluables de G1-d** juntos. La mediana por negocio, el desglose por oficio y por semana de alta se reportan aparte como lectura complementaria y no deciden el gate |
 
 **Aclaraciones del 22 oct 2026** (decisión de Aarón; aclaración de [D-004](../decisiones.md)):
 
 1. «≥5 segundas visitas selladas» de G1-a significa **5 clientes** distintos que tienen visitas en 2 o más días locales distintos dentro de los días 1 a 30 (no 5 visitas sueltas).
 2. **Negocio evaluable:** un negocio entra al cálculo de un criterio solo cuando ya pasó la ventana de ese criterio. Los no evaluables se muestran en el informe, pero no se cuentan como «no cumple».
+3. **Mínimo de 8 negocios evaluables por criterio:** cada criterio da veredicto solo con **al menos 8 negocios evaluables** de la primera tanda, también G1-c. Con menos de 8, el informe muestra las cifras de ese criterio junto con `n_evaluables` y dice «sin veredicto» para ese criterio: no se declara ni «cumple» ni «corte». El corte también se evalúa solo sobre negocios evaluables. Motivo: D-004 estima una capacidad realista de 10 a 14 negocios; con 1 o 2 evaluables, un solo negocio mueve la cifra de 50 a 100 puntos.
+4. **Cobertura de G1-c:** el «≥70 % de N con denominador» de G1-c se mide sobre los **negocios evaluables** de G1-c (los que ya pasaron el día 14). El informe reporta también la cobertura sobre N como dato.
+5. **Denominador de cada criterio:** G1-a, G1-b, G1-c y G1-d se calculan sobre sus propios negocios evaluables, no sobre N. Los umbrales de G1-a, G1-b y G1-c dicen «de los negocios evaluables»; el de G1-d es un porcentaje de inscritos de los negocios evaluables de G1-d.
+6. **Veredicto del Gate 1:** pasa si **3 criterios con veredicto cumplen su umbral**, aunque el cuarto esté «sin veredicto»; se corta si **cualquier criterio con veredicto llega a su corte**; en cualquier otro caso, «sin veredicto». *Por definir:* qué pasa si 3 criterios cumplen y otro llega a su corte a la vez (la regla no lo resuelve; propuesta de PQ al coordinador). G1-d no tiene corte definido.
 
 **Siguen Por definir** (fuera de PQ-32): G1-b, si se suman los pagos o es un pago único ≥ MXN 299 (PQ-01 y PQ-02); y G1-c, cuyo denominador de visitas depende de que el dueño lo capture (RF-EVT-04): se rige por **PQ-41**.
 
@@ -622,7 +628,7 @@ Estado al 2026-10-21, según `docs/fase-7/propuestas/aprobaciones-2026-10-21.md`
 | PQ-38 | **Reintento de crear la tarjeta tras verificar:** si el código ya se verificó y falla la creación de la tarjeta, si se puede reintentar sin pedir otro código (y con qué ventana). Incluye confirmar que el estado del paso 2 se conserva en `sessionStorage` (CA-C1.14) | Arquitecto | ADR-003 §2.2; pieza 08 |
 | PQ-39 | **Tiempo de espera del hook de SMS:** el máximo no está documentado por Supabase; el valor de trabajo es de 15 s `[SUPUESTO]` y se mide en el *spike* junto con el reintento por SMS dentro de la misma llamada | Arquitecto y desarrollo, en el *spike* | ADR-004 §2 punto 11 y §3 |
 | PQ-40 | **Alfabeto del SMS:** el ADR-004 dice «sin á, é, ó», pero el GSM-7 sí incluye la «é». Confirmar por escrito con SMS Masivos qué caracteres aceptan en el SMS y ajustar el texto | Aarón, con el proveedor (junto con PQ-30) | ADR-004 §1; D-024 |
-| **PQ-41** | **Captura del denominador de G1-c** (`ext_visitas_dia`, RF-EVT-04): ¿cómo captura el dueño los clientes que visitan por día (pantalla o ajuste de N0/N8, o conteo externo), con qué frecuencia, y qué pasa si falta el dato? Hoy G1-c queda «sin dato» si menos del 70 % de N tiene denominador (§2.2) | Aarón, con el product designer; puede esperar a la Fase 8 | RF-EVT-04; §2.2 (G1-c); `docs/fase-7/medicion.md` §7.3 y §9; [D-004](../decisiones.md) (aclaración del 22 oct 2026) |
+| **PQ-41** | **Captura del denominador de G1-c** (`ext_visitas_dia`, RF-EVT-04): ¿cómo captura el dueño los clientes que visitan por día (pantalla o ajuste de N0/N8, o conteo externo), con qué frecuencia, y qué pasa si falta el dato? Hoy G1-c queda «sin dato» si menos del 70 % de los negocios evaluables de G1-c tiene denominador (§2.2) | Aarón, con el product designer; puede esperar a la Fase 8 | RF-EVT-04; §2.2 (G1-c); `docs/fase-7/medicion.md` §7.3 y §9; [D-004](../decisiones.md) (aclaración del 22 oct 2026) |
 
 ---
 
