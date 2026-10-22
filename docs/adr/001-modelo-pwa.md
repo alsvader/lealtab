@@ -145,10 +145,10 @@ Notas:
 4. **Tarjeta tematizada por negocio.** Dentro de la app, cada tarjeta usa el logo, los colores y el nombre del negocio, y cambia `<meta name="theme-color">` al color del negocio `[SUPUESTO: confirmar que el modo standalone respeta el cambio en iOS y Android]`. El ícono, el nombre de la app y el splash son de LealTab.
 5. **Un solo service worker** registrado con scope `/c/` (H14). Guarda en caché el último estado de cada tarjeta con una clave por `slug` y la lista de "mis tarjetas" para verla sin conexión. La separación por negocio la garantiza el servidor (sección 6), no el navegador.
 6. **Alta del segundo negocio:**
-   - **Android:** el QR de Café Y abre la app instalada (H16) o Chrome (H17, S7). En los dos casos hay sesión, porque la WebAPK comparte cookies con Chrome. El cliente acepta el registro con un toque y la tarjeta aparece en "Mis tarjetas".
+   - **Android:** el QR de Café Y abre la app instalada (H16) o Chrome (H17, S7). En los dos casos hay sesión, porque la WebAPK comparte cookies con Chrome. El cliente escribe su nombre para ese negocio y acepta el aviso (sin código, porque hay sesión, D-031) y la tarjeta aparece en "Mis tarjetas".
    - **iOS:** el QR abre Safari (S6).
      - Si Safari conserva la sesión del primer registro, el alta es de un toque y la página dice "Listo. Abre LealTab en tu inicio: tu tarjeta de Café Y ya está ahí".
-     - Si Safari no tiene sesión, el cliente escribe su WhatsApp. La tarjeta se liga a la `identidad` de ese teléfono, pero queda **por confirmar**: no se muestra en la app hasta que el cliente la acepta desde la app instalada (que sí tiene sesión) o el cajero lo verifica al dar el primer sello. Así, quien escriba un teléfono ajeno no puede meter tarjetas en el perfil de otra persona.
+     - Si Safari no tiene sesión, el cliente escribe su WhatsApp y el código que recibe (mismo flujo del registro, D-031). Al verificar, entra a su cuenta y «Mis tarjetas» muestra todas las de su identidad. Ya no existe el estado «por confirmar» ni la confirmación por el cajero; el código impide meter tarjetas en el perfil de otra persona. *(Sustituido el 22 oct 2026 por D-031; antes: tarjeta «por confirmar», D-025.)*
    - **No** hay que instalar ni transferir otra vez.
 7. **Guía de instalación** con copy de tarjetas, no de app: "Guarda tus tarjetas en tu inicio". Muestra el ícono LealTab con una línea que explique "Ahí viven tu tarjeta de Café X y las que agregues". El copy final lo define diseño `[SUPUESTO, medir en piloto]`.
 8. **Transferencia de sesión en iOS una sola vez,** ligada a la `identidad` (sección 7).
@@ -200,7 +200,7 @@ El subdominio da aislamiento por el navegador, pero cuesta de 2 a 3 días entre 
 
   El mismo WhatsApp en tres negocios es **una** identidad con **tres** `cliente_negocio` independientes. Con B, "Mis tarjetas" es la lista de los `cliente_negocio` activos de la identidad con sesión.
 - **Separación:** el panel del dueño y todas las consultas filtran por `negocio_id` (con RLS en Postgres en Supabase; stack confirmado en D-023 y ADR-002). Un negocio **nunca** ve si su cliente está inscrito en otro negocio. La única vista que cruza negocios es "Mis tarjetas", y solo la ve el propio cliente con su sesión.
-- **Recuperación:** con B se hace una sola vez, desde `/c/recuperar`, y recupera todas las tarjetas de la identidad. *(Actualizado 21 oct 2026, decisión de Aarón, cambio parcial de D-011: cuando el cliente cambia de teléfono, recupera con un **código enviado por WhatsApp** mediante la API de WhatsApp Business, de pago. Antes: verificación del cajero o un enlace firmado. Costo y configuración de la API: pendientes.)* Con H se hace por negocio, desde `/c/{slug}/recuperar`.
+- **Recuperación:** con B se hace una sola vez, desde `/c/recuperar`, y recupera todas las tarjetas de la identidad. *(Actualizado 21 oct 2026, decisión de Aarón, cambio parcial de D-011: cuando el cliente cambia de teléfono, recupera con un **código enviado por WhatsApp o SMS** con SMS Masivos y el hook de Supabase Auth (D-024), de pago por mensaje (MXN 0.77 a 0.90 por SMS, antes de IVA). Desde D-031 el código también se pide en el registro. Lo pendiente con el proveedor está en PQ-30.)* Con H se hace por negocio, desde `/c/{slug}/recuperar`.
 - **LFPDPPP (nueva ley, DOF 20 mar 2025):** propongo que el **negocio sea el responsable** de los datos de su programa y que **LealTab actúe como encargado**, con un contrato de encargo en cada alta (informe 01, riesgo 9). Reservar la `identidad` compartida solo para autenticar y mostrarle al cliente sus propias tarjetas, sin usos propios de LealTab, es lo que buscaría sostener ese rol de encargado `[SUPUESTO, requiere revisión legal: validación 5.1 a]`.
 
   Si el abogado concluye que "Mis tarjetas" ya convierte a LealTab en responsable de esa cuenta, aplica la sección 5.1. En cualquier caso, si mañana se usan los datos para fines propios (por ejemplo, recomendar otros negocios), LealTab sí pasa a ser responsable: necesitará su propio aviso de privacidad y un consentimiento explícito. Ese cambio debe pasar por un ADR y por un abogado.
@@ -212,7 +212,7 @@ El subdominio da aislamiento por el navegador, pero cuesta de 2 a 3 días entre 
 
 **Diseño propuesto (B):**
 
-1. **Sesión principal:** una cookie `HttpOnly` y `Secure` emitida por el servidor, de larga duración. Al no ser escribible por script, no entra en el borrado de 7 días (H9) `[SUPUESTO: confirmar que ITP no la acorta por ser de primera parte emitida por el servidor]`. La identidad vive en el servidor, así que perder el dispositivo se resuelve con la recuperación.
+1. **Sesión principal:** las cookies de sesión de Supabase Auth, escritas por el servidor con `@supabase/ssr` (`lt-cliente`, `Path=/c`, `HttpOnly`, `Secure`, `SameSite=Lax`), de larga duración (ADR-003 §2.4). Al no ser escribible por script, no entra en el borrado de 7 días (H9) `[SUPUESTO: confirmar que ITP no la acorta por ser de primera parte emitida por el servidor]`. La identidad vive en el servidor, así que perder el dispositivo se resuelve con la recuperación.
 2. **Token de instalación:** cuando el cliente abre la guía "Compartir → Agregar a inicio" en iOS, el servidor emite un `install_token` con estas propiedades:
    - Aleatorio de 128 bits o más.
    - De un solo uso.
@@ -220,8 +220,8 @@ El subdominio da aislamiento por el navegador, pero cuesta de 2 a 3 días entre 
    - Con vigencia de 24 h.
 
    La página cambia el `href` de `<link rel="manifest">` a `/c/manifest.webmanifest?it=<token>`, que devuelve `start_url: /c/?source=pwa&it=<token>`. El `id` sigue siendo `/c/`, así que el token no crea otra app (H1).
-3. **Primer arranque en standalone:** el cliente canjea el token por una sesión nueva en el contenedor de la app, y luego `history.replaceState` quita el token de la URL. En los arranques siguientes, el token ya se usó y se ignora si existe una sesión. Si no hay sesión (por ejemplo, porque iOS borró los datos), se muestra la recuperación.
-4. **Respaldo si S1 falla** (iOS no toma el manifest con el token): en el primer arranque, la app pide el WhatsApp y muestra un código de 6 dígitos que el cliente confirma en la pestaña de Safari donde ya tiene sesión, o con el cajero. No hay costo de OTP.
+3. **Primer arranque en standalone:** el cliente canjea el token por una sesión de Supabase en el contenedor de la app. El mecanismo (A: correo técnico y `generateLink`; B: código nuevo) está Por definir hasta la prueba de PQ-31 (ADR-003 §2.3), y luego `history.replaceState` quita el token de la URL. En los arranques siguientes, el token ya se usó y se ignora si existe una sesión. Si no hay sesión (por ejemplo, porque iOS borró los datos), se muestra la recuperación.
+4. **Respaldo si S1 falla:** el mecanismo B: la PWA pide un código nuevo por WhatsApp o SMS al abrirse por primera vez en iPhone. Cuesta un mensaje más por instalación (RF-APP-15, ADR-003 §2.3). Ya no se confirma con el cajero.
 5. **Android:** la PWA instalada comparte las cookies con Chrome, así que no hace falta token. El mismo código se puede usar sin daño.
 6. **Riesgo aceptado:** el token queda grabado en el `start_url` del ícono. Como es de un solo uso y vence, no sirve para robar la sesión después del primer arranque.
 7. **Negocios siguientes:** no hay token ni transferencia. La tarjeta nueva se liga a la identidad en el servidor y aparece en la app (sección 5.2, punto 6).
@@ -262,10 +262,10 @@ El subdominio da aislamiento por el navegador, pero cuesta de 2 a 3 días entre 
 | Métrica (evento) | Umbral para confirmar | Señal para revisar |
 |---|---|---|
 | Instalación de LealTab por SO (`pwa_instalada`, con `display-mode: standalone`) | ≥25% (E6) | <10% en ambos SO: el modelo de instalación da igual; no invertir más en él. Entre 10% y 25%: revisar el copy del salto mental |
-| Éxito de la transferencia en iOS (`install_token_canjeado` / guías mostradas) | ≥80% | <60%: priorizar el respaldo del código o revisar S1 |
-| Recuperaciones en apps instaladas de iOS | <10% de los inscritos | Más alto: la sesión no sobrevive y hay que revisar la sección 7 |
-| Conversión del segundo negocio en la app ya instalada (`cliente_negocio` nuevo de una identidad con `pwa_instalada` que se abre en standalone en ≤7 días) | ≥60% | <30%: el paso por Safari en iOS (S6) pesa; adelantar el escaneo desde la app |
-| Tarjetas `por_confirmar` que nunca se confirman | <20% | Más alto: simplificar la confirmación |
+| Éxito de la transferencia en iOS (`install_token_canjeado` / guías mostradas) | ≥80% | <60%: pasar al respaldo B (código nuevo al abrir la PWA en iPhone, RNF-PWA-05; con B la métrica mide cuántos completan ese código, MET-06) |
+| Recuperaciones (`recuperacion_completada`: verificación del código por un teléfono que ya tenía tarjetas, sin sesión en ese navegador) | <10% de los inscritos (MET-05) | Más alto: la sesión no sobrevive y hay que revisar la sección 7 |
+| Conversión del segundo negocio en la app ya instalada (`cliente_negocio` nuevo de una identidad con `pwa_instalada` que se abre en standalone en ≤7 días) | ≥60% | <30%: el paso por Safari en iOS (S6) pesa; adelantar el escaneo desde la app. Con D-031, el segundo negocio con sesión sigue en un paso, sin código; sin sesión cuenta como registro con código (MET-03) y recuperación (MET-05) (MET-07). |
+| ~~Tarjetas `por_confirmar` que nunca se confirman~~ | — | **Retirada (D-031, 22 oct 2026): el estado «por confirmar» ya no existe (MET-08).** |
 | Clientes con ≥2 negocios (`identidad` con >1 `cliente_negocio`) | Medir | ≥20%: refuerza B |
 | Dueños que citan "mi ícono/mi marca" como motivo de compra (entrevistas E1 y cierre) | <3 de 10 (validación 5.1 b) | ≥3 de 10: volver a H antes de los pilotos; después de los pilotos, ofrecer el módulo de Fase 7 |
 | Dueños que piden el ícono propio después de firmar | Anecdótico | Frecuente: priorizar el módulo de Fase 7 |

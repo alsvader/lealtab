@@ -1,6 +1,6 @@
 # LealTab: Informe 02, Plan de trabajo
 
-> **Versión 3, 20 oct 2026.** Sin calendario: el plan se organiza por fases y cada fase cierra con su criterio de salida, no con una fecha. Junta en una sola secuencia las fases de marca y diseño de `PLAN.md` con las de validación de este documento. Incorpora D-001 a D-017 de `docs/decisiones.md`. *(Ajuste del 21 oct 2026: los entregables de cada fase van en `docs/fase-N/` con la numeración de este plan, el equipo de subagentes se actualizó en la sección 5 y la guía de instalación de iOS tiene 3 pasos, como en la pieza 02.)*
+> **Versión 3, 20 oct 2026.** Sin calendario: el plan se organiza por fases y cada fase cierra con su criterio de salida, no con una fecha. Junta en una sola secuencia las fases de marca y diseño de `PLAN.md` con las de validación de este documento. Incorpora D-001 a D-031 de `docs/decisiones.md`. *(Ajuste del 21 oct 2026: los entregables de cada fase van en `docs/fase-N/` con la numeración de este plan, el equipo de subagentes se actualizó en la sección 5 y la guía de instalación de iOS tiene 3 pasos, como en la pieza 02.)*
 > Base: `docs/01-validacion-idea.md` (veredicto: GO con condiciones).
 
 ## 1. Principios del plan
@@ -45,9 +45,9 @@ Fuente de detalle: `06-product-design/` (mapa de flujos y piezas 2 a 6, aprobada
 |---|---|
 | **Landing** (lealtab.com, `web/`) | Para el dueño, con CTA "Empieza gratis", ayuda por WhatsApp aparte y precios públicos (D-006, D-008) |
 | **Alta del negocio (N1-N4)** | Autoservicio en menos de 5 min, sin llamada de ventas ni tarjeta de crédito: cuenta (correo + código de 10 min o contraseña, D-005 actualizado 2026-10-21), datos del negocio, tarjeta (4 a 12 sellos, recompensa, sello de bienvenida) y cartel QR del mostrador (D-005) |
-| **App del cliente (C0-C5)** | Una sola PWA LealTab (D-013). Se abre desde el QR del mostrador; registro con nombre + WhatsApp y aviso de privacidad, sin contraseña. "Mis tarjetas" con las tarjetas de varios negocios, cada una con su marca. Muestra los sellos, la recompensa y un QR personal que cambia cada 60 s. "Mis datos" para ver o borrar la cuenta |
+| **App del cliente (C0-C5)** | Una sola PWA LealTab (D-013). Se abre desde el QR del mostrador; registro con nombre + WhatsApp verificado con un código por WhatsApp o SMS (D-031) y aviso de privacidad, sin contraseña. "Mis tarjetas" con las tarjetas de varios negocios, cada una con su marca. Muestra los sellos, la recompensa y un QR personal que cambia cada 60 s. "Mis datos" para ver o borrar la cuenta |
 | **Instalación PWA** | Manifest y service worker. Aviso de instalación en Android/Chrome; en iOS, una guía visual de "Compartir → Agregar a inicio". Instalar es opcional |
-| **Recuperación de tarjeta** | Con el número de WhatsApp si el cliente cambia de teléfono o borra datos |
+| **Recuperación de tarjeta** | Con el número de WhatsApp y un código por WhatsApp o SMS (SMS Masivos, D-024) si el cliente cambia de teléfono o borra datos; es el mismo flujo del registro (D-031) |
 | **Mostrador (N5)** | Dentro del panel, con la cuenta compartida del negocio. Escanea el QR del cliente o lo busca por WhatsApp; estados escanear, confirmar sello y canjear |
 | **Antiabuso** | QR rotativo (60 s, validable sin conexión con 10 min de margen), 1 sello por día por defecto, configurable a "1 cada X horas" o "Sin límite", bloqueo fijo de 2 min contra escaneo doble y registro de quién dio cada sello (D-014) |
 | **Sin conexión primero** | Sellos y canjes se guardan en el teléfono y se sincronizan después; el servidor decide y lo rechazado va a Clientes → Por revisar. Canje sin conexión con límite (D-015) |
@@ -79,7 +79,7 @@ Fuente de detalle: `06-product-design/` (mapa de flujos y piezas 2 a 6, aprobada
 |---|---|---|
 | El QR se abre en el navegador integrado de WhatsApp o Instagram, que no permite instalar | La tarjeta funciona igual; se ofrece "abrir en Safari/Chrome" solo para instalar | E6 |
 | En iOS no hay aviso de instalación | Guía visual de 3 pasos (C2); instalar es opcional | E6 |
-| iOS borra los datos de sitios no instalados después de un tiempo sin uso | La identidad vive en el servidor; se recupera por WhatsApp | Tasa de recuperación |
+| iOS borra los datos de sitios no instalados después de un tiempo sin uso | La identidad vive en el servidor; se recupera con un código por WhatsApp o SMS (D-031) | Tasa de recuperación |
 | Las notificaciones web en iOS requieren la PWA instalada | No dependas del push en el MVP | — |
 | Fraude con capturas de pantalla del QR | QR rotativo firmado y validación en el servidor | Registro de sellos |
 | Mala conexión en el local | Modo sin conexión primero; búsqueda por WhatsApp como respaldo | Rechazos en Por revisar |
@@ -108,7 +108,7 @@ Aprobado: mapa de flujos, tarjeta del cliente, mostrador y quién regresa, alta 
 
 **En paralelo (descubrimiento):** entrevistas con dueños (incluida la validación del ícono del ADR-001), consulta legal LFPDPPP y reclutamiento de pilotos en persona.
 
-**Criterio de salida:** un local real usó el flujo completo durante 1 semana sin errores bloqueantes, hay **≥10 pilotos confirmados por escrito** (WhatsApp), de al menos 3 oficios, y las dos validaciones del ADR-001 están hechas.
+**Criterio de salida:** un local real usó el flujo completo durante 1 semana sin errores bloqueantes, hay **≥10 pilotos confirmados por escrito** (WhatsApp), de al menos 3 oficios, las dos validaciones del ADR-001 están hechas (D-017) y, antes del piloto, el aviso de privacidad está actualizado para la analítica (D-018) y el proveedor del código (SMS Masivos) está configurado y probado (D-024).
 **Si a mitad de la fase hay menos de 6 pilotos confirmados:** revisar el segmento antes de seguir construyendo.
 
 ### Fase 8: Pilotos y Gate 1
@@ -170,7 +170,7 @@ Gate 3: MRR ≥ MXN 30,000 con ≥60 clientes, y el módulo pedido por ≥3 clie
 
 ## 5. Equipo de subagentes (`.claude/agents/`)
 
-> Actualizado el 21 oct 2026 contra el PRD v1.4 y D-001 a D-023. Los entregables en documento van en `docs/fase-N/` con la numeración de este plan; el código de la app va en `web/`.
+> Actualizado el 22 oct 2026 contra el PRD v2.3 y D-001 a D-031. Los entregables en documento van en `docs/fase-N/` con la numeración de este plan; el código de la app va en `web/`.
 
 | Agente | Fases | Rol |
 |---|---|---|
