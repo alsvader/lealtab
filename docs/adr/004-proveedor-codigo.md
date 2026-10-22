@@ -24,7 +24,7 @@ Lo verificado el 21 oct 2026:
 - **Dos «WhatsApp» distintos.** El de `/v2/otp` (`channel: whatsapp`) usa una plantilla fija descrita como «integración oficial», sin cuenta de Meta propia. El de `/whatsapp/send` se conecta escaneando un QR «igual que WhatsApp Web», con límite de 1 envío cada 60 s y advertencia de bloqueo de línea: **no sirve** y no es la API de D-011 ([WhatsApp](https://app.smsmasivos.com.mx/api-docs/whatsapp)).
 - **Precio.** SMS: MXN 0.90 (recarga de 500 o más), 0.77 (1,000+), 0.68 (10,000+), antes de IVA; compra mínima de 500 mensajes ([precios](https://www.smsmasivos.com.mx/precios-sms-masivos)). El WhatsApp OTP **no tiene precio publicado**.
 - **Datos.** Servidores en Estados Unidos; actúa como encargado; conserva número, contenido y metadatos de entrega hasta 3 meses ([aviso de privacidad](https://www.smsmasivos.com.mx/aviso-de-privacidad)). Las cookies que menciona son de su sitio web; el flujo es de servidor a servidor.
-- **SMS.** Alfabeto GSM-7 (sin «á», «é», «ó»), con `{{code}}` y `{{company}}` obligatorios.
+- **SMS.** Alfabeto GSM-7 (sin acentos, PQ-40), con `{{code}}` y `{{company}}` obligatorios.
 
 ### Opciones consideradas
 
@@ -76,25 +76,21 @@ Descartadas: WhatsApp directo con Meta, Twilio Verify y 360dialog. SMS Masivos a
 
 **Condiciones para pasar a «Aceptado» sin reservas:**
 
-- **PQ-30, confirmaciones por escrito de SMS Masivos antes de construir la recuperación:**
-  1. Que el OTP por WhatsApp (`/v2/otp`, `channel: whatsapp`) usa la **API oficial de Meta** (WhatsApp Business), como pide D-011. Si usa una ruta no oficial, no se acepta y se reabre la elección de proveedor con Aarón.
-  2. El **texto exacto de la plantilla** y el **remitente** que verá el cliente (no será un número de LealTab; `[SUPUESTO]`).
-  3. La **cotización** del WhatsApp OTP y del SMS para el volumen del piloto.
-  4. Si hay **webhooks de entrega**. La documentación del OTP solo muestra `GET /v2/otp/status` (`[SUPUESTO]`: sin webhooks). Si no hay, el estado de entrega se consulta o se omite.
+- **PQ-30, confirmaciones por escrito de SMS Masivos: ya no se piden.** Aarón decidió el 22 oct 2026 no pedirlas porque SMS Masivos «tiene todo» y LealTab solo usa su API. Por eso se retiran los cuatro puntos que antes las exigían: API oficial de Meta para el OTP por WhatsApp, texto de la plantilla y remitente, cotización y webhooks de entrega. Lo que queda de PQ-30 es la prueba técnica del hook (*spike*) de abajo.
 - **Prueba técnica del hook sin proveedor nativo (*spike*), con salida definida** (es la prueba 1 del ADR-003; ahora bloquea también el registro del cliente):
   1. Que `signInWithOtp` con teléfono llegue al hook sin proveedor de teléfono nativo y sin `channel`. La lectura del código de Supabase indica que con el hook habilitado no se consulta ningún proveedor, pero no se confirmó que `/otp` no exija el interruptor del proveedor.
   2. Que `code_custom` de 6 dígitos con `channel: whatsapp` y `code_rotate: true` entregue exactamente el código de Supabase, también en reenvíos.
   3. Entrega real en Telcel, AT&T y Movistar, en iPhone y Android, por los dos canales.
   4. Tiempo de respuesta de la API frente al tiempo máximo del hook (no documentado).
   - **Si el hook no se dispara** sin proveedor nativo: las salidas están en ADR-003 §3 (proveedor nominal de relleno, o código propio sin Supabase Auth, que contradice D-031 y D-023). No se elige sin la prueba; se avisa al coordinador para llevarlo a Aarón.
-- **Costo.** El WhatsApp no tiene precio publicado. Hasta la cotización, RNF-REN-06 queda sin cambio (PQ-29).
+- **Costo.** El WhatsApp no tiene precio publicado. No se espera una cotización (decisión de Aarón, 22 oct 2026). RNF-REN-06 usa la estimación de MXN 2,000 a 3,300 antes de IVA, con SMS como peor caso (PQ-29); el costo real del WhatsApp se verá al usar la API.
 - **Cuenta y operación.** Quién abre la cuenta de SMS Masivos y con qué datos fiscales (RNF-PRI-08); primera recarga mínima de 500 mensajes (MXN 450 + IVA al precio de 0.90).
 - **Aviso de privacidad y consulta legal** (D-017, PQ-18): nombrar a SMS Masivos como encargado, la conservación de 3 meses y la transferencia a EE. UU.
 
 ## 4. Consecuencias
 
 - **Un solo proveedor para los dos canales:** punto único de falla, mitigado con las alertas de saldo y de fallos. Con D-031 el impacto es mayor (bloquea registros). Cambiar de proveedor es cambiar un endpoint.
-- **Costo (corregido el 22 oct 2026).** Cada registro consume un código. Piloto (`[SUPUESTO]`): 10 a 14 negocios × 200 clientes = 2,000 a 2,800 altas; con 1.3 envíos por alta (reintentos y recuperaciones), 2,600 a 3,640 envíos. Todo en SMS y antes de IVA: MXN 2,002 a 3,276 (USD 108 a 177 a MXN 18.5), una sola vez a lo largo del piloto. Sustituye al cálculo anterior de unos MXN 380, que cubría solo recuperaciones. El costo con WhatsApp depende de la cotización (PQ-30). Detalle en ADR-003 §4.
+- **Costo (corregido el 22 oct 2026).** Cada registro consume un código. Piloto (`[SUPUESTO]`): 10 a 14 negocios × 200 clientes = 2,000 a 2,800 altas; con 1.3 envíos por alta (reintentos y recuperaciones), 2,600 a 3,640 envíos. Todo en SMS y antes de IVA: MXN 2,002 a 3,276 (USD 108 a 177 a MXN 18.5), una sola vez a lo largo del piloto. Sustituye al cálculo anterior de unos MXN 380, que cubría solo recuperaciones. El costo con WhatsApp se conocerá al usar la API; no se pidió cotización (decisión de Aarón, 22 oct 2026). Detalle en ADR-003 §4.
 - **R-18 sube de peso.** El proveedor está ahora en la ruta crítica del **registro** y de la entrada sin sesión: si se cae o se queda sin saldo, no se registran clientes nuevos. El umbral de alerta de saldo sube de 100 a `[SUPUESTO]` 300 mensajes para cubrir un día de arranque. El gatillo de reconsiderar proveedor sigue igual.
 - **Solo México:** números de 10 dígitos (RF-APP-03); el hook rechaza otro prefijo, lo que también frena el envío masivo a otros países.
 - **Privacidad.** Hay datos en el extranjero y un encargado más. Las cookies del sitio de SMS Masivos no nos afectan: el cliente nunca lo visita (RNF-STK-10).

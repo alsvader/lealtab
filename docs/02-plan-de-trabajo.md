@@ -22,7 +22,7 @@
 | 3 | Identidad visual | ✅ | Logo, paleta y brand book aprobados |
 | 4 | Design System | ✅ | 5 piezas aprobadas |
 | 5 | Marketing de lanzamiento | ⏸️ En pausa | Landing en `web/` publicada ✅, perfil de IG confirmado, posts 8-9 e historias decididos |
-| 6 | Diseño de producto del MVP | ✅ Cerrada (2026-10-20) | Flujos ✅, pantallas N0-N8 y C0-C4 aprobadas ✅ (C5 en alcance, sin wireframe todavía), ADR-001 cerrado ✅, eventos definidos ✅ (`07-entrega` §5). **PRD del MVP: borrador en revisión** (`docs/prd/PRD-lealtab-mvp.md`) |
+| 6 | Diseño de producto del MVP | ✅ Cerrada (2026-10-20) | Flujos ✅, pantallas N0-N8 y C0-C4 aprobadas ✅ (C5 en alcance, sin wireframe todavía), ADR-001 cerrado ✅, eventos definidos ✅ (`07-entrega` §5). **PRD del MVP v2.4** (`docs/prd/PRD-lealtab-mvp.md`) |
 | 7 | Desarrollo del MVP + piloto 0 | Pendiente | Un local real usa el flujo completo una semana sin errores bloqueantes; al menos 10 pilotos confirmados por escrito, de 3 oficios o más; entrevistas sobre el ícono y consulta legal LFPDPPP hechas (D-017) |
 | 8 | Pilotos y Gate 1 | Pendiente | Gate 1 según D-004 (sección 4) |
 | 9 | Producto v1 y Gate 2 | Pendiente | Lo piden los datos. Gate 2: ≥15 clientes de pago, MRR ≥ MXN 7,500, churn ≤8 % y un canal de ≤6 h por cliente |
@@ -102,7 +102,7 @@ Landing publicada en `web/`. Se retoma después de la Fase 6; lo pendiente está
 
 Aprobado: mapa de flujos, tarjeta del cliente, mostrador y quién regresa, alta y configuración, inicio/clientes/ajustes y estados de error y vacío, y la hoja de entrega para desarrollo (`07-entrega-desarrollo.md`, con eventos y modelo de datos). C5 Mis datos queda en alcance sin wireframe.
 
-**PRD del MVP:** borrador en revisión en `docs/prd/PRD-lealtab-mvp.md` (métricas del producto, requisitos no funcionales y preguntas abiertas).
+**PRD del MVP v2.4:** en `docs/prd/PRD-lealtab-mvp.md` (métricas del producto, requisitos no funcionales y preguntas abiertas).
 
 ### Fase 7: Desarrollo del MVP + piloto 0
 
@@ -139,7 +139,7 @@ Aprobado: mapa de flujos, tarjeta del cliente, mostrador y quién regresa, alta 
 
 **Segunda tanda:** los negocios que entren después del corte cuentan para el Gate 2.
 
-**Eventos mínimos** (lista final en `06-product-design/07-entrega-desarrollo.md` §5): `negocio_alta_completada` (oficio, fecha, tanda), `cliente_registrado`, `sello_registrado`, `canje_registrado`, `resumen_semanal_visto`, más los del ADR-001 §10 (`pwa_instalada`, `guia_instalacion_mostrada`, `install_token_canjeado`, `recuperacion_completada`, `tarjeta_por_confirmar_creada`, `tarjeta_confirmada`, `app_abierta`); fuera de la app, clientes que visitaron por día (tickets o conteo) y registro de pagos (fecha, monto sin IVA, método).
+**Eventos mínimos** (lista final en `06-product-design/07-entrega-desarrollo.md` §5): `negocio_alta_completada` (oficio, fecha, tanda), `cliente_registrado`, `sello_registrado`, `canje_registrado`, `resumen_semanal_visto`, más los del ADR-001 §10 (`pwa_instalada`, `guia_instalacion_mostrada`, `install_token_canjeado`, `recuperacion_completada`, `app_abierta`); fuera de la app, clientes que visitaron por día (tickets o conteo) y registro de pagos (fecha, monto sin IVA, método).
 
 **E6 adaptado a la PWA (`[SUPUESTO]`):**
 - ≥85% de los que escanean el QR completan el registro.

@@ -147,7 +147,7 @@ Notas:
 6. **Alta del segundo negocio:**
    - **Android:** el QR de Café Y abre la app instalada (H16) o Chrome (H17, S7). En los dos casos hay sesión, porque la WebAPK comparte cookies con Chrome. El cliente escribe su nombre para ese negocio y acepta el aviso (sin código, porque hay sesión, D-031) y la tarjeta aparece en "Mis tarjetas".
    - **iOS:** el QR abre Safari (S6).
-     - Si Safari conserva la sesión del primer registro, el alta es de un toque y la página dice "Listo. Abre LealTab en tu inicio: tu tarjeta de Café Y ya está ahí".
+     - Si Safari conserva la sesión del primer registro, el alta es de un toque (solo con sesión; sin sesión pide el código, D-031) y la página dice "Listo. Abre LealTab en tu inicio: tu tarjeta de Café Y ya está ahí".
      - Si Safari no tiene sesión, el cliente escribe su WhatsApp y el código que recibe (mismo flujo del registro, D-031). Al verificar, entra a su cuenta y «Mis tarjetas» muestra todas las de su identidad. Ya no existe el estado «por confirmar» ni la confirmación por el cajero; el código impide meter tarjetas en el perfil de otra persona. *(Sustituido el 22 oct 2026 por D-031; antes: tarjeta «por confirmar», D-025.)*
    - **No** hay que instalar ni transferir otra vez.
 7. **Guía de instalación** con copy de tarjetas, no de app: "Guarda tus tarjetas en tu inicio". Muestra el ícono LealTab con una línea que explique "Ahí viven tu tarjeta de Café X y las que agregues". El copy final lo define diseño `[SUPUESTO, medir en piloto]`.
@@ -193,14 +193,14 @@ El subdominio da aislamiento por el navegador, pero cuesta de 2 a 3 días entre 
 
 ## 6. Identidad del cliente y privacidad
 
-- **Modelo (sirve igual para B y para H).** *Adoptado tal cual como D-019 (21 oct 2026): el teléfono es el único identificador global y cada negocio guarda su propio nombre del cliente en `cliente_negocio`, con estado `activa`/`por_confirmar`. Reflejado en `06-product-design/07-entrega-desarrollo.md` §3.*
+- **Modelo (sirve igual para B y para H).** *Adoptado tal cual como D-019 (21 oct 2026): el teléfono es el único identificador global y cada negocio guarda su propio nombre del cliente en `cliente_negocio`, con estado `activa` (el estado `por_confirmar` desapareció con D-031). Reflejado en `06-product-design/07-entrega-desarrollo.md` §3.*
   - `identidad`: el teléfono en E.164, verificado o no, y sus sesiones por dispositivo. Pertenece a la plataforma.
-  - `cliente_negocio`: el nombre, el consentimiento, la fecha de alta, el estado (`activa` o `por_confirmar`, sección 5.2, punto 6) y la relación con un `negocio_id`.
+  - `cliente_negocio`: el nombre, el consentimiento, la fecha de alta, el estado (`activa`; el estado `por_confirmar` desapareció con D-031, sección 5.2, punto 6) y la relación con un `negocio_id`.
   - `tarjeta` y `evento`: siempre con `negocio_id`.
 
   El mismo WhatsApp en tres negocios es **una** identidad con **tres** `cliente_negocio` independientes. Con B, "Mis tarjetas" es la lista de los `cliente_negocio` activos de la identidad con sesión.
 - **Separación:** el panel del dueño y todas las consultas filtran por `negocio_id` (con RLS en Postgres en Supabase; stack confirmado en D-023 y ADR-002). Un negocio **nunca** ve si su cliente está inscrito en otro negocio. La única vista que cruza negocios es "Mis tarjetas", y solo la ve el propio cliente con su sesión.
-- **Recuperación:** con B se hace una sola vez, desde `/c/recuperar`, y recupera todas las tarjetas de la identidad. *(Actualizado 21 oct 2026, decisión de Aarón, cambio parcial de D-011: cuando el cliente cambia de teléfono, recupera con un **código enviado por WhatsApp o SMS** con SMS Masivos y el hook de Supabase Auth (D-024), de pago por mensaje (MXN 0.77 a 0.90 por SMS, antes de IVA). Desde D-031 el código también se pide en el registro. Lo pendiente con el proveedor está en PQ-30.)* Con H se hace por negocio, desde `/c/{slug}/recuperar`.
+- **Recuperación:** con B se hace una sola vez, desde `/c/recuperar`, y recupera todas las tarjetas de la identidad. *(Actualizado 21 oct 2026, decisión de Aarón, cambio parcial de D-011: cuando el cliente cambia de teléfono, recupera con un **código enviado por WhatsApp o SMS** con SMS Masivos y el hook de Supabase Auth (D-024), de pago por mensaje (MXN 0.77 a 0.90 por SMS, antes de IVA). Desde D-031 el código también se pide en el registro. Lo pendiente es la prueba técnica del hook de Supabase (PQ-30).)* Con H se hace por negocio, desde `/c/{slug}/recuperar`.
 - **LFPDPPP (nueva ley, DOF 20 mar 2025):** propongo que el **negocio sea el responsable** de los datos de su programa y que **LealTab actúe como encargado**, con un contrato de encargo en cada alta (informe 01, riesgo 9). Reservar la `identidad` compartida solo para autenticar y mostrarle al cliente sus propias tarjetas, sin usos propios de LealTab, es lo que buscaría sostener ese rol de encargado `[SUPUESTO, requiere revisión legal: validación 5.1 a]`.
 
   Si el abogado concluye que "Mis tarjetas" ya convierte a LealTab en responsable de esa cuenta, aplica la sección 5.1. En cualquier caso, si mañana se usan los datos para fines propios (por ejemplo, recomendar otros negocios), LealTab sí pasa a ser responsable: necesitará su propio aviso de privacidad y un consentimiento explícito. Ese cambio debe pasar por un ADR y por un abogado.

@@ -67,7 +67,7 @@ Hasta ahora el stack era una sugerencia: «TypeScript/Next.js, Postgres (Supabas
 - **Privacidad.**
   - Vercel, Supabase y SMS Masivos (proveedor del código) tratan datos por cuenta de LealTab.
   - Antes del piloto hay que comprobar que no pongan cookies ni carguen recursos de terceros, decidir si se nombran en el aviso y confirmar dónde guardan los datos. Esto va con la consulta legal (D-017) y la actualización del aviso (D-018).
-- **Costo.** El supuesto de USD 20–50 al mes en hosting y base de datos (`03-propuesta.md` §10) sigue sin validar con los planes reales de Vercel y Supabase. Se suma el costo por mensaje del código: unos MXN 2,000 a 3,300 en el piloto, antes de IVA, con SMS como peor caso (D-031, RNF-REN-06). Durante el piloto el hosting usa los planes gratuitos de Vercel y Supabase (decisión de Aarón, 22 oct 2026, PQ-29).
+- **Costo.** El supuesto de USD 20–50 al mes en hosting y base de datos (`03-propuesta.md` §10) sigue sin validar con los planes reales de Vercel y Supabase. Se suma el costo por mensaje del código: unos MXN 2,000 a 3,300 en el piloto, antes de IVA, con SMS como peor caso (D-031, RNF-REN-06). Durante el piloto el hosting usa los planes gratuitos de Vercel y Supabase (decisión de Aarón, 22 oct 2026, PQ-29), por lo que este supuesto no aplica en esa etapa.
 - **Nota sobre las migraciones en el build de Vercel** (riesgos a cuidar al implementarlo; no cambian la decisión):
   - Los despliegues de vista previa también compilan y podrían aplicar migraciones a la base de producción. Conviene que las migraciones corran solo en los builds de producción.
   - Las credenciales de la base van en variables de entorno de Vercel, nunca en el repo.

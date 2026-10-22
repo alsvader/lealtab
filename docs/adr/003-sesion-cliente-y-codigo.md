@@ -98,6 +98,7 @@ Lo que se verificó en la documentación de Supabase (consultada el 21 oct 2026)
   Con nombres y rutas distintos, un dueño que prueba la tarjeta en su propio navegador no pisa ni mezcla las dos sesiones, y la cookie del cliente nunca viaja a `/panel/` ni a la landing. `@supabase/ssr` no marca `HttpOnly` por defecto: hay que fijarlo y comprobar que `setAll` lo respeta (prueba 4).
 - Se renueva en el `proxy` de Next.js (consultar la guía de Next 16.4 en `web/node_modules/next/dist/docs/` al construir). Las peticiones paralelas que renuevan el mismo token se cubren con los 10 s de tolerancia; las pruebas incluyen el service worker y las páginas que cargan varias peticiones.
 - Plazos de sesión: Supabase no caduca el refresh token por sí mismo; el plazo máximo y el de inactividad exigen plan Pro, que ya es el supuesto de PQ-29. En el piloto no se fijan.
+- **Limitación del piloto (aprobada el 22 oct 2026):** con el plan gratuito de Supabase no se pueden imponer los plazos máximo ni de inactividad de la sesión; las sesiones duran lo que dure el refresh token. Se reevalúa cuando se reevalúe el plan de pago (PQ-29).
 - Esto cambia la lectura de D-018: «sin cookies» significa «sin cookies de analítica ni de terceros»; la sesión es una cookie necesaria de primera parte. El aviso debe decirlo así (PQ-18).
 
 ### 2.5 Dueño y cliente en el mismo `auth.users`
