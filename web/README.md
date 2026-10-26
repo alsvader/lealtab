@@ -47,7 +47,23 @@ pnpm stack:down    # baja la app y Supabase (los datos se conservan); solo del p
 - Perfil `dev` (recarga en caliente en Docker, opcional): `docker compose --profile dev up --build app-dev`.
 - Nunca corras `docker system prune`, `docker volume rm` ni `down -v` sin revisar antes qué borran: en esta máquina puede haber contenedores de otros proyectos.
 
-Los scripts `db:*` y `test:db` usan la CLI de Supabase; `db:types` y `test:rls` dependen de T4 (esquema) y `check:cliente` de T6. `pnpm test:unit` corre Vitest.
+Los scripts `db:*` y `test:db` usan la CLI de Supabase; `check:cliente` llega con T6. `pnpm test:unit` corre Vitest (no incluye `src/test/rls`).
+
+### Pruebas de RLS por la API REST (`pnpm test:rls`)
+
+Comprueban desde fuera, con `fetch` crudo a `SUPABASE_URL/rest/v1/...` y JWT reales (sin cliente de Supabase), que `anon`, el cliente, el dueño, un usuario sin filas y `service_role` ven y escriben solo lo que la matriz de `docs/fase-7/arquitectura.md` §4.2 permite (casos R-xx de §4.4; los de tablas o funciones que aún no existen quedan como `it.todo` con su ID).
+
+```bash
+pnpm db:up         # Supabase local arriba, con las migraciones aplicadas (pnpm db:reset si hace falta)
+pnpm db:env        # .env.local con SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY y SUPABASE_SECRET_KEY locales
+pnpm test:rls
+```
+
+- **Solo contra el Supabase local, nunca contra producción.** La prueba se niega a correr si `LT_ENV` no es `local` o si `SUPABASE_URL` no apunta a `127.0.0.1` o `localhost`. Lee `.env.local`; una variable ya exportada en la terminal manda sobre el archivo.
+- Usa la llave secreta solo para preparar y limpiar: crea con la API de administración de Auth unos 15 usuarios ficticios (correos `rls-*@rls.lealtab.test`, teléfonos `+52993999xxxxx`, contraseña aleatoria por corrida) y negocios con slug `rls-*` con sus clientes y tarjetas, y obtiene el JWT de cada uno por inicio de sesión con contraseña. Los clientes llevan también un correo ficticio porque el inicio de sesión por teléfono sigue apagado en local hasta el feature de registro.
+- Al terminar (y al empezar, por si una corrida anterior se cortó) borra todo lo que lleve esos prefijos. No toca el resto de los datos locales (los de `pnpm db:seed` quedan intactos).
+- Configuración en `vitest.rls.config.ts` (los archivos corren en serie y comparten los fixtures de `src/test/rls/global-setup.ts`).
+- `pnpm test:db` corre las pruebas pgTAP de `supabase/tests/` dentro de la base.
 
 ## Pruebas e2e (Playwright)
 

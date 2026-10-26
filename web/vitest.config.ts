@@ -1,5 +1,5 @@
 import path from "node:path";
-import { defineConfig } from "vitest/config";
+import { configDefaults, defineConfig } from "vitest/config";
 
 export default defineConfig({
   resolve: {
@@ -11,6 +11,8 @@ export default defineConfig({
   },
   test: {
     include: ["src/**/*.test.ts"],
+    // Las pruebas de RLS necesitan Supabase local: corren con pnpm test:rls (vitest.rls.config.ts).
+    exclude: [...configDefaults.exclude, "src/test/rls/**"],
     environment: "node",
   },
 });

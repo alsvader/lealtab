@@ -19,7 +19,7 @@
     "db:env": "sh scripts/db-env.sh",
     "db:seed": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --env-file-if-exists=.env.local scripts/seed-dev.ts",
     "test:unit": "vitest run",
-    "test:rls": "vitest run --dir src/test/rls --passWithNoTests",
+    "test:rls": "vitest run --config vitest.rls.config.ts",
     "test:db": "supabase test db",
     "check:cliente": "sh scripts/check-no-supabase-en-cliente.sh",
     "stack:up": "supabase start && sh scripts/db-env.sh && docker compose --profile app up --build -d",
