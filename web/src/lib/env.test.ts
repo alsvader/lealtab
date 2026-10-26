@@ -1,7 +1,7 @@
 import { readdirSync, readFileSync, statSync } from "node:fs";
 import path from "node:path";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { NOMBRES_ENTORNO, env, supabaseConfigurado } from "./env";
+import { NOMBRES_ENTORNO, cookieSecure, env, supabaseConfigurado } from "./env";
 
 beforeEach(() => {
   for (const n of NOMBRES_ENTORNO) vi.stubEnv(n, "");
@@ -65,5 +65,24 @@ describe("sin prefijo público", () => {
     };
     recorrer(raiz);
     expect(ofensores).toEqual([]);
+  });
+});
+
+describe("cookieSecure (H-13)", () => {
+  it("solo es false con LT_COOKIE_SECURE=0 y LT_ENV=local", () => {
+    vi.stubEnv("LT_COOKIE_SECURE", "0");
+    vi.stubEnv("LT_ENV", "local");
+    expect(cookieSecure()).toBe(false);
+  });
+  it("con LT_ENV distinto de local o ausente, siempre true aunque LT_COOKIE_SECURE=0", () => {
+    vi.stubEnv("LT_COOKIE_SECURE", "0");
+    for (const e of ["production", "preview", ""]) {
+      vi.stubEnv("LT_ENV", e);
+      expect(cookieSecure(), e).toBe(true);
+    }
+  });
+  it("por defecto es true", () => {
+    vi.stubEnv("LT_ENV", "local");
+    expect(cookieSecure()).toBe(true);
   });
 });

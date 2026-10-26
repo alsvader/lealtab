@@ -8,17 +8,16 @@ select is(
     where n.nspname = 'public' and c.relkind in ('r','p') and not c.relrowsecurity),
   0, 'P-01: toda tabla de public tiene RLS activo');
 
--- P-02: anon solo tiene SELECT sobre negocio_publico.
-select set_eq(
-  $$ select table_name::text || ':' || privilege_type::text from information_schema.role_table_grants
-      where grantee = 'anon' and table_schema in ('public','privado','servidor') $$,
-  $$ values ('negocio_publico:SELECT') $$,
-  'P-02: anon solo tiene SELECT sobre negocio_publico');
+-- P-02: anon no tiene ningún privilegio (H-03: ni siquiera SELECT sobre negocio_publico).
+select is(
+  (select count(*)::int from information_schema.role_table_grants
+    where grantee = 'anon' and table_schema in ('public','privado','servidor')),
+  0, 'P-02: anon sin ningún privilegio de tabla ni vista');
 
 select is(
   (select count(*)::int from information_schema.role_column_grants
-    where grantee = 'anon' and table_schema = 'public' and table_name <> 'negocio_publico'),
-  0, 'P-02: anon sin privilegios de columna fuera de negocio_publico');
+    where grantee = 'anon' and table_schema in ('public','privado','servidor')),
+  0, 'P-02: anon sin privilegios de columna');
 
 -- authenticated: exactamente los GRANT esperados.
 select set_eq(

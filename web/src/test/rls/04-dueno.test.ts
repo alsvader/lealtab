@@ -42,7 +42,7 @@ describe("dueño (R-30 a R-38)", () => {
     it("las siete columnas permitidas se aplican", async () => {
       const r = await rest.patch<{ ciudad: string; giro: string; zona_horaria: string }[]>(
         `negocio?id=eq.${fx.negocio.A}`,
-        { ciudad: "Paraíso", giro: "cafeteria", zona_horaria: "America/Cancun", logo_path: "rls/logo.png", whatsapp: "+529939990111", correo_dueno: "rls-nuevo@rls.lealtab.test" },
+        { ciudad: "Paraíso", giro: "cafeteria", zona_horaria: "America/Cancun", logo_path: "logos/3f2a9c1e-5b7d-4e8a-9c0f-1a2b3c4d5e6f.png", whatsapp: "+529939990111", correo_dueno: "rls-nuevo@rls.lealtab.test" },
         A,
       );
       expect(r.status).toBe(200);
@@ -52,6 +52,17 @@ describe("dueño (R-30 a R-38)", () => {
         { ciudad: "Villahermosa", giro: "barberia", zona_horaria: "America/Mexico_City", logo_path: null, whatsapp: "+529939990999", correo_dueno: "rls-a@rls.lealtab.test" },
         A,
       );
+    });
+
+    it("H-07: logo_path con ../, / inicial, la forma vieja con negocio_id o extensión rara se rechaza", async () => {
+      for (const malo of [
+        "../x.png", "/logos/3f2a9c1e-5b7d-4e8a-9c0f-1a2b3c4d5e6f.png", `${fx.negocio.B}/logo.png`,
+        "logos/3f2a9c1e-5b7d-4e8a-9c0f-1a2b3c4d5e6f.svg", "logos/../3f2a9c1e-5b7d-4e8a-9c0f-1a2b3c4d5e6f.png",
+      ]) {
+        const r = await rest.patch(`negocio?id=eq.${fx.negocio.A}`, { logo_path: malo }, A);
+        expect(r.status, malo).toBe(400);
+        expect(codigoDe(r.body), malo).toBe("23514");
+      }
     });
 
     for (const [col, valor] of [

@@ -47,10 +47,12 @@ select set_eq(
   $$ values ('tp-activo'), ('tp-prueba'), ('tp-activo-vencido') $$,
   'negocio_publico: activo y prueba vigente; fuera pausa, prueba vencida y sin alta');
 
--- Como anon, sin ninguna función ni esquema de privado.
+-- Como anon: sin nada (H-03). authenticated sí lee la vista, sin funciones de privado.
+set local role authenticated;
+select is((select count(*)::int from public.negocio_publico where slug like 'tp-%'), 3, 'authenticated ve tres negocios vigentes');
+reset role;
 set local role anon;
-select lives_ok($$ select * from public.negocio_publico $$, 'anon lee negocio_publico (la vista no usa funciones de privado)');
-select is((select count(*)::int from public.negocio_publico where slug like 'tp-%'), 3, 'anon ve tres negocios vigentes');
+select throws_ok($$ select * from public.negocio_publico $$, '42501', null, 'H-03: anon no lee negocio_publico');
 select throws_ok($$ select * from public.negocio $$, '42501', null, 'anon no lee negocio');
 reset role;
 

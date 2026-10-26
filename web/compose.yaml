@@ -14,7 +14,7 @@ x-app: &app
     # Se sirve por HTTP en local: las cookies Secure no aplican.
     LT_COOKIE_SECURE: "0"
   ports:
-    - "${APP_PORT:-3300}:3000"
+    - "127.0.0.1:${APP_PORT:-3300}:3000"
   networks:
     - supabase
   security_opt:

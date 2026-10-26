@@ -1,11 +1,12 @@
 import { describe, expect, it } from "vitest";
-import { CON_RLS, SOLO_SERVICIO, VISTAS_PRIVADAS, codigoDe, rest } from "./helpers";
+import { CON_RLS, SOLO_SERVICIO, VISTAS_PRIVADAS, codigoDe, llamar, rest } from "./helpers";
 
 const anon = { rol: "anon" as const };
+const servicio = { rol: "service" as const };
 const sinNegocioPublico = [...SOLO_SERVICIO, ...CON_RLS];
 
 describe("anon (R-01 a R-04)", () => {
-  describe("R-01: SELECT en cada tabla y vista, salvo negocio_publico", () => {
+  describe("R-01: SELECT en cada tabla y vista, también negocio_publico (H-03)", () => {
     for (const t of sinNegocioPublico) {
       it(`${t.nombre}: 401 con 42501`, async () => {
         const r = await rest.get(`${t.nombre}?select=*`, anon);
@@ -13,7 +14,7 @@ describe("anon (R-01 a R-04)", () => {
         expect(codigoDe(r.body)).toBe("42501");
       });
     }
-    for (const v of VISTAS_PRIVADAS) {
+    for (const v of [...VISTAS_PRIVADAS, "negocio_publico"]) {
       it(`${v}: 401 con 42501`, async () => {
         const r = await rest.get(`${v}?select=*`, anon);
         expect(r.status).toBe(401);
@@ -53,28 +54,59 @@ describe("anon (R-01 a R-04)", () => {
     });
   });
 
-  describe("R-04: negocio_publico", () => {
-    it("solo expone las columnas esperadas y solo negocios vigentes con alta completa", async () => {
-      const r = await rest.get<Record<string, unknown>[]>("negocio_publico?select=*&slug=like.rls-*&order=slug", anon);
+  describe("R-04: negocio_publico (H-03: anon sin nada; el servidor la lee con la llave de servicio)", () => {
+    it("anon no la lista ni filtrando por slug", async () => {
+      for (const q of ["negocio_publico?select=slug", "negocio_publico?slug=eq.rls-a"]) {
+        const r = await rest.get(q, anon);
+        expect(r.status, q).toBe(401);
+        expect(codigoDe(r.body), q).toBe("42501");
+      }
+    });
+    it("el servicio solo ve negocios vigentes con alta completa y sin columnas internas", async () => {
+      const r = await rest.get<Record<string, unknown>[]>("negocio_publico?select=*&slug=like.rls-*&order=slug", servicio);
       expect(r.status).toBe(200);
       expect(r.body.map((x) => x.slug)).toEqual(["rls-a", "rls-b"]); // fuera: pausa (p), sin alta (s), prueba vencida (v)
       expect(Object.keys(r.body[0]).sort()).toEqual(
         ["color", "limite_minutos", "limite_modo", "logo_path", "nombre", "recompensa", "sello_bienvenida", "sellos_meta", "slug"],
       );
-    });
-    it("no expone columnas internas por nombre (correo, whatsapp, id, estado)", async () => {
       for (const col of ["id", "correo_dueno", "whatsapp", "estado", "plan", "negocio_id"]) {
-        const r = await rest.get(`negocio_publico?select=${col}`, anon);
-        expect(r.status, col).toBe(400);
-        expect(codigoDe(r.body), col).toBe("42703");
+        const c = await rest.get(`negocio_publico?select=${col}`, servicio);
+        expect(c.status, col).toBe(400);
+        expect(codigoDe(c.body), col).toBe("42703");
       }
     });
     it("un negocio en pausa, sin alta o con la prueba vencida no aparece ni filtrando por su slug", async () => {
       for (const s of ["rls-p", "rls-s", "rls-v"]) {
-        const r = await rest.get(`negocio_publico?slug=eq.${s}`, anon);
+        const r = await rest.get(`negocio_publico?slug=eq.${s}`, servicio);
         expect(r.status).toBe(200);
         expect(r.body).toEqual([]);
       }
+    });
+  });
+
+  describe("H-01: registro de Auth cerrado", () => {
+    it("GET /auth/v1/settings dice disable_signup true y sin autoconfirmación", async () => {
+      const r = await llamar<{ disable_signup: boolean; mailer_autoconfirm: boolean; phone_autoconfirm: boolean }>(
+        "GET", "/auth/v1/settings", anon);
+      expect(r.status).toBe(200);
+      expect(r.body.disable_signup).toBe(true);
+      expect(r.body.mailer_autoconfirm).toBe(false);
+      expect(r.body.phone_autoconfirm).toBe(false);
+    });
+    it("POST /auth/v1/signup con la llave publicable no crea la cuenta", async () => {
+      const r = await llamar<{ error_code?: string; access_token?: string }>("POST", "/auth/v1/signup", {
+        ...anon, body: { email: "rls-registro-abierto@rls.lealtab.test", password: "Rls-registro-1234" },
+      });
+      expect(r.status).toBeGreaterThanOrEqual(400);
+      expect(r.body.access_token).toBeUndefined();
+      expect(r.body.error_code).toBe("signup_disabled");
+    });
+    it("signup por teléfono tampoco", async () => {
+      const r = await llamar<{ access_token?: string }>("POST", "/auth/v1/signup", {
+        ...anon, body: { phone: "529939998888", password: "Rls-registro-1234" },
+      });
+      expect(r.status).toBeGreaterThanOrEqual(400);
+      expect(r.body.access_token).toBeUndefined();
     });
   });
 

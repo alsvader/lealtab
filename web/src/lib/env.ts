@@ -97,9 +97,12 @@ export function smsProviderMode(): SmsProviderMode {
   return valor;
 }
 
-/** Cookies `Secure`: `0` solo para HTTP en Chrome local; por defecto, seguras. */
+/**
+ * Cookies `Secure`: `LT_COOKIE_SECURE=0` solo se respeta con `LT_ENV=local` (HTTP en Chrome local).
+ * Con cualquier otro `LT_ENV` (o sin él) siempre devuelve `true` (H-13).
+ */
 export function cookieSecure(): boolean {
-  return leer("LT_COOKIE_SECURE") !== "0";
+  return !(leer("LT_COOKIE_SECURE") === "0" && leer("LT_ENV") === "local");
 }
 
 export const env = {

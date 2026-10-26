@@ -21,7 +21,7 @@ if (process.env.LT_ENV !== "local") {
   process.exit(1);
 }
 const url = entorno("SUPABASE_URL");
-if (!/^https?:\/\/(127\.0\.0\.1|localhost)(:\d+)?/.test(url)) {
+if (!/^https?:\/\/(127\.0\.0\.1|localhost)(:\d+)?\/?$/.test(url)) {
   console.error(`seed-dev se niega a correr: SUPABASE_URL (${url}) no es local.`);
   process.exit(1);
 }

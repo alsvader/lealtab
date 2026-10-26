@@ -60,6 +60,17 @@ describe("R-40: service_role (control positivo)", () => {
     expect(negocios.body).toHaveLength(5);
   });
 
+  it("H-04: envio_codigo y codigo_intento solo aceptan teléfonos E.164 de México", async () => {
+    for (const malo of ["+52 993 123 4567", "529931234567", "9931234567", "+5299312345678"]) {
+      const a = await rest.post("envio_codigo", { telefono: malo, proposito: "registro" }, servicio);
+      const b = await rest.post("codigo_intento", { telefono: malo, resultado: "incorrecto" }, servicio);
+      for (const r of [a, b]) {
+        expect(r.status, malo).toBe(400);
+        expect(codigoDe(r.body), malo).toBe("23514");
+      }
+    }
+  });
+
   it("escribe y borra en las tablas de servicio", async () => {
     const clave = "rls_prueba";
     const ins = await rest.post("config_plataforma", { clave, valor: "1" }, servicio);
