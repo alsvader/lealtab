@@ -29,6 +29,10 @@ export const N1 = {
   codigoEtiqueta: "Código",
   entrar: "Entrar",
   codigoError: "No pudimos comprobar el código. Revisa los dígitos e inténtalo otra vez.",
+  codigoNoValido: "Ese código no es correcto o ya venció. Revisa los 6 dígitos o pide uno nuevo.",
+  pedirOtro: "Pedir otro código",
+  crearContrasena: "Crear también una contraseña (opcional)",
+  crearContrasenaAyuda: "Sin contraseña, entras siempre con un código por correo.",
   correoInvalido: "Escribe un correo válido.",
   codigo:
     "Te enviamos un código a tu correo para entrar, sin contraseña. Al continuar aceptas los términos y el aviso de privacidad.",

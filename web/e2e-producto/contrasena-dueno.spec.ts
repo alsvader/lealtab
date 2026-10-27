@@ -106,7 +106,7 @@ test.describe("contraseña del dueño", () => {
 
   test("la casilla de cerrar otras sesiones nace desmarcada", async ({ page }) => {
     await page.goto("/panel/entrar");
-    await page.getByRole("button", { name: "Con contraseña" }).click();
+    await page.getByRole("tab", { name: "Con contraseña" }).click();
     await page.getByRole("button", { name: "¿Olvidaste tu contraseña?" }).click();
     await page.getByLabel("Correo").fill("casilla@lealtab.test");
     await page.getByRole("button", { name: "Enviar código" }).click();

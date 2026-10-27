@@ -7,9 +7,9 @@ import { botonPrimario, botonSecundario, Campo, campoClase } from "@/components/
 
 type Modo = "codigo" | "contrasena" | "olvidar" | "nueva";
 
-export function FormularioEntrada() {
+export function FormularioEntrada({ soloContrasena = false }: { soloContrasena?: boolean }) {
   const router = useRouter();
-  const [modo, setModo] = useState<Modo>("codigo");
+  const [modo, setModo] = useState<Modo>(soloContrasena ? "contrasena" : "codigo");
   const [correo, setCorreo] = useState("");
   const [codigo, setCodigo] = useState("");
   const [pedido, setPedido] = useState(false);
@@ -56,10 +56,24 @@ export function FormularioEntrada() {
     });
     setPendiente(false);
     if (!respuesta.ok) {
-      setError(N1.codigoError);
+      setError(N1.codigoNoValido);
       return;
     }
     router.push("/panel/negocio");
+  }
+
+  async function otroCodigo() {
+    setPendiente(true);
+    setError("");
+    setCodigo("");
+    const ruta = modo === "nueva" ? "/panel/api/auth/restablecer/codigo" : "/panel/api/auth/codigo";
+    const respuesta = await fetch(ruta, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ correo }),
+    });
+    setPendiente(false);
+    if (!respuesta.ok) setError(N1.correoInvalido);
   }
 
   async function entrarContrasena(event: React.FormEvent) {
@@ -97,7 +111,7 @@ export function FormularioEntrada() {
     });
     setPendiente(false);
     if (!respuesta.ok) {
-      setError(N1.codigoError);
+      setError(N1.codigoNoValido);
       return;
     }
     router.push("/panel/negocio");
@@ -107,7 +121,8 @@ export function FormularioEntrada() {
     <button
       className={modo === id ? botonPrimario() : botonSecundario()}
       type="button"
-      aria-pressed={modo === id}
+      role="tab"
+      aria-selected={modo === id}
       onClick={() => cambiarModo(id)}
     >
       {etiqueta}
@@ -147,7 +162,15 @@ export function FormularioEntrada() {
             <span className="block text-text-muted">{ENTRADA.cerrarOtrasAyuda}</span>
           </span>
         </label>
-        {error ? <p className="text-error" role="alert">{error}</p> : null}
+        {error ? (
+          <div className="flex flex-col items-start gap-space-3" role="alert">
+            <p className="font-bold">Código vencido</p>
+            <p className="text-error">{error}</p>
+            <button className={botonSecundario()} type="button" onClick={otroCodigo} disabled={pendiente}>
+              {N1.pedirOtro}
+            </button>
+          </div>
+        ) : null}
         <button className={botonPrimario("self-start")} type="submit" disabled={pendiente}>{ENTRADA.guardar}</button>
       </form>
     );
@@ -155,11 +178,15 @@ export function FormularioEntrada() {
 
   return (
     <div className="flex flex-col gap-space-4">
-      <h2 className="font-display text-h3 font-extrabold">{ENTRADA.titulo}</h2>
-      <div className="flex flex-wrap gap-space-2" aria-label={N1.pestanas}>
-        {pestana("codigo", N1.conCodigo)}
-        {pestana("contrasena", N1.conContrasena)}
-      </div>
+      {soloContrasena ? null : (
+        <>
+          <h2 className="font-display text-h3 font-extrabold">{ENTRADA.titulo}</h2>
+          <div className="flex flex-wrap gap-space-2" role="tablist" aria-label={N1.pestanas}>
+            {pestana("codigo", N1.conCodigo)}
+            {pestana("contrasena", N1.conContrasena)}
+          </div>
+        </>
+      )}
       {modo === "codigo" ? (
         <form className="flex flex-col gap-space-4" onSubmit={pedido ? entrarCodigo : enviarCodigo}>
           <Campo etiqueta={N1.correo}>
@@ -172,7 +199,17 @@ export function FormularioEntrada() {
           ) : (
             <p className="text-text-muted">{ENTRADA.codigoAyuda}</p>
           )}
-          {error ? <p className="text-error" role="alert">{error}</p> : null}
+          {error ? (
+            <div className="flex flex-col items-start gap-space-3" role="alert">
+              <p className="font-bold">Código vencido</p>
+              <p className="text-error">{error}</p>
+              {pedido ? (
+                <button className={botonSecundario()} type="button" onClick={otroCodigo} disabled={pendiente}>
+                  {N1.pedirOtro}
+                </button>
+              ) : null}
+            </div>
+          ) : null}
           <button className={botonPrimario("self-start")} type="submit" disabled={pendiente} aria-busy={pendiente}>
             {pedido ? ENTRADA.entrar : ENTRADA.enviarCodigo}
           </button>

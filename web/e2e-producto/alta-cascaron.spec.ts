@@ -23,6 +23,9 @@ test.describe("cascarón de N1 a N4", () => {
     expect(href?.startsWith("https://wa.me/")).toBe(true);
     expect(href?.includes("text=")).toBe(false);
     await expect(page.getByRole("heading", { name: "Empieza gratis hoy" })).toBeVisible();
+    await expect(page.getByRole("tablist", { name: "Cómo quieres entrar" })).toBeVisible();
+    await expect(page.getByRole("tab", { name: "Con contraseña" })).toBeVisible();
+    await expect(page.getByText("Crear también una contraseña (opcional)")).toBeVisible();
   });
 
   test("el alta no agrega violaciones de axe", async ({ page }) => {
