@@ -150,6 +150,7 @@ Comandos (desde `web/`, con pnpm):
 | `pnpm check:cliente` | Tras `pnpm build`, falla si `.next/static` contiene Supabase o sus llaves |
 | `pnpm db:push` | Migraciones manuales; se niega a tocar producción fuera de Vercel sin `LT_CONFIRMA_PRODUCCION=1` |
 | `pnpm db:push:pruebas` | Lo mismo contra el proyecto de pruebas (`SUPABASE_DB_URL_PRUEBAS`) |
+| `pnpm plane:sync` | Crea o actualiza en Plane las tareas de un brief (`crear` al aprobarlo, `estado` cuando cambia una tarea) |
 
 - Playwright está fijado en **1.61.1** a propósito: desde la 1.62, WebKit se cuelga en macOS 14. No lo actualices.
 - La fixture `guard` de `e2e/fixtures.ts` falla cualquier prueba con errores de consola, `pageerror` o respuestas 4xx o 5xx.
@@ -169,7 +170,7 @@ Los skills del proyecto viven en `.agents/skills/` y se enlazan desde `.claude/s
 | Tokens en `@theme` de Tailwind v4, instalar y tematizar shadcn/ui, variantes de componentes | `tailwind-design-system` | Mapea a los `tokens.css` existentes; sus ejemplos OKLCH no se copian y no se agregan colores. |
 | Docker Compose (Supabase y app) y Dockerfile multi-stage | `docker-patterns`, `docker-compose-patterns`, `docker-build-strategies` | Antes de cualquier comando destructivo de Docker: `docker-destructive-guardrails`. |
 | Landing, **solo si Aarón lo pide** | `design-taste-frontend`, `redesign-existing-projects` | **Prohibidos en el producto**: proponen fuentes, gradientes y estéticas que chocan con el design system cerrado y con la paridad v1.7. |
-| Revisión de código o de seguridad (RLS, HMAC, auth) | `code-review`, `security-review` | |
+| Revisión de código o de seguridad (RLS, HMAC, auth) | En Cursor, paso 5 de `/feature`: `/review-bugbot` y `/review-security`. En Claude Code: `/code-review` y `/security-review` | Las lanza el orquestador; QA no las llena. Un hallazgo high o critical vuelve a implementación. |
 | Gráficas o tableros de métricas | `dataviz` | |
 
 ## 7. Roles
@@ -192,8 +193,8 @@ Los skills del proyecto viven en `.agents/skills/` y se enlazan desde `.claude/s
 1. **Contexto:** ubicar los RF y RNF, la pieza de diseño, las D- y las PQ abiertas que afectan.
 2. **Alcance:** confirmar con el coordinador que es de la fase actual y del MVP. Si no, se detiene y se propone a Aarón.
 3. **Definición:** solo lo que falte (diseño, copy, arquitectura, eventos).
-4. **Brief** en `docs/fase-N/features/<slug>.md`. **Aarón lo aprueba antes de construir.**
-5. **Implementación** en `feat/<slug>`, con pruebas, y **verificación** independiente: QA técnica, revisión de diseño y de eventos.
-6. **Cierre:** reporte con evidencia y pendientes. **Aarón aprueba antes del commit o el PR.**
+4. **Brief** en `docs/fase-N/features/<slug>.md`. **Aarón lo aprueba antes de construir.** Al aprobarlo, desde `web/`: `pnpm plane:sync crear ../docs/fase-N/features/<slug>.md`. Crea un work item por tarea, en **Todo**. Volver a correrlo no duplica.
+5. **Implementación** en `feat/<slug>`, con pruebas, y **verificación** independiente: QA técnica, revisión de diseño y de eventos. Cada cambio de estado de una tarea se refleja con `pnpm plane:sync estado ../docs/fase-N/features/<slug>.md <T#> "<Estado>"`. Los estados son `In Progress` (se empieza), `In QA` (entra a verificación), `Done` (la verificación de esa tarea pasó), `Blocked` (espera a Aarón o un bloqueo externo) y `Cancelled` (sale del alcance).
+6. **Cierre:** reporte con evidencia y pendientes. **Aarón aprueba antes del commit o el PR.** Al aprobarlo, lo que siga en `In QA` y ya cumplió pasa a `Done`.
 
 En Claude Code, este flujo es el skill `/feature` (`.agents/skills/feature/`).

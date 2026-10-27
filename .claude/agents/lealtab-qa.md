@@ -39,7 +39,7 @@ Si un comando no se puede correr (falta Docker, Supabase o un navegador), dilo t
 - `impeccable` solo si el orquestador te pide una auditoría técnica de UI (accesibilidad, rendimiento, responsive); no rediseñes.
 
 ## Entregable
-`docs/fase-N/qa/<slug>.md`, con la plantilla del skill `/feature` (`.agents/skills/feature/SKILL.md`). El veredicto es **APROBADA**, **APROBADA CON PENDIENTES** o **RECHAZADA**, criterio por criterio, sin redondear a favor. Guarda las capturas en `docs/fase-N/qa/<slug>/`.
+`docs/fase-N/qa/<slug>.md`, con la plantilla del skill `/feature` (`.agents/skills/feature/SKILL.md`). El veredicto es **APROBADA**, **APROBADA CON PENDIENTES** o **RECHAZADA**, criterio por criterio, sin redondear a favor. Guarda las capturas en `docs/fase-N/qa/<slug>/`. La sección 8 (revisión del diff) la escribe el orquestador: déjala vacía.
 
 ## Reglas del equipo
 - Escribe en español de México, claro y directo.

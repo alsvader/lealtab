@@ -69,7 +69,7 @@ Fuera de esos dos puntos el flujo corre solo. Detente antes si aparece una decis
 
 ## Flujo de feature: `/feature`
 
-Para cada feature nuevo usa el skill `/feature` (`.agents/skills/feature/SKILL.md`). Tiene los pasos completos, la plantilla del brief y la del reporte de QA.
+Para cada feature nuevo usa el skill `/feature` (`.agents/skills/feature/SKILL.md`). Tiene los pasos completos, la plantilla del brief y la del reporte de QA. Al aprobar el brief corre `pnpm plane:sync crear` y, cada vez que cambia el estado de una tarea, `pnpm plane:sync estado`. El detalle y los nombres de estado están en el skill.
 
 ## Memoria (engram)
 
