@@ -28,8 +28,12 @@ async function codigoEnMailpit(correo: string): Promise<string> {
       if (id) {
         const mensaje = await fetch(`${MAILPIT}/api/v1/message/${id}`);
         const data = (await mensaje.json()) as { Text?: string; HTML?: string };
-        const encontrado = `${data.Text ?? ""}\n${data.HTML ?? ""}`.match(/\b(\d{6})\b/);
-        if (encontrado) return encontrado[1];
+        const texto = `${data.Text ?? ""}\n${data.HTML ?? ""}`;
+        const encontrado = texto.match(/\b(\d{6})\b/);
+        if (encontrado) {
+          expect(texto).toContain("6 dígitos");
+          return encontrado[1];
+        }
       }
     }
     await new Promise((r) => setTimeout(r, 400));
