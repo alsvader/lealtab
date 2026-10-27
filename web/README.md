@@ -47,7 +47,7 @@ pnpm stack:down    # baja la app y Supabase (los datos se conservan); solo del p
 - Perfil `dev` (recarga en caliente en Docker, opcional): `docker compose --profile dev up --build app-dev`.
 - Nunca corras `docker system prune`, `docker volume rm` ni `down -v` sin revisar antes qué borran: en esta máquina puede haber contenedores de otros proyectos.
 
-Los scripts `db:*` y `test:db` usan la CLI de Supabase; `check:cliente` llega con T6. `pnpm test:unit` corre Vitest (no incluye `src/test/rls`).
+Los scripts `db:*` y `test:db` usan la CLI de Supabase. `pnpm test:unit` corre Vitest (no incluye `src/test/rls`).
 
 ### Pruebas de RLS por la API REST (`pnpm test:rls`)
 
@@ -64,6 +64,45 @@ pnpm test:rls
 - Al terminar (y al empezar, por si una corrida anterior se cortó) borra todo lo que lleve esos prefijos. No toca el resto de los datos locales (los de `pnpm db:seed` quedan intactos).
 - Configuración en `vitest.rls.config.ts` (los archivos corren en serie y comparten los fixtures de `src/test/rls/global-setup.ts`).
 - `pnpm test:db` corre las pruebas pgTAP de `supabase/tests/` dentro de la base.
+
+## Migraciones en Vercel y push manual
+
+`vercel.json` usa `sh scripts/vercel-build.sh` (ADR-005). El script compila con `next build` y solo después, si `VERCEL_ENV=production`, corre `supabase db push` contra `SUPABASE_DB_URL_MIGRACIONES` (pooler de sesión, puerto 5432). En cualquier otro entorno imprime «Vista previa: sin migraciones» y no toca la base. El directorio raíz del proyecto en Vercel es `web/`.
+
+```bash
+pnpm db:push           # SUPABASE_DB_URL_MIGRACIONES; se niega si la URL es de producción
+pnpm db:push:pruebas   # SUPABASE_DB_URL_PRUEBAS (proyecto lealtab-pruebas)
+```
+
+Producción, fuera de Vercel, pide `LT_CONFIRMA_PRODUCCION=1` en esa corrida. No dejes esa variable en `.env.local`. Hasta cerrar SP-0 (proyecto alojado) el primer merge a `main` no migra producción. El informe está en `docs/fase-7/sp-0-migraciones.md`.
+
+## Plane
+
+El flujo de un feature crea las tareas en Plane al aprobar el brief y actualiza el estado cada vez que cambia. Desde este directorio, con `PLANE_API_KEY` en `.env.local`:
+
+```bash
+pnpm plane:sync crear ../docs/fase-N/features/<slug>.md
+pnpm plane:sync estado ../docs/fase-N/features/<slug>.md T1 "In Progress"
+```
+
+Los estados son `Todo` (al crear), `In Progress`, `In QA`, `Blocked`, `Done` y `Cancelled`. El detalle está en el skill `/feature`.
+
+## Sesión del producto y guardas de aislamiento
+
+- **Dos cookies de sesión**, escritas solo por el servidor: `lt-cliente` (`Path=/c`, 400 días) y `lt-dueno` (`Path=/panel`, 30 días), ambas `HttpOnly`, `SameSite=Lax` y `Secure` (según `cookieSecure()`). Código en `src/lib/supabase/` (`cookies.ts`, `server.ts`, `admin.ts`, `claims.ts`); todo con `server-only`. No hay `anon.ts` ni cliente para el navegador: tras T5b el rol `anon` no tiene privilegios y el servidor lee con la llave secreta.
+- `src/proxy.ts` solo corre en `/c/*` y `/panel/*` (nunca en la landing) y renueva la sesión del rol que toca. Sin Supabase configurado no hace nada.
+- Cabeceras de seguridad y CSP (`connect-src 'self'`, solo en producción, sin `script-src`) en `next.config.ts`, solo para `/c/*`, `/panel/*` y `/api/*`.
+- **ESLint** prohíbe importar `@supabase/*` o `src/lib/supabase` desde componentes `'use client'`, `components/landing` y `app/(landing)`; `@supabase/*` solo se importa dentro de `src/lib/supabase`.
+- **`pnpm check:cliente`** (después de `pnpm build`): falla si `.next/static` contiene `supabase`, `sb_publishable`, `sb_secret` o `127.0.0.1:54321`.
+- **Ruta de prueba de cookies, solo desarrollo:** `POST /c/api/auth/dev-sesion` y `POST /panel/api/auth/dev-sesion` con `{"usuario": "+529931000201"}` o `{"usuario": "velez@lealtab.test"}` abren sesión con un usuario de `pnpm db:seed`. **Solo existe con `LT_ENV=local`**, Supabase configurado y `SUPABASE_URL` local; en cualquier otro caso responden **404**. Para el cliente de la semilla le asigna un correo y una contraseña ficticios (el acceso por teléfono sigue apagado en local). Se retira cuando existan las pantallas de acceso.
+
+## Pruebas e2e del producto (`pnpm test:e2e:producto`)
+
+Aparte de la suite de la landing. Necesita `pnpm db:up`, `pnpm db:env` (`.env.local` con `LT_ENV=local`) y `pnpm db:seed`. `playwright.producto.config.ts` hace `pnpm build` + `next start` en el puerto 3140 (`E2E_PRODUCTO_PORT` lo cambia; reutiliza un servidor ya levantado ahí) y corre `e2e-producto/` en los mismos 5 proyectos que la landing, con `LT_COOKIE_SECURE=1` sobre `localhost`.
+
+- Chromium, Firefox y Mobile Chrome tratan `localhost` como seguro y aceptan cookies `Secure`. **WebKit (escritorio y Mobile Safari) las guarda pero no las envía por HTTP**: ahí corren solo las pruebas que miran los `Set-Cookie` y la red, y las demás se saltan. Lo que depende del envío de la cookie en iOS se prueba con HTTPS en un iPhone real (RNF-PWA-07).
+- Cubre: atributos de las cookies, que `lt-cliente` no viaje a `/panel` ni `lt-dueno` a `/c`, convivencia en el mismo navegador, que la landing y `/api/salud` no reciban `Set-Cookie`, y que el navegador no haga ninguna petición a Supabase.
+- `pnpm test:e2e` (landing) no cambia y corre sin variables de Supabase.
 
 ## Pruebas e2e (Playwright)
 
