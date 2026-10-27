@@ -31,7 +31,7 @@ export function Pricing() {
           <h2 className="reveal">{PRICING.heading}</h2>
           <div className={styles.trial}>
             <p>{PRICING.trial}</p>
-            <BtnCta href={LINKS.createCard} target="_blank" rel="noopener">{PRICING.cta}</BtnCta>
+            <BtnCta href={LINKS.createCard}>{PRICING.cta}</BtnCta>
           </div>
         </div>
 
@@ -56,7 +56,7 @@ export function Pricing() {
                 </li>
               ))}
             </ul>
-            <a className="btn btn-secondary btn-lg" href={LINKS.createCard} target="_blank" rel="noopener">
+            <a className="btn btn-secondary btn-lg" href={LINKS.createCard}>
               {PRICING.cta}
             </a>
           </article>
@@ -84,7 +84,7 @@ export function Pricing() {
                 </li>
               ))}
             </ul>
-            <BtnCta href={LINKS.createCard} target="_blank" rel="noopener">{PRICING.cta}</BtnCta>
+            <BtnCta href={LINKS.createCard}>{PRICING.cta}</BtnCta>
           </article>
 
           <article

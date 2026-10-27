@@ -27,7 +27,7 @@ export const FOOTER = {
     {
       title: "Cuenta",
       links: [
-        { href: LINKS.createCard, label: "Crea tu tarjeta gratis", external: true },
+        { href: LINKS.createCard, label: "Crea tu tarjeta gratis", external: false },
       ],
     },
   ],

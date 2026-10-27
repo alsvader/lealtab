@@ -45,7 +45,7 @@ export const TERMS: LegalDocument = {
         {
           type: "p",
           content: [
-            "Al usar lealtab.com o la plataforma (app.lealtab.com), o al crear tu cuenta, aceptas estos Términos y condiciones y nuestro ",
+            "Al usar lealtab.com, incluido el alta y el panel, o al crear tu cuenta, aceptas estos Términos y condiciones y nuestro ",
             PRIVACY_LINK,
             ". Si no estás de acuerdo, no uses el servicio.",
           ],

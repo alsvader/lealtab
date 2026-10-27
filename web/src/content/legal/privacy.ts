@@ -65,7 +65,7 @@ export const PRIVACY: LegalDocument = {
         {
           type: "p",
           content: [
-            "Este aviso aplica solo a las personas que visitan lealtab.com, que es una página informativa. Aquí no hay registro ni formularios: los botones “Crea tu tarjeta gratis” y “Entrar” te llevan a app.lealtab.com, que es otro sitio.",
+            "Este aviso aplica a las personas que visitan lealtab.com. En esta página no hay formularios: los botones «Crea tu tarjeta gratis» y «Empieza gratis» abren el alta en este mismo sitio.",
           ],
         },
         {

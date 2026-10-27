@@ -134,10 +134,10 @@ export function Nav({ basePath }: { basePath?: string }) {
         </nav>
         <div className={styles["nav-actions"]}>
           {/* "Entrar" (NAV.login) oculto hasta que exista app.lealtab.com */}
-          <BtnCta size="sm" className={styles["nav-cta-desktop"]} href={NAV.ctaDesktop.href} target="_blank" rel="noopener">
+          <BtnCta size="sm" className={styles["nav-cta-desktop"]} href={NAV.ctaDesktop.href}>
             {NAV.ctaDesktop.label}
           </BtnCta>
-          <BtnCta size="sm" className={styles["nav-cta-mobile"]} href={NAV.ctaMobile.href} target="_blank" rel="noopener">
+          <BtnCta size="sm" className={styles["nav-cta-mobile"]} href={NAV.ctaMobile.href}>
             {NAV.ctaMobile.label}
           </BtnCta>
           <button
@@ -171,7 +171,7 @@ export function Nav({ basePath }: { basePath?: string }) {
             ))}
           </nav>
           <div className={styles["nav-drawer-foot"]}>
-            <BtnCta href={NAV.drawer.cta.href} target="_blank" rel="noopener" onClick={closeFromLink}>
+            <BtnCta href={NAV.drawer.cta.href} onClick={closeFromLink}>
               {NAV.drawer.cta.label}
             </BtnCta>
             <p className={styles.note}>{NAV.drawer.note}</p>
