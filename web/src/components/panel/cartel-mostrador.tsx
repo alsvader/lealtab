@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { N4 } from "@/content/alta";
+import { AJUSTES } from "@/content/ajustes";
 import { botonPrimario, botonSecundario } from "@/components/panel/alta-marco";
 
 const TAMANOS = [
@@ -49,9 +50,14 @@ export function CartelMostrador({ fin, destino }: { fin: string; destino: string
           <li>{N4.pegalo}</li>
           <li>{fin ? `Tu mes de prueba termina el ${fin}.` : N4.prueba}</li>
         </ul>
-        <Link className={botonSecundario("self-start")} href="/panel/tarjeta">
-          {N4.atras}
-        </Link>
+        <div className="flex gap-space-4">
+          <Link className={botonSecundario()} href="/panel/tarjeta">
+            {N4.atras}
+          </Link>
+          <Link className={botonSecundario()} href="/panel/ajustes">
+            {AJUSTES.titulo}
+          </Link>
+        </div>
       </div>
       <aside className="flex w-full max-w-xs flex-col items-center gap-space-3 rounded-control border-2 border-noche bg-surface p-space-5 text-center">
         <p className="font-bold">{N4.escanear}</p>
