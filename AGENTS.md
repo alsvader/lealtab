@@ -146,6 +146,8 @@ Comandos (desde `web/`, con pnpm):
 | `pnpm typecheck` | `next typegen` y `tsc --noEmit` |
 | `pnpm build` | Build de producción |
 | `pnpm test:e2e` | Playwright contra un build de producción en 5 proyectos: chromium, firefox, webkit, Mobile Safari y Mobile Chrome |
+| `pnpm test:e2e:producto` | Playwright de `/c` y `/panel` (cookies y aislamiento), mismos 5 proyectos; necesita Supabase local |
+| `pnpm check:cliente` | Tras `pnpm build`, falla si `.next/static` contiene Supabase o sus llaves |
 
 - Playwright está fijado en **1.61.1** a propósito: desde la 1.62, WebKit se cuelga en macOS 14. No lo actualices.
 - La fixture `guard` de `e2e/fixtures.ts` falla cualquier prueba con errores de consola, `pageerror` o respuestas 4xx o 5xx.

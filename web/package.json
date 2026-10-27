@@ -9,6 +9,7 @@
     "lint": "eslint",
     "typecheck": "next typegen && tsc --noEmit",
     "test:e2e": "playwright test",
+    "test:e2e:producto": "playwright test -c playwright.producto.config.ts",
     "db:up": "supabase start",
     "db:down": "supabase stop",
     "db:status": "supabase status",

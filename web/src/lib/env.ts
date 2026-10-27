@@ -85,6 +85,11 @@ export function ltEnv(): LtEnv {
   return valor;
 }
 
+/** ¿`LT_ENV` es exactamente `local`? Nunca lanza (para guardas que deben negarse en silencio). */
+export function entornoLocal(): boolean {
+  return leer("LT_ENV") === "local";
+}
+
 /** `stub` se niega a arrancar si `LT_ENV` no es `local`. */
 export function smsProviderMode(): SmsProviderMode {
   const valor = requerida("SMS_PROVIDER_MODE");

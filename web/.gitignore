@@ -52,3 +52,5 @@ next-env.d.ts
 
 # env: se versiona solo el ejemplo
 !.env.local.example
+.check-cliente.tmp
+/test-results-producto/
