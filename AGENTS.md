@@ -148,6 +148,8 @@ Comandos (desde `web/`, con pnpm):
 | `pnpm test:e2e` | Playwright contra un build de producción en 5 proyectos: chromium, firefox, webkit, Mobile Safari y Mobile Chrome |
 | `pnpm test:e2e:producto` | Playwright de `/c` y `/panel` (cookies y aislamiento), mismos 5 proyectos; necesita Supabase local |
 | `pnpm check:cliente` | Tras `pnpm build`, falla si `.next/static` contiene Supabase o sus llaves |
+| `pnpm db:push` | Migraciones manuales; se niega a tocar producción fuera de Vercel sin `LT_CONFIRMA_PRODUCCION=1` |
+| `pnpm db:push:pruebas` | Lo mismo contra el proyecto de pruebas (`SUPABASE_DB_URL_PRUEBAS`) |
 
 - Playwright está fijado en **1.61.1** a propósito: desde la 1.62, WebKit se cuelga en macOS 14. No lo actualices.
 - La fixture `guard` de `e2e/fixtures.ts` falla cualquier prueba con errores de consola, `pageerror` o respuestas 4xx o 5xx.

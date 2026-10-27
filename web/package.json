@@ -18,6 +18,8 @@
     "db:lint": "supabase db lint --level warning --fail-on error",
     "db:types": "supabase gen types typescript --local > src/lib/supabase/database.types.ts",
     "db:env": "sh scripts/db-env.sh",
+    "db:push": "sh scripts/db-push.sh",
+    "db:push:pruebas": "sh scripts/db-push.sh --pruebas",
     "db:seed": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --env-file-if-exists=.env.local scripts/seed-dev.ts",
     "test:unit": "vitest run",
     "test:rls": "vitest run --config vitest.rls.config.ts",
