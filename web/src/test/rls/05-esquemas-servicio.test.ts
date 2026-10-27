@@ -44,7 +44,24 @@ describe("esquemas privado y servidor no son accesibles por la API REST", () => 
     });
   }
 
-  it.todo("R-03/R-27: RPC de funciones servidor.* con anon, dueño y cliente da 401 o 403 (las funciones llegan con los features de alta, registro y mostrador); mientras tanto, 02_privilegios_por_defecto.test.sql prueba que toda función nueva nace sin EXECUTE");
+  it("crear_negocio y completar_alta solo las ejecuta service_role", async () => {
+    for (const [quien, o] of Object.entries(sesiones)) {
+      for (const f of ["crear_negocio", "completar_alta"]) {
+        const r = await llamar("POST", `/rest/v1/rpc/${f}`, {
+          ...o,
+          body: {},
+          headers: { "Content-Profile": "servidor" },
+        });
+        expect([r.status, codigoDe(r.body)], `${quien} ${f}`).toEqual([404, "PGRST202"]);
+      }
+    }
+    const servicioOk = await llamar("POST", "/rest/v1/rpc/completar_alta", {
+      rol: "service",
+      body: { p_user_id: NIL, p_version: "0.1.0", p_duracion_s: 0 },
+      headers: { "Content-Profile": "servidor" },
+    });
+    expect([servicioOk.status, codigoDe(servicioOk.body)]).toEqual([400, "23514"]);
+  });
 });
 
 describe("R-40: service_role (control positivo)", () => {
