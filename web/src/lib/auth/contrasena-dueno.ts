@@ -7,6 +7,7 @@ import {
   filasContrasena,
   registrarIntento,
 } from "@/lib/auth/intentos-dueno";
+import { env } from "@/lib/env";
 import { crearClienteServidor } from "@/lib/supabase/server";
 import { crearClienteSinSesion } from "@/lib/supabase/publico";
 
@@ -43,15 +44,30 @@ export async function entrarConContrasena(
   return CUERPO_ENTRADA;
 }
 
+/** Guarda el hash sin revocar sesiones. GoTrue lo hace solo al usar updateUser. */
+async function fijarContrasena(userId: string, contrasena: string): Promise<boolean> {
+  const respuesta = await fetch(`${env.supabaseUrl()}/rest/v1/rpc/fijar_contrasena`, {
+    method: "POST",
+    cache: "no-store",
+    headers: {
+      Authorization: `Bearer ${env.supabaseSecretKey()}`,
+      apikey: env.supabaseSecretKey(),
+      "Content-Type": "application/json",
+      "Content-Profile": "servidor",
+    },
+    body: JSON.stringify({ p_user_id: userId, p_contrasena: contrasena }),
+  });
+  return respuesta.ok;
+}
+
 /** Con sesión y un código reciente, guarda la contraseña. */
 export async function crearContrasena(contrasena: string): Promise<"ok" | "invalida" | "sin-sesion"> {
   if (!contrasenaValida(contrasena)) return "invalida";
   const supabase = await crearClienteServidor("dueno");
   const { data, error } = await supabase.auth.getUser();
   const correo = data.user?.email?.toLowerCase();
-  if (error || !correo || !(await codigoReciente(correo))) return "sin-sesion";
-  const guardada = await supabase.auth.updateUser({ password: contrasena });
-  if (guardada.error) return "sin-sesion";
+  if (error || !data.user || !correo || !(await codigoReciente(correo))) return "sin-sesion";
+  if (!(await fijarContrasena(data.user.id, contrasena))) return "sin-sesion";
   return "ok";
 }
 
@@ -79,11 +95,8 @@ export async function confirmarRestablecer(
     if (data.user) await supabase.auth.signOut();
     return "rechazado";
   }
-  const guardada = await supabase.auth.updateUser({ password: contrasena });
-  if (guardada.error) return "rechazado";
+  if (!(await fijarContrasena(data.user.id, contrasena))) return "rechazado";
   await registrarIntento(correo, "restablecer", "correcto");
-  // GoTrue ya revoca los otros refresh tokens al cambiar la contraseña.
-  // La casilla igual pide el cierre explícito por si esa versión deja de hacerlo.
   if (cerrarOtras) await supabase.auth.signOut({ scope: "others" });
   return "ok";
 }

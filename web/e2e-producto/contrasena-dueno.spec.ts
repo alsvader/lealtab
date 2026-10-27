@@ -98,8 +98,8 @@ test.describe("contraseña del dueño", () => {
     const codigo = await codigoEnMailpit(correo);
     expect((await request.post("/panel/api/auth/restablecer/confirmar", { data: { correo, codigo, contrasena: "barber" } })).status()).toBe(400);
     expect((await request.post("/panel/api/auth/restablecer/confirmar", { data: { correo, codigo, contrasena: OTRA } })).status()).toBe(200);
-    // GoTrue revoca los refresh tokens al cambiar la contraseña, aunque no llamemos a signOut.
-    expect((await sesion.auth.refreshSession()).error).not.toBeNull();
+    expect((await sesion.auth.refreshSession()).error).toBeNull();
+    expect((await publico().auth.signInWithPassword({ email: correo, password: CLAVE })).error).not.toBeNull();
     expect((await publico().auth.signInWithPassword({ email: correo, password: OTRA })).error).toBeNull();
     await borrar(admin(), correo);
   });

@@ -46,7 +46,7 @@ describe("esquemas privado y servidor no son accesibles por la API REST", () => 
 
   it("crear_negocio y completar_alta solo las ejecuta service_role", async () => {
     for (const [quien, o] of Object.entries(sesiones)) {
-      for (const f of ["crear_negocio", "completar_alta"]) {
+      for (const f of ["crear_negocio", "completar_alta", "fijar_contrasena"]) {
         const r = await llamar("POST", `/rest/v1/rpc/${f}`, {
           ...o,
           body: {},
