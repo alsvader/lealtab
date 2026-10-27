@@ -150,6 +150,7 @@ test("un alta completo, de N1 a N4, pasa con el código de Mailpit", async ({ pa
     tanda: 1,
     version_producto: "0.1.0",
   });
+  expect(completadas[0].props.duracion_s).toBeGreaterThan(0);
   expect(completadas[0].props).not.toHaveProperty("correo");
   expect(completadas[0].props).not.toHaveProperty("nombre");
   expect(descargas).toHaveLength(2);

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { AYUDA_WHATSAPP, PASOS, type PasoId } from "@/content/alta";
+import { RelojAlta } from "@/components/panel/reloj-alta";
 
 const control =
   "inline-flex min-h-11 items-center justify-center rounded-control border-2 border-noche px-space-4 font-body text-ui font-bold";
@@ -41,6 +42,7 @@ export function MarcoAlta({ paso, children }: { paso: PasoId; children: React.Re
           {AYUDA_WHATSAPP.label}
         </a>
       </header>
+      <RelojAlta />
       <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col gap-space-6 px-space-4 py-space-6 lg:flex-row lg:px-space-7">
         {children}
       </main>

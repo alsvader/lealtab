@@ -1,15 +1,16 @@
 import { Suspense } from "react";
-import { headers } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { connection } from "next/server";
 import { MarcoAlta } from "@/components/panel/alta-marco";
 import { CartelMostrador } from "@/components/panel/cartel-mostrador";
 import { completarAlta, destinoQr } from "@/lib/negocio/cartel";
+import { COOKIE_DURACION_ALTA, duracionDeCookie } from "@/lib/negocio/duracion-alta";
 
 async function CartelDatos() {
-  // Sin `connection()`, el `.catch` de un prerender se quedaba en el HTML estático
-  // y el cartel salía sin fecha aunque la sesión sí cerrara el alta.
+  // Sin `connection()`, un prerender se quedaba en el HTML estático y el cartel salía sin fecha.
   await connection();
-  const alta = await completarAlta(0);
+  const galleta = (await cookies()).get(COOKIE_DURACION_ALTA)?.value;
+  const alta = await completarAlta(duracionDeCookie(galleta));
   const encabezados = await headers();
   const proto = encabezados.get("x-forwarded-proto") ?? "http";
   const host = encabezados.get("host") ?? "";

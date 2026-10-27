@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { N3 } from "@/content/alta";
 import { botonPrimario, botonSecundario, Campo, campoClase } from "@/components/panel/alta-marco";
+import { publicarDuracionAlta } from "@/components/panel/reloj-alta";
 
 export function FormularioTarjeta() {
   const router = useRouter();
@@ -28,6 +29,7 @@ export function FormularioTarjeta() {
       setError("Escribe la recompensa. Los sellos van de 4 a 12.");
       return;
     }
+    publicarDuracionAlta();
     router.push("/panel/cartel");
   }
 
