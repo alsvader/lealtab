@@ -1,7 +1,7 @@
 # QA: registro-cliente
 
 **Veredicto:** APROBADA CON PENDIENTES
-**Rama y commit:** `feat/registro-cliente` @ `de82ea2`. T3, T4 y T5 están en el árbol de trabajo, sin commit. **Brief:** `docs/fase-7/features/registro-cliente.md`
+**Rama:** `feat/registro-cliente`. T1 `15f3a2f`, T2 `de82ea2`, T3 `8cf10f1`, T4 `c7f0f8e`, T5 `b9e9ecd`. **Brief:** `docs/fase-7/features/registro-cliente.md`
 **Fecha:** 2026-10-27
 
 El cliente se registra en local con el código de prueba, agrega un segundo negocio sin otro código y ve su tarjeta con un QR que cambia cada 60 s. La entrega real del código sigue en `spike-auth-cliente/T7`. El cierre espera la aprobación de Aarón.
@@ -66,7 +66,7 @@ Ninguna dejó estas corridas en rojo.
 
 ## 6. Pendientes para el fundador
 
-1. Aprobar el cierre antes del commit. T3, T4 y T5 siguen sin commit.
+1. Aprobar el push de `feat/registro-cliente`.
 2. PQ-18: la frase del proveedor y si el aviso de la landing alcanza para el cliente.
 3. Cuando exista el proyecto de pruebas, retomar `spike-auth-cliente/T7`.
 4. El texto de «1 sello cada X horas» cuando X no es una hora entera.
