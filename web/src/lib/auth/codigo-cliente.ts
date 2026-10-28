@@ -47,7 +47,7 @@ export async function pedirCodigoCliente(telefono: string): Promise<void> {
 }
 
 /** Verifica el código y deja la cookie del cliente. Rechaza si esa cuenta ya es dueño. */
-export async function verificarCodigoCliente(telefono: string, codigo: string): Promise<string | null> {
+export async function verificarCodigoCliente(telefono: string, codigo: string, cerrarOtras = false): Promise<string | null> {
   const supabase = await crearClienteServidor("cliente");
   const { data, error } = await supabase.auth.verifyOtp({ phone: telefono, token: codigo, type: "sms" });
   if (error || !data.user) return null;
@@ -61,6 +61,7 @@ export async function verificarCodigoCliente(telefono: string, codigo: string): 
   if (puesto.error) return null;
   const refrescada = await supabase.auth.refreshSession();
   if (refrescada.error) return null;
+  if (cerrarOtras) await supabase.auth.signOut({ scope: "others" });
   return data.user.id;
 }
 
