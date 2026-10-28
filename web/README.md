@@ -67,7 +67,7 @@ pnpm test:rls
 
 ## Migraciones en Vercel y push manual
 
-`vercel.json` usa `sh scripts/vercel-build.sh` (ADR-005). El script compila con `next build` y solo después, si `VERCEL_ENV=production`, corre `supabase db push` contra `SUPABASE_DB_URL_MIGRACIONES` (pooler de sesión, puerto 5432). En cualquier otro entorno imprime «Vista previa: sin migraciones» y no toca la base. El directorio raíz del proyecto en Vercel es `web/`.
+`vercel.json` usa `sh scripts/vercel-build.sh` (ADR-005). El script compila con `next build` y solo después, si `VERCEL_ENV=production` y existe `SUPABASE_DB_URL_MIGRACIONES`, corre `supabase db push` contra esa URL (pooler de sesión, puerto 5432). Sin la URL no migra y el build sigue: se publica la landing. En cualquier otro entorno imprime «Vista previa: sin migraciones» y no toca la base. El directorio raíz del proyecto en Vercel es `web/`.
 
 ```bash
 pnpm db:push           # SUPABASE_DB_URL_MIGRACIONES; se niega si la URL es de producción

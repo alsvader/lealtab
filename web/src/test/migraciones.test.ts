@@ -38,10 +38,10 @@ describe("vercel-build.sh", () => {
     expect(r.stdout).not.toContain("Migraciones:");
   });
 
-  it("en producción sin URL de migraciones falla y no llega al push", () => {
+  it("en producción sin URL de migraciones no migra y termina en 0", () => {
     const r = correr("vercel-build.sh", { VERCEL_ENV: "production", LT_OMITIR_BUILD: "1" });
-    expect(r.status).not.toBe(0);
-    expect(r.stderr).toContain("Falta SUPABASE_DB_URL_MIGRACIONES");
+    expect(r.status).toBe(0);
+    expect(r.stdout).toContain("Producción: sin migraciones");
     expect(r.stdout).not.toContain("Migraciones:");
   });
 
