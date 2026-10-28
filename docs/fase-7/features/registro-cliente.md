@@ -1,6 +1,6 @@
 # Feature: Registro del cliente
 
-**Estado:** Aprobado por Aarón (27 oct 2026). Se construye contra el código de prueba local. La entrega real del hook queda en `spike-auth-cliente/T7`.
+**Estado:** Cerrado por Aarón (27 oct 2026). Se construyó contra el código de prueba local. Lo que falta queda en T7. La entrega real del hook sigue en `spike-auth-cliente/T7`.
 **Fase:** 7 · **Rama:** `feat/registro-cliente`
 **Cubre:** RF-APP-01 a 04, 09 a 13 y 15 a 18; RF-SEL-04 (el QR en la tarjeta del cliente); RF-TAR-03 (el sello al crear la tarjeta); RNF-STK-06 en local · **Pantallas:** C0, C1, C3, C4, R1, `/c/recuperar` · **Flujos:** F2
 **Restricciones:** D-019, D-031, D-016, ADR-003. El registro por correo sigue cerrado.
@@ -40,6 +40,7 @@ El cliente abre el QR del mostrador, deja su nombre y su WhatsApp, confirma el c
 | T4 | R1, segundo negocio, y `/c/recuperar` | T3 | - Con sesión, el segundo negocio no pide código y no pisa el nombre del primero (spec) <br> - Sin sesión, recuperar pide el teléfono y devuelve las tarjetas (spec) |
 | T5 | C0, C3 y C4 | T3 | - C0 lista las tarjetas o el vacío (spec) <br> - C3 muestra los sellos y un QR que cambia con el paso de 60 s (spec) <br> - Con la meta llena se ve C4 (spec) |
 | T6 | Cierre | T1 a T5 | - `pnpm lint`, `typecheck` y las specs de este feature en Chromium pasan (QA) <br> - `docs/fase-7/qa/registro-cliente.md` con veredicto |
+| T7 | Seguimiento de lo que quedó fuera del cierre | T6 | - PQ-18: la frase del proveedor y si el aviso de la landing cubre al cliente (nota) <br> - El texto de «1 sello cada X horas» cuando X no es una hora entera (microcopy) <br> - axe, scroll desde 320 px, Firefox, WebKit y los dos móviles (specs) <br> - Revisión de seguridad del diff, que el reporte dejó vacía (reporte) <br> - Registro y QR en un iPhone con HTTPS (nota) <br> - No repite el hook alojado ni entra a la PWA ni a la fila del evento |
 
 ## Por definir
 
@@ -48,5 +49,5 @@ El cliente abre el QR del mostrador, deja su nombre y su WhatsApp, confirma el c
 
 ## Pendientes para Aarón
 
-1. Cuando exista el proyecto de pruebas, retomar `spike-auth-cliente/T7`.
-2. Aprobar el cierre de este feature antes del commit, si el flujo de siempre sigue valiendo.
+1. T7 de este brief: lo que el cierre dejó fuera.
+2. Cuando exista el proyecto de pruebas, retomar `spike-auth-cliente/T7`. No está en el ticket de arriba.

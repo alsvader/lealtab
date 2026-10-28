@@ -66,11 +66,7 @@ Ninguna dejó estas corridas en rojo.
 
 ## 6. Pendientes para el fundador
 
-1. Aprobar el push de `feat/registro-cliente`.
-2. PQ-18: la frase del proveedor y si el aviso de la landing alcanza para el cliente.
-3. Cuando exista el proyecto de pruebas, retomar `spike-auth-cliente/T7`.
-4. El texto de «1 sello cada X horas» cuando X no es una hora entera.
-5. Probar el registro y el QR en un iPhone con HTTPS. Aquí solo corrió Chromium.
+El cierre quedó aprobado el 27 oct 2026. El seguimiento está en Plane como `registro-cliente/T7`: PQ-18, el texto de las horas fraccionarias, axe, 320 px, los otros navegadores, la revisión de seguridad y el iPhone con HTTPS. El hook alojado sigue aparte, en `spike-auth-cliente/T7`.
 
 ## 7. Archivos
 
