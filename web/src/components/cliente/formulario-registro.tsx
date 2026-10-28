@@ -10,14 +10,18 @@ const campo =
 const boton =
   "inline-flex min-h-12 w-full items-center justify-center rounded-control border-2 border-noche bg-bosque px-space-4 font-body text-ui font-bold text-lino shadow-button disabled:opacity-70";
 
-type ErrorCampo = "nombre" | "telefono" | "casilla" | null;
+type ErrorCampo = "nombre" | "telefono" | "casilla" | "codigo" | null;
+type TarjetaLista = { sellos: number; bienvenida: boolean };
 
 export function FormularioRegistro({ negocio }: { negocio: NegocioPublico }) {
   const [nombre, setNombre] = useState("");
   const [telefono, setTelefono] = useState("");
   const [acepto, setAcepto] = useState(false);
-  const [paso, setPaso] = useState<"datos" | "codigo">("datos");
+  const [paso, setPaso] = useState<"datos" | "codigo" | "lista">("datos");
   const [nacional, setNacional] = useState("");
+  const [e164, setE164] = useState("");
+  const [codigo, setCodigo] = useState("");
+  const [tarjeta, setTarjeta] = useState<TarjetaLista | null>(null);
   const [pendiente, setPendiente] = useState(false);
   const [error, setError] = useState<ErrorCampo>(null);
   const [mensaje, setMensaje] = useState("");
@@ -26,6 +30,7 @@ export function FormularioRegistro({ negocio }: { negocio: NegocioPublico }) {
   const nombreRef = useRef<HTMLInputElement>(null);
   const telefonoRef = useRef<HTMLInputElement>(null);
   const casillaRef = useRef<HTMLInputElement>(null);
+  const codigoRef = useRef<HTMLInputElement>(null);
 
   function fallar(campo: ErrorCampo, texto: string, foco: HTMLElement | null) {
     setError(campo);
@@ -75,7 +80,49 @@ export function FormularioRegistro({ negocio }: { negocio: NegocioPublico }) {
         JSON.stringify({ nombre: limpio, telefono: numero.nacional, paso: "codigo" }),
       );
       setNacional(numero.nacional);
+      setE164(numero.e164);
+      setCodigo("");
       setPaso("codigo");
+    } catch {
+      setSinRed(true);
+    } finally {
+      enviando.current = false;
+      setPendiente(false);
+    }
+  }
+
+  async function crear(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (enviando.current) return;
+    if (!/^\d{6}$/.test(codigo)) {
+      fallar("codigo", REGISTRO.codigoError, codigoRef.current);
+      return;
+    }
+    enviando.current = true;
+    setPendiente(true);
+    setError(null);
+    setMensaje("");
+    try {
+      const respuesta = await fetch("/c/api/auth/verificar", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ telefono: e164, codigo, nombre: nombre.trim(), slug: negocio.slug, acepto: true }),
+      });
+      if (respuesta.status === 401) {
+        fallar("codigo", REGISTRO.codigoError, codigoRef.current);
+        return;
+      }
+      if (!respuesta.ok) {
+        fallar("codigo", REGISTRO.pregunta(negocio.nombre), codigoRef.current);
+        return;
+      }
+      const cuerpo = (await respuesta.json()) as { sellos?: number; bienvenida?: boolean };
+      if (typeof cuerpo.sellos !== "number") {
+        fallar("codigo", REGISTRO.pregunta(negocio.nombre), codigoRef.current);
+        return;
+      }
+      setTarjeta({ sellos: cuerpo.sellos, bienvenida: cuerpo.bienvenida === true });
+      setPaso("lista");
     } catch {
       setSinRed(true);
     } finally {
@@ -96,12 +143,67 @@ export function FormularioRegistro({ negocio }: { negocio: NegocioPublico }) {
         <p className="font-display text-h4 font-extrabold">{negocio.nombre}</p>
       </header>
 
-      {paso === "codigo" ? (
-        <section className="flex flex-col gap-space-3" aria-live="polite">
+      {paso === "lista" && tarjeta ? (
+        <article
+          aria-label={REGISTRO.listaTitulo}
+          className="flex flex-col gap-space-3 rounded-card border-2 border-noche bg-surface p-space-4 shadow-card"
+        >
+          <h1 className="font-display text-h2 font-extrabold">{REGISTRO.listaTitulo}</h1>
+          <p className="font-display text-stat font-extrabold">{REGISTRO.sellos(tarjeta.sellos, negocio.sellosMeta)}</p>
+          <p>{tarjeta.bienvenida ? REGISTRO.bienvenida : REGISTRO.listaCuerpo(negocio.nombre)}</p>
+          <Pie />
+        </article>
+      ) : paso === "codigo" ? (
+        <form className="flex flex-col gap-space-4" onSubmit={crear} noValidate>
           <h1 className="font-display text-h2 font-extrabold">{REGISTRO.codigoTitulo}</h1>
           <p>{REGISTRO.codigoCuerpo(mostrarWhatsapp(nacional))}</p>
+          <label className="flex flex-col gap-space-2 text-ui font-semibold" htmlFor="registro-codigo">
+            {REGISTRO.codigoEtiqueta}
+            <input
+              ref={codigoRef}
+              id="registro-codigo"
+              className={`${campo} ${error === "codigo" ? "border-error" : "border-noche"}`}
+              name="codigo"
+              inputMode="numeric"
+              autoComplete="one-time-code"
+              maxLength={6}
+              readOnly={pendiente}
+              aria-invalid={error === "codigo" || undefined}
+              aria-describedby={error === "codigo" ? "registro-codigo-error" : undefined}
+              value={codigo}
+              onChange={(event) => setCodigo(event.target.value.replace(/\D/g, "").slice(0, 6))}
+            />
+          </label>
+          {mensaje ? (
+            <p id="registro-codigo-error" className="text-error" role="alert">
+              {mensaje}
+            </p>
+          ) : null}
+          {sinRed ? (
+            <div role="alert" className="flex flex-col gap-space-3 rounded-card border-2 border-noche bg-durazno-claro p-space-4">
+              <p className="font-bold">{REGISTRO.sinConexion}</p>
+              <p>{REGISTRO.sinConexionCuerpo}</p>
+            </div>
+          ) : null}
+          <p className="sr-only" aria-live="polite">
+            {pendiente ? REGISTRO.verificandoVivo : ""}
+          </p>
+          <button className={boton} type="submit" disabled={pendiente} aria-busy={pendiente || undefined}>
+            {pendiente ? REGISTRO.verificando : REGISTRO.crear}
+          </button>
+          <button
+            className="inline-flex min-h-11 items-center font-semibold underline"
+            type="button"
+            onClick={() => {
+              setPaso("datos");
+              setError(null);
+              setMensaje("");
+            }}
+          >
+            {REGISTRO.cambiar}
+          </button>
           <Pie />
-        </section>
+        </form>
       ) : (
         <form className="flex flex-col gap-space-4" onSubmit={enviar} noValidate>
           <div>

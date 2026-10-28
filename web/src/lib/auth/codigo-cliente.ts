@@ -47,20 +47,42 @@ export async function pedirCodigoCliente(telefono: string): Promise<void> {
 }
 
 /** Verifica el código y deja la cookie del cliente. Rechaza si esa cuenta ya es dueño. */
-export async function verificarCodigoCliente(telefono: string, codigo: string): Promise<boolean> {
+export async function verificarCodigoCliente(telefono: string, codigo: string): Promise<string | null> {
   const supabase = await crearClienteServidor("cliente");
   const { data, error } = await supabase.auth.verifyOtp({ phone: telefono, token: codigo, type: "sms" });
-  if (error || !data.user) return false;
+  if (error || !data.user) return null;
   const rol = data.user.app_metadata?.rol;
   if (rol === "dueno") {
     await supabase.auth.signOut();
-    return false;
+    return null;
   }
   const meta = { ...(data.user.app_metadata ?? {}), rol: "cliente" };
   const puesto = await crearClienteAdmin().auth.admin.updateUserById(data.user.id, { app_metadata: meta });
-  if (puesto.error) return false;
+  if (puesto.error) return null;
   const refrescada = await supabase.auth.refreshSession();
-  return !refrescada.error;
+  if (refrescada.error) return null;
+  return data.user.id;
+}
+
+export type TarjetaRegistrada = { sellos: number; bienvenida: boolean };
+
+/** Crea la ficha y la tarjeta. La segunda llamada no suma otro sello. */
+export async function registrarCliente(userId: string, slug: string, nombre: string): Promise<TarjetaRegistrada | null> {
+  const respuesta = await fetch(`${env.supabaseUrl()}/rest/v1/rpc/registrar_cliente`, {
+    method: "POST",
+    cache: "no-store",
+    headers: {
+      Authorization: `Bearer ${env.supabaseSecretKey()}`,
+      apikey: env.supabaseSecretKey(),
+      "Content-Type": "application/json",
+      "Content-Profile": "servidor",
+    },
+    body: JSON.stringify({ p_user_id: userId, p_slug: slug, p_nombre: nombre, p_acepto: true }),
+  });
+  if (!respuesta.ok) return null;
+  const cuerpo = (await respuesta.json()) as { sellos?: number; bienvenida?: boolean };
+  if (typeof cuerpo.sellos !== "number") return null;
+  return { sellos: cuerpo.sellos, bienvenida: cuerpo.bienvenida === true };
 }
 
 export function telefonoDeEntrada(valor: unknown): string | null {
