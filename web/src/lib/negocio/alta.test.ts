@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { giroNegocio, inicialesNegocio, slugBase, whatsappNegocio, zonaNegocio } from "./alta";
+import { giroNegocio, inicialesNegocio, mostrarWhatsapp, slugBase, whatsappCliente, whatsappNegocio, zonaNegocio } from "./alta";
 
 describe("zonaNegocio", () => {
   it("conserva una zona de México y usa Ciudad de México si no lo es", () => {
@@ -24,5 +24,10 @@ describe("whatsapp y giro", () => {
     expect(whatsappNegocio("123")).toBeNull();
     expect(giroNegocio("estetica")).toBe("estetica");
     expect(giroNegocio("gym")).toBeNull();
+    expect(whatsappCliente("993 123 4567")).toEqual({ ok: true, e164: "+529931234567", nacional: "9931234567" });
+    expect(whatsappCliente("+52 993-123-4567")).toEqual({ ok: true, e164: "+529931234567", nacional: "9931234567" });
+    expect(whatsappCliente("99312")).toEqual({ ok: false, motivo: "corto" });
+    expect(whatsappCliente("+1 415 555 2671")).toMatchObject({ ok: false, motivo: "otro" });
+    expect(mostrarWhatsapp("9931234567")).toBe("993 123 4567");
   });
 });
