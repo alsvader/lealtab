@@ -43,6 +43,7 @@ Saber si Supabase llama al hook de SMS sin un proveedor nativo y si el código q
 | T4 | `POST /c/api/auth/codigo` y `…/verificar` | T1, T3 | - La respuesta es la misma si el teléfono existe o no (spec) <br> - El código de `test_otp` deja `lt-cliente` `HttpOnly` y `Path=/c` (spec) <br> - Un usuario que ya es dueño no pasa a `rol = cliente` (spec) <br> - El navegador no llama a Supabase (spec) |
 | T5 | Página `/c/prueba-auth` y manifest de prueba, solo en local | T4 | - Con `LT_ENV=local` la página responde 200 y pide el teléfono (spec) <br> - Sin `LT_ENV=local` responde 404 (spec) <br> - El manifest solo tiene alcance en esa ruta de prueba (revisión) |
 | T6 | Informe SP-1 | T1 a T5 | - `docs/fase-7/spikes/sp-1-hook.md` con lo local en pasa o no pasa, y la entrega real, el alojado y los iPhone marcados como pendientes de dispositivo |
+| T7 | Retomar la prueba del hook en el proyecto alojado y en teléfonos reales | T6 | - El proyecto de pruebas y un túnel HTTPS comprueban que Supabase llama al hook sin proveedor nativo (informe) <br> - Entrega real por Telcel, AT&T y Movistar, en iPhone y Android, por WhatsApp y SMS (informe) <br> - SP-2, la cookie en Safari y los límites del plan gratuito quedan medidos o con el motivo de por qué siguen pendientes |
 
 ## API de SMS Masivos
 
