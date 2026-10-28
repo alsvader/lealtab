@@ -36,7 +36,8 @@
     "pdf-lib": "^1.17.1",
     "qrcode": "^1.5.4",
     "react": "19.3.0",
-    "react-dom": "19.3.0"
+    "react-dom": "19.3.0",
+    "standardwebhooks": "1.0.0"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.13.0",

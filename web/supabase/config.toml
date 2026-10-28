@@ -173,6 +173,7 @@ enable_refresh_token_rotation = true
 # Requires enable_refresh_token_rotation = true.
 refresh_token_reuse_interval = 10
 # Registro cerrado (H-01): las cuentas las crea solo el servidor con la llave de administración.
+# No se puede abrir solo para el teléfono: si este valor es true, el alta por correo también queda abierta.
 enable_signup = false
 # Allow/disallow anonymous sign-ins to your project.
 enable_anonymous_sign_ins = false
@@ -217,8 +218,8 @@ web3 = 30
 # secret = ""
 
 [auth.email]
-# Habilita el proveedor de correo (en GoTrue este valor apaga TODO inicio de sesión por correo si
-# es false). El registro sigue cerrado por [auth] enable_signup = false (H-01).
+# Habilita el proveedor de correo. En false, GoTrue apaga también el inicio de sesión por correo.
+# El alta por correo sigue cerrada por [auth] enable_signup = false.
 enable_signup = true
 # If enabled, a user will be required to confirm any email change on both the old, and new email
 # addresses. If disabled, only the new email is required to confirm.
@@ -275,9 +276,15 @@ template = "Your code is {{ .Code }}"
 # Controls the minimum amount of time that must pass before sending another sms otp.
 max_frequency = "60s"
 
-# Use pre-defined map of phone number to OTP for testing.
-# [auth.sms.test_otp]
-# 4152127777 = "123456"
+# Código fijo solo en local. No llama a SMS Masivos (spike T1).
+[auth.sms.test_otp]
+529931009901 = "847291"
+
+# Hook de SMS. En local el stub vive en la app; el secreto sale de .env y no se versiona.
+[auth.hook.send_sms]
+enabled = true
+uri = "http://host.docker.internal:3000/api/hooks/send-sms"
+secrets = "env(SEND_SMS_HOOK_SECRET)"
 
 # Configure logged in session timeouts.
 # [auth.sessions]
@@ -296,13 +303,13 @@ max_frequency = "60s"
 # enabled = true
 # uri = "pg-functions://<database>/<schema>/<hook_name>"
 
-# Configure one of the supported SMS providers: `twilio`, `twilio_verify`, `messagebird`, `textlocal`, `vonage`.
+# GoTrue apaga el teléfono si ningún proveedor está enabled, aunque el hook y test_otp existan.
+# Estas credenciales son de relleno y no se usan: test_otp responde antes, y el envío real lo hace el hook.
 [auth.sms.twilio]
-enabled = false
-account_sid = ""
-message_service_sid = ""
-# DO NOT commit your Twilio auth token to git. Use environment variable substitution instead:
-auth_token = "env(SUPABASE_AUTH_SMS_TWILIO_AUTH_TOKEN)"
+enabled = true
+account_sid = "AC00000000000000000000000000000000"
+message_service_sid = "MG00000000000000000000000000000000"
+auth_token = "local-no-se-usa"
 
 # Multi-factor-authentication is available to Supabase Pro plan.
 [auth.mfa]
