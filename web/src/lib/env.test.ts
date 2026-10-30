@@ -1,7 +1,7 @@
 import { readdirSync, readFileSync, statSync } from "node:fs";
 import path from "node:path";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { NOMBRES_ENTORNO, cookieSecure, env, supabaseConfigurado } from "./env";
+import { NOMBRES_ENTORNO, cookieSecure, env, entornoLocal, supabaseConfigurado } from "./env";
 
 beforeEach(() => {
   for (const n of NOMBRES_ENTORNO) vi.stubEnv(n, "");
@@ -46,6 +46,15 @@ describe("SMS_PROVIDER_MODE", () => {
     vi.stubEnv("SMS_PROVIDER_MODE", "stub");
     vi.stubEnv("LT_ENV", "local");
     expect(env.smsProviderMode()).toBe("stub");
+  });
+});
+
+describe("entornoLocal", () => {
+  it("la página de prueba solo se muestra en local", () => {
+    vi.stubEnv("LT_ENV", "production");
+    expect(entornoLocal()).toBe(false);
+    vi.stubEnv("LT_ENV", "local");
+    expect(entornoLocal()).toBe(true);
   });
 });
 

@@ -42,6 +42,24 @@ export function whatsappNegocio(valor: unknown): string | null {
   return null;
 }
 
+export type WhatsappCliente =
+  | { ok: true; e164: string; nacional: string }
+  | { ok: false; motivo: "corto" | "otro" };
+
+/** Distingue un número corto de uno que no es de México, para el error del paso 1. */
+export function whatsappCliente(valor: string): WhatsappCliente {
+  const e164 = whatsappNegocio(valor);
+  if (e164) return { ok: true, e164, nacional: e164.slice(3) };
+  const digitos = valor.replace(/\D/g, "");
+  const otroPais = digitos.length > 12 || (digitos.length >= 11 && !digitos.startsWith("52"));
+  return { ok: false, motivo: otroPais ? "otro" : "corto" };
+}
+
+/** 9931234567 → «993 123 4567». */
+export function mostrarWhatsapp(nacional: string): string {
+  return `${nacional.slice(0, 3)} ${nacional.slice(3, 6)} ${nacional.slice(6)}`;
+}
+
 export function textoNegocio(valor: unknown, max: number): string | null {
   if (typeof valor !== "string") return null;
   const texto = valor.trim();
