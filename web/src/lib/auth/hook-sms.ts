@@ -1,6 +1,7 @@
 import "server-only";
 import { Webhook } from "standardwebhooks";
 import { env } from "@/lib/env";
+import { enviarOtp, type CanalEnvio, type FetchOtp, type ResultadoEnvio } from "@/lib/auth/sms-masivos";
 
 export type AutorizacionEnvio = {
   permitido: boolean;
@@ -68,7 +69,13 @@ export function autorizarEnvio(telefono: string): Promise<AutorizacionEnvio | nu
   return rpc("autorizar_envio_codigo", { p_telefono: telefono });
 }
 
-export async function marcarEnviado(id: number, canal: string): Promise<void> {
+export type CierreEnvio = {
+  resultado: "enviado" | "enviado_por_respaldo" | "fallido";
+  canal: CanalEnvio | null;
+  requestId: string | null;
+};
+
+export async function cerrarEnvio(id: number, cierre: CierreEnvio): Promise<void> {
   await fetch(`${env.supabaseUrl()}/rest/v1/envio_codigo?id=eq.${id}`, {
     method: "PATCH",
     headers: {
@@ -77,13 +84,33 @@ export async function marcarEnviado(id: number, canal: string): Promise<void> {
       "Content-Type": "application/json",
       Prefer: "return=minimal",
     },
-    body: JSON.stringify({ resultado: "enviado", canal }),
+    body: JSON.stringify({
+      resultado: cierre.resultado,
+      canal: cierre.canal,
+      request_id: cierre.requestId,
+    }),
   });
 }
 
+export type DependenciasHook = {
+  autorizar?: (telefono: string) => Promise<AutorizacionEnvio | null>;
+  cerrar?: (id: number, cierre: CierreEnvio) => Promise<void>;
+  fetchImpl?: FetchOtp;
+};
+
 type Carga = { user?: { phone?: string }; sms?: { otp?: string } };
 
-export async function recibirHook(cuerpo: string, encabezados: Headers): Promise<Response> {
+/** Un 200 del proveedor con `error` no puede volver como 200: Auth lo tomaría como envío hecho. */
+function respuestaFallo(resultado: ResultadoEnvio): Response {
+  const status = !resultado.ok && resultado.status >= 400 ? resultado.status : 502;
+  return Response.json({ error: { http_code: status, message: "envio" } }, { status });
+}
+
+export async function recibirHook(
+  cuerpo: string,
+  encabezados: Headers,
+  deps?: DependenciasHook,
+): Promise<Response> {
   env.smsProviderMode();
   if (!firmaValida(cuerpo, encabezados)) return new Response(null, { status: 401 });
 
@@ -99,17 +126,54 @@ export async function recibirHook(cuerpo: string, encabezados: Headers): Promise
     return Response.json({ error: { http_code: 400, message: "telefono" } }, { status: 400 });
   }
 
-  const autorizado = await autorizarEnvio(telefono);
+  const autorizado = await (deps?.autorizar ?? autorizarEnvio)(telefono);
   if (!autorizado) return Response.json({ error: { http_code: 400, message: "telefono" } }, { status: 400 });
   if (!autorizado.permitido) {
     return Response.json({ error: { http_code: 429, message: "limite" } }, { status: 429 });
   }
 
+  const cerrar = deps?.cerrar ?? cerrarEnvio;
   if (env.smsProviderMode() === "stub") {
     console.info(lineaHookEnviado(otp, telefono));
-    await marcarEnviado(autorizado.id, "whatsapp");
+    await cerrar(autorizado.id, { resultado: "enviado", canal: "whatsapp", requestId: null });
     return new Response(null, { status: 200 });
   }
 
-  return Response.json({ error: { http_code: 501, message: "proveedor" } }, { status: 501 });
+  const sandbox = env.smsProviderMode() === "sandbox";
+  const apiKey = env.smsMasivosApiKey();
+  const primero: CanalEnvio = autorizado.canal_intencion === "sms" ? "sms" : "whatsapp";
+  const intento = (canal: CanalEnvio) =>
+    enviarOtp({
+      telefono,
+      codigo: otp,
+      canal,
+      sandbox,
+      apiKey,
+      fetchImpl: deps?.fetchImpl,
+    });
+
+  const inicial = await intento(primero);
+  if (inicial.ok) {
+    console.info(lineaHookEnviado(otp, telefono));
+    await cerrar(autorizado.id, { resultado: "enviado", canal: primero, requestId: inicial.requestId });
+    return new Response(null, { status: 200 });
+  }
+
+  if (primero === "whatsapp" && inicial.reintentable) {
+    const respaldo = await intento("sms");
+    if (respaldo.ok) {
+      console.info(lineaHookEnviado(otp, telefono));
+      await cerrar(autorizado.id, {
+        resultado: "enviado_por_respaldo",
+        canal: "sms",
+        requestId: respaldo.requestId,
+      });
+      return new Response(null, { status: 200 });
+    }
+    await cerrar(autorizado.id, { resultado: "fallido", canal: "sms", requestId: null });
+    return respuestaFallo(respaldo);
+  }
+
+  await cerrar(autorizado.id, { resultado: "fallido", canal: primero, requestId: null });
+  return respuestaFallo(inicial);
 }
