@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Link from "next/link";
 import { N4 } from "@/content/alta";
-import { AJUSTES } from "@/content/ajustes";
 import { botonPrimario, botonSecundario } from "@/components/panel/alta-marco";
 
 const TAMANOS = [
@@ -12,7 +11,7 @@ const TAMANOS = [
   { valor: "sticker", etiqueta: "Sticker 10 cm" },
 ] as const;
 
-export function CartelMostrador({ fin, destino }: { fin: string; destino: string }) {
+export function CartelMostrador({ fin, destino, qr }: { fin: string; destino: string; qr: string }) {
   const [tamano, setTamano] = useState<(typeof TAMANOS)[number]["valor"]>("carta");
   const archivo = (formato: "pdf" | "png") => `/panel/api/cartel?formato=${formato}&tamano=${tamano}`;
 
@@ -50,18 +49,22 @@ export function CartelMostrador({ fin, destino }: { fin: string; destino: string
           <li>{N4.pegalo}</li>
           <li>{fin ? `Tu mes de prueba termina el ${fin}.` : N4.prueba}</li>
         </ul>
-        <div className="flex gap-space-4">
+        <div className="flex flex-wrap items-center gap-space-4">
           <Link className={botonSecundario()} href="/panel/tarjeta">
             {N4.atras}
           </Link>
-          <Link className={botonSecundario()} href="/panel/ajustes">
-            {AJUSTES.titulo}
-          </Link>
+          <span className="inline-flex items-center gap-space-3">
+            <button className={botonSecundario()} type="button" disabled aria-describedby="mostrador-pronto">
+              {N4.mostrador}
+            </button>
+            <span id="mostrador-pronto">{N4.muyPronto}</span>
+          </span>
         </div>
       </div>
-      <aside className="flex w-full max-w-xs flex-col items-center gap-space-3 rounded-control border-2 border-noche bg-surface p-space-5 text-center">
+      <aside className="flex h-[400px] w-[300px] max-w-full shrink-0 flex-col items-center gap-space-3 self-start rounded-control border-2 border-noche bg-surface p-space-5 text-center">
         <p className="font-bold">{N4.escanear}</p>
-        <p className="text-text-muted">{destino ? "El QR abre el registro de tu negocio." : N4.escanearAyuda}</p>
+        {qr ? <img alt={N4.qrAlt} width={170} height={170} src={qr} /> : null}
+        <p className="text-text-muted">{destino ? N4.registro : N4.escanearAyuda}</p>
         <p className="mt-auto text-caption">{N4.hecho}</p>
       </aside>
     </>

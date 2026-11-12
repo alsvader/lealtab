@@ -75,6 +75,11 @@ export async function pngCartel(url: string): Promise<Buffer> {
   return QRCode.toBuffer(url, { type: "png", margin: 1, width: 480, errorCorrectionLevel: "M" });
 }
 
+/** Vista del cartel. No registra descarga: eso solo lo hace la ruta con formato. */
+export function vistaPreviaQr(url: string): Promise<string> {
+  return QRCode.toDataURL(url, { margin: 1, width: 340, errorCorrectionLevel: "M" });
+}
+
 export async function pdfCartel(url: string, tamano: TamanoCartel): Promise<Uint8Array> {
   const { ancho, alto } = TAMANOS[tamano];
   const pdf = await PDFDocument.create();

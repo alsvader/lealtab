@@ -91,7 +91,7 @@ export function FormularioCuenta() {
       }
     }
     setPendiente(false);
-    router.push("/panel/negocio");
+    router.replace("/panel/negocio");
   }
 
   if (fase === "codigo") {

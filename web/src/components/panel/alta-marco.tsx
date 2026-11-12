@@ -1,16 +1,19 @@
-import Link from "next/link";
 import { AYUDA_WHATSAPP, PASOS, type PasoId } from "@/content/alta";
 import { RelojAlta } from "@/components/panel/reloj-alta";
 
-const control =
+const cromo =
   "inline-flex min-h-11 items-center justify-center rounded-control border-2 border-noche px-space-4 font-body text-ui font-bold";
 
+/** Hover solo con puntero fino. Al presionar, el botón baja 4 px y suelta la sombra (pieza 2). */
+const interaccion =
+  "cursor-pointer transition-[border-width,transform,box-shadow] duration-[var(--duration-fast)] ease-[var(--easing-standard)] motion-reduce:transition-none [@media(hover:hover)]:hover:border-[2.5px] motion-safe:active:translate-x-[4px] motion-safe:active:translate-y-[4px] active:shadow-none! disabled:pointer-events-none";
+
 export function botonPrimario(extra = "") {
-  return `${control} bg-bosque text-lino shadow-button ${extra}`;
+  return `${cromo} bg-bosque text-lino shadow-button ${interaccion} ${extra}`;
 }
 
 export function botonSecundario(extra = "") {
-  return `${control} bg-surface text-text ${extra}`;
+  return `${cromo} bg-surface text-text ${interaccion} ${extra}`;
 }
 
 export function MarcoAlta({ paso, children }: { paso: PasoId; children: React.ReactNode }) {
@@ -20,23 +23,24 @@ export function MarcoAlta({ paso, children }: { paso: PasoId; children: React.Re
     <div className="flex min-h-dvh flex-col bg-bg text-text">
       <header className="flex flex-wrap items-center justify-between gap-space-3 border-b-[1.5px] border-noche bg-surface px-space-4 py-space-4 sm:px-space-6">
         <p className="font-display text-h4 font-extrabold text-bosque">LealTab</p>
-        <nav aria-label="Pasos del alta" className="flex flex-wrap gap-space-2">
-          {PASOS.map((p, i) => {
-            const actual = i === indice;
-            const listo = i < indice;
-            return (
-              <Link
-                key={p.id}
-                href={p.href}
-                aria-current={actual ? "step" : undefined}
-                className={`${control} text-caption ${
-                  actual ? "bg-noche text-lino" : listo ? "bg-menta text-bosque" : "bg-surface text-text"
-                }`}
-              >
-                {p.etiqueta}
-              </Link>
-            );
-          })}
+        <nav aria-label="Pasos del alta">
+          <ol className="m-0 flex list-none flex-wrap gap-space-2 p-0">
+            {PASOS.map((p, i) => {
+              const actual = i === indice;
+              const listo = i < indice;
+              return (
+                <li
+                  key={p.id}
+                  aria-current={actual ? "step" : undefined}
+                  className={`${cromo} cursor-default text-caption ${
+                    actual ? "bg-noche text-lino" : listo ? "bg-menta text-bosque" : "bg-surface text-text"
+                  }`}
+                >
+                  {p.etiqueta}
+                </li>
+              );
+            })}
+          </ol>
         </nav>
         <a className={botonSecundario("text-bosque")} href={AYUDA_WHATSAPP.href} rel="noopener noreferrer" target="_blank">
           {AYUDA_WHATSAPP.label}

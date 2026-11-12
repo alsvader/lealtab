@@ -78,13 +78,22 @@ export function FormularioTarjeta() {
             <span className="text-text-muted">{N3.bienvenidaAyuda}</span>
           </p>
           <button
-            className={`relative h-11 w-14 shrink-0 rounded-full border-2 border-noche ${bienvenida ? "bg-bosque" : "bg-surface"}`}
+            className="inline-flex h-11 w-14 shrink-0 cursor-pointer items-center justify-center"
             type="button"
             role="switch"
             aria-checked={bienvenida}
             aria-labelledby="bienvenida-texto"
             onClick={() => setBienvenida((v) => !v)}
-          />
+          >
+            <span
+              aria-hidden="true"
+              className={`relative h-7 w-12 rounded-full border-2 border-noche ${bienvenida ? "bg-bosque" : "bg-surface"}`}
+            >
+              <span
+                className={`absolute top-0.5 size-5 rounded-full ${bienvenida ? "right-0.5 bg-lino" : "left-0.5 bg-noche"}`}
+              />
+            </span>
+          </button>
         </div>
         {error ? (
           <p className="text-error" role="alert">

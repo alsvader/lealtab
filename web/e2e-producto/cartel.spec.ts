@@ -47,8 +47,22 @@ test("el cartel cierra el alta, no suma sellos y cada descarga cuenta un evento"
   expect(dias).toBeLessThan(31);
   expect((await request.get("/panel/api/cartel?duracion_s=99")).status()).toBe(200);
 
+  expect((await page.request.post("/panel/api/auth/contrasena", { data: { correo, contrasena: CLAVE } })).status()).toBe(200);
   await page.goto("/panel/cartel");
   await expect(page.getByText("Hecho con LealTab")).toBeVisible();
+  const cartel = page.locator("aside");
+  await expect(cartel.getByRole("img", { name: "Código QR para crear la tarjeta" })).toBeVisible();
+  const caja = await cartel.boundingBox();
+  expect(caja?.height).toBeGreaterThanOrEqual(399);
+  expect(caja?.height).toBeLessThanOrEqual(401);
+  expect(caja?.width).toBeGreaterThanOrEqual(299);
+  expect(caja?.width).toBeLessThanOrEqual(301);
+  await expect(page.getByRole("button", { name: "Ir a Mostrador" })).toBeDisabled();
+  await expect(page.getByText("Muy pronto")).toBeVisible();
+  await expect(page.getByRole("link", { name: "Ajustes" })).toHaveCount(0);
+  await page.goto("/panel/alta");
+  await expect(page).toHaveURL(/\/panel\/alta$/);
+  await expect(page.getByRole("heading", { name: "Empieza gratis hoy" })).toBeVisible();
   const png = await request.get("/panel/api/cartel?formato=png&tamano=carta");
   const pdf = await request.get("/panel/api/cartel?formato=pdf&tamano=sticker");
   expect(png.headers()["content-type"]).toContain("image/png");
