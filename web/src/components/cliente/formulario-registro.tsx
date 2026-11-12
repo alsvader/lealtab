@@ -1,27 +1,30 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import { REGISTRO } from "@/content/registro";
-import { inicialesNegocio, mostrarWhatsapp, whatsappCliente } from "@/lib/negocio/alta";
+import { mostrarWhatsapp, whatsappCliente } from "@/lib/negocio/alta";
 import type { NegocioPublico } from "@/lib/negocio/publico-tipo";
+import { MarcaNegocio } from "./marca-negocio";
 
 const campo =
   "min-h-12 w-full rounded-control border-2 bg-surface px-space-3 font-body text-text";
-const boton =
-  "inline-flex min-h-12 w-full items-center justify-center rounded-control border-2 border-noche bg-bosque px-space-4 font-body text-ui font-bold text-lino shadow-button disabled:opacity-70";
+const botonBase =
+  "inline-flex min-h-12 w-full items-center justify-center rounded-control border-2 px-space-4 font-body text-ui font-bold";
+const botonActivo = `${botonBase} border-noche bg-bosque text-lino shadow-button disabled:opacity-70`;
+const botonQuieto = `${botonBase} border-gris-noche bg-menta text-gris-noche shadow-none`;
 
 type ErrorCampo = "nombre" | "telefono" | "casilla" | "codigo" | null;
-type TarjetaLista = { sellos: number; bienvenida: boolean };
 
 export function FormularioRegistro({ negocio }: { negocio: NegocioPublico }) {
+  const router = useRouter();
   const [nombre, setNombre] = useState("");
   const [telefono, setTelefono] = useState("");
   const [acepto, setAcepto] = useState(false);
-  const [paso, setPaso] = useState<"datos" | "codigo" | "lista">("datos");
+  const [paso, setPaso] = useState<"datos" | "codigo">("datos");
   const [nacional, setNacional] = useState("");
   const [e164, setE164] = useState("");
   const [codigo, setCodigo] = useState("");
-  const [tarjeta, setTarjeta] = useState<TarjetaLista | null>(null);
   const [pendiente, setPendiente] = useState(false);
   const [error, setError] = useState<ErrorCampo>(null);
   const [mensaje, setMensaje] = useState("");
@@ -31,6 +34,8 @@ export function FormularioRegistro({ negocio }: { negocio: NegocioPublico }) {
   const telefonoRef = useRef<HTMLInputElement>(null);
   const casillaRef = useRef<HTMLInputElement>(null);
   const codigoRef = useRef<HTMLInputElement>(null);
+  const limpio = nombre.trim();
+  const puedeEnviar = limpio.length >= 1 && limpio.length <= 60 && whatsappCliente(telefono).ok && acepto;
 
   function fallar(campo: ErrorCampo, texto: string, foco: HTMLElement | null) {
     setError(campo);
@@ -42,7 +47,6 @@ export function FormularioRegistro({ negocio }: { negocio: NegocioPublico }) {
     event.preventDefault();
     if (enviando.current) return;
     setSinRed(false);
-    const limpio = nombre.trim();
     if (limpio.length < 1 || limpio.length > 60) {
       fallar("nombre", REGISTRO.nombreError, nombreRef.current);
       return;
@@ -116,13 +120,13 @@ export function FormularioRegistro({ negocio }: { negocio: NegocioPublico }) {
         fallar("codigo", REGISTRO.pregunta(negocio.nombre), codigoRef.current);
         return;
       }
-      const cuerpo = (await respuesta.json()) as { sellos?: number; bienvenida?: boolean };
+      const cuerpo = (await respuesta.json()) as { sellos?: number };
       if (typeof cuerpo.sellos !== "number") {
         fallar("codigo", REGISTRO.pregunta(negocio.nombre), codigoRef.current);
         return;
       }
-      setTarjeta({ sellos: cuerpo.sellos, bienvenida: cuerpo.bienvenida === true });
-      setPaso("lista");
+      sessionStorage.removeItem(`lt-registro:${negocio.slug}`);
+      router.push(`/c/${negocio.slug}`);
     } catch {
       setSinRed(true);
     } finally {
@@ -133,28 +137,11 @@ export function FormularioRegistro({ negocio }: { negocio: NegocioPublico }) {
 
   return (
     <main className="mx-auto flex min-h-dvh w-full max-w-md flex-col gap-space-4 bg-bg px-space-4 py-space-6 text-text">
-      <header className="flex items-center gap-space-3">
-        <span
-          className="inline-flex size-12 items-center justify-center rounded-full border-2 border-noche bg-menta font-display font-extrabold text-bosque"
-          aria-hidden="true"
-        >
-          {inicialesNegocio(negocio.nombre)}
-        </span>
-        <p className="font-display text-h4 font-extrabold">{negocio.nombre}</p>
-      </header>
+      <MarcaNegocio negocio={negocio} />
 
-      {paso === "lista" && tarjeta ? (
-        <article
-          aria-label={REGISTRO.listaTitulo}
-          className="flex flex-col gap-space-3 rounded-card border-2 border-noche bg-surface p-space-4 shadow-card"
-        >
-          <h1 className="font-display text-h2 font-extrabold">{REGISTRO.listaTitulo}</h1>
-          <p className="font-display text-stat font-extrabold">{REGISTRO.sellos(tarjeta.sellos, negocio.sellosMeta)}</p>
-          <p>{tarjeta.bienvenida ? REGISTRO.bienvenida : REGISTRO.listaCuerpo(negocio.nombre)}</p>
-          <Pie />
-        </article>
-      ) : paso === "codigo" ? (
+      {paso === "codigo" ? (
         <form className="flex flex-col gap-space-4" onSubmit={crear} noValidate>
+          <Pasos paso={2} />
           <h1 className="font-display text-h2 font-extrabold">{REGISTRO.codigoTitulo}</h1>
           <p>{REGISTRO.codigoCuerpo(mostrarWhatsapp(nacional))}</p>
           <label className="flex flex-col gap-space-2 text-ui font-semibold" htmlFor="registro-codigo">
@@ -188,7 +175,7 @@ export function FormularioRegistro({ negocio }: { negocio: NegocioPublico }) {
           <p className="sr-only" aria-live="polite">
             {pendiente ? REGISTRO.verificandoVivo : ""}
           </p>
-          <button className={boton} type="submit" disabled={pendiente} aria-busy={pendiente || undefined}>
+          <button className={botonActivo} type="submit" disabled={pendiente} aria-busy={pendiente || undefined}>
             {pendiente ? REGISTRO.verificando : REGISTRO.crear}
           </button>
           <button
@@ -206,13 +193,7 @@ export function FormularioRegistro({ negocio }: { negocio: NegocioPublico }) {
         </form>
       ) : (
         <form className="flex flex-col gap-space-4" onSubmit={enviar} noValidate>
-          <div>
-            <p className="font-bold">{REGISTRO.paso}</p>
-            <div className="mt-space-2 flex gap-space-2" aria-hidden="true">
-              <span className="h-2 flex-1 rounded-full bg-bosque" />
-              <span className="h-2 flex-1 rounded-full bg-border" />
-            </div>
-          </div>
+          <Pasos paso={1} />
           <h1 className="font-display text-h2 font-extrabold">{REGISTRO.titulo(negocio.recompensa)}</h1>
           <p>{REGISTRO.subtitulo}</p>
 
@@ -297,7 +278,12 @@ export function FormularioRegistro({ negocio }: { negocio: NegocioPublico }) {
             {pendiente ? REGISTRO.enviandoVivo : ""}
           </p>
 
-          <button className={boton} type="submit" disabled={pendiente} aria-busy={pendiente || undefined}>
+          <button
+            className={puedeEnviar ? botonActivo : botonQuieto}
+            type="submit"
+            disabled={!puedeEnviar || pendiente}
+            aria-busy={pendiente || undefined}
+          >
             {pendiente ? REGISTRO.enviando : REGISTRO.enviar}
           </button>
           <p className="text-center text-ui">{REGISTRO.bajoBoton}</p>
@@ -305,6 +291,18 @@ export function FormularioRegistro({ negocio }: { negocio: NegocioPublico }) {
         </form>
       )}
     </main>
+  );
+}
+
+function Pasos({ paso }: { paso: 1 | 2 }) {
+  return (
+    <div>
+      <p className="font-bold">{paso === 1 ? REGISTRO.paso : REGISTRO.paso2}</p>
+      <div className="mt-space-2 flex gap-space-2" data-pasos={paso} aria-hidden="true">
+        <span className="h-2 flex-1 rounded-full bg-bosque" />
+        <span className={`h-2 flex-1 rounded-full ${paso === 2 ? "bg-bosque" : "bg-menta"}`} />
+      </div>
+    </div>
   );
 }
 

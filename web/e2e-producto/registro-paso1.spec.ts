@@ -2,6 +2,10 @@ import { createClient } from "@supabase/supabase-js";
 import { expect, test } from "./fixtures";
 
 const CLAVE = "clave-valida-1";
+const PNG = Buffer.from(
+  "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==",
+  "base64",
+);
 
 function admin() {
   return createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SECRET_KEY!, {
@@ -50,7 +54,7 @@ async function negocioPublico() {
   expect(config.status).toBe(201);
   const fin = await rpc("completar_alta", { p_user_id: creado.data.user!.id, p_version: "0.1.0", p_duracion_s: 1 });
   expect(fin.status).toBe(200);
-  return { correo, slug: alta.body.slug!, dueno: creado.data.user!.id };
+  return { correo, slug: alta.body.slug!, dueno: creado.data.user!.id, id: alta.body.id! };
 }
 
 async function borrarTelefono(telefono: string) {
@@ -86,14 +90,22 @@ test("el paso 1 pide nombre, WhatsApp y la casilla, y sin casilla no envía", as
   await expect(page.getByLabel("Tu nombre")).toBeVisible();
   await expect(page.getByLabel("Tu WhatsApp")).toBeVisible();
   await expect(page.getByRole("checkbox", { name: "Acepto el aviso de privacidad" })).toBeVisible();
-  await expect(page.getByRole("button", { name: "Enviarme el código" })).toBeVisible();
+  const boton = page.getByRole("button", { name: "Enviarme el código" });
+  await expect(boton).toBeDisabled();
+  await expect(page.getByText("Paso 1 de 2")).toBeVisible();
+  await expect(page.locator("[data-pasos='1'] span").nth(1)).toHaveClass(/bg-menta/);
+  await expect(page.locator("[data-pasos='1'] span").nth(0)).toHaveClass(/bg-bosque/);
+  await expect(page.locator("header img")).toHaveCount(0);
+  await expect(page.locator("header span")).toHaveText("CR");
   await expect(page.getByText("Hecho con LealTab")).toBeVisible();
 
   try {
     await page.getByLabel("Tu nombre").fill("Ana López");
     await page.getByLabel("Tu WhatsApp").fill("993 100 8811");
-    await page.getByRole("button", { name: "Enviarme el código" }).click();
-    await expect(page.locator("#registro-error")).toHaveText("Error: para continuar, acepta el aviso de privacidad.");
+    await expect(boton).toBeDisabled();
+    await expect(page.locator("#registro-error")).toHaveCount(0);
+    await page.getByRole("checkbox", { name: "Acepto el aviso de privacidad" }).check();
+    await expect(boton).toBeEnabled();
     expect(envios).toBe(0);
     expect(llamadas).toEqual([]);
   } finally {
@@ -119,6 +131,8 @@ test("la pantalla siguiente es la misma si el teléfono ya existía o no", async
     await page.getByRole("checkbox", { name: "Acepto el aviso de privacidad" }).check();
     await page.getByRole("button", { name: "Enviarme el código" }).click();
     await expect(page.getByRole("heading", { name: "Escribe tu código" })).toBeVisible();
+    await expect(page.getByText("Paso 2 de 2")).toBeVisible();
+    await expect(page.locator("[data-pasos='2'] span").nth(1)).toHaveClass(/bg-bosque/);
     expect(envios).toBe(antes + 1);
     const texto = await page.locator("main").innerText();
     expect(texto.toLowerCase()).not.toContain("ya tienes");
@@ -131,5 +145,28 @@ test("la pantalla siguiente es la misma si el teléfono ya existía o no", async
     expect(segunda).toBe(primera);
   } finally {
     await limpiar({ ...datos, telefonos: [`+52${existente}`, `+52${nuevo}`] });
+  }
+});
+
+test("con logo el encabezado muestra la imagen del negocio", async ({ page }) => {
+  const datos = await negocioPublico();
+  const archivo = `${crypto.randomUUID()}.png`;
+  try {
+    const subida = await admin().storage.from("logos").upload(archivo, PNG, { contentType: "image/png" });
+    expect(subida.error).toBeNull();
+    const parche = await fetch(`${process.env.SUPABASE_URL}/rest/v1/negocio?id=eq.${datos.id}`, {
+      method: "PATCH",
+      headers: { ...servicio(), Prefer: "return=minimal" },
+      body: JSON.stringify({ logo_path: `logos/${archivo}` }),
+    });
+    expect(parche.status).toBe(204);
+
+    await page.goto(`/c/${datos.slug}/registro`);
+    await expect(page.locator("header img")).toHaveAttribute("src", `/c/logo/${datos.slug}`);
+    expect((await page.request.get(`/c/logo/${datos.slug}`)).status()).toBe(200);
+    await expect(page.locator("header span")).toHaveCount(0);
+  } finally {
+    await admin().storage.from("logos").remove([archivo]);
+    await limpiar({ ...datos, telefonos: [] });
   }
 });

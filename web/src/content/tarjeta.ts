@@ -16,7 +16,7 @@ export const C3 = {
   muestra: "Muestra este código en mostrador",
   sellos: "sellos",
   faltan: (n: number, recompensa: string) =>
-    n === 1 ? `Te falta 1 visita para tu ${recompensa}.` : `Te faltan ${n} visitas para tu ${recompensa}.`,
+    n === 1 ? `Te falta 1 visita para: ${recompensa}.` : `Te faltan ${n} visitas para: ${recompensa}.`,
   cuenta: (sellos: number, meta: number) => `${sellos} de ${meta} sellos`,
   terminos: "Términos de la tarjeta",
   noCaducan: "Tus sellos y tu recompensa no caducan.",

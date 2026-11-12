@@ -3,8 +3,8 @@
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { REGISTRO, SEGUNDO } from "@/content/registro";
-import { inicialesNegocio } from "@/lib/negocio/alta";
 import type { NegocioPublico } from "@/lib/negocio/publico-tipo";
+import { MarcaNegocio } from "./marca-negocio";
 
 const campo = "min-h-12 w-full rounded-control border-2 bg-surface px-space-3 font-body text-text";
 const boton =
@@ -85,12 +85,7 @@ export function FormularioSegundo({
 
   return (
     <main className="mx-auto flex min-h-dvh w-full max-w-md flex-col gap-space-4 bg-bg px-space-4 py-space-6 text-text">
-      <header className="flex items-center gap-space-3">
-        <span className="inline-flex size-12 items-center justify-center rounded-full border-2 border-noche bg-menta font-display font-extrabold text-bosque" aria-hidden="true">
-          {inicialesNegocio(negocio.nombre)}
-        </span>
-        <p className="font-display text-h4 font-extrabold">{negocio.nombre}</p>
-      </header>
+      <MarcaNegocio negocio={negocio} />
       {lista ? (
         <section aria-live="polite" className="flex flex-col gap-space-3">
           <h1 className="font-display text-h2 font-extrabold">{bienvenida ? SEGUNDO.bienvenida : SEGUNDO.listo(negocio.nombre)}</h1>

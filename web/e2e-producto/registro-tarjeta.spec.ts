@@ -78,7 +78,9 @@ test("C0 lista o vacío, C3 rota el QR y C4 aparece con la meta llena", async ({
     await page.getByRole("button", { name: "Enviarme el código" }).click();
     await page.getByLabel("Código de 6 dígitos").fill(CODIGO);
     await page.getByRole("button", { name: "Crear mi tarjeta" }).click();
-    await expect(page.getByText("Tu sello de bienvenida ya está aquí.")).toBeVisible();
+    await expect(page).toHaveURL(new RegExp(`/c/${alta.body.slug}$`));
+    await expect(page.getByText("1/8")).toBeVisible();
+    await expect(page.locator("[data-qr]")).toBeVisible();
 
     await page.goto("/c");
     await expect(page.getByRole("link", { name: /Casa Alfa/ })).toBeVisible();
@@ -87,7 +89,7 @@ test("C0 lista o vacío, C3 rota el QR y C4 aparece con la meta llena", async ({
     await page.clock.install({ time: new Date("2026-10-27T18:00:00Z") });
     await page.goto(`/c/${alta.body.slug}`);
     await expect(page.getByText("1/8")).toBeVisible();
-    await expect(page.getByText("Te faltan 7 visitas para tu corte gratis.")).toBeVisible();
+    await expect(page.getByText("Te faltan 7 visitas para: corte gratis.")).toBeVisible();
     await expect(page.getByText("1 sello por día").first()).toBeVisible();
     await expect(page.getByText("Hecho con LealTab").last()).toBeVisible();
     const qr = page.locator("[data-qr]");

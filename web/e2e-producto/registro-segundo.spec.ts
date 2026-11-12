@@ -115,7 +115,8 @@ test("con sesión el segundo negocio no pide código ni pisa el nombre, y sin se
     await page.getByRole("button", { name: "Enviarme el código" }).click();
     await page.getByLabel("Código de 6 dígitos").fill(CODIGO);
     await page.getByRole("button", { name: "Crear mi tarjeta" }).click();
-    await expect(page.getByText("Tu sello de bienvenida ya está aquí.")).toBeVisible();
+    await expect(page).toHaveURL(new RegExp(`/c/${alfa.slug}$`));
+    await expect(page.getByText("1/8")).toBeVisible();
 
     codigos = 0;
     await page.goto(`/c/${beta.slug}/registro`);
@@ -135,7 +136,8 @@ test("con sesión el segundo negocio no pide código ni pisa el nombre, y sin se
     expect(guardados.get(beta.slug)).toBe("Luis Vega");
 
     await page.goto(`/c/${alfa.slug}/registro`);
-    await expect(page.getByRole("heading", { name: "Ya tienes tu tarjeta de Casa Alfa." })).toBeVisible();
+    await expect(page).toHaveURL(new RegExp(`/c/${alfa.slug}$`));
+    await expect(page.getByText("1/8")).toBeVisible();
     await expect(page.getByRole("button", { name: "Enviarme el código" })).toHaveCount(0);
 
     const contexto = await browser.newContext();

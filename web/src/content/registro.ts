@@ -5,6 +5,7 @@
 
 export const REGISTRO = {
   paso: "Paso 1 de 2",
+  paso2: "Paso 2 de 2",
   titulo: (recompensa: string) => `Junta sellos y gana ${recompensa}`,
   subtitulo: "Tu tarjeta digital siempre a un toque.",
   nombre: "Tu nombre",

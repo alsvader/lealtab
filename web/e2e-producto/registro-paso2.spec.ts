@@ -88,11 +88,10 @@ test("el código de prueba deja la cookie y crea la tarjeta", async ({ page }) =
     await page.getByLabel("Código de 6 dígitos").fill(CODIGO);
     await page.getByRole("button", { name: "Crear mi tarjeta" }).click();
 
-    const tarjeta = page.getByRole("article", { name: "Tu tarjeta está lista" });
-    await expect(tarjeta).toBeVisible();
-    await expect(tarjeta.getByText("1/8")).toBeVisible();
-    await expect(tarjeta.getByText("Tu sello de bienvenida ya está aquí.")).toBeVisible();
-    await expect(tarjeta.getByText("Hecho con LealTab")).toBeVisible();
+    await expect(page).toHaveURL(new RegExp(`/c/${datos.slug}$`));
+    await expect(page.getByText("1/8")).toBeVisible();
+    await expect(page.locator("[data-qr]")).toBeVisible();
+    await expect(page.locator("main > p").filter({ hasText: "Hecho con LealTab" })).toBeVisible();
 
     const cookies = await page.context().cookies();
     const cliente = cookies.filter((c) => esCookieCliente(c.name));
