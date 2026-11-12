@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { AYUDA_WHATSAPP, ENTRADA, N1 } from "@/content/alta";
 import { botonPrimario, botonSecundario, Campo, campoClase } from "@/components/panel/alta-marco";
+import { destinoTrasEntrada } from "@/lib/negocio/destino-alta";
 
 export function FormularioCuenta() {
   const router = useRouter();
@@ -91,7 +92,7 @@ export function FormularioCuenta() {
       }
     }
     setPendiente(false);
-    router.push("/panel/negocio");
+    router.replace(await destinoTrasEntrada());
   }
 
   if (fase === "codigo") {

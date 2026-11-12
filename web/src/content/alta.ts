@@ -4,10 +4,10 @@
  */
 
 export const PASOS = [
-  { id: "cuenta", etiqueta: "1. Cuenta", href: "/panel/alta" },
-  { id: "negocio", etiqueta: "2. Tu negocio", href: "/panel/negocio" },
-  { id: "tarjeta", etiqueta: "3. Tu tarjeta", href: "/panel/tarjeta" },
-  { id: "cartel", etiqueta: "4. QR de mostrador", href: "/panel/cartel" },
+  { id: "cuenta", etiqueta: "1. Cuenta" },
+  { id: "negocio", etiqueta: "2. Tu negocio" },
+  { id: "tarjeta", etiqueta: "3. Tu tarjeta" },
+  { id: "cartel", etiqueta: "4. QR de mostrador" },
 ] as const;
 
 export type PasoId = (typeof PASOS)[number]["id"];
@@ -91,6 +91,13 @@ export const N2 = {
   logoZona: "Arrastra tu logo o elige un archivo. PNG o JPG.",
   atras: "Atrás",
   continuar: "Continuar",
+  guardado: "Así quedó tu negocio.",
+  guardadoAyuda: "Para usar otro nombre, elimínalo y créalo de nuevo.",
+  eliminar: "Eliminar y elegir otro nombre",
+  eliminarAviso: "Se borra este negocio y la tarjeta que hayas configurado.",
+  eliminarConfirmar: "Eliminar negocio",
+  cancelar: "Cancelar",
+  eliminarError: "No se pudo eliminar el negocio.",
 } as const;
 
 export const N3 = {
@@ -122,8 +129,11 @@ export const N4 = {
   pegalo: "Pégalo junto a la caja, a la altura de los ojos",
   prueba: "Tu mes de prueba empieza cuando terminas este paso.",
   mostrador: "Ir a Mostrador",
+  muyPronto: "Muy pronto",
   escanear: "Escanéame con tu cámara",
   escanearAyuda: "Tu tarjeta digital siempre a un toque.",
+  registro: "El QR abre el registro de tu negocio.",
+  qrAlt: "Código QR para crear la tarjeta",
   hecho: "Hecho con LealTab",
   atras: "Atrás",
 } as const;

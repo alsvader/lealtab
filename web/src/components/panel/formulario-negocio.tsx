@@ -1,8 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import { N1, N2 } from "@/content/alta";
 import { botonPrimario, botonSecundario, Campo, campoClase } from "@/components/panel/alta-marco";
 import { inicialesNegocio } from "@/lib/negocio/alta";
@@ -23,6 +22,22 @@ export function FormularioNegocio() {
   const [giro, setGiro] = useState<string>("barberia");
   const [error, setError] = useState("");
   const [pendiente, setPendiente] = useState(false);
+  const [logoUrl, setLogoUrl] = useState<string | null>(null);
+  const logoRef = useRef<string | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (logoRef.current) URL.revokeObjectURL(logoRef.current);
+    };
+  }, []);
+
+  function elegirLogo(event: React.ChangeEvent<HTMLInputElement>) {
+    const archivo = event.target.files?.[0];
+    if (logoRef.current) URL.revokeObjectURL(logoRef.current);
+    const siguiente = archivo && archivo.type.startsWith("image/") ? URL.createObjectURL(archivo) : null;
+    logoRef.current = siguiente;
+    setLogoUrl(siguiente);
+  }
 
   async function enviar(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -37,6 +52,11 @@ export function FormularioNegocio() {
     const respuesta = await fetch("/panel/api/negocio", { method: "POST", body: form });
     setPendiente(false);
     if (!respuesta.ok) {
+      const cuerpo = (await respuesta.json().catch(() => null)) as { motivo?: string; siguiente?: string } | null;
+      if (respuesta.status === 409 && cuerpo?.motivo === "ya-tiene") {
+        router.push(cuerpo.siguiente === "/panel/cartel" ? "/panel/cartel" : "/panel/tarjeta");
+        return;
+      }
       setError("Revisa el nombre, la ciudad y el WhatsApp de 10 dígitos.");
       return;
     }
@@ -75,10 +95,13 @@ export function FormularioNegocio() {
       </Campo>
       <Campo etiqueta={N2.logo} ayuda={N2.logoAyuda}>
         <span className="flex items-center gap-space-3 rounded-control border-2 border-dashed border-gris-noche p-space-4">
-          <span className="grid size-11 place-items-center rounded-control bg-noche font-bold text-lino" aria-hidden="true">
-            {inicialesNegocio(nombre)}
+          <span className="grid size-11 shrink-0 place-items-center overflow-hidden rounded-control bg-noche font-bold text-lino" aria-hidden="true">
+            {logoUrl ? <img alt="" className="size-full object-cover" src={logoUrl} /> : inicialesNegocio(nombre)}
           </span>
-          <input name="logo" type="file" accept="image/png,image/jpeg,image/webp" />
+          <span className="flex min-w-0 flex-col gap-space-2 font-normal text-text-muted">
+            <span>{N2.logoZona}</span>
+            <input name="logo" type="file" accept="image/png,image/jpeg,image/webp" onChange={elegirLogo} />
+          </span>
         </span>
       </Campo>
       {error ? (
@@ -86,10 +109,7 @@ export function FormularioNegocio() {
           {error}
         </p>
       ) : null}
-      <div className="flex justify-between gap-space-3">
-        <Link className={botonSecundario()} href="/panel/alta">
-          {N2.atras}
-        </Link>
+      <div className="flex justify-end gap-space-3">
         <button className={botonPrimario()} type="submit" disabled={pendiente}>
           {N2.continuar}
         </button>

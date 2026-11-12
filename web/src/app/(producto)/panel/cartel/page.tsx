@@ -3,7 +3,7 @@ import { cookies, headers } from "next/headers";
 import { connection } from "next/server";
 import { MarcoAlta } from "@/components/panel/alta-marco";
 import { CartelMostrador } from "@/components/panel/cartel-mostrador";
-import { completarAlta, destinoQr } from "@/lib/negocio/cartel";
+import { completarAlta, destinoQr, vistaPreviaQr } from "@/lib/negocio/cartel";
 import { COOKIE_DURACION_ALTA, duracionDeCookie } from "@/lib/negocio/duracion-alta";
 
 async function CartelDatos() {
@@ -18,7 +18,8 @@ async function CartelDatos() {
     ? new Date(alta.fin_prueba).toLocaleDateString("es-MX", { dateStyle: "long", timeZone: "America/Mexico_City" })
     : "";
   const destino = alta && host ? destinoQr(`${proto}://${host}`, alta.slug) : "";
-  return <CartelMostrador fin={fin} destino={destino} />;
+  const qr = destino ? await vistaPreviaQr(destino) : "";
+  return <CartelMostrador fin={fin} destino={destino} qr={qr} />;
 }
 
 export default function Page() {

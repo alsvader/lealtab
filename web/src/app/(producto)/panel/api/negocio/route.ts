@@ -1,5 +1,5 @@
 import { CABECERAS_SIN_CACHE } from "@/lib/supabase/cookies";
-import { crearNegocioDelDueno } from "@/lib/negocio/crear";
+import { crearNegocioDelDueno, descartarNegocioIncompleto } from "@/lib/negocio/crear";
 
 export async function POST(request: Request) {
   const form = await request.formData().catch(() => null);
@@ -18,4 +18,11 @@ export async function POST(request: Request) {
     logo,
   });
   return Response.json(resultado, { status: resultado.ok ? 200 : resultado.status, headers: CABECERAS_SIN_CACHE });
+}
+
+export async function DELETE() {
+  const resultado = await descartarNegocioIncompleto();
+  if (resultado === "ok") return Response.json({ ok: true }, { headers: CABECERAS_SIN_CACHE });
+  const status = resultado === "sin-sesion" ? 401 : 409;
+  return Response.json({ ok: false }, { status, headers: CABECERAS_SIN_CACHE });
 }
