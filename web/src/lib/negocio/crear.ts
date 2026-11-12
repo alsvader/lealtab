@@ -22,9 +22,45 @@ export type AltaNegocio = {
   logo?: { type: string; bytes: Uint8Array } | null;
 };
 
+export type PasoAlta = "/panel/negocio" | "/panel/tarjeta" | "/panel/cartel";
+
+function cabecerasServicio() {
+  return {
+    Authorization: `Bearer ${env.supabaseSecretKey()}`,
+    apikey: env.supabaseSecretKey(),
+    "Content-Type": "application/json",
+  };
+}
+
+/** A dónde sigue el alta. Sin sesión, null: el paso 1 se queda en la cuenta. */
+export async function pasoPendienteDueno(): Promise<PasoAlta | null> {
+  try {
+    const sesion = await crearClienteServidor("dueno");
+    const { data, error } = await sesion.auth.getUser();
+    if (error || !data.user) return null;
+    const dueno = await fetch(
+      `${env.supabaseUrl()}/rest/v1/dueno_negocio?user_id=eq.${data.user.id}&select=negocio_id`,
+      { headers: cabecerasServicio(), cache: "no-store" },
+    );
+    if (!dueno.ok) return null;
+    const negocios = (await dueno.json()) as { negocio_id: string }[];
+    const negocioId = negocios[0]?.negocio_id;
+    if (!negocioId) return "/panel/negocio";
+    const previa = await fetch(
+      `${env.supabaseUrl()}/rest/v1/tarjeta_config?negocio_id=eq.${negocioId}&select=negocio_id`,
+      { headers: cabecerasServicio(), cache: "no-store" },
+    );
+    if (!previa.ok) return "/panel/tarjeta";
+    const ya = ((await previa.json()) as { negocio_id: string }[]).length > 0;
+    return ya ? "/panel/cartel" : "/panel/tarjeta";
+  } catch {
+    return null;
+  }
+}
+
 export async function crearNegocioDelDueno(alta: AltaNegocio): Promise<
   | { ok: true; slug: string; zona: string; iniciales: string; rol: string }
-  | { ok: false; status: number }
+  | { ok: false; status: number; motivo?: "ya-tiene"; siguiente?: PasoAlta }
 > {
   const nombre = textoNegocio(alta.nombre, 80);
   const ciudad = textoNegocio(alta.ciudad, 80);
@@ -63,7 +99,14 @@ export async function crearNegocioDelDueno(alta: AltaNegocio): Promise<
       p_slug_base: slugBase(nombre),
     }),
   });
-  if (!creado.ok) return { ok: false, status: 409 };
+  if (!creado.ok) {
+    const detalle = await creado.text();
+    if (detalle.includes("ya tiene negocio")) {
+      const siguiente = await pasoPendienteDueno();
+      return { ok: false, status: 409, motivo: "ya-tiene", siguiente: siguiente === "/panel/cartel" ? "/panel/cartel" : "/panel/tarjeta" };
+    }
+    return { ok: false, status: 409 };
+  }
 
   const cuerpo = (await creado.json()) as { slug?: string };
   const admin = crearClienteAdmin();

@@ -52,6 +52,11 @@ export function FormularioNegocio() {
     const respuesta = await fetch("/panel/api/negocio", { method: "POST", body: form });
     setPendiente(false);
     if (!respuesta.ok) {
+      const cuerpo = (await respuesta.json().catch(() => null)) as { motivo?: string; siguiente?: string } | null;
+      if (respuesta.status === 409 && cuerpo?.motivo === "ya-tiene") {
+        router.push(cuerpo.siguiente === "/panel/cartel" ? "/panel/cartel" : "/panel/tarjeta");
+        return;
+      }
       setError("Revisa el nombre, la ciudad y el WhatsApp de 10 dígitos.");
       return;
     }

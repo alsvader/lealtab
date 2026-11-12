@@ -112,4 +112,37 @@ test.describe("alta del negocio", () => {
     expect(logo.url()).not.toContain("supabase");
     await limpiar(correo);
   });
+
+  test("un negocio ya creado sigue en la tarjeta y no pide los datos otra vez", async ({ page, request }) => {
+    const correo = correoNuevo();
+    expect((await admin().auth.admin.createUser({ email: correo, password: CLAVE, email_confirm: true })).error).toBeNull();
+    await entrar(request, correo);
+    const creado = await request.post("/panel/api/negocio", {
+      multipart: {
+        nombre: `MININOS ${Date.now()}`,
+        giro: "cafeteria",
+        ciudad: "Villahermosa",
+        whatsapp: "9932109034",
+        zona: "America/Mexico_City",
+      },
+    });
+    expect(creado.status()).toBe(200);
+    const segundo = await request.post("/panel/api/negocio", {
+      multipart: {
+        nombre: "MININOS",
+        giro: "cafeteria",
+        ciudad: "Villahermosa",
+        whatsapp: "9932109034",
+        zona: "America/Mexico_City",
+      },
+    });
+    expect(segundo.status()).toBe(409);
+    const cuerpo = (await segundo.json()) as { motivo?: string; siguiente?: string };
+    expect(cuerpo.motivo).toBe("ya-tiene");
+    expect(cuerpo.siguiente).toBe("/panel/tarjeta");
+    expect((await page.request.post("/panel/api/auth/contrasena", { data: { correo, contrasena: CLAVE } })).status()).toBe(200);
+    await page.goto("/panel/negocio");
+    await expect(page).toHaveURL(/\/panel\/tarjeta$/);
+    await limpiar(correo);
+  });
 });
