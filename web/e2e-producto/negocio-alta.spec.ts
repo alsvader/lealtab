@@ -113,13 +113,14 @@ test.describe("alta del negocio", () => {
     await limpiar(correo);
   });
 
-  test("un negocio ya creado sigue en la tarjeta y no pide los datos otra vez", async ({ page, request }) => {
+  test("un negocio ya creado se ve en el paso 2 y se puede descartar", async ({ page, request }) => {
     const correo = correoNuevo();
+    const nombre = `MININOS ${Date.now()}`;
     expect((await admin().auth.admin.createUser({ email: correo, password: CLAVE, email_confirm: true })).error).toBeNull();
     await entrar(request, correo);
     const creado = await request.post("/panel/api/negocio", {
       multipart: {
-        nombre: `MININOS ${Date.now()}`,
+        nombre,
         giro: "cafeteria",
         ciudad: "Villahermosa",
         whatsapp: "9932109034",
@@ -140,9 +141,44 @@ test.describe("alta del negocio", () => {
     const cuerpo = (await segundo.json()) as { motivo?: string; siguiente?: string };
     expect(cuerpo.motivo).toBe("ya-tiene");
     expect(cuerpo.siguiente).toBe("/panel/tarjeta");
+    const paso = await request.get("/panel/api/alta/paso");
+    expect(paso.status()).toBe(200);
+    expect(((await paso.json()) as { paso: string }).paso).toBe("/panel/tarjeta");
+    expect((await page.request.post("/panel/api/auth/contrasena", { data: { correo, contrasena: CLAVE } })).status()).toBe(200);
+    await page.goto("/panel/alta");
+    await expect(page).toHaveURL(/\/panel\/tarjeta$/);
+    await page.goto("/panel/negocio");
+    await expect(page).toHaveURL(/\/panel\/negocio$/);
+    await expect(page.getByText(nombre)).toBeVisible();
+    await expect(page.getByRole("link", { name: "Continuar" })).toHaveAttribute("href", "/panel/tarjeta");
+    await page.getByRole("button", { name: "Eliminar y elegir otro nombre" }).click();
+    await page.getByRole("button", { name: "Eliminar negocio" }).click();
+    await expect(page.getByLabel("Nombre del negocio")).toHaveValue("");
+    await limpiar(correo);
+  });
+
+  test("con el alta cerrada el negocio no se elimina", async ({ page, request }) => {
+    const correo = correoNuevo();
+    expect((await admin().auth.admin.createUser({ email: correo, password: CLAVE, email_confirm: true })).error).toBeNull();
+    await entrar(request, correo);
+    expect((await request.post("/panel/api/negocio", {
+      multipart: {
+        nombre: `Cerrado ${Date.now()}`,
+        giro: "barberia",
+        ciudad: "Villahermosa",
+        whatsapp: "9932109035",
+        zona: "America/Mexico_City",
+      },
+    })).status()).toBe(200);
+    expect((await request.post("/panel/api/tarjeta", {
+      data: { sellos: 8, recompensa: "Corte", bienvenida: true },
+    })).status()).toBe(200);
+    expect((await request.get("/panel/api/cartel")).status()).toBe(200);
+    expect((await request.delete("/panel/api/negocio")).status()).toBe(409);
     expect((await page.request.post("/panel/api/auth/contrasena", { data: { correo, contrasena: CLAVE } })).status()).toBe(200);
     await page.goto("/panel/negocio");
-    await expect(page).toHaveURL(/\/panel\/tarjeta$/);
+    await expect(page.getByRole("link", { name: "Continuar" })).toHaveAttribute("href", "/panel/cartel");
+    await expect(page.getByRole("button", { name: "Eliminar y elegir otro nombre" })).toHaveCount(0);
     await limpiar(correo);
   });
 });

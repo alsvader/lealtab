@@ -1,17 +1,16 @@
 import { Suspense } from "react";
-import { redirect } from "next/navigation";
 import { connection } from "next/server";
 import { FormularioNegocio } from "@/components/panel/formulario-negocio";
+import { ResumenNegocio } from "@/components/panel/resumen-negocio";
 import { MarcoAlta } from "@/components/panel/alta-marco";
-import { pasoPendienteDueno } from "@/lib/negocio/crear";
+import { leerFichaAlta } from "@/lib/negocio/crear";
 
 async function Negocio() {
   await connection();
-  const paso = await pasoPendienteDueno();
-  if (paso === "/panel/tarjeta" || paso === "/panel/cartel") redirect(paso);
+  const ficha = await leerFichaAlta();
   return (
     <MarcoAlta paso="negocio">
-      <FormularioNegocio />
+      {ficha ? <ResumenNegocio ficha={ficha} /> : <FormularioNegocio />}
     </MarcoAlta>
   );
 }

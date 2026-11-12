@@ -5,6 +5,7 @@ import { esCliente } from "@/lib/auth/codigo-dueno";
 import { giroNegocio, inicialesNegocio, slugBase, textoNegocio, whatsappNegocio, zonaNegocio } from "@/lib/negocio/alta";
 import { crearClienteAdmin } from "@/lib/supabase/admin";
 import { crearClienteServidor } from "@/lib/supabase/server";
+import type { FichaAlta } from "@/lib/negocio/ficha-alta";
 
 const LOGO_MAX = 512 * 1024;
 const TIPOS: Record<string, "png" | "jpg" | "webp"> = {
@@ -56,6 +57,78 @@ export async function pasoPendienteDueno(): Promise<PasoAlta | null> {
   } catch {
     return null;
   }
+}
+
+export type { FichaAlta } from "@/lib/negocio/ficha-alta";
+
+/** El negocio ya creado, para verlo en el paso 2 sin editarlo. Sin negocio, null. */
+export async function leerFichaAlta(): Promise<FichaAlta | null> {
+  try {
+    const sesion = await crearClienteServidor("dueno");
+    const { data, error } = await sesion.auth.getUser();
+    if (error || !data.user) return null;
+    const dueno = await fetch(
+      `${env.supabaseUrl()}/rest/v1/dueno_negocio?user_id=eq.${data.user.id}&select=negocio_id`,
+      { headers: cabecerasServicio(), cache: "no-store" },
+    );
+    if (!dueno.ok) return null;
+    const negocios = (await dueno.json()) as { negocio_id: string }[];
+    const negocioId = negocios[0]?.negocio_id;
+    if (!negocioId) return null;
+    const respuesta = await fetch(
+      `${env.supabaseUrl()}/rest/v1/negocio?id=eq.${negocioId}&select=nombre,giro,ciudad,whatsapp,slug,logo_path,alta_ts`,
+      { headers: cabecerasServicio(), cache: "no-store" },
+    );
+    if (!respuesta.ok) return null;
+    const filas = (await respuesta.json()) as {
+      nombre: string;
+      giro: string;
+      ciudad: string;
+      whatsapp: string;
+      slug: string;
+      logo_path: string | null;
+      alta_ts: string | null;
+    }[];
+    const fila = filas[0];
+    if (!fila) return null;
+    const clientes = await fetch(
+      `${env.supabaseUrl()}/rest/v1/cliente_negocio?negocio_id=eq.${negocioId}&select=id&limit=1`,
+      { headers: cabecerasServicio(), cache: "no-store" },
+    );
+    const hayClientes = clientes.ok && ((await clientes.json()) as { id: string }[]).length > 0;
+    const siguiente = await pasoPendienteDueno();
+    return {
+      nombre: fila.nombre,
+      giro: fila.giro,
+      ciudad: fila.ciudad,
+      whatsapp: fila.whatsapp,
+      slug: fila.slug,
+      logo: Boolean(fila.logo_path?.startsWith("logos/")),
+      puedeEliminar: fila.alta_ts == null && !hayClientes,
+      siguiente: siguiente === "/panel/cartel" ? "/panel/cartel" : "/panel/tarjeta",
+    };
+  } catch {
+    return null;
+  }
+}
+
+export async function descartarNegocioIncompleto(): Promise<"ok" | "no" | "sin-sesion"> {
+  const sesion = await crearClienteServidor("dueno");
+  const { data, error } = await sesion.auth.getUser();
+  if (error || !data.user) return "sin-sesion";
+  const respuesta = await fetch(`${env.supabaseUrl()}/rest/v1/rpc/descartar_negocio_incompleto`, {
+    method: "POST",
+    cache: "no-store",
+    headers: { ...cabecerasServicio(), "Content-Profile": "servidor" },
+    body: JSON.stringify({ p_user_id: data.user.id }),
+  });
+  if (!respuesta.ok) return "no";
+  const cuerpo = (await respuesta.json()) as { logo_path?: string | null };
+  const ruta = cuerpo.logo_path;
+  if (typeof ruta === "string" && ruta.startsWith("logos/")) {
+    await crearClienteAdmin().storage.from("logos").remove([ruta.slice("logos/".length)]).catch(() => undefined);
+  }
+  return "ok";
 }
 
 export async function crearNegocioDelDueno(alta: AltaNegocio): Promise<

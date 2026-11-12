@@ -91,6 +91,13 @@ export const N2 = {
   logoZona: "Arrastra tu logo o elige un archivo. PNG o JPG.",
   atras: "Atrás",
   continuar: "Continuar",
+  guardado: "Así quedó tu negocio.",
+  guardadoAyuda: "Para usar otro nombre, elimínalo y créalo de nuevo.",
+  eliminar: "Eliminar y elegir otro nombre",
+  eliminarAviso: "Se borra este negocio y la tarjeta que hayas configurado.",
+  eliminarConfirmar: "Eliminar negocio",
+  cancelar: "Cancelar",
+  eliminarError: "No se pudo eliminar el negocio.",
 } as const;
 
 export const N3 = {

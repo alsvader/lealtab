@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { ENTRADA, N1 } from "@/content/alta";
 import { botonPrimario, botonSecundario, Campo, campoClase } from "@/components/panel/alta-marco";
+import { destinoTrasEntrada } from "@/lib/negocio/destino-alta";
 
 type Modo = "codigo" | "contrasena" | "olvidar" | "nueva";
 
@@ -59,7 +60,7 @@ export function FormularioEntrada({ soloContrasena = false }: { soloContrasena?:
       setError(N1.codigoNoValido);
       return;
     }
-    router.push("/panel/negocio");
+    router.push(await destinoTrasEntrada());
   }
 
   async function otroCodigo() {
@@ -93,7 +94,7 @@ export function FormularioEntrada({ soloContrasena = false }: { soloContrasena?:
       setError(cuerpo?.pausa ? ENTRADA.pausa : ENTRADA.error);
       return;
     }
-    router.push("/panel/negocio");
+    router.push(await destinoTrasEntrada());
   }
 
   async function guardar(event: React.FormEvent) {
@@ -114,7 +115,7 @@ export function FormularioEntrada({ soloContrasena = false }: { soloContrasena?:
       setError(N1.codigoNoValido);
       return;
     }
-    router.push("/panel/negocio");
+    router.push(await destinoTrasEntrada());
   }
 
   const pestana = (id: "codigo" | "contrasena", etiqueta: string) => (

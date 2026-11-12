@@ -61,8 +61,7 @@ test("el cartel cierra el alta, no suma sellos y cada descarga cuenta un evento"
   await expect(page.getByText("Muy pronto")).toBeVisible();
   await expect(page.getByRole("link", { name: "Ajustes" })).toHaveCount(0);
   await page.goto("/panel/alta");
-  await expect(page).toHaveURL(/\/panel\/alta$/);
-  await expect(page.getByRole("heading", { name: "Empieza gratis hoy" })).toBeVisible();
+  await expect(page).toHaveURL(/\/panel\/tarjeta$/);
   const png = await request.get("/panel/api/cartel?formato=png&tamano=carta");
   const pdf = await request.get("/panel/api/cartel?formato=pdf&tamano=sticker");
   expect(png.headers()["content-type"]).toContain("image/png");
